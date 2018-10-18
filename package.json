@@ -4,9 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "PORT=8080 ./node_modules/nodemon/bin/nodemon.js --exec babel-node server.js",
-    "debug": "PORT=8080 ./node_modules/nodemon/bin/nodemon.js --inspect --exec babel-node server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "PORT=8080 ./node_modules/nodemon/bin/nodemon.js --exec babel-node ./src/server.js",
+    "debug": "PORT=8080 ./node_modules/nodemon/bin/nodemon.js --inspect --exec babel-node ./src/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clean": "rm -rf build && mkdir build",
+    "build-babel": "babel -d ./build ./src -s",
+    "build": "npm run clean && npm run build-babel",
+    "start": "npm run build && node ./build/server.js"
   },
   "keywords": [],
   "author": "",
