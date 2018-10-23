@@ -1,4 +1,5 @@
 import moment from 'moment';
+
 const dateCalculation = {
   data() {
     return {
@@ -17,7 +18,7 @@ const dateCalculation = {
   },
   methods: {
     calculateCounter() {
-      let res = {...this.counter};
+      let res = this.counter;
       let hackathon = moment(this.hackathon_date),
         opening = moment(this.registration_opening_date),
         closing = moment(this.registration_closing_date),

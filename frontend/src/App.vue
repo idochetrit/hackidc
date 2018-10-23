@@ -10,9 +10,9 @@
 </template>
 
 <script>
-import Navigation from './components/Navigation'
-import Footer from './components/Footer'
-import Loader from './components/Loader'
+import Navigation from "./components/Navigation.vue"
+import Footer from './components/Footer.vue'
+import Loader from './components/Loader.vue'
 export default {
   computed: {
     loading() {return this.$store.getters.isLoading},

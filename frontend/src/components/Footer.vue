@@ -18,7 +18,7 @@
   </div>
 </template>
 <script>
-import FooterLinks from './FooterLinks'
+import FooterLinks from './FooterLinks.vue'
 export default {
   data() {
     return {
