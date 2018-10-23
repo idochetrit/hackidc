@@ -1,6 +1,6 @@
 const { Router } = require("express");
 
-let userRouter = new Router();
+const userRouter = new Router();
 
 userRouter.get("/", (req, res) => {
   console.log("Here");
