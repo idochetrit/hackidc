@@ -8,7 +8,7 @@
         <a v-for="(t, i) in team" :key="i" class="team-item" :href="t.linkedin" target="_blank">
           <div class="wrapper">
             <div class="overlay"><span class="fab fa-linkedin fa-2x"></span></div>
-            <img class="img-responsive" :src="t.thumbnail">
+            <img class="img-responsive" :src="'t.thumbnail'">
           </div>
           <h5>{{ t.name }}</h5>
         </a>
@@ -21,7 +21,7 @@ export default {
   data() {
     return {
       team: [
-        {name: 'Alon Houven', linkedin: '#', thumbnail: '../../static/alon.jpg'},
+        {name: 'Alon Houven', linkedin: '#', thumbnail: '../static/alon.jpg'},
         {name: 'Golan Romano', linkedin: 'https://www.linkedin.com/in/golan-romano-29933714a/', thumbnail: 'https://media.licdn.com/dms/image/C5603AQFu2bm_Mvsp5g/profile-displayphoto-shrink_800_800/0?e=1545264000&v=beta&t=_Dx7XCJTqdgolASgnnUIJSoCHlZoq3bjamBzH8Vq4sU'},
         {name: 'Ori Zilka', linkedin: 'https://www.linkedin.com/in/ori-zilka-802450153/', thumbnail: 'https://media.licdn.com/dms/image/C4D03AQHLIb55li32qw/profile-displayphoto-shrink_800_800/0?e=1545264000&v=beta&t=tFGTmvxoJi0NzWJNOH_dT08avAT0EFk0Y5H1EVriqJ4'},
         {name: 'Hadar Mordechai', linkedin: 'https://www.linkedin.com/in/hadar-mordechai-7641b7159/', thumbnail: '../../static/hadar.jpg'},
