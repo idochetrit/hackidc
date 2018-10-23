@@ -8,7 +8,7 @@
         <a v-for="(t, i) in team" :key="i" class="team-item" :href="t.linkedin" target="_blank">
           <div class="wrapper">
             <div class="overlay"><span class="fab fa-linkedin fa-2x"></span></div>
-            <img class="img-responsive" :src="t.thumbnail">
+            <img class="img-responsive" :src="'t.thumbnail'">
           </div>
           <h5>{{ t.name }}</h5>
         </a>
