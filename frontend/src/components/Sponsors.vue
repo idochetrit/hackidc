@@ -20,7 +20,7 @@ export default {
       sponsors: [
         {name: 'Midgal', link: 'https://www.migdal.co.il/He/Pages/MigdalHomePage.aspx', size: 'lg', logo: 'https://upload.wikimedia.org/wikipedia/he/thumb/3/35/Migdal_Logo.svg/475px-Migdal_Logo.svg.png'},
         {name: 'Google', link: 'https://careers.google.com/locations/tel-aviv-haifa/', size: 'sm', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/2000px-Google_2015_logo.svg.png'},
-        {name: 'Essence Group', link: 'https://www.essence-grp.com/', size: 'sm', logo: '../../static/essence_logo.png'},
+        {name: 'Essence Group', link: 'https://www.essence-grp.com/', size: 'sm', logo: require('../../static/essence_logo.png')},
         {name: 'Microsoft', link: 'https://www.microsoft.com/he-il', size: 'sm', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Microsoft_logo_%282012%29.svg/1280px-Microsoft_logo_%282012%29.svg.png'},
       ]
     }

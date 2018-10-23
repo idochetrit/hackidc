@@ -23,10 +23,10 @@ export default {
   data() {
     return {
       logos: [
-        '../../static/idc_herzliya_logo.png',
-        '../../static/efi_arazi_logo.png',
-        '../../static/iec_logo.png',
-        '../../static/student_union_logo.png',
+        require('../../static/idc_herzliya_logo.png'),
+        require('../../static/efi_arazi_logo.png'),
+        require('../../static/iec_logo.png'),
+        require('../../static/student_union_logo.png'),
       ]
     }
   },

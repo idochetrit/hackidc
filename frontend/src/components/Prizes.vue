@@ -17,9 +17,9 @@ export default {
   data() {
     return {
       prizes: {
-        first: {thumbnail: '../../static/1.png', prize: 15000},
-        second: {thumbnail: '../../static/2.png', prize: 7000},
-        third: {thumbnail: '../../static/3.png', prize: 3000},
+        first: {thumbnail: require('../../static/1.png'), prize: 15000},
+        second: {thumbnail: require('../../static/2.png'), prize: 7000},
+        third: {thumbnail: require('../../static/3.png'), prize: 3000},
       }
     }
   }
