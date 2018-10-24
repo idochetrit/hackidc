@@ -28,7 +28,7 @@ export default {
 
 <style scoped>
   * {
-    font-family: 'Roboto', sans-serif !important;
+    font-family: 'Rajdhani', sans-serif !important;
   }
   #app {
     overflow: hidden;

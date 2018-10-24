@@ -28526,7 +28526,7 @@ exports = module.exports = __webpack_require__(2)(undefined);
 
 
 // module
-exports.push([module.i, "\n*[data-v-049a028f] {\n  font-family: 'Roboto', sans-serif !important;\n}\n#app[data-v-049a028f] {\n  overflow: hidden;\n}\n", ""]);
+exports.push([module.i, "\n*[data-v-049a028f] {\n  font-family: 'Rajdhani', sans-serif !important;\n}\n#app[data-v-049a028f] {\n  overflow: hidden;\n}\n", ""]);
 
 // exports
 
