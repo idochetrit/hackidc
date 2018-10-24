@@ -4,8 +4,8 @@ const dateCalculation = {
   data() {
     return {
       registration_opening_date: "2018-12-11",    //set the registration opening date (yyyy-mm-dd)
-      registration_closing_date: "2019-01-10",    //set the registration closing date (yyyy-mm-dd)
-      hackathon_date: "2019-04-10",               //set the hackathon event date (yyyy-mm-dd)
+      registration_closing_date: "2019-03-08",    //set the registration closing date (yyyy-mm-dd)
+      hackathon_date: "2019-04-11",               //set the hackathon event date (yyyy-mm-dd)
       counter: {
         message: '',
         countTo: null,
