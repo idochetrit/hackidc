@@ -10,7 +10,7 @@
             <button v-scroll-to="'#about'" class="btn btn-outline-light btn-lg">READ MORE</button>
           </div>
           <hr>
-          <h4>April 10th - April 12th</h4>
+          <h4>April 11th - April 12th</h4>
           <h2>IDC Herzliya</h2>
         </div>
       </div>

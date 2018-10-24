@@ -30,6 +30,7 @@ export default {
   * {
     font-family: 'Rajdhani', sans-serif !important;
   }
+  button {font-weight: bold !important;}
   #app {
     overflow: hidden;
   }
