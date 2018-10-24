@@ -3,7 +3,7 @@
     <div class="container">
       <br>
       <div class="row">
-        <div class="col-lg-7">
+        <div class="col-md-7">
           <h2 id="about">What is HackIDC?</h2>
           <br>
           <h5><strong>300+ students, 36 hours, 35,000 NIS prizes.</strong></h5>
@@ -14,8 +14,8 @@
           <p>Run by students from IDC, HackIDC is the largest student-run hackathon in Israel, gathering the most innovative, enthusiastic and determined to succeed students that have an idea and want to execute it - fast!</p>
           <button @click="toSchedule" class="btn btn-info btn-md">VIEW SCHEDULE</button>
         </div>
-        <div class="col-lg-5">
-          <img src="https://s3.amazonaws.com/bizzabo.users.files/BBBur1GrQ2f5CxkoDWjH_%D7%94%D7%A8%D7%A6%D7%9C%20%D7%9C%D7%91%D7%9F-01.png">
+        <div class="col-md-5 col-sm-4">
+          <img  class="herzel" src="https://s3.amazonaws.com/bizzabo.users.files/BBBur1GrQ2f5CxkoDWjH_%D7%94%D7%A8%D7%A6%D7%9C%20%D7%9C%D7%91%D7%9F-01.png">
         </div>
       </div>
       <br>
@@ -85,5 +85,16 @@ export default {
     justify-content: center;
     align-items: center;
     font-size: 12rem;
+  }
+
+  @media screen and (max-width: 1200px) {
+
+  }
+
+  @media screen and (max-width: 767px) {
+    .container-fluid {padding: 2rem .5rem;}
+    .col-lg-5, .col-sm-4 {padding: 1rem 0 0 0;}
+    .col-lg-4 {padding: 3rem 0 0 0;}
+    .row:nth-of-type(2) {flex-direction: column-reverse;}
   }
 </style>

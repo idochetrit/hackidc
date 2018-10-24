@@ -69,4 +69,13 @@ export default {
   }
   .footerLogo img {width: 50%;}
   .footerLogo:nth-of-type(2) img {width: 80%;}
+
+  @media screen and (max-width: 1200px) {
+    .container-fluid {padding: 2rem .5rem;}
+  }
+
+  @media screen and (max-width: 767px) {
+    .footerLogo img {width: 65%;}
+    .footerLogo:nth-of-type(2) img {width: 95%;}
+  }
 </style>

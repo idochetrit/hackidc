@@ -4,7 +4,7 @@
       <h2>The Judges</h2>
       <br>
       <div class="row">
-        <div v-for="(j,i) in judges" :key="i" class="judges-item col-lg-4 col-sm-6">
+        <div v-for="(j,i) in judges" :key="i" class="judges-item">
           <img class="img-responsive" :src="j.thumbnail">
           <h5>{{ j.name }}</h5>
           <p>{{ j.title }}</p>
@@ -62,6 +62,7 @@ export default {
     transform: scale(1.03);
   }
   .judges-item {
+    flex-basis: 33.33333333%;
     padding: 1rem;
     display: flex;
     flex-direction: column;
@@ -79,5 +80,13 @@ export default {
     margin-bottom: 1rem;
     width: 70%;
     border-radius: 50%;
+  }
+
+  @media screen and (max-width: 1200px) {
+    .container-fluid {padding: 2rem .5rem;}
+  }
+
+  @media screen and (max-width: 767px) {
+    .judges-item {flex-basis: 50%;}
   }
 </style>

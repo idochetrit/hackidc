@@ -4,7 +4,7 @@
       <h2>The Prizes</h2>
       <br>
       <div class="row">
-        <div v-for="(p, i) in prizes" :key="i" class="col-lg-4 prizes-item">
+        <div v-for="(p, i) in prizes" :key="i" class="prizes-item">
           <img :src="p.thumbnail">
           <h4>{{ p.prize.toLocaleString('enUS')}} <span class="fas fa-shekel-sign fa-xs"></span></h4>
         </div>
@@ -30,6 +30,7 @@ export default {
     padding: 4rem 0;
   }
   .prizes-item {
+    flex-basis: 33.3333333%;
     padding: 1rem 0;
     display: flex;
     flex-direction: column;
@@ -43,4 +44,12 @@ export default {
   }
   h2 {font-weight: bold; text-align: center;}
   h4 {font-weight: bold;}
+
+  @media screen and (max-width: 1200px) {
+    .container-fluid {padding: 2rem .5rem;}
+  }
+
+  @media screen and (max-width: 767px) {
+    h4 {font-size: 1.3rem;}
+  }
 </style>

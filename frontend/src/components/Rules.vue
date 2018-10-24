@@ -4,7 +4,7 @@
       <h2>The Rules</h2>
       <br>
       <div class="row">
-        <div v-for="(r, i) in rules" :key="i" class="col-lg-4 col-sm-6 rules-item">
+        <div v-for="(r, i) in rules" :key="i" class="rules-item">
           <h5>{{ r.title | cap }}</h5>
           <p>{{ r.description }}</p>
         </div>
@@ -53,9 +53,20 @@ export default {
     background: linear-gradient(to top, #212426, #3a3f45); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   }
   .rules-item {
+    flex-basis: 33.3333333%;
     padding: 1rem;
     color: #fff;
   }
   h2 {font-weight: bold; color: #fff; text-align: center}
   h5 {font-weight: bold;}
+
+  @media screen and (max-width: 1200px) {
+    .container-fluid {padding: 2rem .5rem;}
+  }
+
+  @media screen and (max-width: 767px) {
+    .rules-item {flex-basis: 50%;}
+    p {font-size: .8rem; margin: 0;}
+    h5 {font-size: 1rem;}
+  }
 </style>
