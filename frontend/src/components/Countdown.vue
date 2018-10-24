@@ -2,7 +2,7 @@
   <div class="container-fluid bg-info">
     <h3 id="registration">{{ counter.message }}</h3>
     <div class="row">
-      <div class="counter offset-lg-1 col-lg-10">
+      <div class="counter offset-sm-1 col-sm-10">
         <div class="box">
           <h1>{{ counter.days }}</h1>
           <h4>Days</h4>
@@ -66,4 +66,11 @@ export default {
     border-radius: 10px;
     color: #fff;
   }
+
+  @media screen and (max-width: 767px) {
+    h1 {font-size: 2rem;}
+    h4 {font-size: 1rem;}
+    .box {min-height: 80px; min-width: 80px; padding: .5rem;}
+  }
+
 </style>

@@ -30,4 +30,7 @@ export default {
   * {
     font-family: 'Roboto', sans-serif !important;
   }
+  #app {
+    overflow: hidden;
+  }
 </style>

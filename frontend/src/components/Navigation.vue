@@ -42,7 +42,12 @@ export default {
 
 <style scoped>
   nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
     padding: 1rem 3rem;
+    width: 100%;
     background-color: #212426 !important;
   }
   .navbar-brand:hover > img {transform: scale(1.3)}
@@ -70,5 +75,14 @@ export default {
 
   @media screen and (min-width: 990px) {
     .active {background-color: #333;}
+  }
+  @media screen and (max-width: 1200px) {
+    nav {padding: .5rem 2rem;}
+    button.navbar-toggler {padding: .5rem; border: none;}
+  }
+
+  @media screen and (max-width: 767px) {
+    nav {padding: .7rem 2rem;}
+    button.navbar-toggler {padding: .5rem; border: none;}
   }
 </style>

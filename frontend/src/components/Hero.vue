@@ -33,6 +33,7 @@
 
 <style scoped>
   .container-fluid {
+    margin-top: 3rem;
     padding: 8rem 0;
     background-size: cover;
     background: url('../../static/hero.jpg') no-repeat bottom;
@@ -52,7 +53,8 @@
   }
 
   .logo {
-    max-width: 50%;animation: pulse 5s 2.5s infinite ease-in-out;
+    max-width: 50%;
+    animation: pulse 5s 2.5s infinite ease-in-out;
 
   }
   .buttons {
@@ -82,5 +84,14 @@
     25% {transform: scale(1.05);}
     50% {transform: scale(1);}
     100% {transform: scale(1);}
+  }
+
+  @media screen and (max-width: 1200px) {
+    .container-fluid {padding: 6rem 0;}
+  }
+
+  @media screen and (max-width: 767px) {
+    .container-fluid {padding: 6rem 0;}
+    .logo {max-width: 70%;}
   }
 </style>
