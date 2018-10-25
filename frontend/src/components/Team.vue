@@ -111,6 +111,6 @@ export default {
   a {text-decoration: none;}
 
   @media screen and (max-width: 767px) {
-    .team-item {flex-basis: 50%;}
+    .team-item {flex-basis: 50%; padding: 1rem 1.6rem;}
   }
 </style>
