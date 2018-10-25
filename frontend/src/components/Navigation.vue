@@ -12,11 +12,11 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <router-link tag="li" class="nav-item" active-class="active" to="/" exact><a class="nav-link">home</a></router-link>
-        <router-link tag="li" class="nav-item" active-class="active" to="/schedule" exact><a class="nav-link">schedule</a></router-link>
-        <router-link tag="li" class="nav-item" active-class="active" to="/resources" exact><a class="nav-link">resources</a></router-link>
-        <router-link tag="li" class="nav-item" active-class="active" to="/team" exact><a class="nav-link">the team</a></router-link>
-        <router-link tag="li" class="nav-item" active-class="active" to="/faq" exact><a class="nav-link">FAQ</a></router-link>
+        <router-link tag="li" class="nav-item" active-class="active" to="/" exact><a data-toggle="collapse" class="nav-link">home</a></router-link>
+        <router-link tag="li" class="nav-item" active-class="active" to="/schedule" exact><a data-toggle="collapse" class="nav-link">schedule</a></router-link>
+        <router-link tag="li" class="nav-item" active-class="active" to="/resources" exact><a data-toggle="collapse" class="nav-link">resources</a></router-link>
+        <router-link tag="li" class="nav-item" active-class="active" to="/team" exact><a data-toggle="collapse" class="nav-link">the team</a></router-link>
+        <router-link tag="li" class="nav-item" active-class="active" to="/faq" exact><a data-toggle="collapse" class="nav-link">FAQ</a></router-link>
       </ul>
       <ul class="navbar-nav">
         <button v-if="registration === 'closed'" @click="toLogin" class="btn btn-sm btn-info">Sign in</button>

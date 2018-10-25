@@ -76,10 +76,6 @@ export default {
     flex-basis: 25%;
     text-align: center;
   }
-  /*.wrapper:hover > .overlay {*/
-    /*opacity: 1;*/
-    /*transform: translateY(0)*/
-  /*}*/
   .team-item img {
     width: 100%;
     transition: all .2s ease-out;
@@ -98,13 +94,10 @@ export default {
   }
   .overlay {
     transition: all .3s ease-in-out;
-    /*transform: translateY(40px);*/
-    /*opacity: 0;*/
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    /*padding: 1rem 0;*/
     color: #fff;
     background-color: rgba(0, 119, 181, .85);
     width: 40px;

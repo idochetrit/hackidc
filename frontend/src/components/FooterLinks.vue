@@ -29,4 +29,8 @@
     color: #fff;
   }
   li a:hover {text-decoration: underline;}
+
+  @media screen and (max-width: 767px) {
+    ul {flex-direction: column; align-items: center;}
+  }
 </style>
