@@ -7,7 +7,7 @@
       <div class="row">
         <a v-for="(t, i) in team" :key="i" class="team-item" :href="t.linkedin" target="_blank">
           <div class="wrapper">
-            <div class="overlay"><span class="fab fa-linkedin fa-2x"></span></div>
+            <div class="overlay"><span class="fab fa-linkedin-in fa-lg"></span></div>
             <img class="img-responsive" :src="t.thumbnail">
           </div>
           <h5>{{ t.name }}</h5>
@@ -33,12 +33,12 @@ export default {
         {name: 'Gal Rabin', linkedin: 'https://www.linkedin.com/in/gal-rabin-473351120/', thumbnail: 'https://media.licdn.com/dms/image/C5103AQEsJqEH4PIPhA/profile-displayphoto-shrink_800_800/0?e=1545264000&v=beta&t=9JXDp6IpdJP1FkqbLCmuyG-DoMTGcIIaOB7AU3S-X1I'},
         {name: 'Gill Samia', linkedin: 'https://www.linkedin.com/in/gillsamia/', thumbnail: 'https://media.licdn.com/dms/image/C4E03AQH_4tFezJZD_g/profile-displayphoto-shrink_800_800/0?e=1545264000&v=beta&t=8aZJFWNbS4qZzPVS-2t8uKm4B4DRdAT0W8L2aJhv_uE'},
         {name: 'Lidor Hezkelo', linkedin: 'https://www.linkedin.com/in/lidor-hezkelo-64147315b/', thumbnail: 'https://media.licdn.com/dms/image/C4D03AQGb3QwV4eg1Eg/profile-displayphoto-shrink_800_800/0?e=1545264000&v=beta&t=adcHq3WNvpaE2khwxrT1VxFN7bhB3TMxUyweBd7EHjc'},
-        {name: 'Miya Margalith', linkedin: 'https://www.linkedin.com/in/miya-margalith/', thumbnail: 'https://media.licdn.com/dms/image/C5603AQFqFrUtT8R60w/profile-displayphoto-shrink_800_800/0?e=1545868800&v=beta&t=W2uCRyfeHgg0EsbemrC30lZLYb0yLzD0h-NS3MfJUig'},
         {name: 'Yonatan Eldan', linkedin: 'https://www.linkedin.com/in/yonatan-eldan-879706a9/', thumbnail: 'https://media.licdn.com/dms/image/C5603AQEA1qGtHZRASw/profile-displayphoto-shrink_800_800/0?e=1545264000&v=beta&t=72J0eBZYTP7q1G7h-gFeIil1CqhBChlddMRv0Sgfu3M'},
         {name: 'Ido Chetrit', linkedin: 'https://www.linkedin.com/in/ido-chetrit-a379077a/', thumbnail: require('../../static/ido.jpg')},
-        {name: 'Lia Levy', linkedin: 'https://www.linkedin.com/in/lia-levy/', thumbnail: 'https://media.licdn.com/dms/image/C4E03AQF8WAHAFonAYg/profile-displayphoto-shrink_800_800/0?e=1545868800&v=beta&t=9aXAAdeQ4fQ3lXZ5d7_LK2jzxxb8O0Ql-r9KMi2qeh0'},
+        {name: 'Lia Levy', linkedin: '#', thumbnail: 'https://image.flaticon.com/icons/png/512/149/149071.png'},
         {name: 'Tal Kedmi', linkedin: 'https://www.linkedin.com/in/tal-kedmi-bb1169172/', thumbnail: require('../../static/tal.jpg')},
         {name: 'Ohad Ronen', linkedin: 'https://www.linkedin.com/in/ohad-ronen-4a045542/', thumbnail: 'https://media.licdn.com/dms/image/C5603AQEvKKbXq25hUw/profile-displayphoto-shrink_800_800/0?e=1545264000&v=beta&t=mB7FxIYBlmC3kK7tYqu04rsswMrd975ksPIQknKe1j8'},
+        {name: 'Miya Margalith', linkedin: '#', thumbnail: 'https://image.flaticon.com/icons/png/512/149/149071.png'},
         {name: 'Gad Suarez', linkedin: 'https://www.linkedin.com/in/gad-zuaretz-37613b161/', thumbnail: require('../../static/gad.jpg')},
       ]
     }
@@ -74,11 +74,12 @@ export default {
     justify-content: center;
     align-items: center;
     flex-basis: 25%;
+    text-align: center;
   }
-  .wrapper:hover > .overlay {
-    opacity: 1;
-    transform: translateY(0)
-  }
+  /*.wrapper:hover > .overlay {*/
+    /*opacity: 1;*/
+    /*transform: translateY(0)*/
+  /*}*/
   .team-item img {
     width: 100%;
     transition: all .2s ease-out;
@@ -90,22 +91,27 @@ export default {
     width: 100%;
     text-align: center;
     margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
   }
   .overlay {
     transition: all .3s ease-in-out;
-    transform: translateY(40px);
-    opacity: 0;
+    /*transform: translateY(40px);*/
+    /*opacity: 0;*/
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
+    align-items: center;
     justify-content: center;
-    padding: 1rem 0;
+    /*padding: 1rem 0;*/
     color: #fff;
     background-color: rgba(0, 119, 181, .85);
-    width: 100%;
-    height: 30%;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
     position: absolute;
-    bottom: 0;
+    bottom: 5px;
   }
   h2 {font-weight: bold; text-align: center;}
   h5 {font-weight: bold; color: #000;}
