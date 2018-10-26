@@ -1,9 +1,15 @@
+const path = require("path");
+const webpack = require("webpack");
+const { VueLoaderPlugin } = require("vue-loader");
+
 module.exports = {
   // This is the "main" file which should include all other modules
   entry: "./frontend/src/main.js",
   // Where should the compiled file go?
   output: {
-    filename: "./public/bundle.js"
+    path: path.join(__dirname, "public"),
+    filename: "bundle.js",
+    publicPath: "/"
   },
   resolve: {
     alias: {
@@ -41,6 +47,20 @@ module.exports = {
     ]
   },
   devServer: {
-    port: 3000
-  }
+    host: "0.0.0.0",
+    historyApiFallback: true,
+    port: 3000,
+    proxy: {
+      "/api/**": {
+        target: "http://localhost:8080",
+        secure: false,
+        changeOrigin: true
+      }
+    },
+    // Open the browser window, set to false if you are in a headless browser environment.
+    // open: false,
+    contentBase: path.join(__dirname, "/public"),
+    watchContentBase: true
+  },
+  plugins: [new webpack.HotModuleReplacementPlugin()]
 };
