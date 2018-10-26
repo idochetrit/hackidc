@@ -8,6 +8,7 @@ module.exports = {
   plugins: ["prettier"],
   rules: {
     camelcase: 0,
+    "class-methods-use-this": 0,
     "comma-dangle": [2, "never"],
     "comma-spacing": [2, { before: false, after: true }],
     "consistent-return": 0,
