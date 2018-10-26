@@ -77,11 +77,12 @@ export default {
 
   @media screen and (max-width: 1200px) {
     .container-fluid {padding: 2rem .5rem;}
+    .footerLogo {padding: 0;}
   }
 
   @media screen and (max-width: 767px) {
-    .eventLogo img {width: 40%;}
-    .footerLogo {flex-basis: 30%;}
+    .eventLogo img {width: 50%;}
+    .footerLogo {flex-basis: 30%; padding: 0;}
     .footerLogo img {width: 65%;}
     .footerLogo:nth-of-type(2) img {width: 95%;}
   }

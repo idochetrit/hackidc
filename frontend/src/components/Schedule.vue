@@ -30,4 +30,8 @@
     font-weight: bold;
     text-align: center;
   }
+
+  @media screen and (max-width: 767px) {
+    .herzel {width: 20%;}
+  }
 </style>

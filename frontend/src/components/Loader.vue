@@ -36,4 +36,8 @@
     50% {margin: 0;}
     100% {margin: 0;}
   }
+
+  @media screen and (max-width: 767px) {
+    span {font-size: 2rem;}
+  }
 </style>

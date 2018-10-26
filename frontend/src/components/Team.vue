@@ -111,6 +111,7 @@ export default {
   a {text-decoration: none;}
 
   @media screen and (max-width: 767px) {
-    .team-item {flex-basis: 50%; padding: 1rem 1.6rem;}
+    .herzel {width: 20%;}
+    .team-item {flex-basis: 50%; padding: .3rem 1.2rem;}
   }
 </style>

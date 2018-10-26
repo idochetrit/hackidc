@@ -30761,7 +30761,7 @@ exports = module.exports = __webpack_require__(2)(undefined);
 
 
 // module
-exports.push([module.i, "\nnav[data-v-639bd3db] {\n  position: fixed;\n  top: 0;\n  left: 0;\n  z-index: 100;\n  padding: 1rem 3rem;\n  width: 100%;\n  background-color: #212426 !important;\n}\n.navbar-brand:hover > img[data-v-639bd3db] {transform: scale(1.3)\n}\n.navbar-brand[data-v-639bd3db]:hover {cursor: pointer;\n}\n.navbar-brand img[data-v-639bd3db] {transition: all .2s ease-out;\n}\n.navbar-brand[data-v-639bd3db] {font-weight: bold; font-size: 1.4rem; color: #fff !important;\n}\n.nav-link[data-v-639bd3db] {\n  text-transform: capitalize;\n  transition: all .2s ease-out;\n  font-size: 1.1rem;\n  letter-spacing: .03rem;\n}\n.nav-item[data-v-639bd3db] {\n  border-radius: 20px;\n  padding: 0 .3rem;\n}\nbutton[data-v-639bd3db] {padding: 0 1rem; font-size: 1rem;\n}\n.nav-item:hover > .nav-link [data-v-639bd3db], .social[data-v-639bd3db]:hover {color: #ccc;\n}\n.active[data-v-639bd3db] {font-weight: bold;\n}\n.social[data-v-639bd3db] {\n  padding: 0 .7rem;\n  color: #fff;\n  transition: all .2s ease-out;\n}\n@media screen and (min-width: 990px) {\n.active[data-v-639bd3db] {background-color: #333;\n}\n}\n@media screen and (max-width: 1200px) {\nnav[data-v-639bd3db] {padding: .5rem 2rem;\n}\nbutton.navbar-toggler[data-v-639bd3db] {padding: .5rem; border: none;\n}\n}\n@media screen and (max-width: 767px) {\nnav[data-v-639bd3db] {padding: .7rem 2rem;\n}\nbutton.navbar-toggler[data-v-639bd3db] {padding: .5rem; border: none;\n}\n}\n", ""]);
+exports.push([module.i, "\nnav[data-v-639bd3db] {\n  position: fixed;\n  top: 0;\n  left: 0;\n  z-index: 100;\n  padding: 1rem 3rem;\n  width: 100%;\n  background-color: #212426 !important;\n}\n.navbar-brand:hover > img[data-v-639bd3db] {transform: scale(1.3)\n}\n.navbar-brand[data-v-639bd3db]:hover {cursor: pointer;\n}\n.navbar-brand img[data-v-639bd3db] {transition: all .2s ease-out;\n}\n.navbar-brand[data-v-639bd3db] {font-weight: bold; font-size: 1.4rem; color: #fff !important;\n}\n.nav-link[data-v-639bd3db] {\n  text-transform: capitalize;\n  transition: all .2s ease-out;\n  font-size: 1.1rem;\n  letter-spacing: .03rem;\n}\n.nav-item[data-v-639bd3db] {\n  border-radius: 20px;\n  padding: 0 .3rem;\n}\nbutton[data-v-639bd3db] {padding: 0 1rem; font-size: 1rem;\n}\n.nav-item:hover > .nav-link [data-v-639bd3db], .social[data-v-639bd3db]:hover {color: #ccc;\n}\n.active[data-v-639bd3db] {font-weight: bold;\n}\n.social[data-v-639bd3db] {\n  padding: 0 .7rem;\n  color: #fff;\n  transition: all .2s ease-out;\n}\n@media screen and (min-width: 990px) {\n.active[data-v-639bd3db] {background-color: #333;\n}\n}\n@media screen and (max-width: 1200px) {\nnav[data-v-639bd3db] {padding: .5rem 2rem;\n}\nbutton.navbar-toggler[data-v-639bd3db] {padding: .5rem; border: none;\n}\n}\n@media screen and (max-width: 767px) {\nnav[data-v-639bd3db] {padding: .7rem 2rem;\n}\n.nav-link[data-v-639bd3db] {padding: .3rem .2rem; font-size: 1.2rem;\n}\nbutton.navbar-toggler[data-v-639bd3db] {padding: .5rem; border: none;\n}\n}\n@media screen and (max-width: 360px) {\nnav[data-v-639bd3db] {padding: .4rem 1rem;\n}\n}\n", ""]);
 
 // exports
 
@@ -30816,6 +30816,18 @@ exports.default = {
     registration: function registration() {
       return this.$store.getters.isRegistrationOpen;
     }
+  },
+  mounted: function mounted() {
+    var links = Array.prototype.slice.call(document.getElementsByClassName('mainNav-item'), 0);
+    var view = document.getElementsByTagName('body')[0].clientWidth;
+    alert(view);
+    links.map(function (s) {
+      s.addEventListener('click', function () {
+        if (view <= 1000) {
+          document.getElementById('toggleBtn').click();
+        }
+      });
+    });
   }
 };
 
@@ -30878,7 +30890,7 @@ var render = function() {
               _c(
                 "router-link",
                 {
-                  staticClass: "nav-item",
+                  staticClass: "nav-item mainNav-item",
                   attrs: {
                     tag: "li",
                     "active-class": "active",
@@ -30886,22 +30898,13 @@ var render = function() {
                     exact: ""
                   }
                 },
-                [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "nav-link",
-                      attrs: { "data-toggle": "collapse" }
-                    },
-                    [_vm._v("home")]
-                  )
-                ]
+                [_c("a", { staticClass: "nav-link" }, [_vm._v("home")])]
               ),
               _vm._v(" "),
               _c(
                 "router-link",
                 {
-                  staticClass: "nav-item",
+                  staticClass: "nav-item mainNav-item",
                   attrs: {
                     tag: "li",
                     "active-class": "active",
@@ -30909,22 +30912,13 @@ var render = function() {
                     exact: ""
                   }
                 },
-                [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "nav-link",
-                      attrs: { "data-toggle": "collapse" }
-                    },
-                    [_vm._v("schedule")]
-                  )
-                ]
+                [_c("a", { staticClass: "nav-link" }, [_vm._v("schedule")])]
               ),
               _vm._v(" "),
               _c(
                 "router-link",
                 {
-                  staticClass: "nav-item",
+                  staticClass: "nav-item mainNav-item",
                   attrs: {
                     tag: "li",
                     "active-class": "active",
@@ -30932,22 +30926,13 @@ var render = function() {
                     exact: ""
                   }
                 },
-                [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "nav-link",
-                      attrs: { "data-toggle": "collapse" }
-                    },
-                    [_vm._v("resources")]
-                  )
-                ]
+                [_c("a", { staticClass: "nav-link" }, [_vm._v("resources")])]
               ),
               _vm._v(" "),
               _c(
                 "router-link",
                 {
-                  staticClass: "nav-item",
+                  staticClass: "nav-item mainNav-item",
                   attrs: {
                     tag: "li",
                     "active-class": "active",
@@ -30955,22 +30940,13 @@ var render = function() {
                     exact: ""
                   }
                 },
-                [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "nav-link",
-                      attrs: { "data-toggle": "collapse" }
-                    },
-                    [_vm._v("the team")]
-                  )
-                ]
+                [_c("a", { staticClass: "nav-link" }, [_vm._v("the team")])]
               ),
               _vm._v(" "),
               _c(
                 "router-link",
                 {
-                  staticClass: "nav-item",
+                  staticClass: "nav-item mainNav-item",
                   attrs: {
                     tag: "li",
                     "active-class": "active",
@@ -30978,16 +30954,7 @@ var render = function() {
                     exact: ""
                   }
                 },
-                [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "nav-link",
-                      attrs: { "data-toggle": "collapse" }
-                    },
-                    [_vm._v("FAQ")]
-                  )
-                ]
+                [_c("a", { staticClass: "nav-link" }, [_vm._v("FAQ")])]
               )
             ],
             1
@@ -31025,6 +30992,7 @@ var staticRenderFns = [
       {
         staticClass: "navbar-toggler",
         attrs: {
+          id: "toggleBtn",
           type: "button",
           "data-toggle": "collapse",
           "data-target": "#navbarSupportedContent",
@@ -31172,7 +31140,7 @@ exports = module.exports = __webpack_require__(2)(undefined);
 
 
 // module
-exports.push([module.i, "\n.container-fluid.logos[data-v-380b5362] {\n  background-color: #3a3f45;\n  padding: 2rem 0 1rem 0;\n}\n.container .row[data-v-380b5362] {\n  display: flex;\n  justify-content: center;\n}\n.coop[data-v-380b5362] {\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n  flex-wrap: wrap;\n}\n.eventLogo[data-v-380b5362] {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.eventLogo img[data-v-380b5362] {\n  width: 30%;\n  margin: 0 auto;\n}\n.footerLogo[data-v-380b5362] {\n  flex-basis: 20%;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  padding: 1rem 0;\n}\n.footerLogo img[data-v-380b5362] {width: 50%;\n}\n.footerLogo:nth-of-type(2) img[data-v-380b5362],\n.footerLogo:nth-of-type(3) img[data-v-380b5362] {width: 80%;\n}\n@media screen and (max-width: 1200px) {\n.container-fluid[data-v-380b5362] {padding: 2rem .5rem;\n}\n}\n@media screen and (max-width: 767px) {\n.eventLogo img[data-v-380b5362] {width: 40%;\n}\n.footerLogo[data-v-380b5362] {flex-basis: 30%;\n}\n.footerLogo img[data-v-380b5362] {width: 65%;\n}\n.footerLogo:nth-of-type(2) img[data-v-380b5362] {width: 95%;\n}\n}\n", ""]);
+exports.push([module.i, "\n.container-fluid.logos[data-v-380b5362] {\n  background-color: #3a3f45;\n  padding: 2rem 0 1rem 0;\n}\n.container .row[data-v-380b5362] {\n  display: flex;\n  justify-content: center;\n}\n.coop[data-v-380b5362] {\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n  flex-wrap: wrap;\n}\n.eventLogo[data-v-380b5362] {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.eventLogo img[data-v-380b5362] {\n  width: 30%;\n  margin: 0 auto;\n}\n.footerLogo[data-v-380b5362] {\n  flex-basis: 20%;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  padding: 1rem 0;\n}\n.footerLogo img[data-v-380b5362] {width: 50%;\n}\n.footerLogo:nth-of-type(2) img[data-v-380b5362],\n.footerLogo:nth-of-type(3) img[data-v-380b5362] {width: 80%;\n}\n@media screen and (max-width: 1200px) {\n.container-fluid[data-v-380b5362] {padding: 2rem .5rem;\n}\n.footerLogo[data-v-380b5362] {padding: 0;\n}\n}\n@media screen and (max-width: 767px) {\n.eventLogo img[data-v-380b5362] {width: 50%;\n}\n.footerLogo[data-v-380b5362] {flex-basis: 30%; padding: 0;\n}\n.footerLogo img[data-v-380b5362] {width: 65%;\n}\n.footerLogo:nth-of-type(2) img[data-v-380b5362] {width: 95%;\n}\n}\n", ""]);
 
 // exports
 
@@ -31324,7 +31292,7 @@ exports = module.exports = __webpack_require__(2)(undefined);
 
 
 // module
-exports.push([module.i, "\n.container-fluid[data-v-183deb27] {\n  background-color: #212426;\n  padding: 1rem 0;\n}\nul[data-v-183deb27] {\n  margin: 0;\n  padding: 0;\n  list-style: none;\n  display: flex;\n  flex-direction: row;\n  justify-content: center;\n  align-items: baseline;\n}\nli[data-v-183deb27] {padding: 0 1rem;\n}\nli a[data-v-183deb27] {\n  text-decoration: none;\n  color: #fff;\n}\nli a[data-v-183deb27]:hover {text-decoration: underline;\n}\n@media screen and (max-width: 767px) {\nul[data-v-183deb27] {flex-direction: column; align-items: center;\n}\n}\n", ""]);
+exports.push([module.i, "\n.container-fluid[data-v-183deb27] {\n  background-color: #212426;\n  padding: 1rem 0;\n}\nul[data-v-183deb27] {\n  margin: 0;\n  padding: 0;\n  list-style: none;\n  display: flex;\n  flex-direction: row;\n  justify-content: center;\n  align-items: baseline;\n}\nli[data-v-183deb27] {padding: 0 1rem;\n}\nli a[data-v-183deb27] {\n  text-decoration: none;\n  color: #fff;\n}\nli a[data-v-183deb27]:hover {text-decoration: underline;\n}\n@media screen and (max-width: 767px) {\nul[data-v-183deb27] {flex-direction: column; align-items: center;\n}\nli a[data-v-183deb27] {font-size: .9rem;\n}\n}\n@media screen and (max-width: 360px) {\n.container-fluid[data-v-183deb27] {padding: .5rem 0;\n}\n}\n", ""]);
 
 // exports
 
@@ -31715,7 +31683,7 @@ exports = module.exports = __webpack_require__(2)(undefined);
 
 
 // module
-exports.push([module.i, "\n.container-fluid[data-v-15e05c4c] {\n  min-height: 1000px;\n}\n.container[data-v-15e05c4c] {\n  padding: 10rem;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.fas[data-v-15e05c4c] {\n  margin: 0 1rem;\n  opacity: .3;\n  animation: spin 1.5s 0s infinite ease-in-out;\n}\nspan[data-v-15e05c4c] {\n  font-size: 3rem;\n  font-family: \"Fira Code\", monospace;\n  font-weight: bold;\n  text-align: center;\n  animation: loader-data-v-15e05c4c 1.5s 0s infinite ease-in-out;\n}\n@keyframes loader-data-v-15e05c4c {\n0% {margin: 0;\n}\n25% {margin: 0 .5rem;\n}\n50% {margin: 0;\n}\n100% {margin: 0;\n}\n}\n", ""]);
+exports.push([module.i, "\n.container-fluid[data-v-15e05c4c] {\n  min-height: 1000px;\n}\n.container[data-v-15e05c4c] {\n  padding: 10rem;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.fas[data-v-15e05c4c] {\n  margin: 0 1rem;\n  opacity: .3;\n  animation: spin 1.5s 0s infinite ease-in-out;\n}\nspan[data-v-15e05c4c] {\n  font-size: 3rem;\n  font-family: \"Fira Code\", monospace;\n  font-weight: bold;\n  text-align: center;\n  animation: loader-data-v-15e05c4c 1.5s 0s infinite ease-in-out;\n}\n@keyframes loader-data-v-15e05c4c {\n0% {margin: 0;\n}\n25% {margin: 0 .5rem;\n}\n50% {margin: 0;\n}\n100% {margin: 0;\n}\n}\n@media screen and (max-width: 767px) {\nspan[data-v-15e05c4c] {font-size: 2rem;\n}\n}\n", ""]);
 
 // exports
 
@@ -35024,7 +34992,7 @@ exports = module.exports = __webpack_require__(2)(undefined);
 
 
 // module
-exports.push([module.i, "\n.container-fluid[data-v-5c94c516] {\n  background: #f7f7f7;  /* fallback for old browsers */\n  background: -webkit-linear-gradient(to top, #fff, #f7f7f7);  /* Chrome 10-25, Safari 5.1-6 */\n  background: linear-gradient(to top, #fff, #f7f7f7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */\n  padding: 4rem 0;\n}\nimg[data-v-5c94c516] {\n  width: 100%;\n  filter: brightness(0);\n}\nh2[data-v-5c94c516] {font-weight: bold;\n}\n.bolder[data-v-5c94c516] {\n  font-weight: bold;\n  font-size: 1.3rem;\n}\n.col-lg-4[data-v-5c94c516], .col-lg-5[data-v-5c94c516] {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  font-size: 12rem;\n}\n@media screen and (max-width: 1200px) {\n}\n@media screen and (max-width: 767px) {\n.container-fluid[data-v-5c94c516] {padding: 2rem .5rem;\n}\n.col-lg-5[data-v-5c94c516], .col-sm-4[data-v-5c94c516] {padding: 1rem 0 0 0;\n}\n.col-lg-4[data-v-5c94c516] {padding: 3rem 0 0 0;\n}\n.row[data-v-5c94c516]:nth-of-type(2) {flex-direction: column-reverse;\n}\n}\n", ""]);
+exports.push([module.i, "\n.container-fluid[data-v-5c94c516] {\n  background: #f7f7f7;  /* fallback for old browsers */\n  background: -webkit-linear-gradient(to top, #fff, #f7f7f7);  /* Chrome 10-25, Safari 5.1-6 */\n  background: linear-gradient(to top, #fff, #f7f7f7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */\n  padding: 4rem 0;\n}\nimg[data-v-5c94c516] {\n  width: 100%;\n  filter: brightness(0);\n}\nh2[data-v-5c94c516] {font-weight: bold;\n}\n.bolder[data-v-5c94c516] {\n  font-weight: bold;\n  font-size: 1.3rem;\n}\n.col-lg-4[data-v-5c94c516], .col-lg-5[data-v-5c94c516] {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  font-size: 12rem;\n}\n@media screen and (max-width: 1200px) {\n}\n@media screen and (max-width: 767px) {\n.herzel[data-v-5c94c516] {width: 70%;\n}\n.container-fluid[data-v-5c94c516] {padding: 2rem .5rem;\n}\n.col-lg-5[data-v-5c94c516], .col-sm-4[data-v-5c94c516] {\n    padding: 2rem 0 0 0;\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    font-size: 9rem;\n}\n.col-lg-4[data-v-5c94c516] {padding: 3rem 0 0 0; font-size: 9rem;\n}\n.row[data-v-5c94c516]:nth-of-type(2) {flex-direction: column-reverse;\n}\n}\n", ""]);
 
 // exports
 
@@ -35451,7 +35419,7 @@ exports = module.exports = __webpack_require__(2)(undefined);
 
 
 // module
-exports.push([module.i, "\n.container-fluid[data-v-5778e53a] {\n  padding: 1.5rem 0;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n}\n.counter > *[data-v-5778e53a] {font-family: 'Fira Code', monospace;\n}\nh3[data-v-5778e53a] {\n  text-transform: uppercase;\n  color: #fff;\n  margin-bottom: 1rem;\n}\nh1[data-v-5778e53a] {font-size: 3rem; font-weight: bold;\n}\nh1[data-v-5778e53a], h4[data-v-5778e53a] {margin: 0; padding: 0; text-align: center\n}\n.counter[data-v-5778e53a] {\n  display: flex;\n  flex-direction: row;\n  justify-content: center;\n  align-items: center;\n}\n.box[data-v-5778e53a] {\n  margin: 0 .2rem;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  min-width: 120px;\n  min-height: 120px;\n  padding: 1rem;\n  background-color: rgba(0,0,0,.15);\n  border-radius: 10px;\n  color: #fff;\n}\n@media screen and (max-width: 767px) {\nh1[data-v-5778e53a] {font-size: 2rem;\n}\nh4[data-v-5778e53a] {font-size: 1rem;\n}\n.box[data-v-5778e53a] {min-height: 80px; min-width: 80px; padding: .5rem;\n}\n}\n\n", ""]);
+exports.push([module.i, "\n.container-fluid[data-v-5778e53a] {\n  padding: 1.5rem 0;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n}\n.counter > *[data-v-5778e53a] {font-family: 'Fira Code', monospace;\n}\nh3[data-v-5778e53a] {\n  text-transform: uppercase;\n  color: #fff;\n  margin-bottom: 1rem;\n}\nh1[data-v-5778e53a] {font-size: 3rem; font-weight: bold;\n}\nh1[data-v-5778e53a], h4[data-v-5778e53a] {margin: 0; padding: 0; text-align: center\n}\n.counter[data-v-5778e53a] {\n  display: flex;\n  flex-direction: row;\n  justify-content: center;\n  align-items: center;\n}\n.box[data-v-5778e53a] {\n  margin: 0 .2rem;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  min-width: 120px;\n  min-height: 120px;\n  padding: 1rem;\n  background-color: rgba(0,0,0,.15);\n  border-radius: 10px;\n  color: #fff;\n}\n@media screen and (max-width: 767px) {\nh1[data-v-5778e53a] {font-size: 2rem;\n}\nh4[data-v-5778e53a] {font-size: 1rem;\n}\n.box[data-v-5778e53a] {min-height: 80px; min-width: 80px; padding: .5rem;\n}\n.container-fluid[data-v-5778e53a] {padding: 1rem 0;\n}\n}\n@media screen and (max-width: 360px) {\n.container-fluid[data-v-5778e53a] {padding: .7rem 0;\n}\nh3[data-v-5778e53a] {font-size: 1.5rem; margin-bottom: .5rem;\n}\nh1[data-v-5778e53a] {font-size: 1.5rem;\n}\nh4[data-v-5778e53a] {font-size: .8rem;\n}\n.box[data-v-5778e53a] {margin: 0 .1rem; min-height: 60px; min-width: 70px;\n}\n}\n", ""]);
 
 // exports
 
@@ -36018,7 +35986,7 @@ exports = module.exports = __webpack_require__(2)(undefined);
 
 
 // module
-exports.push([module.i, "\n.container-fluid[data-v-5c7bd983] {\n  padding: 4rem 0;\n  background-color: #f7f7f7;\n}\n.judges-item:hover > img[data-v-5c7bd983] {\n  transform: scale(1.03);\n}\n.judges-item[data-v-5c7bd983] {\n  flex-basis: 33.33333333%;\n  padding: 1rem;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n}\nh5[data-v-5c7bd983] {font-weight: bold;\n}\np[data-v-5c7bd983] {\n  padding: 0 1rem;\n  text-align: center;\n}\nh2[data-v-5c7bd983] {font-weight: bold; text-align: center;\n}\nimg[data-v-5c7bd983] {\n  transition: all .2s ease-out;\n  margin-bottom: 1rem;\n  width: 70%;\n  border-radius: 50%;\n}\n@media screen and (max-width: 1200px) {\n.container-fluid[data-v-5c7bd983] {padding: 2rem .5rem;\n}\n}\n@media screen and (max-width: 767px) {\n.judges-item[data-v-5c7bd983] {flex-basis: 50%;\n}\n}\n", ""]);
+exports.push([module.i, "\n.container-fluid[data-v-5c7bd983] {\n  padding: 4rem 0;\n  background-color: #f7f7f7;\n}\n.judges-item:hover > img[data-v-5c7bd983] {\n  transform: scale(1.03);\n}\n.judges-item[data-v-5c7bd983] {\n  flex-basis: 33.33333333%;\n  padding: 1rem;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n}\nh5[data-v-5c7bd983] {font-weight: bold;\n}\np[data-v-5c7bd983] {\n  padding: 0 1rem;\n  text-align: center;\n}\nh2[data-v-5c7bd983] {font-weight: bold; text-align: center;\n}\nimg[data-v-5c7bd983] {\n  transition: all .2s ease-out;\n  margin-bottom: 1rem;\n  width: 70%;\n  border-radius: 50%;\n}\n@media screen and (max-width: 1200px) {\n.container-fluid[data-v-5c7bd983] {padding: 2rem .5rem;\n}\n}\n@media screen and (max-width: 767px) {\n.judges-item[data-v-5c7bd983] {flex-basis: 50%; padding: .2rem 0;\n}\n}\n", ""]);
 
 // exports
 
@@ -36604,7 +36572,7 @@ exports = module.exports = __webpack_require__(2)(undefined);
 
 
 // module
-exports.push([module.i, "\n.container-fluid[data-v-30c82580] {\n  padding: 4rem 0;\n  background-color: #3a3f45;\n  background: -webkit-linear-gradient(to top, #212426, #3a3f45);  /* Chrome 10-25, Safari 5.1-6 */\n  background: linear-gradient(to top, #212426, #3a3f45); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */\n}\n.rules-item[data-v-30c82580] {\n  flex-basis: 33.3333333%;\n  padding: 1rem;\n  color: #fff;\n}\nh2[data-v-30c82580] {font-weight: bold; color: #fff; text-align: center\n}\nh5[data-v-30c82580] {font-weight: bold;\n}\n@media screen and (max-width: 1200px) {\n.container-fluid[data-v-30c82580] {padding: 2rem .5rem;\n}\n}\n@media screen and (max-width: 767px) {\n.rules-item[data-v-30c82580] {flex-basis: 50%;\n}\np[data-v-30c82580] {font-size: .8rem; margin: 0;\n}\nh5[data-v-30c82580] {font-size: 1rem;\n}\n}\n", ""]);
+exports.push([module.i, "\n.container-fluid[data-v-30c82580] {\n  padding: 4rem 0;\n  background-color: #3a3f45;\n  background: -webkit-linear-gradient(to top, #212426, #3a3f45);  /* Chrome 10-25, Safari 5.1-6 */\n  background: linear-gradient(to top, #212426, #3a3f45); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */\n}\n.rules-item[data-v-30c82580] {\n  flex-basis: 33.3333333%;\n  padding: 1rem;\n  color: #fff;\n}\nh2[data-v-30c82580] {font-weight: bold; color: #fff; text-align: center\n}\nh5[data-v-30c82580] {font-weight: bold;\n}\n@media screen and (max-width: 1200px) {\n.container-fluid[data-v-30c82580] {padding: 2rem .5rem;\n}\n}\n@media screen and (max-width: 767px) {\n.rules-item[data-v-30c82580] {flex-basis: 50%; padding: .5rem;\n}\np[data-v-30c82580] {font-size: .8rem; margin: 0;\n}\nh5[data-v-30c82580] {font-size: 1rem;\n}\n}\n", ""]);
 
 // exports
 
@@ -36649,14 +36617,14 @@ exports.default = {
         title: 'ownership',
         description: 'Teams have full ownership of everything they build at our events and are free to do with it as they wish.'
       }, {
-        title: 'student verification',
-        description: 'All participants will be subject to a student ID check for verification, prior to the event.'
+        title: 'code review',
+        description: 'Winning teams may be subject to a code-review at some point following the event or immediately before winning.'
       }, {
         title: 'fresh code',
         description: 'You may not begin your project until the competition officially begins. Please don’t come in and build on top of previous projects if you want to win.'
       }, {
-        title: 'code review',
-        description: 'Winning teams may be subject to a code-review at some point following the event or immediately before winning.'
+        title: 'student verification',
+        description: 'All participants will be subject to a student ID check for verification, prior to the event.'
       }]
     };
   }
@@ -36832,7 +36800,7 @@ exports = module.exports = __webpack_require__(2)(undefined);
 
 
 // module
-exports.push([module.i, "\n.container-fluid[data-v-0d5ae29e] {\n  padding: 8rem 0;\n  min-height: 1000px;\n  background-color: #f7f7f7;\n}\n.container[data-v-0d5ae29e] {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n.herzel[data-v-0d5ae29e] {\n  width: 10%;\n  margin-bottom: 4rem;\n}\nh2[data-v-0d5ae29e] {\n  font-weight: bold;\n  text-align: center;\n}\n", ""]);
+exports.push([module.i, "\n.container-fluid[data-v-0d5ae29e] {\n  padding: 8rem 0;\n  min-height: 1000px;\n  background-color: #f7f7f7;\n}\n.container[data-v-0d5ae29e] {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n.herzel[data-v-0d5ae29e] {\n  width: 10%;\n  margin-bottom: 4rem;\n}\nh2[data-v-0d5ae29e] {\n  font-weight: bold;\n  text-align: center;\n}\n@media screen and (max-width: 767px) {\n.herzel[data-v-0d5ae29e] {width: 20%;\n}\n}\n", ""]);
 
 // exports
 
@@ -36983,7 +36951,7 @@ exports = module.exports = __webpack_require__(2)(undefined);
 
 
 // module
-exports.push([module.i, "\n.container-fluid[data-v-780f332e] {\n  padding: 8rem 0;\n  min-height: 1000px;\n  background-color: #f7f7f7;\n}\n.container[data-v-780f332e] {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n}\n.row[data-v-780f332e] {\n  padding-bottom: 4rem;\n  width: 100%;\n}\n.herzel[data-v-780f332e] {\n  width: 10%;\n  margin-bottom: 2rem;\n}\nh2[data-v-780f332e] {font-weight: bold; margin-bottom: 4rem;\n}\n.nav-link[data-v-780f332e] {color: #000;\n}\n.tab-content[data-v-780f332e] {\n  padding: 2rem;\n  display: flex;\n  flex-direction: row;\n  justify-content: flex-start;\n  align-items: flex-start;\n  flex-wrap: wrap;\n  background-color: #fdfdfd;\n  border: 1px solid #f3f3f3;\n  width: 100%;\n  min-height: 500px;\n}\n.tab-content > .active[data-v-780f332e] {\n  display: flex;\n  flex-direction: row;\n  justify-content: flex-start;\n  align-items: flex-start;\n  flex-wrap: wrap;\n  width: 100%;\n}\n.card[data-v-780f332e] {\n  flex-basis: 31%;\n  text-decoration: none;\n  color: #000;\n}\n.card-body[data-v-780f332e] {padding: 1rem; border-top: 1px solid #eee;\n}\n.card-title[data-v-780f332e] {font-weight: bold;\n}\n.card-img-top[data-v-780f332e] {height: 180px;\n}\n@media screen and (max-width: 1200px) {\n.card[data-v-780f332e] {flex-basis: 48%; margin-right: .5rem !important;\n}\n.card-img-top[data-v-780f332e] {height: 160px;\n}\n}\n@media screen and (max-width: 767px) {\n.tab-content[data-v-780f332e] {justify-content: center; padding: 1rem;\n}\n.tab-content > .active[data-v-780f332e] {justify-content: center\n}\n.card[data-v-780f332e] {flex-basis: 100%; margin-right: 0 !important;\n}\n.card-body[data-v-780f332e] {padding: .5rem; border-top: 1px solid #eee;\n}\n.card-title[data-v-780f332e] {font-weight: bold; font-size: 1.2rem; text-align: center;\n}\n.card-img-top[data-v-780f332e] {height: 150px;\n}\n}\n", ""]);
+exports.push([module.i, "\n.container-fluid[data-v-780f332e] {\n  padding: 8rem 0;\n  min-height: 1000px;\n  background-color: #f7f7f7;\n}\n.container[data-v-780f332e] {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n}\n.row[data-v-780f332e] {\n  padding-bottom: 4rem;\n  width: 100%;\n}\n.herzel[data-v-780f332e] {\n  width: 10%;\n  margin-bottom: 2rem;\n}\nh2[data-v-780f332e] {font-weight: bold; margin-bottom: 4rem;\n}\n.nav-link[data-v-780f332e] {color: #000;\n}\n.tab-content[data-v-780f332e] {\n  padding: 2rem;\n  display: flex;\n  flex-direction: row;\n  justify-content: flex-start;\n  align-items: flex-start;\n  flex-wrap: wrap;\n  background-color: #fdfdfd;\n  border: 1px solid #f3f3f3;\n  width: 100%;\n  min-height: 500px;\n}\n.tab-content > .active[data-v-780f332e] {\n  display: flex;\n  flex-direction: row;\n  justify-content: flex-start;\n  align-items: flex-start;\n  flex-wrap: wrap;\n  width: 100%;\n}\n.card[data-v-780f332e] {\n  flex-basis: 31%;\n  text-decoration: none;\n  color: #000;\n}\n.card-body[data-v-780f332e] {padding: 1rem; border-top: 1px solid #eee;\n}\n.card-title[data-v-780f332e] {font-weight: bold;\n}\n.card-img-top[data-v-780f332e] {height: 180px;\n}\n@media screen and (max-width: 1200px) {\n.card[data-v-780f332e] {flex-basis: 48%; margin-right: .5rem !important;\n}\n.card-img-top[data-v-780f332e] {height: 160px;\n}\n}\n@media screen and (max-width: 767px) {\n.herzel[data-v-780f332e] {width: 20%;\n}\n.tab-content[data-v-780f332e] {justify-content: center; padding: 2rem 1rem;\n}\n.tab-content > .active[data-v-780f332e] {justify-content: center\n}\n.card[data-v-780f332e] {flex-basis: 100%; margin-right: 0 !important;\n}\n.card-body[data-v-780f332e] {padding: .5rem; border-top: 1px solid #eee;\n}\n.card-title[data-v-780f332e] {font-weight: bold; font-size: 1.2rem; text-align: center;\n}\n.card-img-top[data-v-780f332e] {height: 180px;\n}\n}\n", ""]);
 
 // exports
 
@@ -37346,7 +37314,7 @@ exports = module.exports = __webpack_require__(2)(undefined);
 
 
 // module
-exports.push([module.i, "\n.container-fluid[data-v-f0b63742] {\n  padding: 8rem 0;\n  background-color: #f7f7f7;\n  min-height: 1000px;\n}\n.container[data-v-f0b63742] {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n}\n.herzel[data-v-f0b63742] {\n  width: 10%;\n  margin-bottom: 2rem;\n}\nh2[data-v-f0b63742] {font-weight: bold; margin-bottom: 4rem;\n}\nh3[data-v-f0b63742] {margin: 1rem 0;\n}\n.point[data-v-f0b63742] {\n  padding: 0 1rem 2rem 1rem;\n}\na[data-v-f0b63742] {color: #000;\n}\na.btn[data-v-f0b63742] {color: #fff; text-decoration: none; text-transform: uppercase; font-size: 1rem;\n}\n", ""]);
+exports.push([module.i, "\n.container-fluid[data-v-f0b63742] {\n  padding: 8rem 0;\n  background-color: #f7f7f7;\n  min-height: 1000px;\n}\n.container[data-v-f0b63742] {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n}\n.herzel[data-v-f0b63742] {\n  width: 10%;\n  margin-bottom: 2rem;\n}\nh2[data-v-f0b63742] {font-weight: bold; margin-bottom: 4rem;\n}\nh3[data-v-f0b63742] {margin: 1rem 0;\n}\n.point[data-v-f0b63742] {\n  padding: 0 1rem 2rem 1rem;\n}\na[data-v-f0b63742] {color: #000;\n}\na.btn[data-v-f0b63742] {color: #fff; text-decoration: none; text-transform: uppercase; font-size: 1rem; font-weight: bold;\n}\n@media screen and (max-width: 767px) {\n.container-fluid[data-v-f0b63742] {padding: 8rem 0 4rem 0;\n}\n.herzel[data-v-f0b63742] {width: 20%;\n}\nh3[data-v-f0b63742] {text-align: center; font-size: 1.5rem;\n}\n}\n", ""]);
 
 // exports
 
@@ -37888,7 +37856,7 @@ exports = module.exports = __webpack_require__(2)(undefined);
 
 
 // module
-exports.push([module.i, "\n.container-fluid[data-v-ab65e238] {\n  padding: 8rem 0;\n  background-color: #f7f7f7;\n}\n.container[data-v-ab65e238] {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n}\n.herzel[data-v-ab65e238] {\n  width: 10%;\n  margin-bottom: 2rem;\n}\n.row[data-v-ab65e238] {\n  display: flex;\n  flex-direction: row;\n  justify-content: center;\n  align-items: center;\n  flex-wrap: wrap;\n}\n.team-item[data-v-ab65e238] {\n  padding: 1rem 2rem;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  flex-basis: 25%;\n  text-align: center;\n}\n.team-item img[data-v-ab65e238] {\n  width: 100%;\n  transition: all .2s ease-out;\n}\n.wrapper[data-v-ab65e238] {\n  border-radius: 50%;\n  overflow: hidden;\n  position: relative;\n  width: 100%;\n  text-align: center;\n  margin-bottom: 1rem;\n  display: flex;\n  flex-direction: column;\n  justify-content: flex-end;\n  align-items: center;\n}\n.overlay[data-v-ab65e238] {\n  transition: all .3s ease-in-out;\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n  justify-content: center;\n  color: #fff;\n  background-color: rgba(0, 119, 181, .85);\n  width: 40px;\n  height: 40px;\n  border-radius: 50%;\n  position: absolute;\n  bottom: 5px;\n}\nh2[data-v-ab65e238] {font-weight: bold; text-align: center;\n}\nh5[data-v-ab65e238] {font-weight: bold; color: #000;\n}\na[data-v-ab65e238] {text-decoration: none;\n}\n@media screen and (max-width: 767px) {\n.team-item[data-v-ab65e238] {flex-basis: 50%; padding: 1rem 1.6rem;\n}\n}\n", ""]);
+exports.push([module.i, "\n.container-fluid[data-v-ab65e238] {\n  padding: 8rem 0;\n  background-color: #f7f7f7;\n}\n.container[data-v-ab65e238] {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n}\n.herzel[data-v-ab65e238] {\n  width: 10%;\n  margin-bottom: 2rem;\n}\n.row[data-v-ab65e238] {\n  display: flex;\n  flex-direction: row;\n  justify-content: center;\n  align-items: center;\n  flex-wrap: wrap;\n}\n.team-item[data-v-ab65e238] {\n  padding: 1rem 2rem;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  flex-basis: 25%;\n  text-align: center;\n}\n.team-item img[data-v-ab65e238] {\n  width: 100%;\n  transition: all .2s ease-out;\n}\n.wrapper[data-v-ab65e238] {\n  border-radius: 50%;\n  overflow: hidden;\n  position: relative;\n  width: 100%;\n  text-align: center;\n  margin-bottom: 1rem;\n  display: flex;\n  flex-direction: column;\n  justify-content: flex-end;\n  align-items: center;\n}\n.overlay[data-v-ab65e238] {\n  transition: all .3s ease-in-out;\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n  justify-content: center;\n  color: #fff;\n  background-color: rgba(0, 119, 181, .85);\n  width: 40px;\n  height: 40px;\n  border-radius: 50%;\n  position: absolute;\n  bottom: 5px;\n}\nh2[data-v-ab65e238] {font-weight: bold; text-align: center;\n}\nh5[data-v-ab65e238] {font-weight: bold; color: #000;\n}\na[data-v-ab65e238] {text-decoration: none;\n}\n@media screen and (max-width: 767px) {\n.herzel[data-v-ab65e238] {width: 20%;\n}\n.team-item[data-v-ab65e238] {flex-basis: 50%; padding: .3rem 1.2rem;\n}\n}\n", ""]);
 
 // exports
 

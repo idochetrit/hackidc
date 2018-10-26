@@ -6,17 +6,17 @@
         HackIDC 2019
       </a>
     </router-link>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button id="toggleBtn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <router-link tag="li" class="nav-item" active-class="active" to="/" exact><a data-toggle="collapse" class="nav-link">home</a></router-link>
-        <router-link tag="li" class="nav-item" active-class="active" to="/schedule" exact><a data-toggle="collapse" class="nav-link">schedule</a></router-link>
-        <router-link tag="li" class="nav-item" active-class="active" to="/resources" exact><a data-toggle="collapse" class="nav-link">resources</a></router-link>
-        <router-link tag="li" class="nav-item" active-class="active" to="/team" exact><a data-toggle="collapse" class="nav-link">the team</a></router-link>
-        <router-link tag="li" class="nav-item" active-class="active" to="/faq" exact><a data-toggle="collapse" class="nav-link">FAQ</a></router-link>
+        <router-link tag="li" class="nav-item mainNav-item" active-class="active" to="/" exact><a class="nav-link">home</a></router-link>
+        <router-link tag="li" class="nav-item mainNav-item" active-class="active" to="/schedule" exact><a class="nav-link">schedule</a></router-link>
+        <router-link tag="li" class="nav-item mainNav-item" active-class="active" to="/resources" exact><a class="nav-link">resources</a></router-link>
+        <router-link tag="li" class="nav-item mainNav-item" active-class="active" to="/team" exact><a class="nav-link">the team</a></router-link>
+        <router-link tag="li" class="nav-item mainNav-item" active-class="active" to="/faq" exact><a class="nav-link">FAQ</a></router-link>
       </ul>
       <ul class="navbar-nav">
         <button v-if="registration === 'closed'" @click="toLogin" class="btn btn-sm btn-info">Sign in</button>
@@ -36,6 +36,17 @@ export default {
   },
   computed: {
     registration() {return this.$store.getters.isRegistrationOpen;}
+  },
+  mounted() {
+    let links = Array.prototype.slice.call(document.getElementsByClassName('mainNav-item'), 0);
+    let view = document.getElementsByTagName('body')[0].clientWidth;
+    links.map(s => {
+      s.addEventListener('click', function () {
+        if (view <= 1000) {
+          document.getElementById('toggleBtn').click();
+        }
+      });
+    })
   }
 }
 </script>
@@ -83,6 +94,11 @@ export default {
 
   @media screen and (max-width: 767px) {
     nav {padding: .7rem 2rem;}
+    .nav-link {padding: .3rem .2rem; font-size: 1.2rem;}
     button.navbar-toggler {padding: .5rem; border: none;}
+  }
+
+  @media screen and (max-width: 360px) {
+    nav {padding: .4rem 1rem;}
   }
 </style>

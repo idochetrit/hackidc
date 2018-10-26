@@ -71,6 +71,14 @@ export default {
     h1 {font-size: 2rem;}
     h4 {font-size: 1rem;}
     .box {min-height: 80px; min-width: 80px; padding: .5rem;}
+    .container-fluid {padding: 1rem 0;}
   }
 
+  @media screen and (max-width: 360px) {
+    .container-fluid {padding: .7rem 0;}
+    h3 {font-size: 1.5rem; margin-bottom: .5rem;}
+    h1 {font-size: 1.5rem;}
+    h4 {font-size: .8rem;}
+    .box {margin: 0 .1rem; min-height: 60px; min-width: 70px;}
+  }
 </style>

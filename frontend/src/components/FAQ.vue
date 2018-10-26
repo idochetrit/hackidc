@@ -118,5 +118,11 @@
     padding: 0 1rem 2rem 1rem;
   }
   a {color: #000;}
-  a.btn {color: #fff; text-decoration: none; text-transform: uppercase; font-size: 1rem;}
+  a.btn {color: #fff; text-decoration: none; text-transform: uppercase; font-size: 1rem; font-weight: bold;}
+
+  @media screen and (max-width: 767px) {
+    .container-fluid {padding: 8rem 0 4rem 0;}
+    .herzel {width: 20%;}
+    h3 {text-align: center; font-size: 1.5rem;}
+  }
 </style>

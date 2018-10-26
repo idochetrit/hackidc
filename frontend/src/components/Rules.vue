@@ -29,16 +29,16 @@ export default {
           description: 'Teams have full ownership of everything they build at our events and are free to do with it as they wish.'
         },
         {
-          title: 'student verification',
-          description: 'All participants will be subject to a student ID check for verification, prior to the event.'
+          title: 'code review',
+          description: 'Winning teams may be subject to a code-review at some point following the event or immediately before winning.'
         },
         {
           title: 'fresh code',
           description: 'You may not begin your project until the competition officially begins. Please don’t come in and build on top of previous projects if you want to win.'
         },
         {
-          title: 'code review',
-          description: 'Winning teams may be subject to a code-review at some point following the event or immediately before winning.'
+          title: 'student verification',
+          description: 'All participants will be subject to a student ID check for verification, prior to the event.'
         },
       ]
     }
@@ -65,7 +65,7 @@ export default {
   }
 
   @media screen and (max-width: 767px) {
-    .rules-item {flex-basis: 50%;}
+    .rules-item {flex-basis: 50%; padding: .5rem;}
     p {font-size: .8rem; margin: 0;}
     h5 {font-size: 1rem;}
   }

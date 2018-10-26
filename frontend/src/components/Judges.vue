@@ -87,6 +87,6 @@ export default {
   }
 
   @media screen and (max-width: 767px) {
-    .judges-item {flex-basis: 50%;}
+    .judges-item {flex-basis: 50%; padding: .2rem 0;}
   }
 </style>

@@ -186,11 +186,12 @@ export default {
   }
 
   @media screen and (max-width: 767px) {
+    .herzel {width: 20%;}
     .tab-content {justify-content: center; padding: 2rem 1rem;}
     .tab-content > .active {justify-content: center}
     .card {flex-basis: 100%; margin-right: 0 !important;}
     .card-body {padding: .5rem; border-top: 1px solid #eee;}
     .card-title {font-weight: bold; font-size: 1.2rem; text-align: center;}
-    .card-img-top {height: 150px;}
+    .card-img-top {height: 180px;}
   }
 </style>

@@ -92,9 +92,16 @@ export default {
   }
 
   @media screen and (max-width: 767px) {
+    .herzel {width: 70%;}
     .container-fluid {padding: 2rem .5rem;}
-    .col-lg-5, .col-sm-4 {padding: 1rem 0 0 0;}
-    .col-lg-4 {padding: 3rem 0 0 0;}
+    .col-lg-5, .col-sm-4 {
+      padding: 2rem 0 0 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 9rem;
+    }
+    .col-lg-4 {padding: 3rem 0 0 0; font-size: 9rem;}
     .row:nth-of-type(2) {flex-direction: column-reverse;}
   }
 </style>

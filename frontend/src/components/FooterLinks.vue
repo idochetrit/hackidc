@@ -32,5 +32,10 @@
 
   @media screen and (max-width: 767px) {
     ul {flex-direction: column; align-items: center;}
+    li a {font-size: .9rem;}
+  }
+
+  @media screen and (max-width: 360px) {
+    .container-fluid {padding: .5rem 0;}
   }
 </style>
