@@ -69,6 +69,7 @@ button {margin: 0 .3rem; flex-basis: 25%;}
     padding-left: 2rem;
     display: flex;
     align-items: center;
+    border-radius: 25px;
 }
 .linkedinBtn:hover {background-color: #005E93;}
 .fab {

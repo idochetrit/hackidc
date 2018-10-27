@@ -17,11 +17,15 @@
         <router-link tag="li" class="nav-item mainNav-item" active-class="active" to="/resources" exact><a class="nav-link">resources</a></router-link>
         <router-link tag="li" class="nav-item mainNav-item" active-class="active" to="/team" exact><a class="nav-link">the team</a></router-link>
         <router-link tag="li" class="nav-item mainNav-item" active-class="active" to="/faq" exact><a class="nav-link">FAQ</a></router-link>
-      </ul>
-      <ul class="navbar-nav">
-        <button v-if="registration === 'closed'" @click="toLogin" class="btn btn-sm btn-info">Sign in</button>
         <li><a class="social" href="https://www.facebook.com/HackIDC/" target="_blank"><span class="fab fa-facebook fa-2x"></span></a></li>
         <li><a class="social" href="https://www.instagram.com/hackidc2019/" target="_blank"><span class="fab fa-instagram fa-2x"></span></a></li>
+      </ul>
+      <ul class="navbar-nav">
+        <button v-if="!this.$store.getters.isAuthenticated" @click="toLogin" class="btn btn-md btn-info"><strong>Sign in</strong></button>
+        <div v-else class="userGreet">
+          <router-link to="/"><a><span class="fas fa-user fa-lg"></span>Hi, {{ this.$store.getters.getUser.name | firstName }}</a></router-link>
+          <button @click="signout" class="btn btn-md btn-secondary"><strong>Sign out</strong></button>
+        </div>
       </ul>
     </div>
   </nav>
@@ -29,9 +33,15 @@
 
 <script>
 export default {
+  filters: {
+    firstName(v) {return v.split(" ")[0];}
+  },
   methods: {
     toLogin() {
       this.$router.push({name: 'login'});
+    },
+    signout() {
+      // implement sign-out method
     }
   },
   computed: {
@@ -61,6 +71,10 @@ export default {
     width: 100%;
     background-color: #212426 !important;
   }
+  .navbar-nav {
+    display: flex;
+    align-items: center;
+  }
   .navbar-brand:hover > img {transform: scale(1.3)}
   .navbar-brand:hover {cursor: pointer;}
   .navbar-brand img {transition: all .2s ease-out;}
@@ -76,6 +90,7 @@ export default {
     padding: 0 .3rem;
   }
   button {padding: 0 1rem; font-size: 1rem;}
+  button.btn-md {padding: .3rem 1rem;}
   .nav-item:hover > .nav-link , .social:hover {color: #ccc;}
   .active {font-weight: bold;}
   .social {
@@ -83,9 +98,27 @@ export default {
     color: #fff;
     transition: all .2s ease-out;
   }
-
+  .userGreet {
+    color: #fff;
+    display: flex;
+    align-items: baseline;
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
+  .userGreet button {margin-left: 1rem;}
+  .userGreet a {
+    text-decoration: none;
+    color: #fff;
+    transition: all .2s ease-in-out;
+  }
+  .userGreet a:hover {color: #ccc;}
+  .fas {margin-right: .7rem;}
   @media screen and (min-width: 990px) {
     .active {background-color: #333;}
+  }
+  /*fix devices navigation alignment*/
+  @media screen and (max-width: 1000px) {
+    .navbar-nav {align-items: flex-start;}
   }
   @media screen and (max-width: 1200px) {
     nav {padding: .5rem 2rem;}

@@ -5,12 +5,16 @@ Vue.use(Vuex);
 
 export const store = new Vuex.Store({
   state: {
+    authenticated: false,
+    user: {},
     loading: false,
     registration: "under-construction" // valid values: 'under-construction' ,'opened' or 'closed'
   },
   getters: {
     isLoading: state => state.loading,
-    isRegistrationOpen: state => state.registration
+    isRegistrationOpen: state => state.registration,
+    isAuthenticated: state => state.authenticated,
+    getUser: state => state.user
   },
   mutations: {
     setLoading: (state, payload) => (state.loading = payload),
