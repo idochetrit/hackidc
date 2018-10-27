@@ -1,6 +1,4 @@
-import Model from "../models";
-
-const { User } = Model;
+const { User } = require("../models");
 
 export default (() => {
   class UserService {

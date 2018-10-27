@@ -9,7 +9,7 @@
     "dev": "concurrently --kill-others --raw \"npm run dev-server\" \"npm run dev-client\"",
     "debug": "PORT=8080 ./node_modules/nodemon/bin/nodemon.js --inspect --exec babel-node ./src/server.js",
     "clean": "rm -rf build && mkdir build",
-    "build-server": "babel -d ./build ./src -s",
+    "build-server": "babel -d ./build ./src -s --copy-files",
     "build-client": "webpack",
     "build": "npm run clean && npm run build-server && npm run build-client",
     "start": "npm run build && node ./build/server.js",
