@@ -22,10 +22,10 @@
       <hr>
       <br>
       <div class="row">
-        <div class="col-lg-5">
+        <div class="col-lg-5 col-md-5">
           <span class="fas fa-handshake"></span>
         </div>
-        <div class="col-lg-7">
+        <div class="col-lg-7 col-md-7">
           <h2>Endless opportunities</h2>
           <br>
           <h5><strong>Introducing this year <span class="bolder text-info">ACTIVE RECRUITMENT</span> functionality.</strong></h5>
@@ -38,7 +38,7 @@
       <hr>
       <br>
       <div class="row">
-        <div class="col-lg-8">
+        <div class="col-lg-8 col-md-8">
           <h2>Start Learning</h2>
           <br>
           <h5><strong>Make yourself more ready by learning from our recommended <br><span class="bolder text-info">RESOURCES LINKS</span> material.</strong></h5>
@@ -46,7 +46,7 @@
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi aspernatur, autem corporis dolorum error eum laboriosam nam nulla officia optio perferendis provident sequi tempora vitae voluptate? Ab at ipsa veritatis?</p>
           <button @click="toResources" class="btn btn-md btn-info">VIEW THE RESOURCES</button>
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-4 col-md-4">
           <span class="fas fa-code"></span>
         </div>
       </div>
@@ -88,7 +88,14 @@ export default {
   }
 
   @media screen and (max-width: 1200px) {
-
+    .col-lg-5, .col-sm-4 {
+      padding: 2rem 0 0 0;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      font-size: 9rem;
+    }
+    .col-lg-4 {padding: 2rem 0 0 0; font-size: 9rem;}
   }
 
   @media screen and (max-width: 767px) {

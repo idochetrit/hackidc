@@ -25,7 +25,7 @@
     },
     methods: {
       toRegistrationForm() {
-        this.$router.push({name: 'sign-up'})
+        this.$router.push({name: 'signup'})
       }
     }
   }

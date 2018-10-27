@@ -13,7 +13,7 @@
     min-height: 1000px;
   }
   .container {
-    padding: 10rem;
+    padding: 10rem 0;
     display: flex;
     justify-content: center;
     align-items: center;

@@ -53,8 +53,8 @@ export default new Router({
       component: FAQ
     },
     {
-      path: "/sign-up",
-      name: "sign-up",
+      path: "/signup",
+      name: "signup",
       meta: {
         title: "HackIDC 2019 | Registration"
       },

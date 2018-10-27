@@ -1,0 +1,283 @@
+<template>
+    <div class="container-fluid">
+        <div class="container">
+            <img class="herzel" src="../../static/herzel_black.png">
+            <h2>HackIDC 2019 - Registration</h2>
+            <transition mode="out-in" enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
+                <div v-if="currentStep === 1" class="row">
+                    <h3>Getting Started</h3>
+                    <h5>Please connect your LinkedIn account to fill in your personal basic details. <br>
+                        Don't have a LinkedIn account? <a class="text-info" target="_blank" href="https://www.linkedin.com/">Create one here.</a>
+                        You'll need one to join HackIDC 2019.</h5>
+                    <br>
+                    <button @click="integrate" class="btn btn-lg linkedinBtn"><span class="fab fa-linkedin fa-lg"></span>Sign up with LinkedIn</button>
+                </div>
+                <div v-else-if="currentStep === 2" class="row">
+                    <h3>A Few Quick Questions</h3>
+                    <h5>Check your information and fill in the blanks so we can know you better.</h5>
+                    <br>
+                    <div class="form-row">
+                        <div class="form-col">
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input id="name" type="text" class="form-control" placeholder="Name" v-model="userData.name" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label for="gender">Gender</label>
+                                <select id="gender" v-model="userData.gender" class="custom-select" disabled>
+                                    <option :value="true">Male</option>
+                                    <option :value="false">Female</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-col">
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input id="email" type="email" class="form-control" placeholder="Email" v-model="userData.email">
+                            </div>
+                            <div class="form-group">
+                                <label for="mobile">Mobile Number</label>
+                                <input id="mobile" v-model="userData.mobile" type="text" class="form-control" placeholder="05...">
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <h5 class="sectionTitle">Academic Information</h5>
+                    <div class="form-row">
+                        <div class="form-col">
+                            <div class="form-group">
+                                <label for="isStudent">Are you a student?</label>
+                                <select id="isStudent" v-model="userData.isStudent" class="custom-select">
+                                    <option :value="true">I'm a student</option>
+                                    <option :value="false">I'm not a student</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="field">Field of study</label>
+                                <select :disabled="!userData.isStudent" id="field" v-model="userData.fieldOfStudy" class="custom-select">
+                                    <option value="">Select...</option>
+                                    <option value="computer-science" selected>Computer Science</option>
+                                    <option value="engineering">Engineering</option>
+                                    <option value="business">Business</option>
+                                    <option value="entrepreneurship">Entrepreneurship</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="year">Year of study</label>
+                                <select :disabled="!userData.isStudent" id="year" v-model="userData.studyYear" class="custom-select">
+                                    <option value="0">Select...</option>
+                                    <option value="1" selected>1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-col">
+                            <div class="form-group">
+                                <label for="degreeType">Type of degree?</label>
+                                <select :disabled="!userData.isStudent" id="degreeType" v-model="userData.degreeType" class="custom-select">
+                                    <option value="">Select...</option>
+                                    <option value="bachelor">Bachelor degree</option>
+                                    <option value="master">Master degree</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="institute">Academic Institute</label>
+                                <select :disabled="!userData.isStudent" id="institute" v-model="userData.academicInstitute" class="custom-select">
+                                    <option value="">Select...</option>
+                                    <option value="idc" selected>IDC Herzliya</option>
+                                    <option value="technion">Technion (IIT)</option>
+                                    <option value="tel-aviv">Tel Aviv University (TAU)</option>
+                                    <option value="hebrew-jerusalem">Hebrew University of Jerusalem (HUJI)</option>
+                                    <option value="weizmann">Weizmann Institute of Science (WIS)</option>
+                                    <option value="bar-ilan">Bar-Ilan University (BIU)</option>
+                                    <option value="haifa-uni">University of Haifa (HU)</option>
+                                    <option value="ben-gurion">Ben-Gurion University (BGU)</option>
+                                    <option value="open-uni">Open University of Israel (OPENU)</option>
+                                    <option value="ariel-uni">Ariel University (AU)</option>
+                                    <option value="academic-tel-aviv">Academic College of Tel Aviv-Yafo</option>
+                                    <option value="law-and-business">College of Law and Business</option>
+                                    <option value="afeka">Afeka College of Engineering</option>
+                                    <option value="ono">Ono Academic College</option>
+                                    <option value="ruppin">Ruppin Academic Center</option>
+                                    <option value="shenkar">Shenkar College</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div v-else-if="currentStep === 3" class="row">
+                    <h3>Almost There...</h3>
+                    <h5>Upload your CV and fill in your professional information</h5>
+                    <br>
+                    <div class="form-row">
+                        <div class="form-col">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="customFile">
+                                <label class="custom-file-label" for="customFile">Upload your CV</label>
+                                <small id="cv-help" class="form-text text-muted">Make sure to upload <strong>only</strong> PDF files</small>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-row">
+                        <div class="form-col">
+                            <div class="form-group">
+                                <label for="experience">Do you have any previous experience?</label>
+                                <select id="experience" v-model="userData.experienceType" class="custom-select">
+                                    <option value="">Select...</option>
+                                    <option value="no-experience">No experience</option>
+                                    <option value="basic">Basic knowledge and background</option>
+                                    <option value="intermediate">Intermediate programmer (~junior developer)</option>
+                                    <option value="experienced">Well-experienced (~senior developer)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div v-else-if="currentStep === 4" class="row">
+                    <h3>Some Technical Issues</h3>
+                    <h5>To make sure you're all set</h5>
+                    <br>
+                    <div class="form-row">
+                        <div class="form-col">
+                            <div class="form-group">
+                                <label for="teamBuilder">Are you signing up as a Team Builder?</label>
+                                <select id="teamBuilder" class="custom-select" v-model="userData.role">
+                                    <option value="">Select...</option>
+                                    <option value="participant">No, I'm part of a team</option>
+                                    <option value="loner">No, I'm signing up alone</option>
+                                    <option value="team-builder">Yes, I'm a Team Builder</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-col">
+                            <div v-if="userData.role === 'team-builder'">
+                                <h5>Your team number is</h5>
+                                <h1 class="text-info" style="text-align: center;"><strong>{{ this.userData.teamId }}</strong></h1>
+                                <h5>Write down this number. Your teammates will have to enter it later when they will register.</h5>
+                                <hr>
+                                <div class="form-group">
+                                    <label for="accept-loner">This year we are accepting "alone" participants. Would you like us to connect your group with one of these talented candidates?</label>
+                                    <select id="accept-loner" class="custom-select" v-model="userData.volunteerToAcceptLoner">
+                                        <option :value="false">No</option>
+                                        <option :value="true">Yes</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div v-else-if="userData.role === 'participant'" class="form-group">
+                                <label for="teamId">Enter your Team Number (received from your Team Builder)</label>
+                                <input id="teamId" type="number" class="form-control" v-model="userData.teamId">
+                            </div>
+                            <hr>
+                            <div class="form-group">
+                                <label for="shirt">What is your shirt size?</label>
+                                <select id="shirt" class="custom-select" v-model="userData.shirtSize">
+                                    <option value="">Select...</option>
+                                    <option value="s">S</option>
+                                    <option value="m">M</option>
+                                    <option value="l">L</option>
+                                    <option value="xl">XL</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="food">Are there any food restrictions?</label>
+                                <select id="food" class="custom-select" v-model="userData.foodRestrictionType">
+                                    <option value="">Select...</option>
+                                    <option value="none">None</option>
+                                    <option value="vegetarian">Vegetarian</option>
+                                    <option value="vegan">Vegan</option>
+                                </select>
+                            </div>
+                            <hr>
+                            <div class="form-group">
+                                <label for="hearAbout">How did you hear about HackIDC?</label>
+                                <select id="hearAbout" class="custom-select" v-model="userData.hearAboutUs">
+                                    <option value="">Select...</option>
+                                    <option value="idc">IDC</option>
+                                    <option value="social-media">Social Media</option>
+                                    <option value="friends">Friends</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div v-else-if="isCompleted" class="row">
+                    <span class="fas fa-check fa-6x text-success"></span>
+                    <br>
+                    <h1>That's it!</h1>
+                    <h3>We're looking forward to read your application form. Good-luck!</h3>
+                    <br>
+                    <h2><strong>HackIDC 2019 team</strong></h2>
+                    <button @click="toHome" class="btn btn-lg btn-info"><strong>Back Home</strong></button>
+                </div>
+            </transition>
+            <div v-if="!isCompleted" class="progress-bar">
+                <span class="progress-inside bg-info"
+                      :class="{'bg-success': currentStep === 4}"
+                      :style="{width: currentStep * (100 / 4) + '%'}">Step {{currentStep}} of 4</span>
+            </div>
+            <transition mode="out-in" enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
+                <div v-if="currentStep > 1" class="controls">
+                    <button class="btn-secondary btn-lg btn" @click="move('back')">Back</button>
+                    <button v-if="currentStep < 4" class="btn-info btn-lg btn" @click="move('next')">Continue</button>
+                    <button v-else class="btn-success btn-lg btn" @click="submit">Submit</button>
+                </div>
+            </transition>
+        </div>
+    </div>
+</template>
+
+<script>
+import linkedInIntegration from '../assets/linkedInIntegration'
+import newUserData from '../assets/newUserData'
+import teamIdGenerator from '../assets/teamIdGenerator'
+const view = document.getElementsByTagName('body')[0].clientWidth;
+export default {
+  data() {
+    return {
+      currentStep: 1,
+      isCompleted: false
+    }
+  },
+  mixins: [newUserData, linkedInIntegration, teamIdGenerator],
+  methods: {
+    move(v) {
+      setTimeout(function() {
+        if (v === 'next') {
+          if (this.currentStep < 4) this.currentStep++;
+          return;
+        }
+        else if (v === 'back') {
+          if (this.currentStep > 1) this.currentStep--;
+          return;
+        }
+      }.bind(this), 1000);
+      if (view <= 767) {
+        this.$scrollTo('.herzel', 1300)
+      }
+    },
+    submit() {
+      //**implement form and userData fields validation**
+      setTimeout(function() {
+        this.currentStep = 0;
+        this.isCompleted = true;
+      }.bind(this), 1000);
+      if (view <= 767) {
+        this.$scrollTo('.herzel', 1300)
+      }
+    },
+    toHome() {
+      this.$router.push({name: 'home'});
+    }
+  }
+}
+</script>
+
+<style src="../assets/registration.css" scoped>
+</style>

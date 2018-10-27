@@ -1,0 +1,114 @@
+.container-fluid {
+    padding: 8rem 0;
+    min-height: 1000px;
+    background-color: #f7f7f7;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.herzel {
+    width: 10%;
+    margin-bottom: 2rem;
+}
+h2 {font-weight: bold; margin-bottom: 4rem;}
+.row {
+    background-color: #eee;
+    border-radius: 15px;
+    border: 1px solid #ddd;
+    padding: 2rem 0;
+    margin-bottom: 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.form-row {
+    width: 100%;
+    padding: 0 2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+}
+.custom-file {margin: 1rem 0;}
+hr {width: 90%;}
+.form-col {flex-basis: 50%; padding: 0 .5rem;}
+.progress-bar {
+    width: 75%;
+    height: 25px;
+    background: #eee;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+}
+.progress-inside {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    transition: all .7s ease-in-out;
+    font-size: 1.1rem;
+    color: #fff;
+    font-weight: bold;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.bg-success {background-color: #28a745 !important;}
+button {margin: 0 .3rem; flex-basis: 25%;}
+.linkedinBtn {
+    background-color: #0077B5;
+    color: #fff;
+    font-weight: bold;
+    padding-right: 2rem;
+    padding-left: 2rem;
+    display: flex;
+    align-items: center;
+}
+.linkedinBtn:hover {background-color: #005E93;}
+.fab {
+    font-weight: normal;
+    margin-right: .7rem;
+}
+.controls {
+    padding: 2rem 0;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+h5, h3 {text-align: center;}
+h5.sectionTitle {margin: .5rem 0 1.5rem 0;}
+a {text-decoration: none; font-weight: bold;}
+
+@media screen and (max-width: 1200px) {
+    .progress-bar {width: 95%;}
+    .row {padding: 2rem 1rem; margin-bottom: 3rem;}
+    h5 {font-size: 1.1rem;}
+    .form-row {padding: 0;}
+    .form-col {flex-basis: 100%; padding: 0 1rem;}
+    h1 {font-size: 2rem;}
+    .row h3 {font-size: 1.4rem;}
+    .row h2 {font-size: 1.7rem;}
+    .fas {font-size: 4rem;}
+}
+
+@media screen and (max-width: 767px) {
+    .herzel {width: 20%;}
+    .row {padding: 2rem 1rem;}
+    .form-col {flex-basis: 100%; padding: 0;}
+}
+
+@media screen and (max-width: 360px) {
+    .progress-inside {font-size: .8rem;}
+    h2 {font-size: 1.5rem; margin-bottom: 2rem;}
+    h5 {font-size: 1rem;}
+    .linkedinBtn {padding-right: 1rem; padding-left: 1rem;}
+    .row {padding: 2rem 1rem; margin-bottom: 2rem;}
+    .fas {font-size: 4rem;}
+}
