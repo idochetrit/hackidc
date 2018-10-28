@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Router from "vue-router";
+import {store} from "../store/store";
 import Home from "../components/Home.vue";
 import Schedule from "../components/Schedule.vue";
 import Resources from "../components/Resources.vue";
@@ -7,8 +8,12 @@ import FAQ from "../components/FAQ.vue";
 import Team from "../components/Team.vue";
 import Registration from "../components/Registration.vue";
 import Login from "../components/Login.vue";
+import Dashboard from "../components/Dashboard.vue";
 
 Vue.use(Router);
+
+const user = store.getters.getUser;
+console.log(user);
 
 export default new Router({
   routes: [
@@ -67,6 +72,30 @@ export default new Router({
         title: "HackIDC 2019 | Login"
       },
       component: Login
+    },
+    {
+      path: "/dashboard",
+      name: "dashboard",
+      meta: {
+        title: user.name + " | Dashboard"
+      },
+      component: Dashboard,
+      children: [
+        {
+          path: "profile",
+          meta: {
+            title: user.name + " | Dashboard"
+          },
+          component: Dashboard
+        },
+        {
+          path: "team",
+          meta: {
+            title: user.name + " | Dashboard"
+          },
+          component: Dashboard
+        }
+      ]
     }
   ],
   mode: "history",

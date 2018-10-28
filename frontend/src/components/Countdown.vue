@@ -1,6 +1,6 @@
 <template>
   <div class="container-fluid bg-info">
-    <h3 id="registration">{{ counter.message }}</h3>
+    <h3 id="registration"><strong>{{ counter.message }}</strong></h3>
     <div class="row">
       <div class="counter offset-sm-1 col-sm-10">
         <div class="box">

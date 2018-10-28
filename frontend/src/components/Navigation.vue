@@ -17,14 +17,21 @@
         <router-link tag="li" class="nav-item mainNav-item" active-class="active" to="/resources" exact><a class="nav-link">resources</a></router-link>
         <router-link tag="li" class="nav-item mainNav-item" active-class="active" to="/team" exact><a class="nav-link">the team</a></router-link>
         <router-link tag="li" class="nav-item mainNav-item" active-class="active" to="/faq" exact><a class="nav-link">FAQ</a></router-link>
-        <li><a class="social" href="https://www.facebook.com/HackIDC/" target="_blank"><span class="fab fa-facebook fa-2x"></span></a></li>
-        <li><a class="social" href="https://www.instagram.com/hackidc2019/" target="_blank"><span class="fab fa-instagram fa-2x"></span></a></li>
+        <li><a class="social mainNav-item" href="https://www.facebook.com/HackIDC/" target="_blank"><span class="fab fa-facebook fa-2x"></span></a></li>
+        <li><a class="social mainNav-item" href="https://www.instagram.com/hackidc2019/" target="_blank"><span class="fab fa-instagram fa-2x"></span></a></li>
       </ul>
       <ul class="navbar-nav">
-        <button v-if="!this.$store.getters.isAuthenticated" @click="toLogin" class="btn btn-md btn-info"><strong>Sign in</strong></button>
-        <div v-else class="userGreet">
-          <router-link to="/"><a><span class="fas fa-user fa-lg"></span>Hi, {{ this.$store.getters.getUser.name | firstName }}</a></router-link>
-          <button @click="signout" class="btn btn-md btn-secondary"><strong>Sign out</strong></button>
+        <button v-if="!this.$store.getters.isAuthenticated" @click="toLogin" class="btn btn-md btn-info mainNav-item"><strong>Sign in</strong></button>
+        <div v-else class="dropdown">
+          <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="fas fa-user fa-lg"></span>Hi, <strong>{{ this.$store.getters.getUser.name | firstName }}</strong>
+          </button>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
+            <router-link tag="button" to="/dashboard/profile" class="dropdown-item mainNav-item" type="button">My profile</router-link>
+            <router-link tag="button" to="/dashboard/team" class="dropdown-item mainNav-item" type="button">My team</router-link>
+            <div class="dropdown-divider"></div>
+            <button @click="signout" class="dropdown-item text-danger mainNav-item"><strong>Sign out</strong></button>
+          </div>
         </div>
       </ul>
     </div>
@@ -34,7 +41,10 @@
 <script>
 export default {
   filters: {
-    firstName(v) {return v.split(" ")[0];}
+    firstName(v) {
+      let name = v.split(" ")[0];
+      return name.substring(0,1).toUpperCase() + name.substring(1);
+    }
   },
   methods: {
     toLogin() {
@@ -52,7 +62,7 @@ export default {
     let view = document.getElementsByTagName('body')[0].clientWidth;
     links.map(s => {
       s.addEventListener('click', function () {
-        if (view <= 1000) {
+        if (view <= 990) {
           document.getElementById('toggleBtn').click();
         }
       });
@@ -89,8 +99,12 @@ export default {
     border-radius: 20px;
     padding: 0 .3rem;
   }
-  button {padding: 0 1rem; font-size: 1rem;}
-  button.btn-md {padding: .3rem 1rem;}
+  button {padding: .3rem 1rem; font-size: 1rem;}
+  button.btn-link {color: #fff; text-decoration: none;}
+  button:focus {outline: none !important;}
+  .dropdown-item:hover {cursor: pointer;}
+  .dropdown-item:active {background-color: #1fbed5; color: #fff;}
+  .dropdown-item.text-danger:active {background-color: #f7f7f7;}
   .nav-item:hover > .nav-link , .social:hover {color: #ccc;}
   .active {font-weight: bold;}
   .social {
@@ -98,21 +112,8 @@ export default {
     color: #fff;
     transition: all .2s ease-out;
   }
-  .userGreet {
-    color: #fff;
-    display: flex;
-    align-items: baseline;
-    font-weight: bold;
-    font-size: 1.2rem;
-  }
-  .userGreet button {margin-left: 1rem;}
-  .userGreet a {
-    text-decoration: none;
-    color: #fff;
-    transition: all .2s ease-in-out;
-  }
-  .userGreet a:hover {color: #ccc;}
   .fas {margin-right: .7rem;}
+
   @media screen and (min-width: 990px) {
     .active {background-color: #333;}
   }
@@ -123,10 +124,12 @@ export default {
   @media screen and (max-width: 1200px) {
     nav {padding: .5rem 2rem;}
     button.navbar-toggler {padding: .5rem; border: none;}
+    button.btn-link {font-size: 1.2rem; margin: 1rem 0 0 0;}
   }
 
   @media screen and (max-width: 767px) {
     nav {padding: .7rem 2rem;}
+    .navbar-nav:nth-of-type(1) {margin-right: 1rem !important;}
     .nav-link {padding: .3rem .2rem; font-size: 1.2rem;}
     button.navbar-toggler {padding: .5rem; border: none;}
   }
