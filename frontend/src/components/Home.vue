@@ -6,7 +6,7 @@
     <app-judges></app-judges>
     <app-prizes></app-prizes>
     <!--add the sponsors section later -->
-    <!--<app-sponsors></app-sponsors>-->
+    <app-sponsors></app-sponsors>
     <app-rules></app-rules>
   </div>
 </template>

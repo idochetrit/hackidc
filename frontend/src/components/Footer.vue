@@ -60,7 +60,7 @@ export default {
     align-items: center;
   }
   .eventLogo img {
-    width: 30%;
+    width: 25%;
     margin: 0 auto;
   }
   .footerLogo {
