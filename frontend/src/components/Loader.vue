@@ -37,6 +37,10 @@
     100% {margin: 0;}
   }
 
+  @media screen and (max-width: 1440px) and (min-width: 1201px) {
+    span {font-size: 1.8rem;}
+  }
+
   @media screen and (max-width: 767px) {
     span {font-size: 2rem;}
   }

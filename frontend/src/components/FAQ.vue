@@ -114,11 +114,14 @@
   }
   h2 {font-weight: bold; margin-bottom: 4rem;}
   h3 {margin: 1rem 0;}
-  .point {
-    padding: 0 1rem 2rem 1rem;
-  }
+  .point {padding: 0 1rem 2rem 1rem;}
   a {color: #000;}
   a.btn {color: #fff; text-decoration: none; text-transform: uppercase; font-size: 1rem; font-weight: bold;}
+
+  @media screen and (max-width: 1440px) and (min-width: 1201px) {
+    .container {width: 75%;}
+    .point {padding: 0 0 2rem 0;}
+  }
 
   @media screen and (max-width: 767px) {
     .container-fluid {padding: 8rem 0 4rem 0;}

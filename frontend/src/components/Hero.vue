@@ -86,6 +86,10 @@
     100% {transform: scale(1);}
   }
 
+  @media screen and (max-width: 1440px) and (min-width: 1201px) {
+    .container {width: 75%;}
+  }
+
   @media screen and (max-width: 1200px) {
     .container-fluid {padding: 6rem 0;}
   }

@@ -121,6 +121,11 @@ export default {
   @media screen and (max-width: 1000px) {
     .navbar-nav {align-items: flex-start;}
   }
+
+  @media screen and (max-width: 1440px) {
+    nav {padding: .5rem 2rem;}
+  }
+
   @media screen and (max-width: 1200px) {
     nav {padding: .5rem 2rem;}
     button.navbar-toggler {padding: .5rem; border: none;}

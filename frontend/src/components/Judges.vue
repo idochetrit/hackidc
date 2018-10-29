@@ -58,6 +58,10 @@ export default {
     padding: 4rem 0;
     background-color: #f7f7f7;
   }
+  .row {
+    display: flex;
+    justify-content: center;
+  }
   .judges-item:hover > img {
     transform: scale(1.03);
   }
@@ -80,6 +84,10 @@ export default {
     margin-bottom: 1rem;
     width: 70%;
     border-radius: 50%;
+  }
+
+  @media screen and (max-width: 1440px) and (min-width: 1201px) {
+    .container {width: 75%;}
   }
 
   @media screen and (max-width: 1200px) {

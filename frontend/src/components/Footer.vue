@@ -25,9 +25,9 @@ export default {
   data() {
     return {
       logos: [
-        require('../../static/idc_herzliya_logo.png'),
         require('../../static/efi_arazi_logo.png'),
         require('../../static/adelson_logo.png'),
+        require('../../static/idc_herzliya_logo.png'),
         require('../../static/iec_logo.png'),
         require('../../static/student_union_logo.png'),
       ]
@@ -72,8 +72,12 @@ export default {
     padding: 1rem 0;
   }
   .footerLogo img {width: 50%;}
-  .footerLogo:nth-of-type(2) img,
-  .footerLogo:nth-of-type(3) img {width: 80%;}
+  .footerLogo:nth-of-type(1) img,
+  .footerLogo:nth-of-type(2) img {width: 80%;}
+
+  @media screen and (max-width: 1440px) and (min-width: 1201px) {
+    .container {width: 75%;}
+  }
 
   @media screen and (max-width: 1200px) {
     .container-fluid {padding: 2rem .5rem;}

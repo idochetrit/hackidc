@@ -8,8 +8,8 @@ import { store } from "./store/store";
 
 Vue.config.productionTip = false;
 Vue.use(VueScrollTo, {
-  duration: 750,
-  easing: "ease-in-out",
+  duration: 650,
+  easing: [0.645, 0.045, 0.355, 1],
   offset: -150
 });
 

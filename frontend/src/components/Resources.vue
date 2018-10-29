@@ -178,7 +178,11 @@ export default {
   }
   .card-body {padding: 1rem; border-top: 1px solid #eee;}
   .card-title {font-weight: bold;}
-  .card-img-top {height: 180px;}
+  .card-img-top {height: 150px;}
+
+  @media screen and (max-width: 1440px) and (min-width: 1201px) {
+    .container {width: 75%;}
+  }
 
   @media screen and (max-width: 1200px) {
     .card {flex-basis: 48%; margin-right: .5rem !important;}

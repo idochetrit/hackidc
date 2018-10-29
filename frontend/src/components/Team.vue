@@ -27,9 +27,9 @@ export default {
         {name: 'Hadar Mordechai', linkedin: 'https://www.linkedin.com/in/hadar-mordechai-7641b7159/', thumbnail: require('../../static/hadar.jpg')},
         {name: 'Maayan Rosenthal', linkedin: 'https://www.linkedin.com/in/maayan-rosenthal-1b7349123/', thumbnail: 'https://media.licdn.com/dms/image/C5603AQGdjYCctkgUsA/profile-displayphoto-shrink_800_800/0?e=1545264000&v=beta&t=Yr_YVPrJAAh1MGSI15b5DFq5KWGdSEjvoclg-J6ZpRU'},
         {name: 'Niv Shani', linkedin: 'https://www.linkedin.com/in/niv-shani-5a3313163/', thumbnail: 'https://scontent.fsdv2-1.fna.fbcdn.net/v/t1.0-9/35551549_10212648633634137_981907507586793472_n.jpg?_nc_cat=103&_nc_ht=scontent.fsdv2-1.fna&oh=5855665884d77d85969c6af12674039b&oe=5C4BF196'},
-        {name: 'Chen Hillel', linkedin: '#', thumbnail: 'https://image.flaticon.com/icons/png/512/149/149071.png'},
+        {name: 'Chen Hillel', linkedin: '#', thumbnail: require('../../static/chen.jpg')},
         {name: 'Miya Margalith', linkedin: 'https://www.linkedin.com/in/miya-margalith/', thumbnail: 'https://media.licdn.com/dms/image/C5603AQFqFrUtT8R60w/profile-displayphoto-shrink_800_800/0?e=1545868800&v=beta&t=W2uCRyfeHgg0EsbemrC30lZLYb0yLzD0h-NS3MfJUig'},
-        {name: 'Amit Fainholtz', linkedin: '#', thumbnail: 'https://image.flaticon.com/icons/png/512/149/149071.png'},
+        {name: 'Amit Fainholtz', linkedin: '#', thumbnail: require('../../static/amit.jpg')},
         {name: 'Adi Ninio', linkedin: 'https://www.linkedin.com/in/adi-ninio-99812910a/', thumbnail: 'https://media.licdn.com/dms/image/C5603AQFmce_ovFDPhw/profile-displayphoto-shrink_800_800/0?e=1545264000&v=beta&t=EapY13DpjXxAHhosThRAB8uvMeLzc-FFkM0yh8jDK1A'},
         {name: 'Gal Rabin', linkedin: 'https://www.linkedin.com/in/gal-rabin-473351120/', thumbnail: 'https://media.licdn.com/dms/image/C5103AQEsJqEH4PIPhA/profile-displayphoto-shrink_800_800/0?e=1545264000&v=beta&t=9JXDp6IpdJP1FkqbLCmuyG-DoMTGcIIaOB7AU3S-X1I'},
         {name: 'Gill Samia', linkedin: 'https://www.linkedin.com/in/gillsamia/', thumbnail: 'https://media.licdn.com/dms/image/C4E03AQH_4tFezJZD_g/profile-displayphoto-shrink_800_800/0?e=1545264000&v=beta&t=8aZJFWNbS4qZzPVS-2t8uKm4B4DRdAT0W8L2aJhv_uE'},
@@ -109,6 +109,10 @@ export default {
   h2 {font-weight: bold; text-align: center;}
   h5 {font-weight: bold; color: #000;}
   a {text-decoration: none;}
+
+  @media screen and (max-width: 1440px) and (min-width: 1201px) {
+    .container {width: 75%;}
+  }
 
   @media screen and (max-width: 767px) {
     .herzel {width: 20%;}

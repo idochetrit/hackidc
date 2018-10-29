@@ -87,6 +87,10 @@ h5, h3 {text-align: center;}
 h5.sectionTitle {margin: .5rem 0 1.5rem 0;}
 a {text-decoration: none; font-weight: bold;}
 
+@media screen and (max-width: 1440px) and (min-width: 1201px) {
+    .container {width: 75%;}
+}
+
 @media screen and (max-width: 1200px) {
     .progress-bar {width: 95%;}
     .row {padding: 2rem 1rem; margin-bottom: 3rem;}

@@ -87,6 +87,10 @@ export default {
     font-size: 12rem;
   }
 
+  @media screen and (max-width: 1440px) and (min-width: 1201px) {
+    .container {width: 75%;}
+  }
+
   @media screen and (max-width: 1200px) {
     .col-lg-5, .col-sm-4 {
       padding: 2rem 0 0 0;
