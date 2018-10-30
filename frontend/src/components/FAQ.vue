@@ -98,6 +98,7 @@
 </script>
 <style scoped>
   .container-fluid {
+    margin-top: 3rem;
     padding: 8rem 0;
     background-color: #f7f7f7;
     min-height: 1000px;

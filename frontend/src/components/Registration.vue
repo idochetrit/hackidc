@@ -3,14 +3,25 @@
         <div class="container">
             <img class="herzel" src="../../static/herzel_black.png">
             <h2>HackIDC 2019 - Registration</h2>
+            <div v-if="!isCompleted" class="progress-bar">
+                <span class="progress-inside bg-info"
+                      :class="{'bg-success': currentStep === 4}"
+                      :style="{width: currentStep * (100 / 4) + '%'}">Step {{currentStep}} of 4</span>
+            </div>
             <transition mode="out-in" enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
                 <div v-if="currentStep === 1" class="row">
                     <h3>Getting Started</h3>
+                    <h5>HackIDC is the largest students hackathon in Israel. The event will take place on April 11th, 2019.
+                        <br>Registration is open for groups of 3-5 people or for participants who would like to register on their own.</h5>
+                    <hr>
                     <h5>Please connect your LinkedIn account to fill in your personal basic details. <br>
                         Don't have a LinkedIn account? <a class="text-info" target="_blank" href="https://www.linkedin.com/">Create one here.</a>
                         You'll need one to join HackIDC 2019.</h5>
-                    <br>
                     <button @click="integrate" class="btn btn-lg linkedinBtn"><span class="fab fa-linkedin fa-lg"></span>Sign up with LinkedIn</button>
+                    <div class="alert alert-light" role="alert">
+                        <h4 class="alert-heading text-danger"><strong>Please notice!</strong></h4>
+                        <h5><strong>For groups: </strong> please nominate a <strong>Team Builder</strong> - he should register first, and select the 'Team Builder' option when asked so. Doing this will generate a <strong>team number</strong> which each other team member should fill in later.</h5>
+                    </div>
                 </div>
                 <div v-else-if="currentStep === 2" class="row">
                     <h3>A Few Quick Questions</h3>
@@ -217,11 +228,8 @@
                     <button @click="toHome" class="btn btn-lg btn-info"><strong>Back Home</strong></button>
                 </div>
             </transition>
-            <div v-if="!isCompleted" class="progress-bar">
-                <span class="progress-inside bg-info"
-                      :class="{'bg-success': currentStep === 4}"
-                      :style="{width: currentStep * (100 / 4) + '%'}">Step {{currentStep}} of 4</span>
-            </div>
+            <hr>
+            <small v-if="currentStep === 4" class="text-muted">By hitting submit, your application form will be sent. If you don't want to complete the registration now, simply return to the homepage.</small>
             <transition mode="out-in" enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
                 <div v-if="currentStep > 1" class="controls">
                     <button class="btn-secondary btn-lg btn" @click="move('back')">Back</button>

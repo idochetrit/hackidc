@@ -10,6 +10,7 @@
 </script>
 <style scoped>
   .container-fluid {
+    margin-top: 3rem;
     min-height: 1000px;
   }
   .container {

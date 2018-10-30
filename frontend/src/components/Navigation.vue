@@ -1,45 +1,52 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-    <router-link to="/" v-scroll-to="'#app'">
-      <a class="navbar-brand">
-        <img src="https://s3.amazonaws.com/bizzabo.users.files/BBBur1GrQ2f5CxkoDWjH_%D7%94%D7%A8%D7%A6%D7%9C%20%D7%9C%D7%91%D7%9F-01.png" width="30" height="30" class="d-inline-block align-top" alt="">
-        HackIDC 2019
-      </a>
-    </router-link>
-    <button id="toggleBtn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+  <div class="nav-wrapper">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+      <router-link to="/" v-scroll-to="'#app'">
+        <a class="navbar-brand">
+          <img src="https://s3.amazonaws.com/bizzabo.users.files/BBBur1GrQ2f5CxkoDWjH_%D7%94%D7%A8%D7%A6%D7%9C%20%D7%9C%D7%91%D7%9F-01.png" width="30" height="30" class="d-inline-block align-top" alt="">
+          HackIDC 2019
+        </a>
+      </router-link>
+      <button id="toggleBtn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <router-link tag="li" class="nav-item mainNav-item" active-class="active" to="/" exact><a class="nav-link">home</a></router-link>
-        <router-link tag="li" class="nav-item mainNav-item" active-class="active" to="/schedule" exact><a class="nav-link">schedule</a></router-link>
-        <router-link tag="li" class="nav-item mainNav-item" active-class="active" to="/resources" exact><a class="nav-link">resources</a></router-link>
-        <router-link tag="li" class="nav-item mainNav-item" active-class="active" to="/team" exact><a class="nav-link">the team</a></router-link>
-        <router-link tag="li" class="nav-item mainNav-item" active-class="active" to="/faq" exact><a class="nav-link">FAQ</a></router-link>
-        <li><a class="social mainNav-item" href="https://www.facebook.com/HackIDC/" target="_blank"><span class="fab fa-facebook fa-2x"></span></a></li>
-        <li><a class="social mainNav-item" href="https://www.instagram.com/hackidc2019/" target="_blank"><span class="fab fa-instagram fa-2x"></span></a></li>
-      </ul>
-      <ul class="navbar-nav">
-        <button v-if="!this.$store.getters.isAuthenticated" @click="toLogin" class="btn btn-md btn-info mainNav-item"><strong>Sign in</strong></button>
-        <div v-else class="dropdown">
-          <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <span class="fas fa-user fa-lg"></span>Hi, <strong>{{ this.$store.getters.getUser.name | firstName }}</strong>
-          </button>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
-            <router-link tag="button" to="/dashboard/profile" class="dropdown-item mainNav-item" type="button">My profile</router-link>
-            <router-link tag="button" to="/dashboard/team" class="dropdown-item mainNav-item" type="button">My team</router-link>
-            <div class="dropdown-divider"></div>
-            <button @click="signout" class="dropdown-item text-danger mainNav-item"><strong>Sign out</strong></button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <router-link tag="li" class="nav-item mainNav-item" active-class="active" to="/" exact><a class="nav-link">home</a></router-link>
+          <router-link tag="li" class="nav-item mainNav-item" active-class="active" to="/schedule" exact><a class="nav-link">schedule</a></router-link>
+          <router-link tag="li" class="nav-item mainNav-item" active-class="active" to="/resources" exact><a class="nav-link">resources</a></router-link>
+          <router-link tag="li" class="nav-item mainNav-item" active-class="active" to="/team" exact><a class="nav-link">the team</a></router-link>
+          <router-link tag="li" class="nav-item mainNav-item" active-class="active" to="/faq" exact><a class="nav-link">FAQ</a></router-link>
+          <li><a class="social mainNav-item" href="https://www.facebook.com/HackIDC/" target="_blank"><span class="fab fa-facebook fa-2x"></span></a></li>
+          <li><a class="social mainNav-item" href="https://www.instagram.com/hackidc2019/" target="_blank"><span class="fab fa-instagram fa-2x"></span></a></li>
+        </ul>
+        <ul class="navbar-nav">
+          <button v-if="!this.$store.getters.isAuthenticated" @click="toLogin" class="btn btn-md btn-info mainNav-item"><strong>Sign in</strong></button>
+          <div v-else class="dropdown">
+            <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span class="fas fa-user fa-lg"></span>Hi, <strong>{{ this.$store.getters.getUser.name | firstName }}</strong>
+            </button>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
+              <router-link tag="button" to="/dashboard/profile" class="dropdown-item mainNav-item" type="button">My profile</router-link>
+              <router-link tag="button" to="/dashboard/team" class="dropdown-item mainNav-item" type="button">My team</router-link>
+              <div class="dropdown-divider"></div>
+              <button @click="signout" class="dropdown-item text-danger mainNav-item"><strong>Sign out</strong></button>
+            </div>
           </div>
-        </div>
-      </ul>
-    </div>
-  </nav>
+        </ul>
+      </div>
+    </nav>
+    <app-navbar-countdown></app-navbar-countdown>
+  </div>
 </template>
 
 <script>
+import NavbarCountdown from './NavbarCountdown.vue';
 export default {
+  components: {
+    'app-navbar-countdown': NavbarCountdown
+  },
   filters: {
     firstName(v) {
       let name = v.split(" ")[0];
@@ -72,11 +79,14 @@ export default {
 </script>
 
 <style scoped>
-  nav {
+  .nav-wrapper {
     position: fixed;
     top: 0;
     left: 0;
     z-index: 100;
+    width: 100%;
+  }
+  nav {
     padding: 1rem 3rem;
     width: 100%;
     background-color: #212426 !important;

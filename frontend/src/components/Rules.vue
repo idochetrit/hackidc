@@ -25,7 +25,7 @@ export default {
       rules: [
         {
           title: 'team size',
-          description: 'Teams of  2-5 participants are allowed. All team members must have completed the participation agreement to compete.'
+          description: 'Teams of  3-5 participants are allowed. All team members must have completed the participation agreement to compete.'
         },
         {
           title: 'ownership',

@@ -1,4 +1,5 @@
 .container-fluid {
+    margin-top: 3rem;
     padding: 8rem 0;
     min-height: 1000px;
     background-color: #f7f7f7;
@@ -19,13 +20,14 @@ h2 {font-weight: bold; margin-bottom: 4rem;}
     border-radius: 15px;
     border: 1px solid #ddd;
     padding: 2rem 0;
-    margin-bottom: 4rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100%;
 }
+.alert {width: 80%;}
+.alert h5 {text-align: left;}
 .form-row {
     width: 100%;
     padding: 0 2rem;
@@ -38,6 +40,7 @@ h2 {font-weight: bold; margin-bottom: 4rem;}
 hr {width: 90%;}
 .form-col {flex-basis: 50%; padding: 0 .5rem;}
 .progress-bar {
+    margin: 2rem 0;
     width: 75%;
     height: 25px;
     background: #eee;
@@ -62,6 +65,7 @@ hr {width: 90%;}
 .bg-success {background-color: #28a745 !important;}
 button {margin: 0 .3rem; flex-basis: 25%;}
 .linkedinBtn {
+    margin: 2rem 0;
     background-color: #0077B5;
     color: #fff;
     font-weight: bold;
@@ -77,7 +81,7 @@ button {margin: 0 .3rem; flex-basis: 25%;}
     margin-right: .7rem;
 }
 .controls {
-    padding: 2rem 0;
+    margin: 1rem 0;
     width: 50%;
     display: flex;
     justify-content: center;
@@ -93,7 +97,7 @@ a {text-decoration: none; font-weight: bold;}
 
 @media screen and (max-width: 1200px) {
     .progress-bar {width: 95%;}
-    .row {padding: 2rem 1rem; margin-bottom: 3rem;}
+    .row {padding: 2rem 1rem;}
     h5 {font-size: 1.1rem;}
     .form-row {padding: 0;}
     .form-col {flex-basis: 100%; padding: 0 1rem;}
@@ -104,16 +108,18 @@ a {text-decoration: none; font-weight: bold;}
 }
 
 @media screen and (max-width: 767px) {
+    .alert {width: 100%;}
     .herzel {width: 20%;}
     .row {padding: 2rem 1rem;}
     .form-col {flex-basis: 100%; padding: 0;}
 }
 
 @media screen and (max-width: 360px) {
+    .alert {width: 100%;}
     .progress-inside {font-size: .8rem;}
     h2 {font-size: 1.5rem; margin-bottom: 2rem;}
     h5 {font-size: 1rem;}
     .linkedinBtn {padding-right: 1rem; padding-left: 1rem;}
-    .row {padding: 2rem 1rem; margin-bottom: 2rem;}
+    .row {padding: 2rem 1rem;}
     .fas {font-size: 4rem;}
 }

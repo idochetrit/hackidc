@@ -131,6 +131,7 @@ export default {
 </script>
 <style scoped>
   .container-fluid {
+    margin-top: 3rem;
     padding: 8rem 0;
     min-height: 1000px;
     background-color: #f7f7f7;
