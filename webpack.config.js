@@ -47,12 +47,12 @@ module.exports = {
     ]
   },
   devServer: {
-    host: "0.0.0.0",
+    host: "test.hackidc.com",
     historyApiFallback: true,
     port: 3000,
     proxy: {
       "/api/**": {
-        target: "http://localhost:8080",
+        target: "http://test.hackidc.com:8080",
         secure: false,
         changeOrigin: true
       }
