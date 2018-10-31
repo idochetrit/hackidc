@@ -11,7 +11,8 @@
     "clean": "rm -rf build && mkdir build",
     "build-server": "babel -d ./build ./src -s --copy-files",
     "build-client": "webpack",
-    "build": "npm run clean && npm run build-server && npm run build-client",
+    "build": "npm run clean && npm run build-server && npm run build-client && migrate",
+    "migrate": "sequelize db:migrate",
     "start": "npm run build && node ./build/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

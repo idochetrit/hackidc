@@ -15,8 +15,8 @@ app.use(cors());
 app.use(
   session({
     secret: "keyboardRhino",
-    resave: true,
-    saveUninitialized: true
+    resave: false,
+    saveUninitialized: false
   })
 );
 app.use(passport.initialize());

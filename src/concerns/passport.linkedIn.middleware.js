@@ -2,8 +2,7 @@ import passport from "passport";
 import { Strategy } from "passport-linkedin-oauth2";
 import UserService from "../users/user.service";
 
-const LINKEDIN_CLIENT_ID = "86p0m3imliz50c";
-const LINKEDIN_CLIENT_SECRET = "YsNlY0Lq3toHb4lw";
+const { LINKEDIN_CLIENT_ID, LINKEDIN_CLIENT_SECRET } = process.env;
 
 passport.serializeUser((user, done) => {
   done(null, user.id);
@@ -20,7 +19,7 @@ passport.use(
     {
       clientID: LINKEDIN_CLIENT_ID,
       clientSecret: LINKEDIN_CLIENT_SECRET,
-      callbackURL: "http://test.hackidc.com:3000/api/auth/linkedin/callback",
+      callbackURL: `${process.env.HOST}/api/auth/linkedin/callback`,
       scope: ["r_basicprofile", "r_emailaddress"],
       passReqToCallback: true
     },

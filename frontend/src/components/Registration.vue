@@ -237,9 +237,15 @@
 import linkedInIntegration from '../assets/linkedInIntegration'
 import newUserData from '../assets/newUserData'
 import teamIdGenerator from '../assets/teamIdGenerator'
+import axios from 'axios';
 const view = document.getElementsByTagName('body')[0].clientWidth;
 export default {
   data() {
+      axios.get('/api/users/self', { withCredentials: true })
+      .then((res) => {
+          console.log(res);
+          newUserData.name = res.data.name;
+      });
     return {
       currentStep: 1,
       isCompleted: false

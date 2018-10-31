@@ -21,7 +21,7 @@ import axios from "axios";
 export default {
   methods: {
     signin() {
-        axios.get('/api/auth/linkedin');
+        window.location = "/api/auth/linkedin";
       //implement auth check based on LinkedIn registration token
     //   setTimeout(function() {
     //     this.$router.push({name: 'home'});
