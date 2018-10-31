@@ -7,14 +7,14 @@ module.exports = (sequelize, DataTypes) => {
       title: DataTypes.STRING,
       description: DataTypes.STRING,
       challengeId: DataTypes.INTEGER,
-      codeNumber: DataTypes.NUMBER,
+      codeNumber: DataTypes.INTEGER,
       leaderId: DataTypes.INTEGER
     },
     {}
   );
   Team.associate = models => {
     Team.hasMany(models.User, {
-      foreignKey: "id"
+      foreignKey: "teamId"
     });
     Team.belongsTo(models.User, {
       targetkey: "id",

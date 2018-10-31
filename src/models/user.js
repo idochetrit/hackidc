@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
       academicInstitute: DataTypes.STRING,
       studyYear: DataTypes.INTEGER,
       experienceType: DataTypes.STRING,
-      hearAboutUS: DataTypes.STRING,
+      hearAboutUs: DataTypes.STRING,
       shirtSize: DataTypes.STRING,
       foodRestrictionType: DataTypes.STRING,
       volunteerToAcceptLoner: DataTypes.BOOLEAN,
@@ -28,6 +28,10 @@ module.exports = (sequelize, DataTypes) => {
     {}
   );
   User.associate = models => {
+    User.belongsTo(models.Role, {
+      targetkey: "id",
+      foreignKey: "roleId"
+    });
     User.belongsTo(models.Team, {
       targetkey: "id",
       foreignKey: "teamId"

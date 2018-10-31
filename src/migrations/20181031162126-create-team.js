@@ -19,7 +19,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       codeNumber: {
-        type: Sequelize.NUMBER
+        type: Sequelize.INTEGER
       },
       leaderId: {
         type: Sequelize.INTEGER

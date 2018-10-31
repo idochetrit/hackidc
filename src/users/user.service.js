@@ -2,6 +2,8 @@ import _ from "lodash";
 
 import models from "../models";
 
+const { User, Role } = models;
+
 export const SANITIZED_FIELDS = [
   "id",
   "linkedInId",
@@ -21,31 +23,51 @@ export const SANITIZED_FIELDS = [
   "shirtSize",
   "fieldOfStudy",
   "academicInstitute",
-  "teamId"
+  "teamId",
+  "isTeamBuilder"
 ];
+
+const getRoleId = roleName =>
+  Role.findOne({ where: { name: roleName }, attributes: ["id"] }).then(
+    role => role.id
+  );
 export default (() => {
   class UserService {
-    finishRegistration(userId, userAttrs) {
-      const newUser = _.extend({ registerStatus: "review" }, userAttrs);
-      return this.findById(userId)
-        .then(user => user.updateAttributes(newUser))
-        .catch(err => {
-          console.log(`failed to save user: (Error - ${err})`);
-        });
-    }
-
     registerWithLinkedIn(profile) {
       const defaultAttrs = {
         linkedInId: _.get(profile, "id"),
         name: _.get(profile, "displayName"),
         email: _.get(profile, "emails[0].value"),
-        rawLinkedin: profile,
+        rawLinkedin: profile._raw,
         registerStatus: "pending"
       };
-      return models.User.findOrCreate({
+      return User.findOrCreate({
         where: { linkedInId: defaultAttrs.linkedInId },
         defaults: defaultAttrs
-      }).spread((user, created) => user);
+      }).spread((user, _created) => user);
+    }
+
+    finishRegistration(user, userAttrs) {
+      if (_.isUndefined(userAttrs.isTeamBuilder)) {
+        throw new Error("Bad user attributes: isTeamBuilder is undefined");
+      }
+
+      const newRole = userAttrs.isTeamBuilder ? "TeamBuilder" : "Participant";
+      delete userAttrs.isTeamBuilder;
+
+      return Promise.all([user, getRoleId(newRole)])
+        .then(([user, roleId]) => {
+          const newUser = _.extend(userAttrs, {
+            registerStatus: "review",
+            roleId
+          });
+          return user.updateAttributes(newUser);
+        })
+        .catch(err => {
+          console.log(
+            `Failed to save user: (Error - ${err.message}) ${err.stack}`
+          );
+        });
     }
 
     sanitize(user) {
@@ -54,7 +76,7 @@ export default (() => {
     }
 
     findById(id) {
-      return models.User.findByPk(id);
+      return User.findByPk(id);
     }
   }
 

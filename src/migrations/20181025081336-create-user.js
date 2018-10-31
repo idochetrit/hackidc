@@ -40,7 +40,7 @@ module.exports = {
       experienceType: {
         type: Sequelize.STRING
       },
-      hearAboutUS: {
+      hearAboutUs: {
         type: Sequelize.STRING
       },
       shirtSize: {
@@ -79,5 +79,8 @@ module.exports = {
         type: Sequelize.DATE
       }
     }),
-  down: (queryInterface, Sequelize) => queryInterface.dropTable("Users")
+  down: (queryInterface, Sequelize) => {
+    queryInterface.dropTable("Users");
+    queryInterface.sequelize.query('DROP TYPE "enum_Users_registerStatus"');
+  }
 };
