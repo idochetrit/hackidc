@@ -17,13 +17,15 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   methods: {
     signin() {
+        window.location = "/api/auth/linkedin";
       //implement auth check based on LinkedIn registration token
-      setTimeout(function() {
-        this.$router.push({name: 'home'});
-      }.bind(this), 1000);
+    //   setTimeout(function() {
+    //     this.$router.push({name: 'home'});
+    //   }.bind(this), 1000);
     }
   }
 }

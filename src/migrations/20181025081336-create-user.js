@@ -16,7 +16,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       gender: {
-        type: Sequelize.BOOLEAN
+        type: Sequelize.STRING
       },
       mobile: {
         type: Sequelize.STRING
@@ -59,6 +59,16 @@ module.exports = {
       teamId: {
         allowNull: true,
         type: Sequelize.INTEGER
+      },
+      linkedInId: {
+        type: Sequelize.STRING
+      },
+      registerStatus: {
+        type: Sequelize.ENUM,
+        values: ["approved", "review", "pending", "rejected"]
+      },
+      rawLinkedin: {
+        type: Sequelize.JSONB
       },
       createdAt: {
         allowNull: false,
