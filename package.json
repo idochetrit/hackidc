@@ -12,8 +12,8 @@
     "build-server": "babel -d ./build ./src -s --copy-files",
     "build-client": "webpack",
     "build": "npm run clean && npm run build-server && npm run build-client && npm run migrate",
-    "migrate": "sequelize db:migrate && sequelize db:seed:all",
-    "migrate-clean-temp": "sequelize db:migrate:undo:all",
+    "migrate": "./node_modules/nodemon/bin/sequelize db:migrate && ./node_modules/nodemon/bin/sequelize db:seed:all",
+    "migrate-clean-temp": "./node_modules/nodemon/bin/sequelize db:migrate:undo:all",
     "start": "npm run build && node ./build/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
