@@ -1,6 +1,10 @@
 export function handleError(err, res) {
-  console.warn(`ERROR: ${err}`);
-  return res.status(500).send(`Error occured: ${err}`);
+  console.warn(`ERROR: ${err}, ${err.stack}`);
+  const errorMsg =
+    process.env.NODE_ENV === "production"
+      ? "Something wrong..."
+      : `Error occured: ${err}, See logs...`;
+  return res.status(500).send(errorMsg);
 }
 
 export function handleNotFound(err, res) {

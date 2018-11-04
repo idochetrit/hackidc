@@ -7,8 +7,8 @@ module.exports = (sequelize, DataTypes) => {
       title: DataTypes.STRING,
       description: DataTypes.STRING,
       challengeId: DataTypes.INTEGER,
-      codeNumber: DataTypes.INTEGER,
-      leaderId: DataTypes.INTEGER
+      code: DataTypes.INTEGER,
+      builderId: DataTypes.INTEGER
     },
     {}
   );
@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     });
     Team.belongsTo(models.User, {
       targetkey: "id",
-      foreignKey: "leaderId"
+      foreignKey: "builderId"
     });
   };
   return Team;

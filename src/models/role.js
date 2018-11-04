@@ -6,7 +6,9 @@ module.exports = (sequelize, DataTypes) => {
     {
       name: DataTypes.STRING
     },
-    {}
+    {
+      timestamps: false
+    }
   );
   Role.associate = models => {
     // associations can be defined here

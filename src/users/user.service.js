@@ -1,8 +1,10 @@
 import _ from "lodash";
 
 import models from "../models";
+import TeamService from "../teams/team.service";
+import userRole from "./user.role";
 
-const { User, Role } = models;
+const { User } = models;
 
 export const SANITIZED_FIELDS = [
   "id",
@@ -15,7 +17,6 @@ export const SANITIZED_FIELDS = [
   "volunteerToAcceptLoner",
   "experienceType",
   "foodRestrictionType",
-  "roleId",
   "gender",
   "degreeType",
   "hearAboutUS",
@@ -23,14 +24,11 @@ export const SANITIZED_FIELDS = [
   "shirtSize",
   "fieldOfStudy",
   "academicInstitute",
-  "teamId",
-  "isTeamBuilder"
+  "isTeamBuilder",
+  "role",
+  "team"
 ];
 
-const getRoleId = roleName =>
-  Role.findOne({ where: { name: roleName }, attributes: ["id"] }).then(
-    role => role.id
-  );
 export default (() => {
   class UserService {
     registerWithLinkedIn(profile) {
@@ -47,31 +45,35 @@ export default (() => {
       }).spread((user, _created) => user);
     }
 
-    finishRegistration(user, userAttrs) {
+    async finishRegistration(user, userAttrs) {
       if (_.isUndefined(userAttrs.isTeamBuilder)) {
         throw new Error("Bad user attributes: isTeamBuilder is undefined");
       }
 
-      const newRole = userAttrs.isTeamBuilder ? "TeamBuilder" : "Participant";
+      const roleName = userAttrs.isTeamBuilder ? "TeamBuilder" : "Participant";
       delete userAttrs.isTeamBuilder;
 
-      return Promise.all([user, getRoleId(newRole)])
-        .then(([user, roleId]) => {
-          const newUser = _.extend(userAttrs, {
-            registerStatus: "review",
-            roleId
-          });
-          return user.updateAttributes(newUser);
-        })
-        .catch(err => {
+      const { id: roleId } = await userRole.getByName(roleName);
+      const extendedAttrs = _.extend(userAttrs, {
+        registerStatus: "review",
+        roleId
+      });
+      const updatedUser = await user
+        .update(extendedAttrs)
+        .catch(err =>
           console.log(
             `Failed to save user: (Error - ${err.message}) ${err.stack}`
-          );
-        });
+          )
+        );
+      return updatedUser;
     }
 
-    sanitize(user) {
+    async sanitize(user) {
       const sanitizedParams = _.pick(user, ...SANITIZED_FIELDS);
+      const [role, team] = await Promise.all([user.getRole(), user.getTeam()]);
+
+      sanitizedParams.role = role.name;
+      sanitizedParams.team = TeamService.sanitize(team);
       return sanitizedParams;
     }
 
