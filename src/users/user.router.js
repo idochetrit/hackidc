@@ -2,7 +2,7 @@ import { Router } from "express";
 import _ from "lodash";
 import userService from "./user.service";
 import { ensureAuthenticated } from "../concerns/auth.users";
-import { handleError } from "../routers.helper";
+import { handleError, handleUnauthorize } from "../routers.helper";
 import teamService from "../teams/team.service";
 import userUploadsRouter from "./user.upload.router";
 
@@ -20,6 +20,10 @@ router.get("/self", ensureAuthenticated, async (req, res) => {
 });
 
 router.post("/register", async (req, res) => {
+  // temp block in production
+  if (process.env.NODE_ENV === "production") {
+    return handleUnauthorize(new Error("Currently unavailable"), res);
+  }
   try {
     // const userId = 1;
 
