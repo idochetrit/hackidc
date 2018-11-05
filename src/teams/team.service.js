@@ -47,7 +47,7 @@ export default (() => {
     }
 
     async generateTeamCode() {
-      const generate = () => Math.floor(Math.random() * 10000);
+      const generate = () => Math.floor(Math.random() * 899 + 100);
       var generatedCode = generate();
       const team = await checkAvailability(generatedCode);
       if (team) {
