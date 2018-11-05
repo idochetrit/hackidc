@@ -26,10 +26,11 @@ export default (() => {
     async buildTeam({ builder, teamParams }) {
       try {
         const newTeam = _.extend({ builderId: builder.id }, teamParams);
-        return await Team.findOrCreate({
+        const [team, _saved] = await Team.findOrCreate({
           where: { code: { $eq: newTeam.code } },
           defaults: newTeam
         });
+        return team;
       } catch (err) {
         console.error(`Failed to create user: ${err.message}, ${err.stack}`);
         throw err;

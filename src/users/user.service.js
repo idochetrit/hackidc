@@ -55,10 +55,11 @@ export default (() => {
 
       // HERE: build team logic
       const { code } = teamParams;
+      let team;
       if (roleName === "TeamBuilder") {
-        await teamService.buildTeam({ builder: user, teamParams });
+        team = await teamService.buildTeam({ builder: user, teamParams });
       }
-      await this.connectToTeam({ user, code });
+      await this.connectToTeam({ user, code, team });
 
       const { id: roleId } = await userRole.getByName(roleName);
       const extendedAttrs = _.extend(userParams, {
@@ -72,12 +73,19 @@ export default (() => {
             `Failed to save user: (Error - ${err.message}) ${err.stack}`
           )
         );
+      if (team) {
+        // optimize later sanitized team attribute
+        user.team = teamService.sanitize(team);
+      }
       return updatedUser;
     }
 
     async sanitize(user) {
       const sanitizedParams = _.pick(user, ...SANITIZED_FIELDS);
-      const [role, team] = await Promise.all([user.getRole(), user.getTeam()]);
+      const [role, team] = await Promise.all([
+        user.getRole(),
+        user.team || user.getTeam()
+      ]);
 
       sanitizedParams.role = role.name;
       sanitizedParams.team = teamService.sanitize(team);
@@ -93,9 +101,10 @@ export default (() => {
         .value();
     }
 
-    async connectToTeam({ user, code }) {
-      const team = await teamService.findByCode(code);
-      await user.update({ teamId: team.id });
+    async connectToTeam({ user, code, team }) {
+      const { id: teamId } = team || (await teamService.findByCode(code));
+
+      await user.update({ teamId });
       return user;
     }
 
