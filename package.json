@@ -46,6 +46,7 @@
     "prettier": "1.14.3",
     "sequelize": "4.41.0",
     "sequelize-cli": "5.2.0",
+    "sillyname": "0.1.0",
     "vue": "2.5.2",
     "vue-router": "3.0.1",
     "vue-scrollto": "2.13.0",
