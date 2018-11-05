@@ -1,7 +1,6 @@
 import _ from "lodash";
 
 import models from "../models";
-import TeamService from "../teams/team.service";
 import userRole from "./user.role";
 import teamService from "../teams/team.service";
 
