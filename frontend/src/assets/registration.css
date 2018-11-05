@@ -88,12 +88,14 @@ button {margin: 0 .3rem; flex-basis: 25%;}
     align-items: center;
 }
 h5, h3 {text-align: center;}
-h5.sectionTitle {margin: .5rem 0 1.5rem 0;}
-a {text-decoration: none; font-weight: bold;}
+h5.sectionTitle, h6.sectionTitle {margin: .5rem 0 1.5rem 0;}
+a {text-decoration: none; font-weight: bold; color: #232323;}
 
 @media screen and (max-width: 1440px) and (min-width: 1201px) {
     .container {width: 75%;}
 }
+
+
 
 @media screen and (max-width: 1200px) {
     .progress-bar {width: 95%;}

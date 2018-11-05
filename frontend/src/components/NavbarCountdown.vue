@@ -33,6 +33,10 @@ export default {
     .container-fluid > * {margin: 0; color: #fff;}
     h5 {width: 100%; text-align: center; font-weight: bold;}
 
+    @media screen and (max-width: 1440px) {
+        h5 {font-weight: normal;}
+    }
+
     @media screen and (max-width: 767px) {
         .container-fluid {padding: .1rem 0;}
         h5 {font-size: 1rem;}
