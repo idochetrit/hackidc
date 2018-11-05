@@ -5,3 +5,4 @@ tags
 build/
 .idea/
 public/bundle.js
+.DS_Store

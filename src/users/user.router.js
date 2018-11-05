@@ -1,19 +1,11 @@
 import { Router } from "express";
 import _ from "lodash";
-import userService, { SANITIZED_FIELDS } from "./user.service";
+import userService from "./user.service";
 import { ensureAuthenticated } from "../concerns/auth.users";
 import { handleError } from "../routers.helper";
+import teamService from "../teams/team.service";
 
 const router = new Router();
-
-function buildUserAttributes(body) {
-  return _.chain(body)
-    .get("user")
-    .pick(SANITIZED_FIELDS)
-    .mapValues(i => (typeof i == "string" ? _.toLower(i) : i))
-    .omit("id", "linkedInId", "role", "team")
-    .value();
-}
 
 router.get("/self", ensureAuthenticated, async (req, res) => {
   try {
@@ -25,16 +17,24 @@ router.get("/self", ensureAuthenticated, async (req, res) => {
 });
 
 router.post("/register", async (req, res) => {
-  const userId = 1;
-  // const userId = req.user.id;
-  const user = await userService.findById(userId);
-
-  const attrs = buildUserAttributes(req.body);
   try {
-    const updatedUser = await userService.finishRegistration(user, attrs);
-    const sanitizeUser = await userService.sanitize(updatedUser);
+    const userId = 1;
 
-    res.json(sanitizeUser);
+    // const userId = req.user.id;
+    const user = await userService.findById(userId);
+    const userParams = userService.extractUserParams(req.body);
+    const teamParams = teamService.extractTeamParams(req.body);
+
+    const updatedUser = await userService.finishRegistration({
+      user,
+      userParams,
+      teamParams
+    });
+    const sanitizedUser = await userService.sanitize(updatedUser);
+
+    res.json({
+      user: sanitizedUser
+    });
   } catch (err) {
     handleError(err, res);
   }

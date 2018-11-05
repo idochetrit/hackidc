@@ -3,6 +3,7 @@ import _ from "lodash";
 import models from "../models";
 import TeamService from "../teams/team.service";
 import userRole from "./user.role";
+import teamService from "../teams/team.service";
 
 const { User } = models;
 
@@ -40,28 +41,35 @@ export default (() => {
         registerStatus: "pending"
       };
       return User.findOrCreate({
-        where: { linkedInId: defaultAttrs.linkedInId },
+        where: { linkedInId: { $eq: defaultAttrs.linkedInId } },
         defaults: defaultAttrs
       }).spread((user, _created) => user);
     }
 
-    async finishRegistration(user, userAttrs) {
-      if (_.isUndefined(userAttrs.isTeamBuilder)) {
+    async finishRegistration({ user, userParams, teamParams }) {
+      if (_.isUndefined(userParams.isTeamBuilder)) {
         throw new Error("Bad user attributes: isTeamBuilder is undefined");
       }
 
-      const roleName = userAttrs.isTeamBuilder ? "TeamBuilder" : "Participant";
-      delete userAttrs.isTeamBuilder;
+      const roleName = userParams.isTeamBuilder ? "TeamBuilder" : "Participant";
+      delete userParams.isTeamBuilder;
+
+      // HERE: build team logic
+      const { code } = teamParams;
+      if (roleName === "TeamBuilder") {
+        await teamService.buildTeam({ builder: user, teamParams });
+      }
+      await this.connectToTeam({ user, code });
 
       const { id: roleId } = await userRole.getByName(roleName);
-      const extendedAttrs = _.extend(userAttrs, {
+      const extendedAttrs = _.extend(userParams, {
         registerStatus: "review",
         roleId
       });
       const updatedUser = await user
         .update(extendedAttrs)
         .catch(err =>
-          console.log(
+          console.error(
             `Failed to save user: (Error - ${err.message}) ${err.stack}`
           )
         );
@@ -73,8 +81,23 @@ export default (() => {
       const [role, team] = await Promise.all([user.getRole(), user.getTeam()]);
 
       sanitizedParams.role = role.name;
-      sanitizedParams.team = TeamService.sanitize(team);
+      sanitizedParams.team = teamService.sanitize(team);
       return sanitizedParams;
+    }
+
+    extractUserParams(params) {
+      return _.chain(params)
+        .get("user")
+        .pick(SANITIZED_FIELDS)
+        .mapValues(i => (typeof i == "string" ? _.toLower(i) : i))
+        .omit("id", "linkedInId", "role", "team")
+        .value();
+    }
+
+    async connectToTeam({ user, code }) {
+      const team = await teamService.findByCode(code);
+      await user.update({ teamId: team.id });
+      return user;
     }
 
     findById(id) {

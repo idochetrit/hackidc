@@ -10,7 +10,17 @@ module.exports = (sequelize, DataTypes) => {
       code: DataTypes.INTEGER,
       builderId: DataTypes.INTEGER
     },
-    {}
+    {
+      indexes: [
+        {
+          unique: true,
+          fields: ["code"]
+        },
+        {
+          fields: ["challengeId"]
+        }
+      ]
+    }
   );
   Team.associate = models => {
     Team.hasMany(models.User, {

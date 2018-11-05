@@ -25,7 +25,18 @@ module.exports = (sequelize, DataTypes) => {
       },
       rawLinkedin: DataTypes.JSONB
     },
-    {}
+    {
+      indexes: [
+        {
+          unique: true,
+          fields: ["email"]
+        },
+        {
+          unique: true,
+          fields: ["linkedInId"]
+        }
+      ]
+    }
   );
   User.associate = models => {
     User.belongsTo(models.Role, {

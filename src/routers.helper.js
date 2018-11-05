@@ -11,3 +11,8 @@ export function handleNotFound(err, res) {
   console.warn(`NA: ${err}`);
   return res.status(404).send(`not found: ${err}`);
 }
+
+export function handleUnauthorize(err, res) {
+  console.warn(`NA: ${err}`);
+  return res.status(401).send(`Unauthorize: ${err}`);
+}
