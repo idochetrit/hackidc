@@ -31,7 +31,7 @@ export const SANITIZED_FIELDS = [
 
 export default (() => {
   class UserService {
-    registerWithLinkedIn(profile) {
+    createLinkedInUser(profile) {
       const defaultAttrs = {
         linkedInId: _.get(profile, "id"),
         name: _.get(profile, "displayName"),
@@ -106,6 +106,20 @@ export default (() => {
 
       await user.update({ teamId });
       return user;
+    }
+
+    async updateCV({ user, fileParams }) {
+      console.log("Uplading", fileParams.mimetype, fileParams.name);
+      if (fileParams.mimetype !== "application/pdf") {
+        throw new Error("File type is not PDF");
+      }
+
+      // in MB
+      if (fileParams.data.byteLength / 1000000 >= 5) {
+        throw new Error("File size is greater than 5 Mb");
+      }
+
+      await user.update({ cvFile: fileParams.data });
     }
 
     findById(id) {

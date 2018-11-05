@@ -18,10 +18,10 @@ module.exports = {
       challengeId: {
         type: Sequelize.INTEGER
       },
-      codeNumber: {
+      code: {
         type: Sequelize.INTEGER
       },
-      leaderId: {
+      builderId: {
         type: Sequelize.INTEGER
       },
       createdAt: {

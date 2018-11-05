@@ -26,7 +26,7 @@ passport.use(
     (req, accessToken, _refreshToken, profile, done) => {
       req.session.accessToken = accessToken;
       Promise.resolve()
-        .then(() => UserService.registerWithLinkedIn(profile))
+        .then(() => UserService.createLinkedInUser(profile))
         .then(user => {
           done(null, user);
         });

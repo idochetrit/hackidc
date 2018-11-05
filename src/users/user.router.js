@@ -4,8 +4,11 @@ import userService from "./user.service";
 import { ensureAuthenticated } from "../concerns/auth.users";
 import { handleError } from "../routers.helper";
 import teamService from "../teams/team.service";
+import userUploadsRouter from "./user.upload.router";
 
 const router = new Router();
+
+router.use("/self/uploads", userUploadsRouter);
 
 router.get("/self", ensureAuthenticated, async (req, res) => {
   try {
@@ -18,9 +21,9 @@ router.get("/self", ensureAuthenticated, async (req, res) => {
 
 router.post("/register", async (req, res) => {
   try {
-    const userId = 1;
+    // const userId = 1;
 
-    // const userId = req.user.id;
+    const userId = req.user.id;
     const user = await userService.findById(userId);
     const userParams = userService.extractUserParams(req.body);
     const teamParams = teamService.extractTeamParams(req.body);

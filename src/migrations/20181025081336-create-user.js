@@ -70,6 +70,9 @@ module.exports = {
       rawLinkedin: {
         type: Sequelize.JSONB
       },
+      cvFile: {
+        type: Sequelize.BLOB("long")
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

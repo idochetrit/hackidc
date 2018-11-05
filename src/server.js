@@ -7,6 +7,8 @@ import passport from "passport";
 import session from "express-session";
 import routers from "./routers";
 
+const fileUpload = require("express-fileupload");
+
 const app = express();
 app.use(morgan("dev"));
 app.use(bodyParser.json());
@@ -21,6 +23,7 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(fileUpload({}));
 
 // api routers
 app.use("/api", routers);
