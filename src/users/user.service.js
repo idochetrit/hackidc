@@ -19,7 +19,7 @@ export const SANITIZED_FIELDS = [
   "foodRestrictionType",
   "gender",
   "degreeType",
-  "hearAboutUS",
+  "hearAboutUs",
   "mobile",
   "shirtSize",
   "fieldOfStudy",
