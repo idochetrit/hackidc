@@ -44,6 +44,32 @@ export default {
   data() {
     return {
       categories: {
+        tips: {
+          id: 'tips',
+          name: 'Tips & Tricks',
+          items: [
+            {
+              title: 'The Hackathon Toolbox',
+              link: 'https://www.thecodeship.com/general/hackathon-toolbox-essential-tools-practices/',
+              thumbnail: 'http://engineering.indeedblog.com/wp-content/uploads/2014/01/hacktee.png'
+            },
+            {
+              title: 'Hackathon-ing as a Non-Developer',
+              link: 'https://medium.com/@xinisterlayer/hackathon-ing-as-a-non-developer-ec994e50458c',
+              thumbnail: 'https://cdn-images-1.medium.com/max/2000/1*0QbvXqleQASAZ0oaAfY66w.jpeg'
+            },
+            {
+              title: 'Hackathon: Important Tips',
+              link: 'https://medium.com/@ginnyfahs/first-hackathon-here-are-6-things-you-need-to-know-46640c3ef72e',
+              thumbnail: 'http://www.mblock.cc/wp-content/uploads/2018/08/hackathon-1-1024x430.png'
+            },
+            {
+              title: 'Prepare for a Hackathon',
+              link: 'https://sendgrid.com/blog/prepare-hackathon/',
+              thumbnail: 'https://blog.westmonroepartners.com/wp-content/uploads/2017/07/hack.png'
+            }
+          ]
+        },
         languages: {
           id: 'languages',
           name: 'Programming Languages',
@@ -63,6 +89,16 @@ export default {
               link: 'https://medium.com/@LindaVivah/the-beginners-guide-understanding-node-js-express-js-fundamentals-e15493462be1',
               thumbnail: 'https://www.valuecoders.com/blog/wp-content/uploads/2018/05/featured.jpg'
             },
+            {
+              title: 'HTML & CSS',
+              link: 'https://learn.shayhowe.com/html-css/',
+              thumbnail: 'https://cdn-images-1.medium.com/max/1344/1*Q8w9PI58DKjolhl5aDeiOQ.png'
+            },
+            {
+              title: 'Swift Basics',
+              link: 'https://docs.swift.org/swift-book/LanguageGuide/TheBasics.html',
+              thumbnail: 'https://www.theinquirer.net/w-images/4aac0508-77fc-41eb-aab5-4a55bd1e07a8/0/swiftlogo-580x358.jpeg'
+            },
           ],
         },
         habits: {
@@ -74,6 +110,11 @@ export default {
               link: 'https://guides.github.com/activities/hello-world/',
               thumbnail: 'http://www.ikrish.com/img/github-universe.jpg'
             },
+            {
+              title: 'GitHub In Depth',
+              link: 'https://git-scm.com/book/en/v2',
+              thumbnail: 'https://cdn-images-1.medium.com/max/2000/1*CmjmgiI3Sr6oByNZ81pkhQ.jpeg'
+            }
           ],
         },
         databases: {
@@ -83,19 +124,16 @@ export default {
             {
               title: 'SQL Basics',
               link: 'https://www.dataquest.io/blog/sql-basics/',
-              tags: ['SQL', 'database', 'data-management'],
               thumbnail: 'https://datadog-prod.imgix.net/img/blog/monitor-azure-sql-databases-datadog/2016-azure-sql-integrations-1.png'
             },
             {
               title: 'No-SQL Databases',
               link: 'https://www.mongodb.com/nosql-explained',
-              tags: ['no-sql', 'database', 'data-management'],
               thumbnail: 'http://pragatisoftware.com/wp-content/uploads/blog/blog_home_icons/an_introduction_to_nosql.jpg'
             },
             {
               title: 'Basics of MongoDB',
               link: 'https://www.codeproject.com/Articles/828392/Basics-of-MongoDB',
-              tags: ['mongoDB', 'database', 'data-management'],
               thumbnail: 'https://coursework.vschool.io/content/images/2015/11/f0c6acff24bc794.png'
             },
           ],
@@ -107,22 +145,9 @@ export default {
             {
               title: 'Cloud Hosting 101',
               link: 'https://www.digitalocean.com/community/tutorials/an-introduction-to-cloud-hosting',
-              tags: ['cloud-service', 'hosting', 'servers'],
               thumbnail: 'https://comtechies.com/wp-content/uploads/2017/07/7-reasons-to-switch-to-cloud-hosting-in-2017.jpg'
             },
           ],
-        },
-        tips: {
-          id: 'tips',
-          name: 'Tips & Tricks',
-          items: [
-            {
-              title: 'Hackathon: Important Tips',
-              link: 'https://medium.com/@ginnyfahs/first-hackathon-here-are-6-things-you-need-to-know-46640c3ef72e',
-              tags: ['hackathon', 'rookies', 'team-project', 'tips', 'hello-world'],
-              thumbnail: 'http://www.mblock.cc/wp-content/uploads/2018/08/hackathon-1-1024x430.png'
-            },
-          ]
         }
       },
     }
@@ -182,7 +207,7 @@ export default {
   .card-img-top {height: 150px;}
 
   @media screen and (max-width: 1440px) and (min-width: 1201px) {
-    .container {width: 75%;}
+    .container {width: 80%;}
   }
 
   @media screen and (max-width: 1200px) {

@@ -10,6 +10,7 @@ const linkedInIntegration = {
       //     console.log(res);
       //   });
 
+
       // axios.get('/api/users/self', { withCredentials: true })
       //   .then((res) => {
       //     console.log(res);

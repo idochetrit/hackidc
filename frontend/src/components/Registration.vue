@@ -21,7 +21,7 @@
                     <h5>Please connect your LinkedIn account to fill in your personal basic details. <br>
                         Don't have a LinkedIn account? <a class="text-info" target="_blank" href="https://www.linkedin.com/">Create one here.</a>
                         You'll need one to join HackIDC 2019.</h5>
-                    <button @click="integrate" class="btn btn-lg linkedinBtn"><span class="fab fa-linkedin fa-lg"></span>Sign up with LinkedIn</button>
+                    <a href="/api/auth/linkedin" class="btn btn-lg linkedinBtn"><span class="fab fa-linkedin fa-lg"></span>Sign up with LinkedIn</a>
                 </div>
                 <div v-else-if="currentStep === 2" class="row">
                     <h3>A Few Quick Questions</h3>
