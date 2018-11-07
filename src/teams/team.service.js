@@ -47,8 +47,11 @@ export default (() => {
     }
 
     async generateTeamCode() {
-      const generate = () => Math.floor(Math.random() * 899 + 100);
+      const generate = () => Math.floor(Math.random() * 399 + 100);
       var generatedCode = generate();
+      if (generatedCode % 100 >= 30) {
+        return this.generateTeamCode();
+      }
       const team = await checkAvailability(generatedCode);
       if (team) {
         return this.generateTeamCode();
