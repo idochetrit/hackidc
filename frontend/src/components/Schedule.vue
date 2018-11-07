@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <div class="container">
       <img class="herzel" src="../../static/herzel_black.png">
-      <h2>Schedule TDB</h2>
+      <h2>Schedule TBD</h2>
     </div>
   </div>
 </template>

@@ -72,7 +72,21 @@ export default new Router({
       meta: {
         title: "HackIDC 2019 | Registration"
       },
-      component: Registration
+      component: Registration,
+      beforeEnter: (to, from, next) => {
+        let status = store.getters.isRegistrationOpen;
+        if (status == 'opened') {
+          next();
+        }
+        else if (!status || status == 'closed') {
+          alert("HackIDC 2019 registration is currently closed.");
+          next({name: 'home'});
+        }
+        else {
+          alert("HackIDC 2019 registration isn't open yet...");
+          next({name: 'home'});
+        }
+      }
     },
     {
       path: "/login",
