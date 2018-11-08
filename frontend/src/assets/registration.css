@@ -91,6 +91,9 @@ h5, h3 {text-align: center;}
 h5.sectionTitle, h6.sectionTitle {margin: .5rem 0 1.5rem 0;}
 a {text-decoration: none; font-weight: bold; color: #232323;}
 
+.invalid input, .invalid select {border-color: rgba(217,83,79, .3);}
+.invalid label, .invalid label > * {color: #d9534f;}
+
 @media screen and (max-width: 1440px) and (min-width: 1201px) {
     .container {width: 75%;}
 }

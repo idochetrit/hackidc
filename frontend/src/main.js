@@ -4,9 +4,11 @@ import Vue from "vue";
 import VueScrollTo from "vue-scrollto";
 import App from "./App.vue";
 import router from "./router";
+import Vuelidate from 'vuelidate'
 import { store } from "./store/store";
 
 Vue.config.productionTip = false;
+Vue.use(Vuelidate);
 Vue.use(VueScrollTo, {
   duration: 650,
   easing: [0.645, 0.045, 0.355, 1],

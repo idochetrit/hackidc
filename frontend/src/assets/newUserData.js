@@ -2,7 +2,7 @@ const newUserData = {
   data() {
     return {
       userData: {
-        name: '',
+        name: 'John Doe',
         email: '',
         gender: true,
         mobile: '',
@@ -12,14 +12,15 @@ const newUserData = {
         studyYear: 0,
         experienceType: '',
         techExperience: false,
-        hearAboutUs: '',
         shirtSize: '',
         foodRestrictionType: '',
+        hearAboutUs: 'social-media',
         volunteerToAcceptLoner: false,
-        role: '',
+        role: '', //valid values: 'loner', 'participant', 'team-builder'
         roleId: 0,
         teamId: 0,
-        cvAgree: true
+        cvAgree: true,
+        termsAgree: false
       }
     };
   }
