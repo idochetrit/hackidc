@@ -10,9 +10,11 @@ const router = new Router();
 
 router.use("/self/uploads", userUploadsRouter);
 
-router.get("/self", ensureAuthenticated, async (req, res) => {
+router.get("/self", async (req, res) => {
   try {
-    const sanitizedUser = await userService.sanitize(req.user);
+    const userId = _.get(req, "user.id") || req.body.id;
+    const user = await userService.findById(userId);
+    const sanitizedUser = await userService.sanitize(user);
     res.json(sanitizedUser);
   } catch (err) {
     handleError(err, res);
@@ -25,8 +27,6 @@ router.post("/register", async (req, res) => {
     return handleUnauthorize(new Error("Currently unavailable"), res);
   }
   try {
-    // const userId = 1;
-
     const userId = req.user.id;
     const user = await userService.findById(userId);
     const userParams = userService.extractUserParams(req.body);
