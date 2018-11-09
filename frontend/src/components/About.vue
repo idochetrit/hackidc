@@ -132,5 +132,6 @@ export default {
     }
     .col-lg-4 {padding: 3rem 0 0 0; font-size: 9rem;}
     .row:nth-of-type(2) {flex-direction: column-reverse;}
+    .row:nth-of-type(4) {flex-direction: column-reverse;}
   }
 </style>

@@ -14,15 +14,16 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <router-link tag="li" class="nav-item mainNav-item" active-class="active" to="/" exact><a class="nav-link">home</a></router-link>
-          <router-link tag="li" class="nav-item mainNav-item" active-class="active" to="/schedule" exact><a class="nav-link">schedule</a></router-link>
+          <!--<router-link tag="li" class="nav-item mainNav-item" active-class="active" to="/schedule" exact><a class="nav-link">schedule</a></router-link>-->
           <router-link tag="li" class="nav-item mainNav-item" active-class="active" to="/resources" exact><a class="nav-link">resources</a></router-link>
           <router-link tag="li" class="nav-item mainNav-item" active-class="active" to="/team" exact><a class="nav-link">the team</a></router-link>
           <router-link tag="li" class="nav-item mainNav-item" active-class="active" to="/faq" exact><a class="nav-link">FAQ</a></router-link>
           <li><a class="social mainNav-item" href="https://www.facebook.com/HackIDC/" target="_blank"><span class="fab fa-facebook fa-2x"></span></a></li>
           <li><a class="social mainNav-item" href="https://www.instagram.com/hackidc2019/" target="_blank"><span class="fab fa-instagram fa-2x"></span></a></li>
         </ul>
-        <ul class="navbar-nav">
-          <button v-if="!this.$store.getters.isAuthenticated" @click="toLogin" class="btn btn-md btn-info mainNav-item"><strong>Sign in</strong></button>
+        <ul class="navbar-nav" v-if="this.$store.getters.isRegistrationOpen !== 'under-construction'">
+          <button v-if="!this.$store.getters.isAuthenticated"
+                  @click="toLogin" class="btn btn-md btn-info mainNav-item"><strong>Sign in</strong></button>
           <div v-else class="dropdown">
             <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <span class="fas fa-user fa-lg"></span>Hi, <strong>{{ this.$store.getters.getUser.name | firstName }}</strong>
