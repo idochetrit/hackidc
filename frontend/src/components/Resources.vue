@@ -6,7 +6,7 @@
         <div class="row">
           <div class="col-lg-12">
             <h3>What are these resources?</h3>
-            <h5>This page's goal is to provide the participants with the tools necessary to build a prototype in a short time frame.</h5>
+            <h5>This page's goal is to provide participants the tools necessary to build a prototype in a short time frame.</h5>
             <br>
             <p>If you wish to participate in HackIDC and have a technical background but little to no experience, start by finding out about these common yet very important subjects.</p>
             <p>As part of the agenda of promoting talented students, HackIDC encourage you to start your training on your own. These links are intended to guide young programmers, who wish to turn their basic coding skills into real experience, through their first Hackathon.</p>

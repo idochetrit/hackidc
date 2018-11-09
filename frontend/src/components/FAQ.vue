@@ -49,7 +49,7 @@
           <div class="point">
             <h4>What is Pre-Hack day?</h4>
             <hr>
-            <p><strong>During Pre-Hack we will reveal the different challenges in this years HackIDC. Participating in a challenge gives you the chance to win additional prizes worth over 15000 NIS which are awarded by our sponsors.</strong></p>
+            <p><strong>During Pre-Hack we will reveal the different challenges in this years HackIDC. Participating in a challenge gives you the chance to win additional prizes which are awarded by our sponsors.</strong></p>
             <p>Pre-Hack Day will also be your chance to get to know what hardware will be available at the event, and you will already be able to reserve the hardware you would like to work with. We strongly recommend at least one member of each group to participate in the event.
               Awesome prizes will be given away throughout the day!</p>
           </div>
@@ -57,7 +57,7 @@
             <h4>What if I don’t have a team?</h4>
             <hr>
             <p><strong>You can decide whether we team you up or you find a team on your own.</strong></p>
-            <p>You can join an existing team or make one through the HackIDC Hackers 2018 Facebook group we will open before the event.</p>
+            <p>In the registration process, choose 'I'm signing up alone'. We will let you know whether we team you up with an existing team or with other participants who signed up alone.</p>
           </div>
         </div>
         <div class="col-lg-4">

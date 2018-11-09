@@ -7,10 +7,10 @@
           <h1>2019</h1>
           <div class="buttons">
             <button @click="toRegistrationForm" v-if="registration === 'opened'" class="btn btn-info btn-lg">SIGN UP!</button>
-            <button v-scroll-to="'#about'" class="btn btn-outline-light btn-lg">READ MORE</button>
+            <button v-scroll-to="'#about'" class="btn btn-outline-light btn-lg">What's New?</button>
           </div>
           <hr>
-          <h4>April 11th - April 12th</h4>
+          <h4>April 2019</h4>
           <h2>IDC Herzliya</h2>
         </div>
       </div>

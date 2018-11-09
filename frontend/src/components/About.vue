@@ -6,12 +6,12 @@
         <div class="col-md-7">
           <h2 id="about">What is HackIDC?</h2>
           <br>
-          <h5><strong>300+ students, 36 hours, 35,000 NIS prizes.</strong></h5>
+          <h5><strong>300+ students, 36 hours, valuable prizes.</strong></h5>
           <p><strong>Are you as creative as you think you are? <br> Do you have the guts to push yourself further than ever before?</strong></p>
           <h5>Come join us at HackIDC 2019 and show us what you're made of.</h5>
           <hr>
           <p>This is an event for students who choose to learn because they can, and to build because they love to. Let us take care of the details — just bring your creativity and watch your ideas come to life.</p>
-          <p>Run by students from IDC, HackIDC is the largest student-run hackathon in Israel, gathering the most innovative, enthusiastic and determined to succeed students that have an idea and want to execute it - fast!</p>
+          <p>Run by students from IDC Herzliya, HackIDC is the largest student-run hackathon in Israel, gathering the most innovative, enthusiastic and determined to succeed students that have an idea and want to execute it - fast!</p>
           <button @click="toSchedule" class="btn btn-info btn-md">VIEW SCHEDULE</button>
         </div>
         <div class="col-md-5 col-sm-4">
@@ -30,7 +30,7 @@
           <br>
           <h5><strong>Introducing this year <span class="bolder text-info">ACTIVE RECRUITMENT</span> functionality.</strong></h5>
           <p><strong>Industry's top companies will be recruiting during the entire event.</strong></p>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi aspernatur, autem corporis dolorum error eum laboriosam nam nulla officia optio perferendis provident sequi tempora vitae voluptate? Ab at ipsa veritatis?</p>
+          <p>More details to come, stay tuned!</p>
           <button v-scroll-to="'#sponsors'" class="btn btn-md btn-info">CHECK OUT THIS YEAR SPONSORS</button>
         </div>
       </div>
@@ -42,12 +42,30 @@
           <h2>Start Learning</h2>
           <br>
           <h5><strong>Make yourself more ready by learning from our recommended <br><span class="bolder text-info">RESOURCES LINKS</span> material.</strong></h5>
-          <p><strong>Learn about the topics you find important before the competition starts.</strong></p>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi aspernatur, autem corporis dolorum error eum laboriosam nam nulla officia optio perferendis provident sequi tempora vitae voluptate? Ab at ipsa veritatis?</p>
+          <p><strong>This is your chance to turn your CS101 knowledge into a real deal.</strong></p>
+          <p>Learn about the topics you find important before the competition starts.
+            <br>We gathered lots of resources to help turn your basic coding skills into real experience, through you first Hackathon.</p>
           <button @click="toResources" class="btn btn-md btn-info">VIEW THE RESOURCES</button>
         </div>
         <div class="col-lg-4 col-md-4">
           <span class="fas fa-code"></span>
+        </div>
+      </div>
+      <br>
+      <hr>
+      <br>
+      <div class="row">
+        <div class="col-lg-5 col-md-5">
+          <span class="fas fa-palette"></span>
+        </div>
+        <div class="col-lg-7 col-md-7">
+          <h2>Digital Art Exhibition</h2>
+          <br>
+          <h5><strong><span class="bolder text-info">WHEN TECH MEETS ART!</span></strong></h5>
+          <p>Digital art is not a new field. Since the 20th century artists have been inspired by technology and incorporated it into their work.
+          As artists discovered the power of technology, they continue to break boundaries and push the limits of their creativity.</p>
+          <p>For the first time in Hackathon's history, HackIDC will present a digital art exhibition, combining different pieces from the digital art world and highlights leading artists from the industry.</p>
+          <p>Come see the magic yourself!</p>
         </div>
       </div>
     </div>
