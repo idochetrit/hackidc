@@ -7,6 +7,7 @@ import Resources from "../components/Resources.vue";
 import SponsorProposal from "../components/SponsorProposal.vue";
 import FAQ from "../components/FAQ.vue";
 import Team from "../components/Team.vue";
+import Gallery from "../components/Gallery.vue";
 import Registration from "../components/Registration.vue";
 import Login from "../components/Login.vue";
 import Dashboard from "../components/Dashboard.vue";
@@ -41,6 +42,14 @@ export default new Router({
         title: "HackIDC 2019 | The Team"
       },
       component: Team
+    },
+    {
+      path: "/gallery",
+      name: "gallery",
+      meta: {
+        title: "HackIDC 2019 | Gallery"
+      },
+      component: Gallery
     },
     {
       path: "/resources",

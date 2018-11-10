@@ -175,7 +175,7 @@ export default {
     width: 10%;
     margin-bottom: 2rem;
   }
-  h2 {font-weight: bold; margin-bottom: 4rem;}
+  h2 {font-weight: bold; margin-bottom: 4rem; text-align: center;}
   .nav-link {color: #000;}
   .tab-content {
     padding: 2rem;

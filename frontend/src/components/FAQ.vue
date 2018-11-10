@@ -113,7 +113,7 @@
     width: 10%;
     margin-bottom: 2rem;
   }
-  h2 {font-weight: bold; margin-bottom: 4rem;}
+  h2 {font-weight: bold; margin-bottom: 4rem; text-align: center;}
   h3 {margin: 1rem 0;}
   .point {padding: 0 1rem 2rem 1rem;}
   a {color: #000;}

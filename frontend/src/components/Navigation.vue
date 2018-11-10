@@ -17,6 +17,7 @@
           <!--<router-link tag="li" class="nav-item mainNav-item" active-class="active" to="/schedule" exact><a class="nav-link">schedule</a></router-link>-->
           <router-link tag="li" class="nav-item mainNav-item" active-class="active" to="/resources" exact><a class="nav-link">resources</a></router-link>
           <router-link tag="li" class="nav-item mainNav-item" active-class="active" to="/team" exact><a class="nav-link">the team</a></router-link>
+          <router-link tag="li" class="nav-item mainNav-item" active-class="active" to="/gallery" exact><a class="nav-link">gallery</a></router-link>
           <router-link tag="li" class="nav-item mainNav-item" active-class="active" to="/faq" exact><a class="nav-link">FAQ</a></router-link>
           <li><a class="social mainNav-item" href="https://www.facebook.com/HackIDC/" target="_blank"><span class="fab fa-facebook fa-2x"></span></a></li>
           <li><a class="social mainNav-item" href="https://www.instagram.com/hackidc2019/" target="_blank"><span class="fab fa-instagram fa-2x"></span></a></li>
