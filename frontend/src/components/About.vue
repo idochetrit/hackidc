@@ -12,7 +12,7 @@
           <hr>
           <p>This is an event for students who choose to learn because they can, and to build because they love to. Let us take care of the details — just bring your creativity and watch your ideas come to life.</p>
           <p>Run by students from IDC Herzliya, HackIDC is the largest student-run hackathon in Israel, gathering the most innovative, enthusiastic and determined to succeed students that have an idea and want to execute it - fast!</p>
-          <button @click="toSchedule" class="btn btn-info btn-md">VIEW SCHEDULE</button>
+          <!--<button @click="toSchedule" class="btn btn-info btn-md">VIEW SCHEDULE</button>-->
         </div>
         <div class="col-md-5 col-sm-4">
           <img  class="herzel" src="https://s3.amazonaws.com/bizzabo.users.files/BBBur1GrQ2f5CxkoDWjH_%D7%94%D7%A8%D7%A6%D7%9C%20%D7%9C%D7%91%D7%9F-01.png">

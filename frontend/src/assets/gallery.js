@@ -32,6 +32,12 @@ const galleryImages = {
         require('../../static/gallery/29.jpg'),
         require('../../static/gallery/30.jpg'),
         require('../../static/gallery/31.jpg'),
+        require('../../static/gallery/32.jpg'),
+        require('../../static/gallery/33.jpg'),
+        require('../../static/gallery/34.jpg'),
+        require('../../static/gallery/35.jpg'),
+        require('../../static/gallery/36.jpg'),
+        require('../../static/gallery/37.jpg'),
       ],
       index: null
     };

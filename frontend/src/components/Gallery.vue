@@ -6,7 +6,7 @@
             <h4>Pictures, videos, stories and highlights from previous years</h4>
             <!--embed 2018 aftermovie-->
             <div class="row">
-                <iframe class="embed" src="https://www.youtube.com/embed/A0hi-H2BnD0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe class="embed" src="https://www.youtube.com/embed/A0hi-H2BnD0?autoplay=1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
 
             <!--image gallery-->
