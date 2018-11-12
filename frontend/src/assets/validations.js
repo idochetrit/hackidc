@@ -25,7 +25,6 @@ const formValidations = {
       teamId: { required, alphaNum },
       volunteerToAcceptLoner: { required },
       shirtSize: { required },
-      foodRestrictionType: { required },
       hearAboutUs: { required },
       termsAgree: { checked: v => v === true }
     }
@@ -52,7 +51,6 @@ const formValidations = {
         if (this.$v.userData.role.$invalid
           || this.$v.userData.volunteerToAcceptLoner.$invalid
           || this.$v.userData.shirtSize.$invalid
-          || this.$v.userData.foodRestrictionType.$invalid
           || this.$v.userData.hearAboutUs.$invalid
           || this.$v.userData.termsAgree.$invalid) return true;
         else return false;

@@ -4,7 +4,7 @@ const newUserData = {
       userData: {
         name: 'John Doe',
         email: '',
-        gender: true,
+        gender: 'male', //male, female, na
         mobile: '',
         degreeType: '',
         fieldOfStudy: '',
@@ -13,8 +13,8 @@ const newUserData = {
         experienceType: '',
         techExperience: false,
         shirtSize: '',
-        foodRestrictionType: '',
-        hearAboutUs: 'social-media',
+        foodRestrictionType: [],
+        hearAboutUs: 'facebook',
         volunteerToAcceptLoner: false,
         role: '', //valid values: 'loner', 'participant', 'team-builder'
         roleId: 0,

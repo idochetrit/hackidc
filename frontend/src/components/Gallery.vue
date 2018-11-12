@@ -92,7 +92,7 @@ export default {
     .gallery-item img {width: 100%; min-height: 100%;}
     .article {
         direction: rtl;
-        font-family: 'Miriam Libre', sans-serif;
+        font-family: 'Rubik', sans-serif;
         border-radius: 15px;
         background-color: #f1f1f1;
         border: 1px solid #ddd;
@@ -130,7 +130,7 @@ export default {
         .embed {height: 400px;}
         .article {flex-basis: 47%; margin: .5rem; padding: .5rem;}
         .article h5 {font-size: .9rem;}
-        .article a {font-size: .5rem;}
+        .article a {font-size: .65rem;}
         .article p {font-size: .8rem; margin-bottom: .5rem;}
 
     }

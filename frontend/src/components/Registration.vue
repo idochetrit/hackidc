@@ -11,12 +11,13 @@
             <transition mode="out-in" enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
                 <div v-if="currentStep === 1" class="row">
                     <h3>Getting Started</h3>
-                    <h5>HackIDC is the largest students hackathon in Israel. The event will take place on April 11th, 2019.
+                    <h5>HackIDC is the largest students hackathon in Israel. The event will take place on April 11-12th, 2019.
                         <br>Registration is open for groups of 3-5 people or for participants who would like to register on their own.</h5>
                     <hr>
                     <div class="alert alert-light" role="alert">
                         <h4 class="alert-heading text-danger"><strong>Please notice!</strong></h4>
-                        <h5><strong>For groups: </strong> please nominate a <strong>Team Builder</strong> - he should register first, and select the 'Team Builder' option when asked so. Doing this will generate a <strong>team number</strong> which each other team member should fill in later.</h5>
+                        <h5><strong>For groups: </strong> please nominate a <strong>Team Builder</strong> - he should register first, and select the 'Team Builder' option when asked so.
+                            <br>Doing this will generate a <strong>team number</strong> which each other team member should fill in later.</h5>
                         <h6>* All the fields are mandatory.</h6>
                     </div>
                     <h5>Please connect your LinkedIn account to fill in your personal basic details. <br>
@@ -25,9 +26,9 @@
                     <button @click="integrate" class="btn btn-lg linkedinBtn"><span class="fab fa-linkedin fa-lg"></span>Sign up with LinkedIn</button>
                 </div>
                 <div v-else-if="currentStep === 2" class="row">
-                    <h3>A Few Quick Questions</h3>
-                    <h5>Check your information and fill in the blanks so we can know you better.</h5>
-                    <h6 class="text-danger">Remember: your Team Builder should register first!</h6>
+                    <h3>A few quick questions</h3>
+                    <h5>Please validate your information and fill in the blanks so we can know you better.</h5>
+                    <h6 class="text-danger"><u>Remember:</u> your Team Builder should register first!</h6>
                     <br>
                     <div class="form-row">
                         <div class="form-col">
@@ -41,9 +42,10 @@
                                 <label for="gender">Gender</label>
                                 <select id="gender"
                                         @blur="$v.userData.gender.$touch()"
-                                        v-model="userData.gender" class="custom-select" disabled>
-                                    <option :value="true">Male</option>
-                                    <option :value="false">Female</option>
+                                        v-model="userData.gender" class="custom-select">
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                    <option value="na">Rather not specify</option>
                                 </select>
                             </div>
                         </div>
@@ -77,8 +79,13 @@
                                     <option value="computer-science">Computer Science</option>
                                     <option value="engineering">Engineering</option>
                                     <option value="business">Business</option>
+                                    <option value="economics">Economics</option>
                                     <option value="entrepreneurship">Entrepreneurship</option>
-                                    <option value="entrepreneurship">Industrial Design / Visual Communications</option>
+                                    <option value="design">Industrial Design / Visual Communications</option>
+                                    <option value="sustainability">Sustainability</option>
+                                    <option value="law">Law</option>
+                                    <option value="communications">Communications</option>
+                                    <option value="psychology">Psychology</option>
                                     <option value="other">Other</option>
                                 </select>
                             </div>
@@ -146,7 +153,7 @@
                             <div class="custom-file">
                                 <input type="file" class="custom-file-input" id="customFile" accept="application/pdf">
                                 <label class="custom-file-label" for="customFile">Upload your CV</label>
-                                <small id="cv-help" class="form-text">Make sure to upload <strong>only</strong> PDF files</small>
+                                <small id="cv-help" class="form-text">Make sure to upload <strong>only PDF files</strong></small>
                             </div>
                         </div>
                     </div>
@@ -160,7 +167,7 @@
                                         v-model="userData.experienceType" class="custom-select">
                                     <option value="">Select...</option>
                                     <option value="no-experience">No experience</option>
-                                    <option value="basic">Basic knowledge and background</option>
+                                    <option value="basic">Basic knowledge</option>
                                     <option value="intermediate">Intermediate (~junior developer)</option>
                                     <option value="experienced">Well-experienced (~senior developer)</option>
                                     <option value="experienced-other">Well-experienced in other fields (IT, entrepreneurship, management, etc.)</option>
@@ -202,7 +209,8 @@
                             <div v-if="userData.role === 'team-builder'">
                                 <h5>Your team number is</h5>
                                 <h1 class="text-info" style="text-align: center;"><strong>{{ this.userData.teamId }}</strong></h1>
-                                <h5>Write down this number. Your teammates will have to enter it later when they will register.</h5>
+                                <h5>Write down this number.
+                                    <br>Your teammates will need it in order to register.</h5>
                                 <hr>
                                 <div class="form-group" :class="{invalid: $v.userData.volunteerToAcceptLoner.$error}">
                                     <label for="accept-loner">This year we are accepting "alone" participants. Would you like us to connect your group with one of these talented candidates?</label>
@@ -231,18 +239,23 @@
                                     <option value="m">M</option>
                                     <option value="l">L</option>
                                     <option value="xl">XL</option>
+                                    <option value="xxl">XXL</option>
                                 </select>
                             </div>
-                            <div class="form-group" :class="{invalid: $v.userData.foodRestrictionType.$error}">
-                                <label for="food">Are there any food restrictions?</label>
-                                <select id="food" class="custom-select"
-                                        @blur="$v.userData.foodRestrictionType.$touch()"
-                                        v-model="userData.foodRestrictionType">
-                                    <option value="">Select...</option>
-                                    <option value="none">None</option>
-                                    <option value="vegetarian">Vegetarian</option>
-                                    <option value="vegan">Vegan</option>
-                                </select>
+                            <div class="form-group">
+                                <label>Are there any food restrictions?</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="vegetarian" value="vegetarian" v-model="userData.foodRestrictionType">
+                                    <label class="form-check-label" for="vegetarian">Vegetarian</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="vegan" value="vegan" v-model="userData.foodRestrictionType">
+                                    <label class="form-check-label" for="vegan">Vegan</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="gluten-free" value="glutten-free" v-model="userData.foodRestrictionType">
+                                    <label class="form-check-label" for="gluten-free">Gluten-Free</label>
+                                </div>
                             </div>
                             <hr>
                             <div class="form-group" :class="{invalid: $v.userData.hearAboutUs.$error}">
@@ -250,7 +263,8 @@
                                 <select id="hearAbout" class="custom-select"
                                         @blur="$v.userData.hearAboutUs.$touch()"
                                         v-model="userData.hearAboutUs">
-                                    <option value="social-media">Social Media</option>
+                                    <option value="facebook">Facebook</option>
+                                    <option value="instagram">Instagram</option>
                                     <option value="idc">Around IDC campus</option>
                                     <option value="friends">Friends</option>
                                     <option value="other">Other</option>
@@ -352,3 +366,8 @@ export default {
 
 <style src="../assets/registration.css" scoped>
 </style>
+
+<!--tdl:-->
+<!--linkedin implementation-->
+<!--validation error UI enhancement -->
+<!--check for registration status - pending >> send to step 2, !pending >> dashboard-->
