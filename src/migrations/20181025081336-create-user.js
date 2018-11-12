@@ -75,6 +75,9 @@ module.exports = {
         cvFile: {
           type: Sequelize.BLOB("long")
         },
+        cvAgree: {
+          type: Sequelize.BOOLEAN
+        },
         createdAt: {
           allowNull: false,
           type: Sequelize.DATE
