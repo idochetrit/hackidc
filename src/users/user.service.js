@@ -11,6 +11,7 @@ export const SANITIZED_FIELDS = [
   "linkedInId",
   "name",
   "email",
+  "userPicture",
   "registerStatus",
   "studyYear",
   "isStudent",
@@ -36,6 +37,7 @@ export default (() => {
         linkedInId: _.get(profile, "id"),
         name: _.get(profile, "displayName"),
         email: _.get(profile, "emails[0].value"),
+        userPicture: _.get(profile, "photos[0].value"),
         rawLinkedin: profile._raw,
         registerStatus: "pending"
       };

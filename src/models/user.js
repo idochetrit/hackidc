@@ -19,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
       roleId: DataTypes.INTEGER,
       teamId: DataTypes.INTEGER,
       linkedInId: DataTypes.STRING,
+      userPicture: DataTypes.STRING, // URL for LinkedIn picture
       cvFile: DataTypes.BLOB("long"),
       registerStatus: {
         type: DataTypes.ENUM,
