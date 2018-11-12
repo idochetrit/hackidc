@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid">
     <ul>
-      <router-link to="/terms" tag="li"><a>Terms and Conditions</a></router-link>
+      <!--<router-link to="/terms" tag="li"><a>Terms and Conditions</a></router-link>-->
       <li><a href="mailto:contact@hackidc.com">Contact the organizers: <strong>contact@hackidc.com</strong></a></li>
     </ul>
   </div>

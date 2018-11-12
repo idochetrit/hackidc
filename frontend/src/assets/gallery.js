@@ -38,8 +38,6 @@ const galleryImages = {
         require('../../static/gallery/4.jpg'),
         require('../../static/gallery/5.jpg'),
         require('../../static/gallery/6.jpg'),
-        require('../../static/gallery/7.jpg'),
-        require('../../static/gallery/8.jpg'),
         require('../../static/gallery/9.jpg'),
         require('../../static/gallery/10.jpg'),
         require('../../static/gallery/11.jpg'),

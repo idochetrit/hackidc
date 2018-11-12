@@ -14,7 +14,7 @@ const newUserData = {
         techExperience: false,
         shirtSize: '',
         foodRestrictionType: [],
-        hearAboutUs: 'facebook',
+        hearAboutUs: '',
         volunteerToAcceptLoner: false,
         role: '', //valid values: 'loner', 'participant', 'team-builder'
         roleId: 0,

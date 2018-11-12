@@ -263,6 +263,7 @@
                                 <select id="hearAbout" class="custom-select"
                                         @blur="$v.userData.hearAboutUs.$touch()"
                                         v-model="userData.hearAboutUs">
+                                    <option value="">Select...</option>
                                     <option value="facebook">Facebook</option>
                                     <option value="instagram">Instagram</option>
                                     <option value="idc">Around IDC campus</option>
@@ -299,7 +300,7 @@
                            @change="$v.userData.termsAgree.$touch()"
                            v-model="userData.termsAgree">
                     <label class="form-check-label" for="terms-agree">
-                        I agree to HackIDC 2019 <router-link to="/terms"><a>terms and conditions.</a></router-link>
+                        I agree to HackIDC 2019 <router-link to="/terms" target="_blank"><a>terms and conditions.</a></router-link>
                     </label>
                 </div>
                 <small class="text-muted">By hitting submit, your application form will be sent. If you don't want to complete the registration now, simply return to the homepage.</small>
@@ -311,7 +312,7 @@
                     <button v-else class="btn-success btn-lg btn" @click="submit" :disabled="disable">Submit</button>
                 </div>
             </transition>
-            <small v-if="disable" class="text-muted">Please fill in all the fields above with valid information.</small>
+            <small v-if="disable" class="text-muted">There are still some invalid fields. Please check above.</small>
         </div>
     </div>
 </template>

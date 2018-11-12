@@ -9,7 +9,7 @@ export const store = new Vuex.Store({
 
     user: {},
     loading: false,
-    registration: "opened" // valid values: 'under-construction' ,'opened' or 'closed'
+    registration: "under-construction" // valid values: 'under-construction' ,'opened' or 'closed'
   },
   getters: {
     isLoading: state => state.loading,
