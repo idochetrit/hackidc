@@ -7,7 +7,8 @@ module.exports = (sequelize, DataTypes) => {
       title: DataTypes.STRING,
       description: DataTypes.STRING,
       challengeId: DataTypes.INTEGER,
-      code: DataTypes.INTEGER,
+      codeName: DataTypes.STRING,
+      codeNumber: DataTypes.INTEGER,
       builderId: DataTypes.INTEGER
     },
     {

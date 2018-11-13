@@ -1,6 +1,5 @@
 import { Router } from "express";
 import _ from "lodash";
-import generateName from "sillyname";
 import teamService from "./team.service";
 import { handleUnauthorize } from "../routers.helper";
 
@@ -18,11 +17,9 @@ router.post(
 
 router.get("/code", async (req, res) => {
   const code = await teamService.generateTeamCode();
-  const codeName = generateName();
 
   res.json({
-    code,
-    codeName
+    code
   });
 });
 

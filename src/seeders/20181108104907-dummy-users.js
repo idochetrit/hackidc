@@ -9,7 +9,7 @@ module.exports = {
       [
         {
           id: 1,
-          linkedInId: "",
+          linkedInId: "linked1",
           name: "barack obama leader",
           email: "barackDontCallMe@obama.care",
           registerStatus: "approved",
@@ -32,7 +32,7 @@ module.exports = {
         },
         {
           id: 2,
-          linkedInId: "",
+          linkedInId: "linked2",
           name: "maayan rossental",
           email: "m@hackidc.com",
           registerStatus: "review",
@@ -55,7 +55,7 @@ module.exports = {
         },
         {
           id: 3,
-          linkedInId: "",
+          linkedInId: "linked3",
           name: "niv shani",
           email: "n@hackidc.com",
           registerStatus: "approved",
@@ -78,7 +78,7 @@ module.exports = {
         },
         {
           id: 4,
-          linkedInId: "",
+          linkedInId: "linked4",
           name: "ido chetrit",
           email: "i@hackidc.com",
           registerStatus: "rejected",
@@ -94,6 +94,7 @@ module.exports = {
           shirtSize: "s",
           fieldOfStudy: "computers",
           academicInstitute: "idc",
+          linkedInId: "linked12",
           roleId: 4,
           teamId: 1,
           updatedAt,

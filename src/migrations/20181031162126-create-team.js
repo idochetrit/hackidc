@@ -18,7 +18,10 @@ module.exports = {
       challengeId: {
         type: Sequelize.INTEGER
       },
-      code: {
+      codeName: {
+        type: Sequelize.STRING
+      },
+      codeNumber: {
         type: Sequelize.INTEGER
       },
       builderId: {
