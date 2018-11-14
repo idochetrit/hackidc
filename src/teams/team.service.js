@@ -12,8 +12,12 @@ export const SANITIZED_FIELDS = [
   "code"
 ];
 
-async function checkAvailability(code) {
-  const team = await Team.findOne({ where: { code: { $eq: code } } });
+async function checkAvailability({ codeNumber, codeName }) {
+  const team = await Team.findOne({
+    where: {
+      or: [{ codeNumber: { $eq: codeNumber } }, { codeName: { $eq: codeName } }]
+    }
+  });
   return team;
 }
 
@@ -49,16 +53,23 @@ export default (() => {
 
     async generateTeamCode() {
       const generateNumber = () => Math.floor(Math.random() * 899 + 100);
-      var generatedCode = `${generateNumber()}-${animals()}`;
-      const team = await checkAvailability(generatedCode);
+      const codeNumber = generateNumber();
+      const codeName = animals();
+      const team = await checkAvailability({ codeNumber, codeName });
       if (team) {
         return this.generateTeamCode();
       } else {
-        return generatedCode;
+        return `${codeNumber}-${codeName}`;
       }
     }
 
+    getTeamCode(team) {
+      const { codeNumber, codeName } = team;
+      return `${codeNumber}-${codeName}`;
+    }
+
     sanitize(team) {
+      team.code = this.getTeamCode(team);
       const sanitizedParams = _.pick(team, ...SANITIZED_FIELDS);
       return sanitizedParams;
     }

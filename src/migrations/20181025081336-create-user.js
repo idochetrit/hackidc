@@ -1,8 +1,8 @@
 "use strict";
 
 module.exports = {
-  up: (queryInterface, Sequelize) =>
-    queryInterface.createTable(
+  up: async (queryInterface, Sequelize) => {
+    await queryInterface.createTable(
       "Users",
       {
         id: {
@@ -76,10 +76,7 @@ module.exports = {
           type: Sequelize.JSONB
         },
         cvFile: {
-          type: Sequelize.BLOB("long")
-        },
-        cvAgree: {
-          type: Sequelize.BOOLEAN
+          type: Sequelize.BLOB
         },
         createdAt: {
           allowNull: false,
@@ -90,21 +87,15 @@ module.exports = {
           type: Sequelize.DATE
         }
       },
-      {
-        indexes: [
-          {
-            unique: true,
-            fields: ["email"]
-          },
-          {
-            unique: true,
-            fields: ["linkedInId"]
-          }
-        ]
-      }
-    ),
-  down: (queryInterface, Sequelize) => {
-    queryInterface.dropTable("Users");
-    queryInterface.sequelize.query('DROP TYPE "enum_Users_registerStatus"');
+      {}
+    );
+    await queryInterface.addIndex("Users", ["email"], { unique: true });
+    await queryInterface.addIndex("Users", ["linkedInId"], { unique: true });
+  },
+  down: async (queryInterface, Sequelize) => {
+    await queryInterface.dropTable("Users");
+    await queryInterface.sequelize.query(
+      'DROP TYPE "enum_Users_registerStatus"'
+    );
   }
 };

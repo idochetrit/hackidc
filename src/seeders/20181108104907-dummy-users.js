@@ -2,13 +2,10 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    const updatedAt = new Date();
-    const createdAt = updatedAt;
     await queryInterface.bulkInsert(
       "Users",
       [
         {
-          id: 1,
           linkedInId: "linked1",
           name: "barack obama leader",
           email: "barackDontCallMe@obama.care",
@@ -27,11 +24,10 @@ module.exports = {
           academicInstitute: "honolulu",
           roleId: 5,
           teamId: 1,
-          updatedAt,
-          createdAt
+          updatedAt: new Date(),
+          createdAt: new Date()
         },
         {
-          id: 2,
           linkedInId: "linked2",
           name: "maayan rossental",
           email: "m@hackidc.com",
@@ -50,11 +46,10 @@ module.exports = {
           academicInstitute: "idc",
           roleId: 4,
           teamId: 1,
-          updatedAt,
-          createdAt
+          updatedAt: new Date(),
+          createdAt: new Date()
         },
         {
-          id: 3,
           linkedInId: "linked3",
           name: "niv shani",
           email: "n@hackidc.com",
@@ -73,11 +68,10 @@ module.exports = {
           academicInstitute: "idc",
           roleId: 4,
           teamId: 1,
-          updatedAt,
-          createdAt
+          updatedAt: new Date(),
+          createdAt: new Date()
         },
         {
-          id: 4,
           linkedInId: "linked4",
           name: "ido chetrit",
           email: "i@hackidc.com",
@@ -94,11 +88,10 @@ module.exports = {
           shirtSize: "s",
           fieldOfStudy: "computers",
           academicInstitute: "idc",
-          linkedInId: "linked12",
           roleId: 4,
           teamId: 1,
-          updatedAt,
-          createdAt
+          updatedAt: new Date(),
+          createdAt: new Date()
         }
       ],
       {}
@@ -107,13 +100,13 @@ module.exports = {
       "Teams",
       [
         {
-          id: 1,
           title: "america inc.",
           description: "home for ~300 mil people!",
           builderId: 1,
-          code: 4536,
-          updatedAt,
-          createdAt
+          codeName: "chamois",
+          codeNumber: 436,
+          updatedAt: new Date(),
+          createdAt: new Date()
         }
       ],
       {}

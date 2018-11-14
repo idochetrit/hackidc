@@ -1,8 +1,8 @@
 "use strict";
 
 module.exports = {
-  up: (queryInterface, Sequelize) =>
-    queryInterface.createTable("Teams", {
+  up: async (queryInterface, Sequelize) => {
+    await queryInterface.createTable("Teams", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -35,6 +35,12 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
-    }),
-  down: (queryInterface, Sequelize) => queryInterface.dropTable("Teams")
+    });
+    await queryInterface.addIndex("Teams", ["codeNumber"], { unique: true });
+    await queryInterface.addIndex("Teams", ["codeName"], { unique: true });
+    await queryInterface.addIndex("Teams", ["challengeId"]);
+  },
+  down: async (queryInterface, Sequelize) => {
+    await queryInterface.dropTable("Teams");
+  }
 };

@@ -44,7 +44,11 @@ export default (() => {
       return User.findOrCreate({
         where: { linkedInId: { $eq: defaultAttrs.linkedInId } },
         defaults: defaultAttrs
-      }).spread((user, _created) => user);
+      })
+        .spread((user, _created) => user)
+        .catch(err => {
+          console.log(err, defaultAttrs);
+        });
     }
 
     async finishRegistration({ user, userParams, teamParams }) {
