@@ -39,7 +39,7 @@
         {name: 'Adi Ninio', linkedin: 'https://www.linkedin.com/in/adi-ninio-99812910a/', thumbnail: 'https://media.licdn.com/dms/image/C5603AQFmce_ovFDPhw/profile-displayphoto-shrink_800_800/0?e=1545264000&v=beta&t=EapY13DpjXxAHhosThRAB8uvMeLzc-FFkM0yh8jDK1A'},
         {name: 'Amit Fainholtz', linkedin: '#', thumbnail: require('../../static/amit.jpg')},
         {name: 'Chen Hillel', linkedin: '#', thumbnail: require('../../static/chen.jpg')},
-        {name: 'Gad Suarez', linkedin: 'https://www.linkedin.com/in/gad-zuaretz-37613b161/', thumbnail: require('../../static/gad.jpg')},
+        {name: 'Gad Zuaretz', linkedin: 'https://www.linkedin.com/in/gad-zuaretz-37613b161/', thumbnail: require('../../static/gad.jpg')},
         {name: 'Gal Rabin', linkedin: 'https://www.linkedin.com/in/gal-rabin-473351120/', thumbnail: 'https://media.licdn.com/dms/image/C5103AQEsJqEH4PIPhA/profile-displayphoto-shrink_800_800/0?e=1545264000&v=beta&t=9JXDp6IpdJP1FkqbLCmuyG-DoMTGcIIaOB7AU3S-X1I'},
         {name: 'Gill Samia', linkedin: 'https://www.linkedin.com/in/gillsamia/', thumbnail: 'https://media.licdn.com/dms/image/C4E03AQH_4tFezJZD_g/profile-displayphoto-shrink_800_800/0?e=1545264000&v=beta&t=8aZJFWNbS4qZzPVS-2t8uKm4B4DRdAT0W8L2aJhv_uE'},
         {name: 'Hadar Mordechai', linkedin: 'https://www.linkedin.com/in/hadar-mordechai-7641b7159/', thumbnail: require('../../static/hadar.jpg')},
