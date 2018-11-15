@@ -1,4 +1,7 @@
 {
-  "presets": ["es2015"]
+  "presets": [
+    "@babel/env",
+    "@babel/typescript"
+  ]
 }
 
