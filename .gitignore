@@ -2,7 +2,7 @@ node_modules/
 .vscode/
 .tags
 tags
-build/
+dist/
 .idea/
 public/bundle.js
 .DS_Store
