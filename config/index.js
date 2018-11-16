@@ -8,8 +8,8 @@ const path = require("path");
 module.exports = {
   dev: {
     // Paths
-    assetsSubDirectory: "./static",
-    assetsPublicPath: "./",
+    assetsSubDirectory: "static",
+    assetsPublicPath: "/",
 
     host: "test.hackidc.com",
     port: 3000,
@@ -26,7 +26,7 @@ module.exports = {
     autoOpenBrowser: false,
     errorOverlay: true,
     notifyOnErrors: true,
-    poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-
+    poll: true, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-
 
     // Use Eslint Loader?
     // If true, your code will be linted during bundling and
@@ -52,8 +52,8 @@ module.exports = {
   },
 
   build: {
-    // Template for index.html
-    index: path.resolve(__dirname, "./public/index.html"),
+    // filename
+    index: path.resolve(__dirname, "../public/index.html"),
 
     // Paths
     assetsRoot: path.resolve(__dirname, "../dist"),

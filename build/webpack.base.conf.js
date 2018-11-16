@@ -25,7 +25,8 @@ module.exports = {
   resolve: {
     extensions: [".js", ".vue", ".json"],
     alias: {
-      "@": resolve("src")
+      vue$: "vue/dist/vue.js",
+      "@": resolve("frontend/src/")
     }
   },
   module: {
@@ -38,11 +39,7 @@ module.exports = {
       {
         test: /\.js$/,
         loader: "babel-loader",
-        include: [
-          resolve("src"),
-          resolve("test"),
-          resolve("node_modules/webpack-dev-server/client")
-        ]
+        include: [resolve("frontend/src/")]
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,

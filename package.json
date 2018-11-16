@@ -8,7 +8,7 @@
     "npm": ">= 3.0.0"
   },
   "scripts": {
-    "dev-client": "PORT=3000 webpack-dev-server --host 0.0.0.0 --progress --debug --hot --colors --config ./build/webpack.dev.conf.js",
+    "dev-client": "PORT=3000 webpack-dev-server --inline --progress --debug --config ./build/webpack.dev.conf.js",
     "dev-server": "PORT=8080 ./node_modules/nodemon/bin/nodemon.js --exec babel-node ./src/server.js",
     "dev": "concurrently --kill-others --raw \"npm run dev-server\" \"npm run dev-client\"",
     "debug": "PORT=8080 ./node_modules/nodemon/bin/nodemon.js --inspect --exec babel-node ./src/server.js",

@@ -29,7 +29,8 @@ app.use(fileUpload({}));
 app.use("/api", routers);
 
 app.use(history());
-app.use(express.static(`${__dirname}/../static`));
+console.log(__dirname);
+app.use("/static", express.static(`${__dirname}/static`));
 app.use(express.static(`${__dirname}/../public`));
 
 app.use((req, res, next) => {

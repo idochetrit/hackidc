@@ -11,7 +11,6 @@ const baseWebpackConfig = require("./webpack.base.conf");
 const config = require("../config");
 const utils = require("./utils");
 
-const { HOST } = process.env;
 const PORT = process.env.PORT && Number(process.env.PORT);
 
 const devWebpackConfig = merge(baseWebpackConfig, {
@@ -26,6 +25,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
 
   // these devServer options should be customized in /config/index.js
   devServer: {
+    // disableHostCheck: true,
     clientLogLevel: "warning",
     historyApiFallback: {
       rewrites: [
@@ -38,17 +38,15 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     hot: true,
     contentBase: false, // since we use CopyWebpackPlugin.
     compress: true,
-    host: HOST || config.dev.host,
+    host: config.dev.host,
     port: PORT || config.dev.port,
     open: config.dev.autoOpenBrowser,
-    overlay: config.dev.errorOverlay
-      ? { warnings: false, errors: true }
-      : false,
+    overlay: config.dev.errorOverlay ? { warnings: true, errors: true } : false,
     publicPath: config.dev.assetsPublicPath,
     proxy: config.dev.proxyTable,
     quiet: true, // necessary for FriendlyErrorsPlugin
     watchOptions: {
-      poll: config.dev.poll
+      poll: true
     }
   },
   plugins: [
@@ -96,9 +94,7 @@ module.exports = new Promise((resolve, reject) => {
               }:${port}`
             ]
           },
-          onErrors: config.dev.notifyOnErrors
-            ? utils.createNotifierCallback()
-            : undefined
+          onErrors: utils.createNotifierCallback()
         })
       );
 
