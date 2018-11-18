@@ -10,7 +10,7 @@
             <button v-scroll-to="'#about'" class="btn btn-outline-light btn-lg">What's New?</button>
           </div>
           <hr>
-          <h4>April 2019</h4>
+          <h4>April 11th-12th</h4>
           <h2>IDC Herzliya</h2>
         </div>
       </div>
