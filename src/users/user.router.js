@@ -12,7 +12,7 @@ router.use("/self/uploads", userUploadsRouter);
 
 router.get("/self", async (req, res) => {
   try {
-    const userId = _.get(req, "user.id") || req.body.id;
+    const userId = _.get(req, "user.id") || req.query.id;
     const user = await userService.findById(userId);
     const sanitizedUser = await userService.sanitize(user);
     res.json(sanitizedUser);

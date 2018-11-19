@@ -16,14 +16,20 @@ const newUserData = {
         foodRestrictionType: [],
         hearAboutUs: '',
         volunteerToAcceptLoner: false,
+        isTeamBuilder: false,
         role: '', //valid values: 'loner', 'participant', 'team-builder'
         roleId: 0,
         teamId: 0,
         cvAgree: true,
         termsAgree: false
+      },
+      teamData: {
+        code: 436,
       }
     };
   }
 }
+
+//add team data picked up during the form
 
 export default newUserData

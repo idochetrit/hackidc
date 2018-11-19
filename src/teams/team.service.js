@@ -31,7 +31,7 @@ export default (() => {
       try {
         const newTeam = _.extend({ builderId: builder.id }, teamParams);
         const [team, _saved] = await Team.findOrCreate({
-          where: { code: { $eq: newTeam.code } },
+          where: { codeNumber: { $eq: newTeam.code } },
           defaults: newTeam
         });
         return team;
@@ -43,7 +43,7 @@ export default (() => {
 
     async findByCode(code) {
       const team = await Team.findOne({
-        where: { code: { $eq: code } }
+        where: { codeNumber: { $eq: code } }
       });
       if (!team) {
         throw new Error(`Team with code: ${code}, not found.`);

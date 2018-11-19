@@ -93,8 +93,8 @@ export default (() => {
         user.team || user.getTeam()
       ]);
 
-      sanitizedParams.role = role.name;
-      sanitizedParams.team = teamService.sanitize(team);
+      sanitizedParams.role = _.get(role, "name");
+      sanitizedParams.team = team && teamService.sanitize(team);
       return sanitizedParams;
     }
 

@@ -11,7 +11,7 @@
             <transition mode="out-in" enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
                 <div v-if="currentStep === 1" class="row">
                     <h3>Getting Started</h3>
-                    <h5>HackIDC is the largest students hackathon in Israel. The event will take place on April 11th-12th, 2019.
+                    <h5>HackIDC is the largest students hackathon in Israel. The event will take place on April 11thgi-12th, 2019.
                         <br>Registration is open for groups of 3-5 people or for participants who would like to register on their own.</h5>
                     <hr>
                     <div class="alert alert-light" role="alert">
@@ -349,8 +349,15 @@ export default {
       }
     },
     submit() {
+      if (this.userData.role === 'team-builder') {
+        this.userData.isTeamBuilder = true;
+      }
+      //add post request to PDF cv - value: multipart/form-data
+      axios.post('/api/users/register', {
+        user: this.userData,
+        team: this.teamData
+      });
       setTimeout(function() {
-        //implement POST request
         this.currentStep = 0;
         this.isCompleted = true;
       }.bind(this), 1000);
