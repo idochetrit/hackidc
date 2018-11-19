@@ -4,9 +4,9 @@
     "target": "es6",
     "moduleResolution": "node",
     "allowJs": true,
-    "strict": true,
-    "isolatedModules": true,
-    "esModuleInterop": true
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "resolveJsonModule": true
   },
   "include": [
     "./src/**/*"

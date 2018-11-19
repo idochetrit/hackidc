@@ -1,7 +1,20 @@
-"use strict";
-
 module.exports = {
   up: async (queryInterface, Sequelize) => {
+    await queryInterface.bulkInsert(
+      "Teams",
+      [
+        {
+          title: "america inc.",
+          description: "home for ~300 mil people!",
+          builderId: 1,
+          codeName: "chamois",
+          codeNumber: 436,
+          updatedAt: new Date(),
+          createdAt: new Date()
+        }
+      ],
+      {}
+    );
     await queryInterface.bulkInsert(
       "Users",
       [
@@ -13,7 +26,7 @@ module.exports = {
           studyYear: 4,
           volunteerToAcceptLoner: false,
           experienceType: "senior developer",
-          foodRestrictionType: "vegan",
+          foodRestrictionType: ["vegan", "glutan-free"],
           gender: "male",
           degreeType: "masters",
           cvAgree: true,
@@ -35,7 +48,7 @@ module.exports = {
           studyYear: 2,
           volunteerToAcceptLoner: true,
           experienceType: "senior developer",
-          foodRestrictionType: "none",
+          foodRestrictionType: ["none"],
           gender: "female",
           degreeType: "first",
           cvAgree: true,
@@ -57,7 +70,7 @@ module.exports = {
           studyYear: 2,
           volunteerToAcceptLoner: true,
           experienceType: "senior developer",
-          foodRestrictionType: "none",
+          foodRestrictionType: ["none"],
           gender: "male",
           cvAgree: true,
           degreeType: "first",
@@ -79,7 +92,7 @@ module.exports = {
           studyYear: 2,
           volunteerToAcceptLoner: true,
           experienceType: "senior developer",
-          foodRestrictionType: "none",
+          foodRestrictionType: ["none"],
           gender: "male",
           cvAgree: true,
           degreeType: "first",
@@ -90,21 +103,6 @@ module.exports = {
           academicInstitute: "idc",
           roleId: 4,
           teamId: 1,
-          updatedAt: new Date(),
-          createdAt: new Date()
-        }
-      ],
-      {}
-    );
-    await queryInterface.bulkInsert(
-      "Teams",
-      [
-        {
-          title: "america inc.",
-          description: "home for ~300 mil people!",
-          builderId: 1,
-          codeName: "chamois",
-          codeNumber: 436,
           updatedAt: new Date(),
           createdAt: new Date()
         }

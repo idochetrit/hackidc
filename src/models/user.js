@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       experienceType: DataTypes.STRING,
       hearAboutUs: DataTypes.STRING,
       shirtSize: DataTypes.STRING,
-      foodRestrictionType: DataTypes.STRING,
+      foodRestrictionType: DataTypes.ARRAY(DataTypes.STRING),
       volunteerToAcceptLoner: DataTypes.BOOLEAN,
       cvAgree: DataTypes.BOOLEAN,
       roleId: DataTypes.INTEGER,
@@ -21,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
       linkedInId: DataTypes.STRING,
       userPicture: DataTypes.STRING, // URL for LinkedIn picture
       cvFile: DataTypes.BLOB("long"),
+      score: DataTypes.DOUBLE,
       registerStatus: {
         type: DataTypes.ENUM,
         values: ["approved", "review", "pending", "rejected"]

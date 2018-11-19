@@ -1,5 +1,3 @@
-"use strict";
-
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable(
@@ -49,7 +47,7 @@ module.exports = {
           type: Sequelize.STRING
         },
         foodRestrictionType: {
-          type: Sequelize.STRING
+          type: Sequelize.ARRAY(Sequelize.STRING)
         },
         volunteerToAcceptLoner: {
           type: Sequelize.BOOLEAN
@@ -77,6 +75,10 @@ module.exports = {
         },
         cvFile: {
           type: Sequelize.BLOB
+        },
+        score: {
+          allowNull: true,
+          type: Sequelize.DOUBLE
         },
         createdAt: {
           allowNull: false,

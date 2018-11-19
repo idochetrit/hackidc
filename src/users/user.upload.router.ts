@@ -1,9 +1,9 @@
 import { Router } from "express";
-import _ from "lodash";
-import stream from "stream";
-import userService from "./user.service";
+import * as _ from "lodash";
+import * as stream from "stream";
 import { ensureAuthenticated } from "../concerns/auth.users";
 import { handleError, handleNotFound } from "../routers.helper";
+import { UserService } from "./user.service";
 
 const router = new Router();
 
@@ -11,7 +11,7 @@ router.post("/cv", ensureAuthenticated, async (req, res) => {
   const userId = req.user.id;
   let user;
   try {
-    user = await userService.findById(userId);
+    user = await UserService.findById(userId);
   } catch (err) {
     handleNotFound(err, res);
   }
@@ -22,7 +22,7 @@ router.post("/cv", ensureAuthenticated, async (req, res) => {
     }
 
     const { file: fileParams } = req.files;
-    await userService.updateCV({ user, fileParams });
+    await UserService.updateCV({ user, fileParams });
   } catch (err) {
     handleError(err, res);
   }
@@ -37,15 +37,15 @@ router.get("/cv", ensureAuthenticated, async (req, res) => {
   const userId = req.user.id;
   let user;
   try {
-    user = await userService.findById(userId);
+    user = await UserService.findById(userId);
   } catch (err) {
     handleNotFound(err, res);
   }
 
   const { cvFile: file } = user;
 
-  var fileContents = Buffer.from(file, "base64");
-  var readStream = new stream.PassThrough();
+  const fileContents = Buffer.from(file, "base64");
+  const readStream = new stream.PassThrough();
   readStream.end(fileContents);
 
   const fileName = `${_.snakeCase(user.name)}_${user.id}_cvFile.pdf`;
