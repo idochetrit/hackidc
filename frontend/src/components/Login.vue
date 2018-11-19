@@ -17,15 +17,12 @@
 </template>
 
 <script>
-import axios from "axios";
+import linkedInIntegration from '../assets/linkedInIntegration'
 export default {
+  mixins: [linkedInIntegration],
   methods: {
     signin() {
-        window.location = "/api/auth/linkedin";
-      //implement auth check based on LinkedIn registration token
-    //   setTimeout(function() {
-    //     this.$router.push({name: 'home'});
-    //   }.bind(this), 1000);
+        this.integrate();
     }
   }
 }

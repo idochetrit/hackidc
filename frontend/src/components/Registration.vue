@@ -368,6 +368,9 @@ export default {
     toHome() {
       this.$router.push({name: 'home'});
     }
+  },
+  created() {
+    this.authRequest();
   }
 }
 </script>

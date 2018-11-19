@@ -20,8 +20,12 @@ export const store = new Vuex.Store({
     setLoading: (state, payload) => (state.loading = payload),
     setRegistrationStatus: (state, payload) => (state.registration = payload),
     authenticate: (state, payload) => {
-      state.isAuthenticated = true;
+      state.authenticated = true;
       state.user = payload;
+    },
+    signout: (state) => {
+      state.user = {};
+      state.authenticated = false;
     }
   },
   actions: {
@@ -39,6 +43,9 @@ export const store = new Vuex.Store({
     },
     signIn: (context, payload) => {
       context.commit("authenticate", payload);
+    },
+    signOut: (context) => {
+      context.commit("signout");
     }
   }
 });

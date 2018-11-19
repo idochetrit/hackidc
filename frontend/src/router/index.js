@@ -117,7 +117,7 @@ export default new Router({
       path: "/dashboard",
       name: "dashboard",
       meta: {
-        title: user.name + " | Dashboard"
+        title: "HackIDC 2019 | Dashboard"
       },
       component: Dashboard,
       children: [
@@ -125,14 +125,14 @@ export default new Router({
           path: "profile",
           name: "user-dashboard",
           meta: {
-            title: user.name + " | Dashboard"
+            title: "HackIDC 2019 | Dashboard"
           },
           // component: Dashboard
         },
         {
           path: "team",
           meta: {
-            title: user.name + " | Dashboard"
+            title: "HackIDC 2019 | Dashboard"
           },
           // component: Dashboard
         },

@@ -2,31 +2,35 @@ import axios from 'axios';
 const linkedInIntegration = {
   methods: {
     integrate() {
-      //handle linked-in token and api information
       window.location = "/api/auth/linkedin";
+    },
+    authRequest() {
+      axios.get('/api/users/self', { withCredentials: true })
+        .then((res) => {
+          console.log(res.data);
+          this.$store.dispatch('signIn', res.data); //auth user in store via LinkedIn SID
+        })
+        .then((res) => {
+          let user = this.$store.getters.getUser;
+          console.log(user);
+          console.log(this.$store.getters.isAuthenticated);
+          // redirect to the appropriate route
+          if (user.registerStatus === 'pending') {
+            this.move('next');
+          }
+          else if (user.registerStatus === 'approved') {
+            this.$router.push({name: 'dashboard'});
+          }
+          else { //rejected / review --> message screen
+            this.$router.push({name: 'user-message'});
+          }
+          // inject fields to reg. form
+          this.userData.name = user.name;
+          this.userData.email = user.email;
+          this.userData.mobile = user.mobile;
+        });
     }
   },
-  created() {
-    axios.get('/api/users/self', { withCredentials: true })
-      .then((res) => {
-        //save user in store via LinkedIn SID
-        this.$store.dispatch('signIn', res.data);
-        if (res.data.registerStatus === 'pending') {
-          this.move('next');
-        }
-        else if (res.data.registerStatus === 'approved') {
-          this.$router.push({name: 'dashboard'});
-        }
-        else { //rejected / review --> message screen
-          this.$router.push({name: 'user-message'});
-        }
-
-        this.userData.name = res.data.name;
-        this.userData.email = res.data.email;
-        // this.userData.gender = res.data.gender;
-        this.userData.mobile = res.data.mobile;
-      });
-  }
 };
 
 export default linkedInIntegration;

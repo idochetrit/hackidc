@@ -60,7 +60,10 @@ export default {
       this.$router.push({name: 'login'});
     },
     signout() {
-      // implement sign-out method
+      this.$store.dispatch("signOut")
+        .then(res => {
+          this.$router.push({name: 'home'});
+        });
     }
   },
   computed: {
