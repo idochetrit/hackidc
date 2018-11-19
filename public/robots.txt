@@ -1,3 +1,4 @@
-User-agent: * 
+User-agent: *
 Disallow: /frontend/
 Disallow: /build/
+Disallow: /dist/
