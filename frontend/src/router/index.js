@@ -11,11 +11,11 @@ import Gallery from "../components/Gallery.vue";
 import Registration from "../components/Registration.vue";
 import Login from "../components/Login.vue";
 import Dashboard from "../components/Dashboard.vue";
+import StatusMessage from "../components/StatusMessage.vue";
 
 Vue.use(Router);
 
 const user = store.getters.getUser;
-console.log(user);
 
 export default new Router({
   routes: [
@@ -84,10 +84,10 @@ export default new Router({
       component: Registration,
       beforeEnter: (to, from, next) => {
         let status = store.getters.isRegistrationOpen;
-        if (status == 'opened') {
+        if (status === 'opened') {
           next();
         }
-        else if (!status || status == 'closed') {
+        else if (!status || status === 'closed') {
           alert("HackIDC 2019 registration is currently closed.");
           next({name: 'home'});
         }
@@ -106,6 +106,14 @@ export default new Router({
       component: Login
     },
     {
+      path: "/status-message",
+      name: "status",
+      meta: {
+        title: "HackIDC 2019 | Your Status"
+      },
+      component: StatusMessage
+    },
+    {
       path: "/dashboard",
       name: "dashboard",
       meta: {
@@ -115,18 +123,19 @@ export default new Router({
       children: [
         {
           path: "profile",
+          name: "user-dashboard",
           meta: {
             title: user.name + " | Dashboard"
           },
-          component: Dashboard
+          // component: Dashboard
         },
         {
           path: "team",
           meta: {
             title: user.name + " | Dashboard"
           },
-          component: Dashboard
-        }
+          // component: Dashboard
+        },
       ]
     }
   ],

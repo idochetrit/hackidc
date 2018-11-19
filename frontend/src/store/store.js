@@ -6,7 +6,6 @@ Vue.use(Vuex);
 export const store = new Vuex.Store({
   state: {
     authenticated: false,
-
     user: {},
     loading: false,
     registration: "under-construction" // valid values: 'under-construction' ,'opened' or 'closed'
@@ -19,7 +18,11 @@ export const store = new Vuex.Store({
   },
   mutations: {
     setLoading: (state, payload) => (state.loading = payload),
-    setRegistrationStatus: (state, payload) => (state.registration = payload)
+    setRegistrationStatus: (state, payload) => (state.registration = payload),
+    authenticate: (state, payload) => {
+      state.isAuthenticated = true;
+      state.user = payload;
+    }
   },
   actions: {
     loadingStart: context => {
@@ -33,6 +36,9 @@ export const store = new Vuex.Store({
     },
     registrationClosed: context => {
       context.commit("setRegistrationStatus", "closed");
+    },
+    signIn: (context, payload) => {
+      context.commit("authenticate", payload);
     }
   }
 });
