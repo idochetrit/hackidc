@@ -19,11 +19,12 @@ const newUserData = {
         isTeamBuilder: false,
         role: '', //valid values: 'loner', 'participant', 'team-builder'
         roleId: 0,
-        teamId: 0,
         cvAgree: true,
-        termsAgree: false
+        termsAgree: false,
+        description: '',
       },
       teamData: {
+        title: '',
         code: 436,
       }
     };

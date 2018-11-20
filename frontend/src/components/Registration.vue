@@ -328,11 +328,20 @@ export default {
   data() {
     return {
       currentStep: 1,
-      isCompleted: false
+      isCompleted: false,
     }
   },
   mixins: [formValidations, newUserData, linkedInIntegration, teamIdGenerator],
   methods: {
+    generate() {
+      axios.get('/api/teams/code')
+        .then(res => {
+          console.log(res.data);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
     move(v) {
       setTimeout(function() {
         if (v === 'next') {
@@ -378,7 +387,9 @@ export default {
 <style src="../assets/registration.css" scoped>
 </style>
 
-<!--tdl:-->
-<!--linkedin implementation-->
-<!--validation error UI enhancement -->
-<!--check for registration status - pending >> send to step 2, !pending >> dashboard-->
+<!--tdl-->
+<!--user register POST req -->
+<!--finish implement teamIdGenerator-->
+<!--finish implement user dashboard-->
+<!--finish implement team dashboard-->
+<!--implement CV upload-->
