@@ -1,5 +1,6 @@
 import * as _ from "lodash";
 
+import { Role } from "../roles/role.model";
 import { Team } from "../teams/team.model";
 import { TeamService } from "../teams/team.service";
 import { User } from "./user.model";
@@ -103,6 +104,7 @@ export class UserService {
   }
 
   public static async sanitize(user: User) {
+    if (!user) return null;
     const sanitizedParams = _.pick(user, ...SANITIZED_FIELDS);
     const role = await user.$get("role");
     const team:Team = user.team || await user.$get("team") as Team;
@@ -152,7 +154,13 @@ export class UserService {
     await user.update({ cvFile: fileParams.data });
   }
 
-  public static findById(id: number) {
-    return User.findById(id);
+  public static findById(id: number, {includeDeps = false}:{includeDeps?: boolean} = {}) {
+    let includes = [];
+    if (includeDeps) {
+      includes = [Team, Role];
+    }
+    return User.findOne({
+      where: { id },
+      include:includes });
   }
 }

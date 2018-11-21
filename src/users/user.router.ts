@@ -5,17 +5,21 @@ import { handleError, handleUnauthorize } from "../routers.helper";
 import { TeamService } from "../teams/team.service";
 import { UserService } from "./user.service";
 import userUploadsRouter from "./user.upload.router";
+import UserScore from "./user.score";
 
 const router = new Router();
 
 router.use("/self/uploads", userUploadsRouter);
 
-router.get("/self", ensureAuthenticated, async (req, res) => {
+router.get("/self", async (req, res) => {
   try {
     const userId = _.get(req, "user.id") || req.query.id;
-    const user = await UserService.findById(userId);
+    const user = await UserService.findById(userId, { includeDeps: true });
     const sanitizedUser = await UserService.sanitize(user);
-    res.json(sanitizedUser);
+
+    //temp calculate lazy score
+     let userScore = UserScore.calculateScore(user);
+    res.json(_.extend(sanitizedUser, { userScore }));
   } catch (err) {
     handleError(err, res);
   }

@@ -45,7 +45,7 @@ app.use((req, res, next) => {
 const port = process.env.PORT || 8080;
 
 (async function startServer() {
-  await sequelize.sync();
+  await sequelize.sync({});
   app.listen(port, () => {
     console.log(`App listening on port ${port}`);
   });

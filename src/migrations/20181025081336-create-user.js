@@ -40,6 +40,9 @@ module.exports = {
         experienceType: {
           type: Sequelize.STRING
         },
+        techExperience: {
+          type: Sequelize.STRING
+        },
         hearAboutUs: {
           type: Sequelize.STRING
         },

@@ -30,6 +30,8 @@ export class User extends Model<User> {
   @Column
   public experienceType:string;
   @Column
+  public techExperience:string;
+  @Column
   public hearAboutUs:string;
   @Column
   public shirtSize:string;

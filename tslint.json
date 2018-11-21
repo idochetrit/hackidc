@@ -1,5 +1,5 @@
 {
-  "extends": ["tslint:latest", "tslint-config-prettier"],
+  "extends": ["tslint", "tslint-config-prettier"],
   "rules": {
     "no-console": true,
     "object-literal-sort-keys": false
