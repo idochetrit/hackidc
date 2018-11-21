@@ -18,7 +18,10 @@ router.get(
   passportLinkedin.authenticate("linkedin", {
     failureRedirect: "/login"
   }),
-  (req, res) => res.redirect("/signup")
+  (req, res) => {
+    const role = req.user;
+    res.redirect("/signup");
+  }
 );
 
 export default router;

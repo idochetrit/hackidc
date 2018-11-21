@@ -8,7 +8,7 @@ export const store = new Vuex.Store({
     authenticated: false,
     user: {},
     loading: false,
-    registration: "under-construction" // valid values: 'under-construction' ,'opened' or 'closed'
+    registration: "opened" // valid values: 'under-construction' ,'opened' or 'closed'
   },
   getters: {
     isLoading: state => state.loading,
@@ -23,7 +23,7 @@ export const store = new Vuex.Store({
       state.authenticated = true;
       state.user = payload;
     },
-    signout: (state) => {
+    signout: state => {
       state.user = {};
       state.authenticated = false;
     }
@@ -44,7 +44,7 @@ export const store = new Vuex.Store({
     signIn: (context, payload) => {
       context.commit("authenticate", payload);
     },
-    signOut: (context) => {
+    signOut: context => {
       context.commit("signout");
     }
   }

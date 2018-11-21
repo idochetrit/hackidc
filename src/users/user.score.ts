@@ -12,7 +12,7 @@ export default class UserScore {
   };
 
   public static fieldOfStudyMap = {
-    "computer": 10,
+    "computer-science": 10,
     "engineering": 10,
     "business": 5,
     "economics": 5,
