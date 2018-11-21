@@ -18,6 +18,7 @@ export const SANITIZED_FIELDS = [
   "isStudent",
   "volunteerToAcceptLoner",
   "experienceType",
+  "techExperience",
   "foodRestrictionType",
   "gender",
   "degreeType",
@@ -26,7 +27,7 @@ export const SANITIZED_FIELDS = [
   "shirtSize",
   "fieldOfStudy",
   "academicInstitute",
-  "isTeamBuilder",
+  "cvAgree",
   "role",
   "team"
 ];
@@ -73,12 +74,12 @@ export class UserService {
     delete userParams.role;
 
     // HERE: build team logic
-    const { codeName, codeNumber } = teamParams;
+    const { codeNumber } = teamParams;
     let team;
     if (roleName === "TeamBuilder") {
       team = await TeamService.buildTeam({ builder: user, teamParams });
     } else if (roleName !== "Loner") {
-      await this.connectToTeam({ user, codeNumber, codeName, team });
+      await this.connectToTeam({ user, codeNumber, team });
     }
     const { id: roleId } = await userRole.getByName(roleName);
     
@@ -124,15 +125,13 @@ export class UserService {
   public static async connectToTeam({
     user,
     codeNumber,
-    codeName,
     team
   }: {
     user: User;
     codeNumber: number;
-    codeName: string;
     team: any;
   }) {
-    const { id: teamId } = team || (await TeamService.findByCode(codeNumber, codeName));
+    const { id: teamId } = team || (await TeamService.findByCode(codeNumber));
 
     await user.update({ teamId });
     return user;

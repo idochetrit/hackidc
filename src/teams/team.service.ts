@@ -20,9 +20,10 @@ export class TeamService {
   public static async buildTeam({ builder, teamParams }: {builder: User, teamParams: any}) {
     try {
       const newTeam = _.extend({ builderId: builder.id }, teamParams);
+      const { codeName, codeNumber } = newTeam;
       const [team] = await Team.findOrCreate({
         defaults: newTeam,
-        where: { codeNumber: { $eq: newTeam.code } }
+        where: { codeNumber, codeName }
       });
       return team;
     } catch (err) {
@@ -31,12 +32,12 @@ export class TeamService {
     }
   }
 
-  public static async findByCode(codeNumber: number, codeName: string) {
+  public static async findByCode(codeNumber: number) {
     const team = await Team.findOne({
-      where:Sequelize.and({codeNumber}, {codeName})
+      where: { codeNumber }
     });
     if (!team) {
-      throw new Error(`Team with code: ${codeNumber}-${codeName}, not found.`);
+      throw new Error(`Team with code: ${codeNumber}, not found.`);
     }
     return team;
   }
