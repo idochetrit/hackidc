@@ -35,7 +35,7 @@
 export default {
   computed: {
     status() {
-      return this.$store.getters.getUser.registrationStatus;
+      return this.$store.getters.getUser.registerStatus;
     }
   },
   methods: {

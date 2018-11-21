@@ -21,11 +21,11 @@ const newUserData = {
         roleId: 0,
         cvAgree: true,
         termsAgree: false,
-        description: '',
+        bio: '',
       },
       teamData: {
-        title: '',
-        code: 436,
+        codeName: '',
+        codeNumber: 0,
       }
     };
   }

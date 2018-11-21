@@ -7,14 +7,12 @@ const linkedInIntegration = {
     authRequest() {
       axios.get('/api/users/self', { withCredentials: true })
         .then((res) => {
-          console.log(res.data);
-          this.$store.dispatch('signIn', res.data); //auth user in store via LinkedIn SID
+          this.$store.dispatch('signIn', res.data);
         })
         .then((res) => {
           let user = this.$store.getters.getUser;
           console.log(user);
           console.log(this.$store.getters.isAuthenticated);
-          // redirect to the appropriate route
           if (user.registerStatus === 'pending') {
             this.move('next');
           }
@@ -22,7 +20,7 @@ const linkedInIntegration = {
             this.$router.push({name: 'dashboard'});
           }
           else { //rejected / review --> message screen
-            this.$router.push({name: 'user-message'});
+            this.$router.push({name: 'status'});
           }
           // inject fields to reg. form
           this.userData.name = user.name;

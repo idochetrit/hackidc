@@ -194,6 +194,7 @@
                             <div class="form-group" :class="{invalid: $v.userData.role.$error}">
                                 <label for="teamBuilder">Are you signing up as a Team Builder?</label>
                                 <select id="teamBuilder" class="custom-select"
+                                        @change="generateTeamID"
                                         @blur="$v.userData.role.$touch()"
                                         v-model="userData.role">
                                     <option value="">Select...</option>
@@ -208,7 +209,7 @@
                         <div class="form-col">
                             <div v-if="userData.role === 'team-builder'">
                                 <h5>Your team number is</h5>
-                                <h1 class="text-info" style="text-align: center;"><strong>{{ this.userData.teamId }}</strong></h1>
+                                <h1 class="text-info" style="text-align: center;"><strong>{{ this.teamData.codeNumber }}</strong></h1>
                                 <h5>Write down this number.
                                     <br>Your teammates will need it in order to register.</h5>
                                 <hr>
@@ -222,11 +223,11 @@
                                     </select>
                                 </div>
                             </div>
-                            <div v-else-if="userData.role === 'participant'" class="form-group" :class="{invalid: $v.userData.teamId.$error}">
+                            <div v-else-if="userData.role === 'participant'" class="form-group" :class="{invalid: $v.teamData.codeNumber.$error}">
                                 <label for="teamId">Enter your Team Number (received from your Team Builder)</label>
                                 <input id="teamId" type="number" class="form-control"
-                                       @blur="$v.userData.teamId.$touch()"
-                                       v-model="userData.teamId">
+                                       @blur="$v.teamData.codeNumber.$touch()"
+                                       v-model="teamData.codeNumber">
                             </div>
                             <hr>
                             <div class="form-group" :class="{invalid: $v.userData.shirtSize.$error}">
@@ -279,7 +280,7 @@
                     <br>
                     <h2>That's it!</h2>
                     <h4>We're looking forward to read your application form. Good-luck!</h4>
-                    <h5 v-if="userData.role != 'loner'">Your team's number is: <span class="text-info"><strong>{{ userData.teamId }}</strong></span>
+                    <h5 v-if="userData.role != 'loner'">Your team's number is: <span class="text-info"><strong>{{ teamData.codeNumber }}</strong></span>
                         <br>This number will follow you throughout the whole contest.</h5>
                     <hr>
                     <h5><strong>HackIDC 2019 team</strong></h5>
@@ -358,9 +359,6 @@ export default {
       }
     },
     submit() {
-      if (this.userData.role === 'team-builder') {
-        this.userData.isTeamBuilder = true;
-      }
       //add post request to PDF cv - value: multipart/form-data
       axios.post('/api/users/register', {
         user: this.userData,
@@ -386,10 +384,3 @@ export default {
 
 <style src="../assets/registration.css" scoped>
 </style>
-
-<!--tdl-->
-<!--user register POST req -->
-<!--finish implement teamIdGenerator-->
-<!--finish implement user dashboard-->
-<!--finish implement team dashboard-->
-<!--implement CV upload-->

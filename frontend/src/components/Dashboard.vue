@@ -10,7 +10,7 @@
             <div class="dashboard-header">
                 <img v-if="!user.userPicture" src="https://hairo.e.f1v.co/wp-content/themes/romisa/images/placeholder.jpg"
                      class="img-responsive img-thumbnail userThumbnail">
-                <img v-else src="user.userPicture" class="img-responsive img-thumbnail">
+                <img v-else :src="user.userPicture" class="img-responsive img-thumbnail">
                 <h2>{{ user.name | displayName }}</h2>
             </div>
             <hr>
@@ -20,6 +20,7 @@
 </template>
 
 <script>
+import linkedInIntegration from '../assets/linkedInIntegration'
 export default {
   filters: {
     displayName(v) {
@@ -29,8 +30,12 @@ export default {
         lastName.substring(0,1).toUpperCase() + lastName.substring(1)
     }
   },
+  mixins: [linkedInIntegration],
   computed: {
     user() {return this.$store.getters.getUser;}
+  },
+  created() {
+    this.authRequest();
   }
 }
 </script>

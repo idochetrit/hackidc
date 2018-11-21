@@ -22,11 +22,13 @@ const formValidations = {
       experienceType: { required },
       techExperience: { required },
       role: { required },
-      teamId: { required, alphaNum },
       volunteerToAcceptLoner: { required },
       shirtSize: { required },
       hearAboutUs: { required },
       termsAgree: { checked: v => v === true }
+    },
+    teamData: {
+      codeNumber: { required, alphaNum },
     }
   },
   computed: {
