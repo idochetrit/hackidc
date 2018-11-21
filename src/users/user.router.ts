@@ -52,4 +52,11 @@ router.post("/register", ensureAuthenticated, async (req, res) => {
   }
 });
 
+router.delete("/:id", async (req, res) => {
+  await UserService.deleteUser(req.params.id);
+  res.json({
+    isDeleted: true
+  });
+});
+
 export default router;

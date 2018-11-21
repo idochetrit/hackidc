@@ -173,4 +173,10 @@ export class UserService {
       score: UserScore.calculateScore(user)
     });
   }
+  
+  public static async deleteUser(id: number){
+  const user = await User.findById(id);
+    user.updateAttributes({isDeleted: true});
+  }
+  
 }

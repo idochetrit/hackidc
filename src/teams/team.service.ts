@@ -71,6 +71,11 @@ export class TeamService {
       .value();
   }
 
+  public static async deleteTeam(id:number){
+    const team = await Team.findById(id);
+    team.updateAttributes({isDeleted: true});
+  }
+  
   private static async checkAvailability({ codeNumber, codeName }: {codeNumber: number, codeName: string}) {
     const team = await Team.findOne({
       where: Sequelize.or({codeName},{codeNumber})

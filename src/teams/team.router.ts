@@ -2,6 +2,8 @@ import { Router } from "express";
 import * as _ from "lodash";
 import { handleUnauthorize } from "../routers.helper";
 import { TeamService } from "./team.service";
+import { Team } from "./team.model";
+import { extname } from "path";
 
 const router = new Router();
 
@@ -13,6 +15,13 @@ router.get("/code", async (req, res) => {
   res.json({
     codeName,
     codeNumber
+  });
+});
+
+router.delete("/:id", async (req, res) => {
+  await TeamService.deleteTeam(req.params.id);
+  res.json({
+    isDeleted: true
   });
 });
 
