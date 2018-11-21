@@ -1,6 +1,6 @@
-import passport from "passport";
+import * as passport from "passport";
 import { Strategy } from "passport-linkedin-oauth2";
-import UserService from "../users/user.service";
+import { UserService } from "../users/user.service";
 
 const { LINKEDIN_CLIENT_ID, LINKEDIN_CLIENT_SECRET } = process.env;
 
@@ -25,11 +25,10 @@ passport.use(
     },
     (req, accessToken, _refreshToken, profile, done) => {
       req.session.accessToken = accessToken;
-      Promise.resolve()
-        .then(() => UserService.createLinkedInUser(profile))
-        .then(user => {
-          done(null, user);
-        });
+      return (async function linkUser() {
+        const user = await UserService.createLinkedInUser(profile);
+        done(null, user);
+      })();
     }
   )
 );

@@ -8,6 +8,7 @@ module.exports = {
         { name: "Admin" },
         { name: "Mentor" },
         { name: "Judge" },
+        { name: "Loner" },
         { name: "Participant" },
         { name: "TeamBuilder" }
       ],

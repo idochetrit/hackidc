@@ -1,13 +1,14 @@
-import express from "express";
-import bodyParser from "body-parser";
-import morgan from "morgan";
-import cors from "cors";
-import history from "connect-history-api-fallback";
-import passport from "passport";
-import session from "express-session";
+import * as bodyParser from "body-parser";
+import * as history from "connect-history-api-fallback";
+import * as cors from "cors";
+import * as express from "express";
+import * as session from "express-session";
+import * as morgan from "morgan";
+import * as passport from "passport";
+import { sequelize } from "./db/sequelize";
 import routers from "./routers";
 
-const fileUpload = require("express-fileupload");
+import * as fileUpload from "express-fileupload";
 
 const app = express();
 app.use(morgan("dev"));
@@ -29,7 +30,6 @@ app.use(fileUpload({}));
 app.use("/api", routers);
 
 app.use(history());
-console.log(__dirname);
 app.use("/static", express.static(`${__dirname}/static`));
 app.use(express.static(`${__dirname}/../public`));
 
@@ -43,6 +43,10 @@ app.use((req, res, next) => {
 });
 
 const port = process.env.PORT || 8080;
-app.listen(port, () => {
-  console.log(`App listening on port ${port}`);
-});
+
+(async function startServer() {
+  await sequelize.sync({});
+  app.listen(port, () => {
+    console.log(`App listening on port ${port}`);
+  });
+})();

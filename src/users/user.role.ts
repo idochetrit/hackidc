@@ -1,11 +1,9 @@
-import _ from "lodash";
-import models from "../models";
-
-const { Role } = models;
+import * as _ from "lodash";
+import { Role } from "../roles/role.model";
 
 export default (() => {
   class UserRole {
-    async getByName(name) {
+    public async getByName(name) {
       const role = await Role.findOne({
         where: { name },
         attributes: ["id"]
