@@ -77,10 +77,9 @@ export class UserService {
     let team;
     if (roleName === "TeamBuilder") {
       team = await TeamService.buildTeam({ builder: user, teamParams });
+    } else if (roleName !== "Loner") {
+      await this.connectToTeam({ user, codeNumber, codeName, team });
     }
-    await 
-    this.connectToTeam({ user, codeNumber, codeName, team });
-
     const { id: roleId } = await userRole.getByName(roleName);
     
     const extendedAttrs = _.extend(userParams, {

@@ -1,4 +1,4 @@
-import animals from "animals";
+import * as animals from "animals";
 import * as _ from "lodash";
 import { Sequelize } from "sequelize-typescript";
 import { User } from "../users/user.model";

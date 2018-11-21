@@ -32,6 +32,8 @@ export class User extends Model<User> {
   @Column
   public techExperience:string;
   @Column
+  public description:string;
+  @Column
   public hearAboutUs:string;
   @Column
   public shirtSize:string;
