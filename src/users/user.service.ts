@@ -82,7 +82,7 @@ export class UserService {
       await this.connectToTeam({ user, codeNumber, team });
     }
     const { id: roleId } = await userRole.getByName(roleName);
-    
+
     const extendedAttrs = _.extend(userParams, {
       registerStatus: "review",
       roleId
@@ -103,7 +103,7 @@ export class UserService {
   }
 
   public static async sanitize(user: User) {
-    if (!user) return null;
+    if (!user) { return null; }
     const sanitizedParams = _.pick(user, ...SANITIZED_FIELDS);
     const role = await user.$get("role");
     const team:Team = user.team || await user.$get("team") as Team;
@@ -166,16 +166,16 @@ export class UserService {
     }
     return user;
   }
+  
+  public static async deleteUser(id: number){
+  const user = await User.findById(id);
+    user.updateAttributes({isDeleted: true});
+  }
 
   private static async updateUserScore(user: User) {
     return await user.updateAttributes({
       score: UserScore.calculateScore(user)
     });
-  }
-  
-  public static async deleteUser(id: number){
-  const user = await User.findById(id);
-    user.updateAttributes({isDeleted: true});
   }
   
 }

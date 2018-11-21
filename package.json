@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "engines": {
-    "node": ">= 6.0.0",
+    "node": ">= 8.0.0",
     "npm": ">= 3.0.0"
   },
   "scripts": {
@@ -13,7 +13,7 @@
     "dev": "concurrently --kill-others --raw \"npm run dev-server\" \"npm run dev-client\"",
     "debug": "PORT=8080 ./node_modules/nodemon/bin/nodemon.js --inspect --watch './src/**/*.ts' --exec ts-node ./src/server.js",
     "clean": "rm -rf dist && mkdir dist",
-    "build-server": "babel -d ./dist ./src -s --copy-files --extensions=\".ts,.js\"",
+    "build-server": "tsc",
     "build-client": "node ./build/build.js",
     "build": "npm run clean && npm run build-server && npm run build-client && npm run migrate",
     "migrate": "./node_modules/.bin/sequelize db:migrate",
@@ -65,7 +65,6 @@
     "pg": "7.5.0",
     "pg-hstore": "2.3.2",
     "portfinder": "1.0.13",
-    "prettier": "1.14.3",
     "reflect-metadata": "0.1.12",
     "rimraf": "2.6.2",
     "sequelize": "4.41.0",
@@ -96,10 +95,10 @@
     "postcss-import": "11.0.0",
     "postcss-loader": "2.0.8",
     "postcss-url": "7.2.1",
+    "prettier": "1.14.3",
     "semver": "5.3.0",
     "shelljs": "0.7.6",
     "tslint-config-prettier": "1.16.0",
-    "typescript-eslint-parser": "21.0.1",
     "url-loader": "1.1.2",
     "vue-style-loader": "3.0.1",
     "vue-template-compiler": "2.5.2",

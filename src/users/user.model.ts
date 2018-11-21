@@ -1,5 +1,5 @@
 import { DataTypeArray, DataTypeDouble, DataTypeEnum, DataTypeJSONB } from "sequelize";
-import {BelongsTo, BelongsToMany, Column, CreatedAt, DataType, ForeignKey, Model, Scopes, Table, UpdatedAt, DefaultScope, Sequelize} from "sequelize-typescript";
+import {BelongsTo, BelongsToMany, Column, CreatedAt, DataType, DefaultScope, ForeignKey, Model, Scopes, Sequelize, Table, UpdatedAt} from "sequelize-typescript";
 import { Role } from "../roles/role.model";
 import { Team } from "../teams/team.model";
 
