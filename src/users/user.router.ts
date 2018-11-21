@@ -13,7 +13,7 @@ router.use("/self/uploads", userUploadsRouter);
 
 router.get("/self", async (req, res) => {
   try {
-    const userId = _.get(req, "user.id") || req.query.id;
+    const userId:number = Number.parseInt(_.get(req, "user.id") || req.query.id);
     const user = await UserService.findById(userId, { includeDeps: true });
     const sanitizedUser = await UserService.sanitize(user);
 
@@ -25,13 +25,13 @@ router.get("/self", async (req, res) => {
   }
 });
 
-router.post("/register", async (req, res) => {
+router.post("/register", ensureAuthenticated, async (req, res) => {
   // temp block in production
   if (process.env.NODE_ENV === "production") {
     return handleUnauthorize(new Error("Currently unavailable"), res);
   }
   try {
-    const userId = _.get(req, 'user.id') || 1;
+    const userId = _.get(req, 'user.id');
     
     const user = await UserService.findById(userId);
     const userParams = UserService.extractUserParams(req.body);

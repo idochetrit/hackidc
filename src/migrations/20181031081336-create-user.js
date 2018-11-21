@@ -27,6 +27,9 @@ module.exports = {
         degreeType: {
           type: Sequelize.STRING
         },
+        bio: {
+          type: Sequelize.STRING
+        },
         fieldOfStudy: {
           type: Sequelize.STRING
         },

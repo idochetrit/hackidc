@@ -7,8 +7,7 @@ export default class UserScore {
     fieldOfStudy: 0.2,
     degreeType: 0.1,
     academicInstitute: 0.3,
-    experienceType: 0.2,
-    // techExperience: 0.2
+    experienceType: 0.2
   };
 
   public static fieldOfStudyMap = {
@@ -26,6 +25,9 @@ export default class UserScore {
   };
   
   public static calculateScore(user: User):number{
+    if (!user) {
+      throw Error("No user is given.");
+    }
     const {fieldOfStudy, studyYear, degreeType, academicInstitute, experienceType} = user;
 
     const fieldOfStudyVal:number = _.get(this.fieldOfStudyMap, fieldOfStudy, 0);

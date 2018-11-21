@@ -84,8 +84,7 @@ export class UserService {
     
     const extendedAttrs = _.extend(userParams, {
       registerStatus: "review",
-      roleId,
-      score: UserScore.calculateScore(user)
+      roleId
     });
     const updatedUser = await user
       .update(extendedAttrs)
@@ -94,7 +93,7 @@ export class UserService {
           `Failed to save user: (Error - ${err.message}) ${err.stack}`
         )
       );
-
+    await this.updateUserScore(user);
     if (team) {
       // optimize later sanitized team attribute
       user.team = TeamService.sanitize(team);
@@ -153,13 +152,25 @@ export class UserService {
     await user.update({ cvFile: fileParams.data });
   }
 
-  public static findById(id: number, {includeDeps = false}:{includeDeps?: boolean} = {}) {
+  public static async findById(id: number, {includeDeps = false}:{includeDeps?: boolean} = {}) {
     let includes = [];
     if (includeDeps) {
       includes = [Team, Role];
     }
-    return User.findOne({
+    const user = await User.findOne({
       where: { id },
-      include:includes });
+      include:includes 
+    });
+
+    if (!user) {
+      throw new Error("No user found!");
+    }
+    return user;
+  }
+
+  private static async updateUserScore(user: User) {
+    return await user.updateAttributes({
+      score: UserScore.calculateScore(user)
+    });
   }
 }

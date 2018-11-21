@@ -1,8 +1,15 @@
 import { DataTypeArray, DataTypeDouble, DataTypeEnum, DataTypeJSONB } from "sequelize";
-import {BelongsTo, BelongsToMany, Column, CreatedAt, DataType, ForeignKey, Model, Scopes, Table, UpdatedAt} from "sequelize-typescript";
+import {BelongsTo, BelongsToMany, Column, CreatedAt, DataType, ForeignKey, Model, Scopes, Table, UpdatedAt, DefaultScope, Sequelize} from "sequelize-typescript";
 import { Role } from "../roles/role.model";
 import { Team } from "../teams/team.model";
 
+@DefaultScope({
+  where: Sequelize.or(
+    {isDeleted: false},
+    {isDeleted: {
+      $is: null
+    }})
+})
 @Table({
   tableName: "Users"
 })
@@ -32,7 +39,7 @@ export class User extends Model<User> {
   @Column
   public techExperience:string;
   @Column
-  public description:string;
+  public bio:string;
   @Column
   public hearAboutUs:string;
   @Column
@@ -82,4 +89,6 @@ export class User extends Model<User> {
   @UpdatedAt
   @Column
   public updatedAt: Date;
+  @Column
+  public isDeleted: boolean;
 }
