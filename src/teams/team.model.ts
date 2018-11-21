@@ -26,4 +26,6 @@ export class Team extends Model<Team> {
   @UpdatedAt
   @Column
   public updatedAt: Date;
+  @Column
+  public isDeleted: boolean;
 }

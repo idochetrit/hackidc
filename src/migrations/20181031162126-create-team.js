@@ -34,6 +34,9 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
+      },
+      isDeleted: {
+        type: Sequelize.BOOLEAN
       }
     });
     await queryInterface.addIndex("Teams", ["codeNumber"], { unique: true });

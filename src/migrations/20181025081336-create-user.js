@@ -83,6 +83,9 @@ module.exports = {
           allowNull: true,
           type: Sequelize.DOUBLE
         },
+        isDeleted: {
+          type: Sequelize.BOOLEAN
+        },
         createdAt: {
           allowNull: false,
           type: Sequelize.DATE
