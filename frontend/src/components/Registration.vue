@@ -283,7 +283,8 @@
                     <h5 v-if="userData.role != 'loner'">Your team's number is: <span class="text-info"><strong>{{ teamData.codeNumber }}</strong></span>
                         <br>This number will follow you throughout the whole contest.</h5>
                     <hr>
-                    <h5><strong>HackIDC 2019 team</strong></h5>
+                    <h5><strong>Good Luck!</strong></h5>
+                    <h5><strong>HackIDC 2019 Team</strong></h5>
                     <br>
                     <button @click="toHome" class="btn btn-lg btn-info"><strong>Back Home</strong></button>
                 </div>

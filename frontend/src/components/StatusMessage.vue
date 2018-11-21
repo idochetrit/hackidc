@@ -8,7 +8,7 @@
                 <h4>We're currently reviewing all applicants registration forms.
                     <br>The process shouldn't take too long. Hang on!</h4>
                 <hr>
-                <h5><strong>HackIDC 2019 team</strong></h5>
+                <h5><strong>HackIDC 2019 Team</strong></h5>
                 <br>
                 <button @click="toHome" class="btn btn-lg btn-info"><strong>Back Home</strong></button>
             </div>
@@ -23,7 +23,7 @@
                 <br>
                 <h5>Hope to see you next year!</h5>
                 <hr>
-                <h5><strong>HackIDC 2019 team</strong></h5>
+                <h5><strong>HackIDC 2019 Team</strong></h5>
                 <br>
                 <button @click="toHome" class="btn btn-lg btn-info"><strong>Back Home</strong></button>
             </div>
