@@ -11,7 +11,7 @@
             <transition mode="out-in" enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
                 <div v-if="currentStep === 1" class="row">
                     <h3>Getting Started</h3>
-                    <h5>HackIDC is the largest students hackathon in Israel. The event will take place on April 11thgi-12th, 2019.
+                    <h5>HackIDC is the largest students hackathon in Israel. The event will take place on April 11-12th, 2019.
                         <br>Registration is open for groups of 3-5 people or for participants who would like to register on their own.</h5>
                     <hr>
                     <div class="alert alert-light" role="alert">
@@ -379,6 +379,14 @@ export default {
   },
   created() {
     this.authRequest();
+  },
+  mounted() {
+    let userStatus = this.$store.getters.getUser.registerStatus;
+    console.log(userStatus);
+    if (userStatus === "pending") {
+      console.log("pend");
+      this.move("next");
+    }
   }
 }
 </script>

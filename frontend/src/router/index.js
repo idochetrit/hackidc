@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Router from "vue-router";
-import {store} from "../store/store";
+import { store } from "../store/store";
 import Home from "../components/Home.vue";
 import Schedule from "../components/Schedule.vue";
 import Resources from "../components/Resources.vue";
@@ -10,12 +10,36 @@ import Team from "../components/Team.vue";
 import Gallery from "../components/Gallery.vue";
 import Registration from "../components/Registration.vue";
 import Login from "../components/Login.vue";
-import Dashboard from "../components/Dashboard.vue";
+import UserDashboard from "../components/UserDashboard.vue";
+import TeamDashboard from "../components/TeamDashboard.vue";
 import StatusMessage from "../components/StatusMessage.vue";
 
 Vue.use(Router);
 
-const user = store.getters.getUser;
+const navigateRegistration = (to, from, next) => {
+  const status = store.getters.isRegistrationOpen;
+  const userStatus = store.getters.getUser.registerStatus;
+  const userAuth = store.getters.isAuthenticated;
+  if (status === "opened") {
+    if (!userAuth || userStatus === "pending") {
+      console.log("here");
+      next();
+    } else if (userStatus === "approved") {
+      next({ name: "user-dashboard" });
+    } else if (
+      userStatus === "rejected" ||
+      userStatus === "review"
+    ) {
+      next({ name: "status" });
+    }
+  } else if (!status || status === "closed") {
+    alert("HackIDC 2019 registration is currently closed.");
+    next({ name: "home" });
+  } else {
+    alert("HackIDC 2019 registration isn't open yet...");
+    next({ name: "home" });
+  }
+};
 
 export default new Router({
   routes: [
@@ -82,20 +106,7 @@ export default new Router({
         title: "HackIDC 2019 | Registration"
       },
       component: Registration,
-      beforeEnter: (to, from, next) => {
-        let status = store.getters.isRegistrationOpen;
-        if (status === 'opened') {
-          next();
-        }
-        else if (!status || status === 'closed') {
-          alert("HackIDC 2019 registration is currently closed.");
-          next({name: 'home'});
-        }
-        else {
-          alert("HackIDC 2019 registration isn't open yet...");
-          next({name: 'home'});
-        }
-      }
+      beforeEnter: navigateRegistration
     },
     {
       path: "/login",
@@ -114,29 +125,20 @@ export default new Router({
       component: StatusMessage
     },
     {
-      path: "/dashboard",
-      name: "dashboard",
+      path: "/dashboard/profile",
+      name: "user-dashboard",
       meta: {
         title: "HackIDC 2019 | Dashboard"
       },
-      component: Dashboard,
-      children: [
-        {
-          path: "profile",
-          name: "user-dashboard",
-          meta: {
-            title: "HackIDC 2019 | Dashboard"
-          },
-          // component: Dashboard
-        },
-        {
-          path: "team",
-          meta: {
-            title: "HackIDC 2019 | Dashboard"
-          },
-          // component: Dashboard
-        },
-      ]
+      component: UserDashboard
+    },
+    {
+      path: "/dashboard/team",
+      name: "team-dashboard",
+      meta: {
+        title: "HackIDC 2019 | Dashboard"
+      },
+      component: TeamDashboard
     }
   ],
   mode: "history",

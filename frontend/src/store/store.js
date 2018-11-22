@@ -1,14 +1,17 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import axios from "axios";
 
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
   state: {
     authenticated: false,
-    user: {},
+    user: {
+      registerStatus: "",
+    },
     loading: false,
-    registration: "under-construction" // valid values: 'under-construction' ,'opened' or 'closed'
+    registration: "opened" // valid values: 'under-construction' ,'opened' or 'closed'
   },
   getters: {
     isLoading: state => state.loading,
@@ -21,7 +24,7 @@ export const store = new Vuex.Store({
     setRegistrationStatus: (state, payload) => (state.registration = payload),
     authenticate: (state, payload) => {
       state.authenticated = true;
-      state.user = payload;
+      state.user = { ...payload };
     },
     signout: state => {
       state.user = {};

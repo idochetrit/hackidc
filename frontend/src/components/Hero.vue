@@ -6,7 +6,7 @@
           <img class="logo" src="../../static/logo_white.png">
           <h1>2019</h1>
           <div class="buttons">
-            <button @click="toRegistrationForm" v-if="registration === 'opened'" class="btn btn-info btn-lg">SIGN UP!</button>
+            <button @click="toRegistrationForm" v-if="registration === 'opened' && !this.$store.getters.isAuthenticated" class="btn btn-info btn-lg">SIGN UP!</button>
             <button v-scroll-to="'#about'" class="btn btn-outline-light btn-lg">What's New?</button>
           </div>
           <hr>

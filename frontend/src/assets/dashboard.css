@@ -1,0 +1,71 @@
+.container-fluid {
+    padding: 0;
+    margin-top: 3rem;
+    min-height: 1000px;
+    background-color: #f7f7f7;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+.side-nav {
+    padding: 4rem 0 .5rem 0;
+    flex-basis: 20%;
+    background-color: #212426;
+}
+.main-view {
+    margin-top: 3rem;
+    flex-basis: 80%;
+    padding: 3rem 8rem;
+}
+.side-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+.side-nav li {
+    padding: .5rem 0 .5rem 2rem;
+    color: #fff;
+}
+.side-nav li.active {
+    background-color: #373737;
+    border-right: 6px solid #1fbed5;
+}
+.side-nav li:hover {
+    cursor: pointer;
+}
+h2 {font-weight: bold; margin: 0;}
+h5 {margin: 0;}
+.userThumbnail {
+    border-radius: 50%;
+    width: 150px;
+    margin-right: 1rem;
+}
+.dashboard-header {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+.dashboard-username {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: .5rem 1rem;
+}
+.linkedinBtn {
+    background-color: #0077B5;
+    color: #fff;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    padding: .5rem;
+    margin-top: .5rem;
+}
+a.linkedinBtn, a.linkedinBtn:hover {color: #fff;}
+.dashboard-body {
+    padding: 2rem 2rem 8rem 0;
+}
