@@ -6,9 +6,9 @@ export function ensureAuthenticated(req, res, next) {
   res.redirect("/login");
 }
 
-export function getRedirectPathStatus(registerStatus: string):string {
+export function getRedirectPathStatus(registerStatus: string): string {
   // pending: signup, approved: dashboard/profile, review: reject status-message, 
-  
+
   const map = {
     "pending": "/signup",
     "approved": "/dashboard/profile",
@@ -16,7 +16,7 @@ export function getRedirectPathStatus(registerStatus: string):string {
     "rejected": "/status-message"
   };
 
-  return _.get(map, registerStatus, '/signup');
+  return "/signup"; //_.get(map, registerStatus, '/signup');
 }
 
 export function foo() {
