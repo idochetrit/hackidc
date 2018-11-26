@@ -13,7 +13,7 @@
     "dev": "concurrently --kill-others --raw \"npm run dev-server\" \"npm run dev-client\"",
     "debug": "PORT=8080 ./node_modules/nodemon/bin/nodemon.js --inspect --watch './src/**/*.ts' --exec ts-node ./src/server.js",
     "clean": "rm -rf dist && mkdir dist",
-    "build-server": "tsc",
+    "build-server": "./node_modules/.bin/tsc",
     "build-client": "node ./build/build.js",
     "build": "npm run clean && npm run build-server && npm run build-client && npm run migrate",
     "migrate": "./node_modules/.bin/sequelize db:migrate",
