@@ -385,7 +385,7 @@ export default {
     console.log(userStatus);
     if (userStatus === "pending") {
       console.log("pend");
-      this.move("next");
+      this.currentStep = 2;
     }
   }
 }

@@ -32,7 +32,10 @@
 </template>
 
 <script>
+import linkedInIntegration from '../assets/linkedInIntegration'
+
 export default {
+  mixins: [linkedInIntegration],
   computed: {
     status() {
       return this.$store.getters.getUser.registerStatus;
@@ -42,6 +45,9 @@ export default {
     toHome() {
       this.$router.push({name: 'home'});
     }
+  },
+  created() {
+    this.authRequest();
   }
 }
 </script>

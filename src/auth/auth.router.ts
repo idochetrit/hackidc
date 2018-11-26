@@ -8,6 +8,7 @@ const router = new Router();
 // POST /auth/logout
 router.get("/logout", (req, res) => {
   req.logout();
+  res.status(204).send("");
 });
 
 // GET /auth/linkedin
@@ -20,7 +21,7 @@ router.get(
     failureRedirect: "/login"
   }),
   (req, res) => {
-    const redirectPath:string = getRedirectPathStatus(req.user.registerStatus);
+    const redirectPath:string = getRedirectPathStatus(req.user.registerStatus.toString());
     
     res.redirect(redirectPath);
   }

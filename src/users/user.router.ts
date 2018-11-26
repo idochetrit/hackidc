@@ -11,7 +11,7 @@ const router = new Router();
 
 router.use("/self/uploads", userUploadsRouter);
 
-router.get("/self", async (req, res) => {
+router.get("/self", ensureAuthenticated, async (req, res) => {
   try {
     const userId: number = Number(_.get(req, "user.id") || req.query.id);
     const user = await UserService.findById(userId, { includeDeps: true });

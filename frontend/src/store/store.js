@@ -8,7 +8,7 @@ export const store = new Vuex.Store({
   state: {
     authenticated: false,
     user: {
-      registerStatus: "",
+      registerStatus: ""
     },
     loading: false,
     registration: "opened" // valid values: 'under-construction' ,'opened' or 'closed'

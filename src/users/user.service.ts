@@ -33,7 +33,7 @@ export const SANITIZED_FIELDS = [
 ];
 
 export class UserService {
-  public static createLinkedInUser(profile: any) {
+  public static createLinkedInUser(profile: any, authToken: string) {
     const defaultAttrs = {
       email: _.get(profile, "emails[0].value"),
       linkedInId: _.get(profile, "id"),
@@ -41,6 +41,7 @@ export class UserService {
       rawLinkedin: profile._raw,
       registerStatus: "pending",
       userPicture: _.get(profile, "photos[0].value"),
+      authToken
     };
 
     return User.findOrCreate({

@@ -26,7 +26,7 @@ passport.use(
     (req, accessToken, _refreshToken, profile, done) => {
       req.session.accessToken = accessToken;
       return (async function linkUser() {
-        const user = await UserService.createLinkedInUser(profile);
+        const user = await UserService.createLinkedInUser(profile, accessToken);
         done(null, user);
       })();
     }

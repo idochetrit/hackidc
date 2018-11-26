@@ -28,6 +28,9 @@ export default class UserScore {
     if (!user) {
       throw Error("No user is given.");
     }
+    if (user.registerStatus.toString() === "pending") {
+      return 0;
+    }
     const {fieldOfStudy, studyYear, degreeType, academicInstitute, experienceType} = user;
 
     const fieldOfStudyVal:number = _.get(this.fieldOfStudyMap, fieldOfStudy, 0);

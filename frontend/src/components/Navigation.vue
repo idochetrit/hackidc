@@ -45,6 +45,7 @@
 
 <script>
 import NavbarCountdown from './NavbarCountdown.vue';
+import axios from "axios";
 export default {
   components: {
     'app-navbar-countdown': NavbarCountdown
@@ -61,6 +62,12 @@ export default {
     },
     signout() {
       this.$store.dispatch("signOut")
+        .then(() => {
+            axios.get('/api/auth/logout')
+              .then((res) => {
+                console.log("User logged out.", res);
+              });
+          })
         .then(res => {
           this.$router.push({name: 'home'});
         });

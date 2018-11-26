@@ -79,6 +79,9 @@ module.exports = {
         rawLinkedin: {
           type: Sequelize.JSONB
         },
+        authToken: {
+          type: Sequelize.STRING(2048)
+        },
         cvFile: {
           type: Sequelize.BLOB
         },
@@ -105,8 +108,6 @@ module.exports = {
   },
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable("Users");
-    await queryInterface.sequelize.query(
-      'DROP TYPE "enum_Users_registerStatus"'
-    );
+    await queryInterface.sequelize.query('DROP TYPE "enum_Users_registerStatus"');
   }
 };

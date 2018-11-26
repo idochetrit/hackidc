@@ -1,4 +1,4 @@
-import { DataTypeArray, DataTypeDouble, DataTypeEnum, DataTypeJSONB } from "sequelize";
+import { DataTypeArray, DataTypeBlob, DataTypeDouble, DataTypeEnum, DataTypeJSONB } from "sequelize";
 import {BelongsTo, BelongsToMany, Column, CreatedAt, DataType, DefaultScope, ForeignKey, Model, Scopes, Sequelize, Table, UpdatedAt} from "sequelize-typescript";
 import { Role } from "../roles/role.model";
 import { Team } from "../teams/team.model";
@@ -81,6 +81,9 @@ export class User extends Model<User> {
     type: DataType.JSONB
   })
   public rawLinkedin: DataTypeJSONB
+  
+  @Column
+  public authToken: string
 
   @CreatedAt
   @Column

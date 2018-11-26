@@ -16,7 +16,7 @@ export function getRedirectPathStatus(registerStatus: string): string {
     "rejected": "/status-message"
   };
 
-  return "/signup"; //_.get(map, registerStatus, '/signup');
+  return _.get(map, registerStatus, '/signup');
 }
 
 export function foo() {
