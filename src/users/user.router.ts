@@ -32,7 +32,7 @@ router.post("/register", ensureAuthenticated, async (req, res) => {
     return handleUnauthorize(new Error("Currently unavailable"), res);
   }
   try {
-    const userId = _.get(req, "user.id");
+    const userId = _.get(req, "user.id") || req.headers.userid;
 
     const user = await UserService.findById(userId);
     const userParams = UserService.extractUserParams(req.body);
@@ -61,7 +61,8 @@ router.patch("/:id", async (req, res) => {
     const success = await UserService.updateUserWith(user, newAttributes);
     if (success) {
       res.json({
-        meessage: "User updated successfuly"
+        meessage: "User updated successfuly",
+        attributesUpdated: newAttributes
       });
     } else {
       res.status(500).json({

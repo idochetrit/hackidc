@@ -1,10 +1,9 @@
+import _ from "lodash";
+
 const f = {
   filters: {
     nameFormatter(v) {
-      const firstName = v.split(" ")[0];
-      const lastName = v.split(" ")[1];
-      return `${firstName.substring(0, 1).toUpperCase() +
-        firstName.substring(1)} ${lastName.substring(0, 1).toUpperCase()}${lastName.substring(1)}`;
+      return _.startCase(_.camelCase(v));
     },
     fieldFormatter(v) {
       return v.replace("-", " ");

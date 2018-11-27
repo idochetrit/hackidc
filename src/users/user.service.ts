@@ -33,17 +33,16 @@ export const SANITIZED_FIELDS = [
   "team"
 ];
 
-export const PATH_SANITIZED_FIELDS = _.omit(
-  SANITIZED_FIELDS,
-  "team",
-  "role",
-  "cvAgree",
-  "linkedInId",
-  "fieldOfStudy",
-  "degreeType",
-  "academicInstitute",
-  "registerStatus"
-);
+export const PATH_SANITIZED_FIELDS = [
+  "name",
+  "email",
+  "userPicture",
+  "foodRestrictionType",
+  "gender",
+  "bio",
+  "mobile",
+  "shirtSize"
+];
 
 export class UserService {
   public static createLinkedInUser(profile: any, authToken: string) {
@@ -122,10 +121,12 @@ export class UserService {
    * updateUserWith
    */
   public static async updateUserWith(user: User, attrs: any = {}) {
+    this.validateUserParams(attrs, PATH_SANITIZED_FIELDS);
     await user.updateAttributes(attrs).catch(err => {
       console.error(`Failed to update user #${user.id}`, err);
       return false;
     });
+    await this.updateUserScore(user);
     return true;
   }
 
@@ -143,14 +144,13 @@ export class UserService {
   }
 
   private static validateUserParams(params: any, sanitizedFields = SANITIZED_FIELDS): void {
-    const intersectedKeys = _.intersection(Object.keys(SANITIZED_FIELDS), Object.keys(params));
-    if (intersectedKeys !== []) {
+    const intersectedKeys = _.difference(Object.keys(params), _.values(sanitizedFields));
+    if (intersectedKeys.length > 0) {
       throw new Error(`Params: ${intersectedKeys.join(",")} are not allowed.`);
     }
   }
 
   public static extractUserParams(params: any, sanitizedFields = SANITIZED_FIELDS) {
-    this.validateUserParams(params, sanitizedFields);
     return _.chain(params)
       .get("user")
       .pick(sanitizedFields)

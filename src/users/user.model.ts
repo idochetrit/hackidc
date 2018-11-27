@@ -1,60 +1,80 @@
-import { DataTypeArray, DataTypeBlob, DataTypeDouble, DataTypeEnum, DataTypeJSONB } from "sequelize";
-import {BelongsTo, BelongsToMany, Column, CreatedAt, DataType, DefaultScope, ForeignKey, Model, Scopes, Sequelize, Table, UpdatedAt} from "sequelize-typescript";
+import {
+  DataTypeArray,
+  DataTypeBlob,
+  DataTypeDouble,
+  DataTypeEnum,
+  DataTypeJSONB
+} from "sequelize";
+import {
+  BelongsTo,
+  BelongsToMany,
+  Column,
+  CreatedAt,
+  DataType,
+  DefaultScope,
+  ForeignKey,
+  Model,
+  Scopes,
+  Sequelize,
+  Table,
+  UpdatedAt
+} from "sequelize-typescript";
 import { Role } from "../roles/role.model";
 import { Team } from "../teams/team.model";
 
 @DefaultScope({
   where: Sequelize.or(
-    {isDeleted: false},
-    {isDeleted: {
-      $is: null
-    }})
+    { isDeleted: false },
+    {
+      isDeleted: {
+        $is: null
+      }
+    }
+  )
 })
 @Table({
   tableName: "Users"
 })
 export class User extends Model<User> {
-
-
   @Column
-  public name:string;
+  public name: string;
   @Column({
     unique: true
   })
-  public email:string;
+  public email: string;
   @Column
-  public gender:string;
+  public gender: string;
   @Column
-  public mobile:string;
+  public mobile: string;
   @Column
-  public degreeType:string;
+  public degreeType: string;
   @Column
-  public fieldOfStudy:string;
+  public fieldOfStudy: string;
   @Column
-  public academicInstitute:string;
+  public academicInstitute: string;
   @Column
-  public studyYear:number;
+  public studyYear: number;
   @Column
-  public experienceType:string;
+  public experienceType: string;
   @Column
-  public techExperience:string;
+  public techExperience: string;
   @Column
-  public bio:string;
+  public bio: string;
   @Column
-  public hearAboutUs:string;
+  public hearAboutUs: string;
   @Column
-  public shirtSize:string;
+  public shirtSize: string;
   @Column({
     type: DataType.ARRAY(DataType.STRING)
   })
-  public foodRestrictionType:DataTypeArray;
+  public foodRestrictionType: DataTypeArray;
   @Column
-  public volunteerToAcceptLoner:boolean;
+  public volunteerToAcceptLoner: boolean;
   @Column
-  public cvAgree:boolean;
+  public cvAgree: boolean;
 
   @BelongsTo(() => Role, "roleId")
-  public role:Role;
+  public role: Role;
 
   @BelongsTo(() => Team, "teamId")
   public team: Team;
@@ -62,28 +82,28 @@ export class User extends Model<User> {
   @Column({
     unique: true
   })
-  public linkedInId:string;
+  public linkedInId: string;
   @Column
-  public userPicture:string; // URL for LinkedIn picture;
+  public userPicture: string; // URL for LinkedIn picture;
   @Column
-  public cvFile:Buffer;
+  public cvFile: Buffer;
   @Column({
     type: DataType.DOUBLE
   })
-  public score:DataTypeDouble;
-  
+  public score: DataTypeDouble;
+
   @Column({
     type: DataType.ENUM("approved", "review", "pending", "rejected")
   })
   public registerStatus: DataTypeEnum;
-  
+
   @Column({
     type: DataType.JSONB
   })
-  public rawLinkedin: DataTypeJSONB
-  
+  public rawLinkedin: DataTypeJSONB;
+
   @Column
-  public authToken: string
+  public authToken: string;
 
   @CreatedAt
   @Column
