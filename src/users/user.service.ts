@@ -21,6 +21,7 @@ export const SANITIZED_FIELDS = [
   "techExperience",
   "foodRestrictionType",
   "gender",
+  "bio",
   "degreeType",
   "hearAboutUs",
   "mobile",
@@ -31,6 +32,18 @@ export const SANITIZED_FIELDS = [
   "role",
   "team"
 ];
+
+export const PATH_SANITIZED_FIELDS = _.omit(
+  SANITIZED_FIELDS,
+  "team",
+  "role",
+  "cvAgree",
+  "linkedInId",
+  "fieldOfStudy",
+  "degreeType",
+  "academicInstitute",
+  "registerStatus"
+);
 
 export class UserService {
   public static createLinkedInUser(profile: any, authToken: string) {
@@ -51,6 +64,7 @@ export class UserService {
       .spread((user: any, _created: any) => user)
       .catch((err: Error) => {
         console.log(err, defaultAttrs);
+        throw err;
       });
   }
 
@@ -92,17 +106,27 @@ export class UserService {
       registerStatus: "review",
       roleId
     });
-    const updatedUser = await user
-      .update(extendedAttrs)
-      .catch((err: Error) =>
-        console.error(`Failed to save user: (Error - ${err.message}) ${err.stack}`)
-      );
+    const updatedUser = await user.update(extendedAttrs).catch((err: Error) => {
+      console.error(`Failed to save user: (Error - ${err.message}) ${err.stack}`);
+      throw err;
+    });
     await this.updateUserScore(user);
     if (team) {
       // optimize later sanitized team attribute
       user.team = TeamService.sanitize(team);
     }
     return updatedUser;
+  }
+
+  /**
+   * updateUserWith
+   */
+  public static async updateUserWith(user: User, attrs: any = {}) {
+    await user.updateAttributes(attrs).catch(err => {
+      console.error(`Failed to update user #${user.id}`, err);
+      return false;
+    });
+    return true;
   }
 
   public static async sanitize(user: User) {
@@ -118,11 +142,19 @@ export class UserService {
     return sanitizedParams;
   }
 
-  public static extractUserParams(params: any) {
+  private static validateUserParams(params: any, sanitizedFields = SANITIZED_FIELDS): void {
+    const intersectedKeys = _.intersection(Object.keys(SANITIZED_FIELDS), Object.keys(params));
+    if (intersectedKeys !== []) {
+      throw new Error(`Params: ${intersectedKeys.join(",")} are not allowed.`);
+    }
+  }
+
+  public static extractUserParams(params: any, sanitizedFields = SANITIZED_FIELDS) {
+    this.validateUserParams(params, sanitizedFields);
     return _.chain(params)
       .get("user")
-      .pick(SANITIZED_FIELDS)
-      .mapValues(i => (typeof i === "string" ? _.toLower(i) : i))
+      .pick(sanitizedFields)
+      .mapValues(val => (typeof val === "string" ? _.toLower(val) : val))
       .omit("id", "linkedInId", "team")
       .value();
   }

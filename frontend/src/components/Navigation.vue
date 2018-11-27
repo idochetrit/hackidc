@@ -23,7 +23,7 @@
           <li><a class="social mainNav-item" href="https://www.instagram.com/hackidc2019/" target="_blank"><span class="fab fa-instagram fa-2x"></span></a></li>
         </ul>
         <ul class="navbar-nav" v-if="this.$store.getters.isRegistrationOpen !== 'under-construction'">
-          <button v-if="!this.$store.getters.isAuthenticated"
+          <button v-if="!this.$store.getters.isSignedUp"
                   @click="toLogin" class="btn btn-md btn-info mainNav-item"><strong>Sign in</strong></button>
           <div v-else class="dropdown">
             <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

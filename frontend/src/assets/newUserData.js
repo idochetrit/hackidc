@@ -17,6 +17,7 @@ const newUserData = {
         hearAboutUs: "",
         volunteerToAcceptLoner: false,
         isTeamBuilder: false,
+        registerStatus: "",
         role: "", //  valid values: 'loner', 'participant', 'team-builder'
         roleId: 0,
         cvAgree: true,
@@ -29,8 +30,8 @@ const newUserData = {
       }
     };
   }
-}
+};
 
 //  add team data picked up during the form
 
-export default newUserData
+export default newUserData;

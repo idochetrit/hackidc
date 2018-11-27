@@ -21,8 +21,8 @@ router.get(
     failureRedirect: "/login"
   }),
   (req, res) => {
-    const redirectPath:string = getRedirectPathStatus(req.user.registerStatus.toString());
-    
+    const redirectPath: string = getRedirectPathStatus(req.user.registerStatus.toString());
+
     res.redirect(redirectPath);
   }
 );

@@ -335,6 +335,17 @@ export default {
   },
   mixins: [formValidations, newUserData, linkedInIntegration, teamIdGenerator],
   methods: {
+    setStep(user) {
+      let userStatus = user.registerStatus;
+      if (userStatus === "pending") {
+        console.log("pend");
+        this.$nextTick(() => {
+          this.userData.name = user.name;
+          this.userData.email = user.email;
+          this.currentStep = 2;
+        });
+      }
+    },
     generate() {
       axios.get('/api/teams/code')
         .then(res => {
@@ -377,16 +388,11 @@ export default {
       this.$router.push({name: 'home'});
     }
   },
-  created() {
-    this.authRequest();
-  },
-  mounted() {
-    let userStatus = this.$store.getters.getUser.registerStatus;
-    console.log(userStatus);
-    if (userStatus === "pending") {
-      console.log("pend");
-      this.$nextTick(() => (this.currentStep = 2));
-    }
+  created(){
+    this.authRequest().then(() => {
+      const user = this.$store.getters.getUser;
+      this.setStep(user);
+    });
   }
 }
 </script>

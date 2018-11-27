@@ -1,10 +1,12 @@
 {
   "extends": [
-    "tslint:recommended",
-    "tslint-config-prettier"
+    "tslint"
   ],
+  "rulesDirectory": ["tslint-plugin-prettier"],
   "rules": {
-    "no-console": true,
-    "object-literal-sort-keys": false
+    "prettier": true,
+    "no-console": false,
+    "object-literal-sort-keys": false,
+    "trailing-comma": false
   }
 }

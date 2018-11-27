@@ -4,8 +4,9 @@ import { ensureAuthenticated } from "../concerns/auth.users";
 import { handleError, handleUnauthorize } from "../routers.helper";
 import { TeamService } from "../teams/team.service";
 import UserScore from "./user.score";
-import { UserService } from "./user.service";
+import { UserService, PATH_SANITIZED_FIELDS } from "./user.service";
 import userUploadsRouter from "./user.upload.router";
+import { User } from "./user.model";
 
 const router = new Router();
 
@@ -49,6 +50,26 @@ router.post("/register", ensureAuthenticated, async (req, res) => {
     });
   } catch (err) {
     handleError(err, res);
+  }
+});
+
+router.patch("/:id", async (req, res) => {
+  try {
+    const userId: number = Number(req.params.id);
+    const user: User = await UserService.findById(userId);
+    const newAttributes: any = UserService.extractUserParams(req.body, PATH_SANITIZED_FIELDS);
+    const success = await UserService.updateUserWith(user, newAttributes);
+    if (success) {
+      res.json({
+        meessage: "User updated successfuly"
+      });
+    } else {
+      res.status(500).json({
+        error: "Failed to update user"
+      });
+    }
+  } catch (error) {
+    handleError(error, res);
   }
 });
 

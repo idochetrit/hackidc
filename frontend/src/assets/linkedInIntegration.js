@@ -6,16 +6,9 @@ const linkedInIntegration = {
       window.location = "/api/auth/linkedin";
     },
     authRequest() {
-      axios
+      return axios
         .get("/api/users/self", { withCredentials: true })
-        .then(res => {
-          this.$store.dispatch("signIn", res.data);
-        })
-        .then(res => {
-          const user = this.$store.getters.getUser;
-          this.userData.name = user.name;
-          this.userData.email = user.email;
-        })
+        .then(res => this.$store.dispatch("signIn", res.data))
         .catch(err => {
           console.warn(err);
         });

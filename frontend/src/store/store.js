@@ -17,7 +17,8 @@ export const store = new Vuex.Store({
     isLoading: state => state.loading,
     isRegistrationOpen: state => state.registration,
     isAuthenticated: state => state.authenticated,
-    getUser: state => state.user
+    getUser: state => state.user,
+    isSignedUp: state => state.authenticated && state.user.registerStatus !== "pending"
   },
   mutations: {
     setLoading: (state, payload) => (state.loading = payload),
