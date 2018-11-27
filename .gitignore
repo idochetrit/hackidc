@@ -5,5 +5,5 @@ tags
 dist/
 .idea/
 public/bundle.js
-public/index.html
 .DS_Store
+public/index.html

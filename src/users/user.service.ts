@@ -46,7 +46,7 @@ export class UserService {
 
     return User.findOrCreate({
       defaults: defaultAttrs,
-      where: { linkedInId: { $eq: defaultAttrs.linkedInId } },
+      where: { linkedInId: { $eq: defaultAttrs.linkedInId } }
     })
       .spread((user: any, _created: any) => user)
       .catch((err: Error) => {
@@ -66,12 +66,16 @@ export class UserService {
     if (!user) {
       throw new Error("No user authenticated: user object is undefined");
     }
-    
+
     if (_.isUndefined(userParams.role)) {
       throw new Error("Bad user attributes: role is undefined");
     }
 
-    const roleName = _.chain(userParams.role).startCase().split(' ').join('').value();
+    const roleName = _.chain(userParams.role)
+      .startCase()
+      .split(" ")
+      .join("")
+      .value();
     delete userParams.role;
 
     // HERE: build team logic
@@ -91,9 +95,7 @@ export class UserService {
     const updatedUser = await user
       .update(extendedAttrs)
       .catch((err: Error) =>
-        console.error(
-          `Failed to save user: (Error - ${err.message}) ${err.stack}`
-        )
+        console.error(`Failed to save user: (Error - ${err.message}) ${err.stack}`)
       );
     await this.updateUserScore(user);
     if (team) {
@@ -104,12 +106,14 @@ export class UserService {
   }
 
   public static async sanitize(user: User) {
-    if (!user) { return null; }
+    if (!user) {
+      return null;
+    }
     const sanitizedParams = _.pick(user, ...SANITIZED_FIELDS);
     const role = await user.$get("role");
-    const team:Team = user.team || await user.$get("team") as Team;
+    const team: Team = user.team || ((await user.$get("team")) as Team);
 
-    sanitizedParams.role = _.get(role, 'name') || "Unavailable";
+    sanitizedParams.role = _.get(role, "name") || "Unavailable";
     sanitizedParams.team = TeamService.sanitize(team);
     return sanitizedParams;
   }
@@ -152,14 +156,17 @@ export class UserService {
     await user.update({ cvFile: fileParams.data });
   }
 
-  public static async findById(id: number, {includeDeps = false}:{includeDeps?: boolean} = {}) {
+  public static async findById(
+    id: number,
+    { includeDeps = false }: { includeDeps?: boolean } = {}
+  ) {
     let includes = [];
     if (includeDeps) {
       includes = [Team, Role];
     }
     const user = await User.findOne({
       where: { id },
-      include:includes 
+      include: includes
     });
 
     if (!user) {
@@ -167,16 +174,28 @@ export class UserService {
     }
     return user;
   }
-  
-  public static async deleteUser(id: number){
-  const user = await User.findById(id);
-    user.updateAttributes({isDeleted: true});
+
+  public static async deleteUser(id: number) {
+    const user = await User.findById(id);
+    user.updateAttributes({ isDeleted: true });
   }
 
   private static async updateUserScore(user: User) {
+    if (!user) {
+      throw Error("No user is given.");
+    }
+    if (user.registerStatus.toString() === "pending") {
+      return 0;
+    }
+    const { fieldOfStudy, studyYear, degreeType, academicInstitute, experienceType } = user;
     return await user.updateAttributes({
-      score: UserScore.calculateScore(user)
+      score: UserScore.calculateScore({
+        fieldOfStudy,
+        studyYear,
+        degreeType,
+        academicInstitute,
+        experienceType
+      })
     });
   }
-  
 }
