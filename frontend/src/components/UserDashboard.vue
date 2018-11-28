@@ -13,9 +13,9 @@
                 <img v-else :src="user.userPicture" class="img-responsive img-thumbnail userThumbnail">
                 <div class="dashboard-username">
                     <h2>{{ user.name | nameFormatter }}</h2>
-                    <h5>Team <strong class="text-info">{{ user.name | nameFormatter }}</strong></h5> <!--change to team name -->
-                    <h5>{{ user.studyYear | yearFormatter }} year, {{ user.fieldOfStudy | fieldFormatter | nameFormatter }}</h5>
-                    <a href="#" target="_blank" class="btn btn-md linkedinBtn"><span class="fab fa-linkedin-in fa-lg"></span></a>
+                    <h5>Team <strong class="text-info">{{ user.team.codeName | nameFormatter }}</strong></h5> <!--change to team name -->
+                    <h5>{{ user.studyYear | yearFormatter }} year, {{ user.fieldOfStudy | fieldFormatter | nameFormatter }} student, at {{ user.academicInstitute | nameFormatter }}</h5>
+                    <a :href="user.linkedInProfileUrl" target="_blank" class="btn btn-md linkedinBtn"><span class="fab fa-linkedin-in fa-lg"></span></a>
                 </div>
             </div>
             <hr>

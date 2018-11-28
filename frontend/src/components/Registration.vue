@@ -151,7 +151,8 @@
                     <div class="form-row">
                         <div class="form-col">
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="customFile" accept="application/pdf">
+                                <input ref="cvFile" type="file" class="custom-file-input" id="customFile"
+                                       accept="application/pdf" v-on:change="handleFileUpload">
                                 <label class="custom-file-label" for="customFile">Upload your CV</label>
                                 <small id="cv-help" class="form-text">Make sure to upload <strong>only PDF files</strong></small>
                             </div>
@@ -331,6 +332,7 @@ export default {
     return {
       currentStep: 1,
       isCompleted: false,
+      cv: ''
     }
   },
   mixins: [formValidations, newUserData, linkedInIntegration, teamIdGenerator],
@@ -370,12 +372,33 @@ export default {
         this.$scrollTo('.herzel', 1300)
       }
     },
+    handleFileUpload() {
+      this.cv = this.$refs.cvFile.files[0];
+      console.log(this.cv);
+    },
     submit() {
       //add post request to PDF cv - value: multipart/form-data
-      axios.post('/api/users/register', {
-        user: this.userData,
-        team: this.teamData
-      });
+      let formData = new FormData();
+      formData.append("file", this.cv);
+      console.log(formData);
+      axios.post("/api/users/self/uploads/cv",
+        formData,
+        {
+          withCredentials: true,
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        }
+      )
+        .then(res => {
+          axios.post('/api/users/register', {
+            user: this.userData,
+            team: this.teamData
+          });
+        })
+        .catch(err => {
+          console.log(err);
+        });
       setTimeout(function() {
         this.currentStep = 0;
         this.isCompleted = true;
