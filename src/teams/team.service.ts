@@ -1,5 +1,6 @@
 import * as animals from "animals";
 import * as _ from "lodash";
+import * as pluralize from "pluralize";
 import { Sequelize } from "sequelize-typescript";
 import { User } from "../users/user.model";
 import { Team } from "./team.model";
@@ -39,7 +40,7 @@ export class TeamService {
   public static async generateTeamCode() {
     const generateNumber = () => Math.floor(Math.random() * 899 + 100);
     const codeNumber = generateNumber();
-    const codeName = animals();
+    const codeName = pluralize(animals());
     const team = await this.checkAvailability({ codeNumber, codeName });
     if (team) {
       return this.generateTeamCode();
