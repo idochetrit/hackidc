@@ -103,6 +103,9 @@ export class User extends Model<User> {
   public rawLinkedin: DataTypeJSONB;
 
   @Column
+  public linkedInProfileUrl: string;
+
+  @Column
   public authToken: string;
 
   @CreatedAt

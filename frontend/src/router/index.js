@@ -26,10 +26,7 @@ const navigateRegistration = (to, from, next) => {
       next();
     } else if (userStatus === "approved") {
       next({ name: "user-dashboard" });
-    } else if (
-      userStatus === "rejected" ||
-      userStatus === "review"
-    ) {
+    } else if (userStatus === "rejected" || userStatus === "review") {
       next({ name: "status" });
     }
   } else if (!status || status === "closed") {
@@ -130,7 +127,14 @@ export default new Router({
       meta: {
         title: "HackIDC 2019 | Dashboard"
       },
-      component: UserDashboard
+      component: UserDashboard,
+      beforeEnter: (to, from, next) => {
+        if (store.getters.isAuthenticated) {
+          next();
+        } else {
+          next({ name: "home" });
+        }
+      }
     },
     {
       path: "/dashboard/team",

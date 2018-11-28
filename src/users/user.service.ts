@@ -36,7 +36,6 @@ export const SANITIZED_FIELDS = [
 export const PATH_SANITIZED_FIELDS = [
   "name",
   "email",
-  "userPicture",
   "foodRestrictionType",
   "gender",
   "bio",
@@ -53,6 +52,7 @@ export class UserService {
       rawLinkedin: profile._raw,
       registerStatus: "pending",
       userPicture: _.get(profile, "photos[0].value"),
+      linkedInProfileUrl: _.get(profile, "_json.publicProfileUrl"),
       authToken
     };
 
@@ -96,7 +96,9 @@ export class UserService {
     let team;
     if (roleName === "TeamBuilder") {
       team = await TeamService.buildTeam({ builder: user, teamParams });
-    } else if (roleName !== "Loner") {
+    }
+
+    if (roleName !== "Loner") {
       await this.connectToTeam({ user, codeNumber, team });
     }
     const { id: roleId } = await userRole.getByName(roleName);

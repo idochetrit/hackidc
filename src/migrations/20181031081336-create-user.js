@@ -79,6 +79,9 @@ module.exports = {
         rawLinkedin: {
           type: Sequelize.JSONB
         },
+        linkedInProfileUrl: {
+          type: Sequelize.STRING
+        },
         authToken: {
           type: Sequelize.STRING(2048)
         },
