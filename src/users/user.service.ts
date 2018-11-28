@@ -28,6 +28,7 @@ export const SANITIZED_FIELDS = [
   "shirtSize",
   "fieldOfStudy",
   "academicInstitute",
+  "linkedInProfileUrl",
   "cvAgree",
   "role",
   "team"

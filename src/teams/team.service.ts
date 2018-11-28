@@ -4,20 +4,14 @@ import { Sequelize } from "sequelize-typescript";
 import { User } from "../users/user.model";
 import { Team } from "./team.model";
 
-
-export const SANITIZED_FIELDS = [
-  "title",
-  "description",
-  "codeNumber",
-  "codeName"
-];
+export const SANITIZED_FIELDS = ["title", "description", "codeNumber", "codeName"];
 
 export class TeamService {
   public static async create(attributes) {
     return attributes;
   }
 
-  public static async buildTeam({ builder, teamParams }: {builder: User, teamParams: any}) {
+  public static async buildTeam({ builder, teamParams }: { builder: User; teamParams: any }) {
     try {
       const newTeam = _.extend({ builderId: builder.id }, teamParams);
       const { codeName, codeNumber } = newTeam;
@@ -72,14 +66,20 @@ export class TeamService {
       .value();
   }
 
-  public static async deleteTeam(id:number){
+  public static async deleteTeam(id: number) {
     const team = await Team.findById(id);
-    team.updateAttributes({isDeleted: true});
+    team.updateAttributes({ isDeleted: true });
   }
-  
-  private static async checkAvailability({ codeNumber, codeName }: {codeNumber: number, codeName: string}) {
+
+  private static async checkAvailability({
+    codeNumber,
+    codeName
+  }: {
+    codeNumber: number;
+    codeName: string;
+  }) {
     const team = await Team.findOne({
-      where: Sequelize.or({codeName},{codeNumber})
+      where: Sequelize.or({ codeName }, { codeNumber })
     });
     return team;
   }
