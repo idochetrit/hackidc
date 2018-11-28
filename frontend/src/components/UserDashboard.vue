@@ -28,7 +28,7 @@
                         <hr>
                         <div class="form-group">
                             <label for="bio-edit">Edit your Bio:</label>
-                            <textarea class="form-control" id="bio-edit" rows="4"></textarea>
+                            <textarea class="form-control" id="bio-edit" rows="4" v-model="newBio"></textarea>
                         </div>
                         <button @click="editBio_done" class="btn btn-sm btn-success">Done</button>
                     </div>
@@ -42,11 +42,13 @@
 <script>
 import linkedInIntegration from '../assets/linkedInIntegration'
 import filters from '../assets/filters'
+import axios from 'axios'
 export default {
   mixins: [linkedInIntegration, filters],
   data() {
     return {
       editBio_flag: false,
+      newBio: "",
     }
   },
   computed: {
@@ -55,7 +57,13 @@ export default {
   methods: {
     editBio() {this.editBio_flag = !this.editBio_flag;},
     editBio_done() {
-      // implement user edit patch api
+      axios.patch(`/api/users/${this.user.id}`, { user: { bio: this.newBio } })
+        .then(res => {
+            this.$store.dispatch("updateUser", res.data);
+        })
+        .catch(err => {
+          console.log(err);
+        });
       this.editBio_flag = !this.editBio_flag;
     }
   },

@@ -30,6 +30,9 @@ export const store = new Vuex.Store({
     signout: state => {
       state.user = {};
       state.authenticated = false;
+    },
+    updateUserObject: (state, payload) => {
+      state.user = { ...payload };
     }
   },
   actions: {
@@ -50,6 +53,15 @@ export const store = new Vuex.Store({
     },
     signOut: context => {
       context.commit("signout");
+    },
+    updateUser: context => {
+      axios.get("/api/users/self", { withCredentials: true })
+        .then(res => {
+          context.commit("updateUserObject", res.data);
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
   }
 });

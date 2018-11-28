@@ -22,7 +22,8 @@ const newUserData = {
         roleId: 0,
         cvAgree: true,
         termsAgree: false,
-        bio: "Write a few words about yourself, edit your Bio!"
+        bio: "",
+        linkedInProfileUrl: "",
       },
       teamData: {
         codeName: "",
