@@ -14,25 +14,82 @@
                 <div class="dashboard-username">
                     <h2>{{ user.name | nameFormatter }}</h2>
                     <h5>Team <strong class="text-info">{{ user.team.codeName | nameFormatter }}</strong></h5> <!--change to team name -->
-                    <h5>{{ user.studyYear | yearFormatter }} year, {{ user.fieldOfStudy | fieldFormatter | nameFormatter }} student, at {{ user.academicInstitute | nameFormatter }}</h5>
+                    <h5>{{ user.studyYear | yearFormatter }} year {{ user.fieldOfStudy | fieldFormatter | nameFormatter }} student, at {{ user.academicInstitute | nameFormatter }}</h5>
                     <a :href="user.linkedInProfileUrl" target="_blank" class="btn btn-md linkedinBtn"><span class="fab fa-linkedin-in fa-lg"></span></a>
                 </div>
             </div>
             <hr>
             <div class="dashboard-body">
                 <h3>Bio</h3>
-                <p>{{ user.bio }}</p>
-                <button @click="editBio" v-if="this.$store.getters.isAuthenticated" class="btn btn-sm btn-info"><strong>Edit Bio</strong></button>
-                <transition mode="out-in" enter-active-class="animated fadeIn">
-                    <div v-if="editBio_flag">
-                        <hr>
-                        <div class="form-group">
-                            <label for="bio-edit">Edit your Bio:</label>
-                            <textarea class="form-control" id="bio-edit" rows="4" v-model="newBio"></textarea>
+                <p style="white-space: pre-line;">{{ user.bio }}</p>
+                <div class="section" v-if="this.$store.getters.isAuthenticated">
+                    <button @click="toggleEdit" v-if="!editArea" class="btn btn-sm btn-info"><strong>Edit your information</strong></button>
+                    <transition mode="out-in" enter-active-class="animated fadeIn">
+                        <div v-if="editArea">
+                            <hr>
+                            <div class="form-group">
+                                <label for="bio-edit">Edit your Bio:</label>
+                                <textarea class="form-control" id="bio-edit" rows="4" placeholder="Edit your Bio..."
+                                          v-model="newBio"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="email-edit">Edit your phone number:</label>
+                                <input class="form-control" id="email-edit"
+                                       type="email" :placeholder="user.email" v-model="newEmail">
+                                <small class="text-muted">digits only, i.e: 0521234567</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="mobile-edit">Edit your phone number:</label>
+                                <input class="form-control" id="mobile-edit"
+                                       type="text" minlength="10" maxlength="10" :placeholder="user.mobile"
+                                       v-model="newMobile">
+                                <small class="text-muted">digits only, i.e: 0521234567</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="shirt">What is your shirt size?</label>
+                                <select id="shirt" class="custom-select"
+                                        v-model="newShirtSize">
+                                    <option value="">Select...</option>
+                                    <option value="s">S</option>
+                                    <option value="m">M</option>
+                                    <option value="l">L</option>
+                                    <option value="xl">XL</option>
+                                    <option value="xxl">XXL</option>
+                                </select>
+                            </div>
+                            <button @click="editBio_done" class="btn btn-sm btn-success">Done</button>
+                            <button @click="editBio_cancel" class="btn btn-sm btn-secondary">Cancel</button>
                         </div>
-                        <button @click="editBio_done" class="btn btn-sm btn-success">Done</button>
-                    </div>
-                </transition>
+                    </transition>
+                </div>
+                <div class="section" v-if="this.$store.getters.isAuthenticated">
+                    <h5>Private Information</h5>
+                    <br>
+                    <table class="table table-sm">
+                        <tbody>
+                        <tr>
+                            <th scope="row">Registration Status</th>
+                            <td :class="{'text-success': user.registerStatus === 'approved',
+                                'text-danger': user.registerStatus === 'reject',
+                                'text-warning': user.registerStatus === 'review'}">{{ user.registerStatus | statusFormatter }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Email Address</th>
+                            <td>{{ user.email }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Mobile Number</th>
+                            <td>{{ user.mobile }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Your CV</th>
+                            <td><a target="_blank" href="/api/users/self/uploads/cv"
+                                   class="btn btn-sm btn-secondary">View CV</a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <button @click="signout" class="btn btn-md btn-danger signoutBtn">Sign Out</button>
+                </div>
             </div>
 
         </div>
@@ -47,29 +104,59 @@ export default {
   mixins: [linkedInIntegration, filters],
   data() {
     return {
-      editBio_flag: false,
+      editFlag: false,
       newBio: "",
+      newEmail: "",
+      newMobile: "",
+      newShirtSize: "",
     }
   },
   computed: {
-    user() {return this.$store.getters.getUser;}
+    user() {return this.$store.getters.getUser;},
+    editArea() {
+      return (this.editFlag) || (this.user.bio.length === 0);
+    }
   },
   methods: {
-    editBio() {this.editBio_flag = !this.editBio_flag;},
+    toggleEdit() {this.editFlag = !this.editFlag},
+    editBio_cancel() {
+      this.newBio = ""; this.newMobile = ""; this.newShirtSize = ""; this.newEmail = "";
+      this.editFlag = !this.editFlag;
+    },
     editBio_done() {
-      axios.patch(`/api/users/${this.user.id}`, { user: { bio: this.newBio } })
+      axios.patch(`/api/users/${this.user.id}`,
+        {
+          user: {
+            bio: this.newBio,
+            mobile: this.newMobile,
+            email: this.newEmail,
+            shirtSize: this.newShirtSize
+          }
+        })
         .then(res => {
             this.$store.dispatch("updateUser", res.data);
         })
         .catch(err => {
           console.log(err);
         });
-      this.editBio_flag = !this.editBio_flag;
+      this.editFlag = !this.editFlag;
+    },
+    signout() {
+      this.$store.dispatch("signOut")
+        .then(() => {
+          axios.get('/api/auth/logout')
+            .then((res) => {
+              console.log("User logged out.", res);
+            });
+        })
+        .then(res => {
+          this.$router.push({name: 'home'});
+        });
     }
   },
   created() {
     this.authRequest();
-  }
+  },
 }
 </script>
 

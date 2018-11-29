@@ -150,10 +150,11 @@
                     <br>
                     <div class="form-row">
                         <div class="form-col">
-                            <div class="custom-file">
+                            <div class="custom-file" :class="{invalid: $v.userData.experienceType.$error}">
                                 <input ref="cvFile" type="file" class="custom-file-input" id="customFile"
+                                       @blur="$v.cv.$touch()"
                                        accept="application/pdf" v-on:change="handleFileUpload">
-                                <label class="custom-file-label" for="customFile">Upload your CV</label>
+                                <label class="custom-file-label" for="customFile">{{ cvFileName }}</label>
                                 <small id="cv-help" class="form-text">Make sure to upload <strong>only PDF files</strong></small>
                             </div>
                         </div>
@@ -332,7 +333,8 @@ export default {
     return {
       currentStep: 1,
       isCompleted: false,
-      cv: ''
+      cv: '',
+      cvFileName: ''
     }
   },
   mixins: [formValidations, newUserData, linkedInIntegration, teamIdGenerator],
@@ -373,6 +375,7 @@ export default {
       }
     },
     handleFileUpload() {
+      this.cvFileName = this.$refs.cvFile.files[0].name;
       this.cv = this.$refs.cvFile.files[0];
       console.log(this.cv);
     },

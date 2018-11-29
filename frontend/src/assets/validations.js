@@ -2,6 +2,7 @@ import { required, email, minLength, maxLength, alphaNum, minValue } from 'vueli
 
 const formValidations = {
   validations: {
+    cv: { required },
     userData: {
       name: { required },
       email: {
@@ -45,7 +46,8 @@ const formValidations = {
         else return false;
       }
       else if (this.currentStep === 3) {
-        if (this.$v.userData.experienceType.$invalid
+        if (this.cvFileName === ""
+          || this.$v.userData.experienceType.$invalid
           || this.$v.userData.techExperience.$invalid) return true;
         else return false;
       }

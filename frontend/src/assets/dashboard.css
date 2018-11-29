@@ -1,7 +1,8 @@
 .container-fluid {
     padding: 0;
     margin-top: 3rem;
-    min-height: 1000px;
+    min-height: 1200px;
+    height: 1500px;
     background-color: #f7f7f7;
     display: flex;
     flex-direction: row;
@@ -11,12 +12,14 @@
 .side-nav {
     padding: 4rem 0 .5rem 0;
     flex-basis: 20%;
+    height: 100%;
     background-color: #212426;
 }
 .main-view {
     margin-top: 3rem;
     flex-basis: 80%;
     padding: 3rem 8rem;
+    overflow: scroll;
 }
 .side-nav ul {
     list-style: none;
@@ -68,4 +71,47 @@ h5 {margin: 0;}
 a.linkedinBtn, a.linkedinBtn:hover {color: #fff;}
 .dashboard-body {
     padding: 2rem 2rem 8rem 0;
+}
+.section {
+    padding: 1rem 0;
+    margin: 1rem 0;
+}
+.signoutBtn {
+    margin-top: 4rem;
+    padding-right: 1.5rem;
+    padding-left: 1.5rem;
+}
+
+@media screen and (max-width: 1200px) {
+    .main-view { padding: 3rem; }
+}
+
+@media screen and (max-width: 767px) {
+    .container-fluid {
+        flex-direction: column;
+        height: 1300px;
+    }
+    .side-nav {
+        width: 100%;
+        flex-basis: 10%;
+    }
+    .main-view {
+        padding: 1rem 2rem;
+    }
+    .dashboard-header { flex-direction: column; align-items: center; }
+    .dashboard-username {
+        padding: 1rem;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .dashboard-header img { margin: 0; }
+    .dashboard-username h5 { font-size: 1.15rem; }
+    .dashboard-body { padding: 1rem 0; }
+}
+
+@media screen and (max-width: 380px) {
+    .main-view { padding: .8rem 2rem; }
+    .main-view { font-size: .8rem; }
+    .dashboard-username { padding: .8rem; }
 }

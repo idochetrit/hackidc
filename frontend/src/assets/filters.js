@@ -9,10 +9,26 @@ const f = {
       return v.replace("-", " ");
     },
     yearFormatter(v) {
-      if (v === 4) return `${v}th`;
-      if (v === 3) return `${v}rd`;
-      if (v === 2) return `${v}nd`;
-      return `${v}st`;
+      switch (v) {
+        case 4:
+          return `${v}th`;
+        case 3:
+          return `${v}rd`;
+        case 2:
+          return `${v}nd`;
+        case 1:
+          return `${v}st`;
+      }
+    },
+    statusFormatter(v) {
+      switch (v) {
+        case "review":
+          return "Under review";
+        case "approved":
+          return "Approved";
+        default:
+          return "Rejected";
+      }
     }
   }
 };

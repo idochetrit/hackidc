@@ -22,7 +22,6 @@ const navigateRegistration = (to, from, next) => {
   const userAuth = store.getters.isAuthenticated;
   if (status === "opened") {
     if (!userAuth || userStatus === "pending") {
-      console.log("here");
       next();
     } else if (userStatus === "approved") {
       next({ name: "user-dashboard" });
