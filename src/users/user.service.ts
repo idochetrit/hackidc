@@ -6,43 +6,7 @@ import { TeamService } from "../teams/team.service";
 import { User } from "./user.model";
 import userRole from "./user.role";
 import UserScore from "./user.score";
-
-export const SANITIZED_FIELDS = [
-  "id",
-  "linkedInId",
-  "name",
-  "email",
-  "userPicture",
-  "registerStatus",
-  "studyYear",
-  "isStudent",
-  "volunteerToAcceptLoner",
-  "experienceType",
-  "techExperience",
-  "foodRestrictionType",
-  "gender",
-  "bio",
-  "degreeType",
-  "hearAboutUs",
-  "mobile",
-  "shirtSize",
-  "fieldOfStudy",
-  "academicInstitute",
-  "linkedInProfileUrl",
-  "cvAgree",
-  "role",
-  "team"
-];
-
-export const PATH_SANITIZED_FIELDS = [
-  "name",
-  "email",
-  "foodRestrictionType",
-  "gender",
-  "bio",
-  "mobile",
-  "shirtSize"
-];
+import { PATH_SANITIZED_FIELDS, SANITIZED_FIELDS, academicInstitutesMap } from "./user.constants";
 
 export class UserService {
   public static createLinkedInUser(profile: any, authToken: string) {
@@ -138,6 +102,8 @@ export class UserService {
       return null;
     }
     const sanitizedParams = _.pick(user, ...SANITIZED_FIELDS);
+    sanitizedParams.academicInstitute =
+      academicInstitutesMap[sanitizedParams.academicInstitute] || "Unknown";
     const role = await user.$get("role");
     const team: Team = user.team || ((await user.$get("team")) as Team);
 
@@ -157,7 +123,12 @@ export class UserService {
     return _.chain(params)
       .get("user")
       .pick(sanitizedFields)
-      .mapValues(val => (typeof val === "string" ? _.toLower(val) : val))
+      .mapValues((val, key) => {
+        if (typeof val === "string" && !_.includes(["bio"], key)) {
+          return _.toLower(val);
+        }
+        return val;
+      })
       .omit("id", "linkedInId", "team")
       .value();
   }
