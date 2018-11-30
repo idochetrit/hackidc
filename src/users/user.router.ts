@@ -4,9 +4,10 @@ import { ensureAuthenticated } from "../concerns/auth.users";
 import { handleError, handleUnauthorize } from "../routers.helper";
 import { TeamService } from "../teams/team.service";
 import UserScore from "./user.score";
-import { UserService, PATH_SANITIZED_FIELDS } from "./user.service";
+import { UserService } from "./user.service";
 import userUploadsRouter from "./user.upload.router";
 import { User } from "./user.model";
+import { PATH_SANITIZED_FIELDS } from "./user.constants";
 
 const router = new Router();
 
