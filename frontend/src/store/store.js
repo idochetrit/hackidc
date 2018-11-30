@@ -11,7 +11,7 @@ export const store = new Vuex.Store({
       registerStatus: ""
     },
     loading: false,
-    registration: "opened" // valid values: 'under-construction' ,'opened' or 'closed'
+    registration: "under-construction" // valid values: 'under-construction' ,'opened' or 'closed'
   },
   getters: {
     isLoading: state => state.loading,
@@ -30,6 +30,7 @@ export const store = new Vuex.Store({
     signout: state => {
       state.user = {};
       state.authenticated = false;
+      // localStorage.setItem('local')
     },
     updateUserObject: (state, payload) => {
       state.user = { ...payload };
