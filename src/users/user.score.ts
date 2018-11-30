@@ -2,20 +2,20 @@ import * as _ from "lodash";
 import { User } from "./user.model";
 export default class UserScore {
   public static readonly WEIGHTS = {
-    studyYear: 0.2,
-    fieldOfStudy: 0.2,
-    degreeType: 0.1,
-    academicInstitute: 0.3,
-    experienceType: 0.2
+    studyYear: 0.08,
+    fieldOfStudy: 0.3,
+    degreeType: 0.15,
+    academicInstitute: 0.15,
+    experienceType: 0.32
   };
 
   public static fieldOfStudyMap = {
     "computer-science": 10,
     engineering: 10,
-    business: 5,
-    economics: 5,
+    business: 7,
+    design: 6,
     entrepreneurship: 5,
-    design: 5,
+    economics: 4,
     sustainability: 3,
     law: 3,
     communications: 3,
@@ -45,7 +45,7 @@ export default class UserScore {
 
     const experienceTypeValue = this.quantifyExperienceType(experienceType);
     const experienceTypeScore =
-      this.normalizeScore(experienceTypeValue, 0, 3) * this.WEIGHTS.experienceType;
+      this.normalizeScore(experienceTypeValue, 0, 5) * this.WEIGHTS.experienceType;
 
     // const techExperienceValue = techExperience ? 1 : 0;
     // const techExperienceScore = techExperienceValue * this.WEIGHTS.techExperience;
@@ -84,7 +84,7 @@ export default class UserScore {
     if (academicInstitute === "idc") {
       return 3;
     } else if (_.includes(univs, academicInstitute)) {
-      return 2;
+      return 2.7;
     } else {
       return 1;
     }
@@ -94,10 +94,10 @@ export default class UserScore {
     return _.get(
       {
         "no-experience": 0,
-        "experienced-other": 1,
+        "experienced-other": 3,
         basic: 1,
-        intermediate: 2,
-        experienced: 3
+        intermediate: 4,
+        experienced: 5
       },
       experienceType,
       0
