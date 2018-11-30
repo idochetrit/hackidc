@@ -14,7 +14,7 @@
                 <div class="dashboard-username">
                     <h2>{{ user.name | nameFormatter }}</h2>
                     <h5>Team <strong class="text-info">{{ user.team.codeName | nameFormatter }}</strong></h5> <!--change to team name -->
-                    <h5>{{ user.studyYear | yearFormatter }} year {{ user.fieldOfStudy | fieldFormatter | nameFormatter }} student, at {{ user.academicInstitute | nameFormatter }}</h5>
+                    <h5>{{ user.studyYear | yearFormatter }} year {{ user.fieldOfStudy | fieldFormatter | nameFormatter }} student, at {{ user.academicInstitute }}</h5>
                     <a :href="user.linkedInProfileUrl" target="_blank" class="btn btn-md linkedinBtn"><span class="fab fa-linkedin-in fa-lg"></span></a>
                 </div>
             </div>
@@ -44,18 +44,6 @@
                                        type="text" minlength="10" maxlength="10" :placeholder="user.mobile"
                                        v-model="newMobile">
                                 <small class="text-muted">digits only, i.e: 0521234567</small>
-                            </div>
-                            <div class="form-group">
-                                <label for="shirt">What is your shirt size?</label>
-                                <select id="shirt" class="custom-select"
-                                        v-model="newShirtSize">
-                                    <option value="">Select...</option>
-                                    <option value="s">S</option>
-                                    <option value="m">M</option>
-                                    <option value="l">L</option>
-                                    <option value="xl">XL</option>
-                                    <option value="xxl">XXL</option>
-                                </select>
                             </div>
                             <button @click="editBio_done" class="btn btn-sm btn-success">Done</button>
                             <button @click="editBio_cancel" class="btn btn-sm btn-secondary">Cancel</button>
@@ -108,7 +96,6 @@ export default {
       newBio: "",
       newEmail: "",
       newMobile: "",
-      newShirtSize: "",
     }
   },
   computed: {
@@ -120,7 +107,7 @@ export default {
   methods: {
     toggleEdit() {this.editFlag = !this.editFlag},
     editBio_cancel() {
-      this.newBio = ""; this.newMobile = ""; this.newShirtSize = ""; this.newEmail = "";
+      this.newBio = ""; this.newMobile = ""; this.newEmail = "";
       this.editFlag = !this.editFlag;
     },
     editBio_done() {
@@ -130,7 +117,6 @@ export default {
             bio: this.newBio,
             mobile: this.newMobile,
             email: this.newEmail,
-            shirtSize: this.newShirtSize
           }
         })
         .then(res => {
