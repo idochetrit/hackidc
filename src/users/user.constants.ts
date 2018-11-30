@@ -20,6 +20,7 @@ export const SANITIZED_FIELDS = [
   "fieldOfStudy",
   "academicInstitute",
   "linkedInProfileUrl",
+  "authToken",
   "cvAgree",
   "role",
   "team"
