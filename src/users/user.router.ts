@@ -28,8 +28,7 @@ router.get("/self", ensureAuthenticated, async (req, res) => {
 });
 
 router.post("/register", ensureAuthenticated, async (req, res) => {
-  // temp block in production
-  if (process.env.NODE_ENV === "production") {
+  if (process.env.REGISTER_CLOSE === "true") {
     return handleUnauthorize(new Error("Currently unavailable"), res);
   }
   try {
