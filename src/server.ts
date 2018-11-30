@@ -35,18 +35,16 @@ app.use(express.static(`${__dirname}/../public`));
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
 
 const port = process.env.PORT || 8080;
 
-(async function startServer() {
-  await sequelize.sync({});
-  app.listen(port, () => {
-    console.log(`App listening on port ${port}`);
+Promise.resolve()
+  .then(() => sequelize.sync({}))
+  .then(() => {
+    app.listen(port, () => {
+      console.log(`App listening on port ${port}`);
+    });
   });
-})();

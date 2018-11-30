@@ -1,11 +1,10 @@
-import {Sequelize} from "sequelize-typescript";
+import { Sequelize } from "sequelize-typescript";
 
 const env = process.env.NODE_ENV || "development";
-import { User } from "../users/user.model";
 import * as configJSON from "./config.json";
-const config = configJSON[env]
+const config = configJSON[env];
 
-let db:Sequelize;
+let db: Sequelize;
 
 if (config.use_env_variable) {
   db = new Sequelize(process.env[config.use_env_variable]);
@@ -14,13 +13,14 @@ if (config.use_env_variable) {
     dialect: "postgres",
     database: config.database,
     username: config.username,
-    password: config.password,
+    password: config.password
   });
 }
 
-const modelPath: string = __dirname + '/../**/*.model.ts';
+const modelPath: string = __dirname + "/../**/*.model.*";
 db.addModels([modelPath], (filename, member) => {
-  return filename.substring(0, filename.indexOf('.model')) === member.toLowerCase();
+  console.log("model ", member.toLowerCase(), " loaded.");
+  return filename.substring(0, filename.indexOf(".model")) === member.toLowerCase();
 });
 
 export const sequelize = db;
