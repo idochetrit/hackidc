@@ -57,7 +57,10 @@ router.patch("/:id", async (req, res) => {
   try {
     const userId: number = Number(req.params.id);
     const user: User = await UserService.findById(userId);
-    const newAttributes: any = UserService.extractUserParams(req.body, PATH_SANITIZED_FIELDS);
+    const newAttributes: any = _.omitBy(
+      UserService.extractUserParams(req.body, PATH_SANITIZED_FIELDS),
+      _.isEmpty
+    );
     const success = await UserService.updateUserWith(user, newAttributes);
     if (success) {
       res.json({

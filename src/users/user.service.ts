@@ -129,7 +129,7 @@ export class UserService {
         }
         return val;
       })
-      .omit("id", "linkedInId", "team")
+      .omit("id", "linkedInId", "team", "linkedInProfileUrl")
       .value();
   }
 
