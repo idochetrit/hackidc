@@ -8,8 +8,13 @@ const linkedInIntegration = {
     authRequest() {
       return axios
         .get("/api/users/self", { withCredentials: true })
-        .then(res => this.$store.dispatch("signIn", res.data))
+        .then(res => {
+          localStorage.setItem("user-token", res.data.authToken);
+          axios.defaults.headers.common["Authorization"] = res.data.authToken;
+          this.$store.dispatch("signIn", res.data);
+        })
         .catch(err => {
+          localStorage.removeItem("user-token");
           console.warn(err);
         });
     }

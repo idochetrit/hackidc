@@ -2,9 +2,10 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from "vue";
 import VueScrollTo from "vue-scrollto";
+import Vuelidate from "vuelidate";
+import axios from "axios";
 import App from "./App.vue";
 import router from "./router";
-import Vuelidate from 'vuelidate'
 import { store } from "./store/store";
 
 Vue.config.productionTip = false;
@@ -14,6 +15,11 @@ Vue.use(VueScrollTo, {
   easing: [0.645, 0.045, 0.355, 1],
   offset: -150
 });
+
+const token = localStorage.getItem("user-token");
+if (token) {
+  axios.defaults.headers.common['Authorization'] = token;
+}
 
 /* eslint-disable no-new */
 new Vue({

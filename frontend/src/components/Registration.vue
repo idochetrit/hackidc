@@ -282,7 +282,7 @@
                     <br>
                     <h2>That's it!</h2>
                     <h4>We're looking forward to read your application form. Good-luck!</h4>
-                    <h5 v-if="userData.role != 'loner'">Your team's number is: <span class="text-info"><strong>{{ teamData.codeNumber }}</strong></span>
+                    <h5 v-if="userData.role != 'loner'">Your team's number is: <span class="text-info"><strong style="font-size: 1.3rem;">{{ teamData.codeNumber }}</strong></span>
                         <br>This number will follow you throughout the whole contest.</h5>
                     <hr>
                     <h5><strong>Good Luck!</strong></h5>
@@ -380,7 +380,6 @@ export default {
       console.log(this.cv);
     },
     submit() {
-      //add post request to PDF cv - value: multipart/form-data
       let formData = new FormData();
       formData.append("file", this.cv);
       console.log(formData);

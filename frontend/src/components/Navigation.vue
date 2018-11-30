@@ -14,7 +14,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <router-link tag="li" class="nav-item mainNav-item" active-class="active" to="/" exact><a class="nav-link">home</a></router-link>
-          <!--<router-link tag="li" class="nav-item mainNav-item" active-class="active" to="/schedule" exact><a class="nav-link">schedule</a></router-link>-->
+          <router-link tag="li" class="nav-item mainNav-item" active-class="active" to="/schedule" exact><a class="nav-link">schedule</a></router-link>
           <router-link tag="li" class="nav-item mainNav-item" active-class="active" to="/resources" exact><a class="nav-link">resources</a></router-link>
           <router-link tag="li" class="nav-item mainNav-item" active-class="active" to="/team" exact><a class="nav-link">the team</a></router-link>
           <router-link tag="li" class="nav-item mainNav-item" active-class="active" to="/gallery" exact><a class="nav-link">gallery</a></router-link>

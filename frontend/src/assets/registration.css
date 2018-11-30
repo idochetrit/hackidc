@@ -132,7 +132,7 @@ a {text-decoration: none; font-weight: bold; color: #232323;}
     .form-col {flex-basis: 100%; padding: 0;}
 }
 
-@media screen and (max-width: 360px) {
+@media screen and (max-width: 380px) {
     .alert {width: 100%;}
     .progress-inside {font-size: .8rem;}
     h2 {font-size: 1.5rem; margin-bottom: 2rem;}

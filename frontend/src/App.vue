@@ -10,6 +10,8 @@
 </template>
 
 <script>
+import axios from "axios";
+import linkedInIntegration from "./assets/linkedInIntegration";
 import Navigation from "./components/Navigation.vue"
 import Footer from './components/Footer.vue'
 import Loader from './components/Loader.vue'
@@ -21,6 +23,21 @@ export default {
     'app-loader': Loader,
     'app-nav': Navigation,
     'app-footer': Footer,
+  },
+  mixins: [linkedInIntegration],
+  beforeMount() {
+    this.authRequest();
+  },
+  created() {
+    axios.interceptors.response.use(undefined, function (err) {
+      return new Promise(() => {
+        if (err.status === 401 && err.config) {
+          this.$store.dispatch("signOut");
+          this.$router.push({ name: 'login' });
+        }
+        throw err;
+      });
+    });
   },
   name: 'App'
 }

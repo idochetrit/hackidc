@@ -21,7 +21,7 @@
             <hr>
             <div class="dashboard-body">
                 <h3>Bio</h3>
-                <p style="white-space: pre-line;">{{ user.bio }}</p>
+                <p class="bio">{{ user.bio }}</p>
                 <div class="section" v-if="this.$store.getters.isAuthenticated">
                     <button @click="toggleEdit" v-if="!editArea" class="btn btn-sm btn-info"><strong>Edit your information</strong></button>
                     <transition mode="out-in" enter-active-class="animated fadeIn">
@@ -53,29 +53,31 @@
                 <div class="section" v-if="this.$store.getters.isAuthenticated">
                     <h5>Private Information</h5>
                     <br>
-                    <table class="table table-sm">
-                        <tbody>
-                        <tr>
-                            <th scope="row">Registration Status</th>
-                            <td :class="{'text-success': user.registerStatus === 'approved',
-                                'text-danger': user.registerStatus === 'reject',
-                                'text-warning': user.registerStatus === 'review'}">{{ user.registerStatus | statusFormatter }}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Email Address</th>
-                            <td>{{ user.email }}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Mobile Number</th>
-                            <td>{{ user.mobile }}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Your CV</th>
-                            <td><a target="_blank" href="/api/users/self/uploads/cv"
-                                   class="btn btn-sm btn-secondary">View CV</a></td>
-                        </tr>
-                        </tbody>
-                    </table>
+                    <div class="table-responsive">
+                        <table class="table table-sm">
+                            <tbody>
+                            <tr>
+                                <th scope="row">Registration Status</th>
+                                <td :class="{'text-success': user.registerStatus === 'approved',
+                                    'text-danger': user.registerStatus === 'reject',
+                                    'text-warning': user.registerStatus === 'review'}"><strong>{{ user.registerStatus | statusFormatter }}</strong></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Email Address</th>
+                                <td>{{ user.email }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Mobile Number</th>
+                                <td>{{ user.mobile }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Your CV</th>
+                                <td><a target="_blank" href="/api/users/self/uploads/cv"
+                                       class="btn btn-sm btn-secondary">View CV</a></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
                     <button @click="signout" class="btn btn-md btn-danger signoutBtn">Sign Out</button>
                 </div>
             </div>
@@ -101,7 +103,9 @@ export default {
   computed: {
     user() {return this.$store.getters.getUser;},
     editArea() {
-      return (this.editFlag) || (this.user.bio.length === 0);
+      if (this.editFlag) return true;
+      else if (this.user.bio.length === 0) return true;
+      return false;
     }
   },
   methods: {
@@ -135,7 +139,7 @@ export default {
               console.log("User logged out.", res);
             });
         })
-        .then(res => {
+        .then(() => {
           this.$router.push({name: 'home'});
         });
     }

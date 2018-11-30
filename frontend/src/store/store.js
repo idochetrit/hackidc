@@ -7,6 +7,7 @@ Vue.use(Vuex);
 export const store = new Vuex.Store({
   state: {
     authenticated: false,
+    token: localStorage.getItem('user-token') || "",
     user: {
       registerStatus: ""
     },
@@ -25,10 +26,12 @@ export const store = new Vuex.Store({
     setRegistrationStatus: (state, payload) => (state.registration = payload),
     authenticate: (state, payload) => {
       state.authenticated = true;
+      state.token = payload.authToken;
       state.user = { ...payload };
     },
     signout: state => {
       state.user = {};
+      state.token = "";
       state.authenticated = false;
       // localStorage.setItem('local')
     },
@@ -54,6 +57,8 @@ export const store = new Vuex.Store({
     },
     signOut: context => {
       context.commit("signout");
+      localStorage.removeItem("user-token");
+      delete axios.defaults.headers.common['Authorization'];
     },
     updateUser: context => {
       axios.get("/api/users/self", { withCredentials: true })

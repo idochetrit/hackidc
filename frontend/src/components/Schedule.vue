@@ -2,7 +2,100 @@
   <div class="container-fluid">
     <div class="container">
       <img class="herzel" src="../../static/herzel_black.png">
-      <h2>Schedule TBD</h2>
+      <h2>Schedule</h2>
+      <table class="table table-dark table-bordered table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th colspan="12">Tuesday, April 11th</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">07:45</th>
+            <td>Registration and Gathering</td>
+            <td>Adelson* Entrance Floor</td>
+          </tr>
+          <tr>
+            <th scope="row">09:00</th>
+            <td>Opening Ceremony</td>
+            <td>Adelson* Auditorium EL03</td>
+          </tr>
+          <tr>
+            <th scope="row">10:00</th>
+            <td>Hacking starts!</td>
+            <td>Floors 1,2,3,4</td>
+          </tr>
+          <tr>
+            <th scope="row">13:00</th>
+            <td>Lunch</td>
+            <td>Outside</td>
+          </tr>
+          <tr>
+            <th scope="row">17:30</th>
+            <td>Happy Hour!</td>
+            <td>Outside</td>
+          </tr>
+          <tr>
+            <th scope="row">19:30</th>
+            <td>Dinner</td>
+            <td>Outside</td>
+          </tr>
+          <tr>
+            <th scope="row">00:00</th>
+            <td>Midnight Snack!</td>
+            <td>Outside</td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="table table-dark table-bordered table-striped">
+        <thead class="thead-dark">
+        <tr>
+          <th colspan="12">Friday, April 12th</th>
+        </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">07:30</th>
+            <td>Breakfast</td>
+            <td>Outside</td>
+          </tr>
+          <tr>
+            <th scope="row">09:00</th>
+            <td>Opening Ceremony</td>
+            <td>Adelson* Auditorium EL03</td>
+          </tr>
+          <tr>
+            <th scope="row">10:30</th>
+            <td>Judging - Challenges</td>
+            <td>TBD</td>
+          </tr>
+          <tr>
+            <th scope="row">11:00</th>
+            <td><strong>Hacking Ends</strong></td>
+            <td>Outside</td>
+          </tr>
+          <tr>
+            <th scope="row">11:10</th>
+            <td>Judging - Round #1</td>
+            <td>TBD</td>
+          </tr>
+          <tr>
+            <th scope="row">12:00</th>
+            <td>Lunch</td>
+            <td>Outside</td>
+          </tr>
+          <tr>
+            <th scope="row">13:00</th>
+            <td>Final Judging & Ceremony</td>
+            <td>Lobby Main Hall</td>
+          </tr>
+          <tr>
+            <th scope="row">14:00</th>
+            <td>The End :)</td>
+          </tr>
+        </tbody>
+      </table>
+      <h5 class="text-muted"><strong>*</strong> All locations refer to Adelson School of Entrepreneurship Building</h5>
     </div>
   </div>
 </template>
@@ -31,8 +124,36 @@
     font-weight: bold;
     text-align: center;
   }
+  table {
+    width: 70%;
+    margin: 2rem 0 1rem 0;
+  }
+  th, td, tr {
+    text-align: center;
+    padding: .5rem 1rem;
+    font-size: 1.2rem;
+  }
+
+  @media screen and (max-width: 1200px) {
+    .herzel {margin-bottom: 2rem;}
+    h2 { margin-bottom: 2rem; }
+    table {
+      width: 90%;
+      margin: 1rem 0;
+    }
+  }
 
   @media screen and (max-width: 767px) {
-    .herzel {width: 20%;}
+    .herzel {width: 20%; margin-bottom: 2rem;}
+    table {
+      width: 100%;
+      margin: 1rem 0;
+    }
+    th, td, tr {
+      text-align: center;
+      padding: .5rem .5rem;
+      font-size: 1rem;
+    }
+    h5 {text-align: center;}
   }
 </style>

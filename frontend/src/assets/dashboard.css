@@ -72,6 +72,11 @@ a.linkedinBtn, a.linkedinBtn:hover {color: #fff;}
 .dashboard-body {
     padding: 2rem 2rem 8rem 0;
 }
+.bio {
+    white-space: pre-line;
+    font-size: 1.1rem;
+    padding-right: 35%;
+}
 .section {
     padding: 1rem 0;
     margin: 1rem 0;
@@ -84,6 +89,9 @@ a.linkedinBtn, a.linkedinBtn:hover {color: #fff;}
 
 @media screen and (max-width: 1200px) {
     .main-view { padding: 3rem; }
+    .bio {
+        padding: 0;
+    }
 }
 
 @media screen and (max-width: 767px) {
