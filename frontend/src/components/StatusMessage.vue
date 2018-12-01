@@ -10,7 +10,10 @@
                 <hr>
                 <h5><strong>HackIDC 2019 Team</strong></h5>
                 <br>
-                <button @click="toHome" class="btn btn-lg btn-info"><strong>Back Home</strong></button>
+                <div class="controls">
+                    <button @click="toHome" class="btn btn-lg btn-secondary"><strong>Back Home</strong></button>
+                    <button @click="toProfile" class="btn btn-lg btn-info"><strong>See your Profile</strong></button>
+                </div>
             </div>
             <div v-else-if="status === 'rejected'" class="row">
                 <span class="far fa-frown-open fa-4x"></span>
@@ -25,7 +28,10 @@
                 <hr>
                 <h5><strong>HackIDC 2019 Team</strong></h5>
                 <br>
-                <button @click="toHome" class="btn btn-lg btn-info"><strong>Back Home</strong></button>
+                <div class="controls">
+                    <button @click="toHome" class="btn btn-lg btn-secondary"><strong>Back Home</strong></button>
+                    <button @click="toProfile" class="btn btn-lg btn-info"><strong>See your Profile</strong></button>
+                </div>
             </div>
         </div>
     </div>
@@ -43,7 +49,10 @@ export default {
   },
   methods: {
     toHome() {
-      this.$router.push({name: 'home'});
+      this.$router.push({ name: "home" });
+    },
+    toProfile() {
+      this.$router.push({ name: "user-dashboard" });
     }
   },
   created() {
@@ -80,35 +89,34 @@ export default {
     .row > * {
         text-align: center;
     }
+    button {margin: 0 .3rem; flex-basis: 25%;}
+    .controls {
+        margin: 1rem 0;
+        width: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
     @media screen and (max-width: 1440px) and (min-width: 1201px) {
         .container {width: 75%;}
     }
     @media screen and (max-width: 1200px) {
-        .progress-bar {width: 95%;}
         .row {padding: 2rem 1rem;}
         h5 {font-size: 1.1rem;}
-        .form-row {padding: 0;}
-        .form-col {flex-basis: 100%; padding: 0 1rem;}
-        h1 {font-size: 2rem;}
-        .row h3 {font-size: 1.4rem;}
-        .row h2 {font-size: 1.7rem;}
+        .row h4 {font-size: 1.2rem;}
+        .row h2 {font-size: 1.5rem; margin-bottom: 1rem;}
         .fas {font-size: 4rem;}
     }
 
     @media screen and (max-width: 767px) {
-        .alert {width: 100%;}
-        .herzel {width: 20%;}
-        .row {padding: 2rem 1rem;}
-        .form-col {flex-basis: 100%; padding: 0;}
+        .row {padding: 2rem .8rem;}
+        button {font-size: 1.1rem;}
     }
 
     @media screen and (max-width: 360px) {
-        .alert {width: 100%;}
-        .progress-inside {font-size: .8rem;}
         h2 {font-size: 1.5rem; margin-bottom: 2rem;}
         h5 {font-size: 1rem;}
-        .linkedinBtn {padding-right: 1rem; padding-left: 1rem;}
         .row {padding: 2rem 1rem;}
         .fas {font-size: 4rem;}
     }

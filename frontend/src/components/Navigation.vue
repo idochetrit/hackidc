@@ -68,7 +68,11 @@ export default {
                 console.log("User logged out.", res);
               });
           })
-        .then(res => {
+        .then(() => {
+          this.$store.dispatch("loadingStart");
+          setTimeout(() => {
+            this.$store.dispatch("loadingEnd");
+          }, 1000);
           this.$router.push({name: 'home'});
         });
     }

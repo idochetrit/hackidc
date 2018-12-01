@@ -288,7 +288,10 @@
                     <h5><strong>Good Luck!</strong></h5>
                     <h5><strong>HackIDC 2019 Team</strong></h5>
                     <br>
-                    <button @click="toHome" class="btn btn-lg btn-info"><strong>Back Home</strong></button>
+                    <div class="controls">
+                        <button @click="toHome" class="btn btn-lg btn-secondary"><strong>Back Home</strong></button>
+                        <button @click="toLogin" class="btn btn-lg btn-info"><strong>Sign In</strong></button>
+                    </div>
                 </div>
             </transition>
             <hr>
@@ -410,7 +413,10 @@ export default {
       }
     },
     toHome() {
-      this.$router.push({name: 'home'});
+      this.$router.push({ name: "home" });
+    },
+    toLogin() {
+      this.$router.push({ name: "login" });
     }
   },
   created(){

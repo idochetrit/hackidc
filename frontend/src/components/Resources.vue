@@ -25,7 +25,7 @@
               <a v-for="(item, i) in c.items" :href="item.link" target="_blank" :key="i" class="card mb-3 mr-3">
                 <img :src="item.thumbnail" class="card-img-top">
                 <div class="card-body">
-                  <h4 class="card-title">{{ item.title }}</h4>
+                  <h5 class="card-title">{{ item.title }}</h5>
                 </div>
               </a>
             </div>
@@ -200,6 +200,7 @@ export default {
   .card {
     flex-basis: 31%;
     text-decoration: none;
+    text-align: center;
     color: #000;
   }
   .card-body {padding: 1rem; border-top: 1px solid #eee;}

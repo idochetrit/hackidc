@@ -25,7 +25,7 @@
                 <div class="section" v-if="this.$store.getters.isAuthenticated">
                     <button @click="toggleEdit" v-if="!editArea" class="btn btn-sm btn-info"><strong>Edit your information</strong></button>
                     <transition mode="out-in" enter-active-class="animated fadeIn">
-                        <div v-if="editArea">
+                        <div v-if="editArea || user.bio.length === 0">
                             <hr>
                             <div class="form-group">
                                 <label for="bio-edit">Edit your Bio:</label>
@@ -46,7 +46,7 @@
                                 <small class="text-muted">digits only, i.e: 0521234567</small>
                             </div>
                             <button @click="editBio_done" class="btn btn-sm btn-success">Done</button>
-                            <button @click="editBio_cancel" class="btn btn-sm btn-secondary">Cancel</button>
+                            <button v-if="user.bio.length > 0" @click="editBio_cancel" class="btn btn-sm btn-secondary">Cancel</button>
                         </div>
                     </transition>
                 </div>
@@ -103,9 +103,7 @@ export default {
   computed: {
     user() {return this.$store.getters.getUser;},
     editArea() {
-      if (this.editFlag) return true;
-      else if (this.user.bio.length === 0) return true;
-      return false;
+      return this.editFlag;
     }
   },
   methods: {
