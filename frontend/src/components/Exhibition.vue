@@ -13,6 +13,7 @@
                     <p>The exhibition will feature innovative artistic representation from leading artists in the digital art world, start-ups that combine technology music and art, computer-generated projects and cutting edge displays from IDC Herzliya that combine art and technology.</p>
                     <h5 class="blueBold">Come join the innovative HackIDC Digital Art Exhibition 2019!</h5>
                     <p>If your art integrates technology, or you have a start-up that connects both worlds, contact us below to discuss displaying your work at <span class="larger redBold">the HackIDC Exhibition 2019.</span></p>
+                    <h4><a href="mailto:digitalart@hackidc.com">digitalart@hackidc.com</a></h4>
                 </div>
             </div>
         </div>
@@ -47,6 +48,13 @@
     .redBold { font-weight: bold; color: #ed117f; }
     .yellowBold { font-weight: bold; color: #f4a61c; }
     .blueBold { font-weight: bold; color: #1585d2; }
+    h4 { text-align: center; }
+    h4 a {
+        color: #fff;
+        font-weight: bold;
+        text-align: center;
+    }
+    h4 a:hover { text-decoration: none; }
 
     @media screen and (max-width: 1200px) {
         .exhibitionLogo { width: 30%; }
