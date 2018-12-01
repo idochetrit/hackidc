@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="container">
             <img class="exhibitionLogo" src="../../static/exhibition_logo.png">
-            <h3>HackIDC digital art exhibition 2019 - <span class="redBold">When teck meets art!</span></h3>
+            <h3>HackIDC digital art exhibition 2019 - <span class="redBold">When tech meets art!</span></h3>
             <div class="row">
                 <div class="offset-lg-1 col-lg-10 col-md-12">
                     <p>HackIDC is the largest student Hackathon in Israel. This annual event is being held for the sixth time and will take place on
