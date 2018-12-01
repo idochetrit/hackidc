@@ -7,6 +7,7 @@ import Resources from "../components/Resources.vue";
 import SponsorProposal from "../components/SponsorProposal.vue";
 import FAQ from "../components/FAQ.vue";
 import Team from "../components/Team.vue";
+import Exhibition from "../components/Exhibition.vue";
 import Gallery from "../components/Gallery.vue";
 import Registration from "../components/Registration.vue";
 import Login from "../components/Login.vue";
@@ -54,6 +55,14 @@ export default new Router({
         title: "HackIDC 2019 | Schedule"
       },
       component: Schedule
+    },
+    {
+      path: "/digital-art-exhibition",
+      name: "exhibition",
+      meta: {
+        title: "HackIDC 2019 | Digital Art Exhibition"
+      },
+      component: Exhibition
     },
     {
       path: "/team",

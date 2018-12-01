@@ -16,6 +16,7 @@
           <router-link tag="li" class="nav-item mainNav-item" active-class="active" to="/" exact><a class="nav-link">home</a></router-link>
           <router-link tag="li" class="nav-item mainNav-item" active-class="active" to="/schedule" exact><a class="nav-link">schedule</a></router-link>
           <router-link tag="li" class="nav-item mainNav-item" active-class="active" to="/resources" exact><a class="nav-link">resources</a></router-link>
+          <router-link tag="li" class="nav-item mainNav-item" active-class="active" to="/digital-art-exhibition" exact><a class="nav-link">exhibition</a></router-link>
           <router-link tag="li" class="nav-item mainNav-item" active-class="active" to="/team" exact><a class="nav-link">the team</a></router-link>
           <router-link tag="li" class="nav-item mainNav-item" active-class="active" to="/gallery" exact><a class="nav-link">gallery</a></router-link>
           <router-link tag="li" class="nav-item mainNav-item" active-class="active" to="/faq" exact><a class="nav-link">FAQ</a></router-link>

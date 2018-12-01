@@ -66,6 +66,7 @@
           As artists discovered the power of technology, they continue to break boundaries and push the limits of their creativity.</p>
           <p>For the first time in Hackathon's history, HackIDC will present a digital art exhibition, combining different pieces from the digital art world and highlights leading artists from the industry.</p>
           <p>Come see the magic yourself!</p>
+          <button @click="toExhibition" class="btn btn-md btn-info">READ MORE ABOUT THE EXHIBITION</button>
         </div>
       </div>
     </div>
@@ -75,8 +76,9 @@
 <script>
 export default {
   methods: {
-    toSchedule() {this.$router.push({name: 'schedule'});},
-    toResources() {this.$router.push({name: 'resources'});}
+    toSchedule() {this.$router.push({ name: "schedule" });},
+    toResources() {this.$router.push({ name: "resources" });},
+    toExhibition() {this.$router.push({ name: "exhibition" });}
   }
 }
 </script>
@@ -134,4 +136,11 @@ export default {
     .row:nth-of-type(2) {flex-direction: column-reverse;}
     .row:nth-of-type(4) {flex-direction: column-reverse;}
   }
+
+  @media screen and (max-width: 380px) {
+    h2 { font-size: 1.6rem; }
+    h5 { font-size: 1.1rem; }
+
+  }
+
 </style>

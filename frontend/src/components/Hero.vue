@@ -69,7 +69,6 @@
   h2 {
     font-size: 2.5rem;
   }
-  /*button.btn-info {background-color: #599ef4 !important;}*/
   button {
     padding-right: 3rem;
     padding-left: 3rem;
@@ -97,5 +96,14 @@
   @media screen and (max-width: 767px) {
     .container-fluid {padding: 6rem 0;}
     .logo {max-width: 70%;}
+  }
+
+  @media screen and (max-width: 380px) {
+    button {
+      padding-right: 1.5rem;
+      padding-left: 1.5rem;
+      margin: 0 .3rem;
+      font-size: 1rem;
+    }
   }
 </style>
