@@ -1,6 +1,10 @@
 <template>
   <div class="container-fluid">
     <div class="container">
+      <div class="row topBanners">
+        <div class="logo-wrapper"><img class="topBannerLogo" src="../../static/efi_arazi_logo.png"></div>
+        <div class="logo-wrapper"><img class="topBannerLogo" src="../../static/student_union_logo.png"></div>
+      </div>
       <div class="row">
         <div class="offset-lg-1 col-lg-10">
           <img class="logo" src="../../static/logo_white.png">
@@ -34,7 +38,7 @@
 <style scoped>
   .container-fluid {
     margin-top: 4rem;
-    padding: 8rem 0;
+    padding: 2rem 0 8rem 0;
     background-size: cover;
     background: url('../../static/hero.jpg') no-repeat bottom;
     display: flex;
@@ -51,7 +55,17 @@
     align-items: center;
     color: #fff;
   }
-
+  .topBanners {
+    padding: 0 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .logo-wrapper:nth-of-type(1) { flex-basis: 20%; }
+  .logo-wrapper:nth-of-type(2) { flex-basis: 10%; }
+  .topBannerLogo {
+    max-width: 100%;
+  }
   .logo {
     max-width: 50%;
     animation: pulse 5s 2.5s infinite ease-in-out;
@@ -90,11 +104,13 @@
   }
 
   @media screen and (max-width: 1200px) {
-    .container-fluid {padding: 6rem 0;}
+    .container-fluid {padding: 3.5rem 0 6rem 0;}
   }
 
   @media screen and (max-width: 767px) {
-    .container-fluid {padding: 6rem 0;}
+    .container-fluid {padding: 2.5rem 0 6rem 0;}
+    .logo-wrapper:nth-of-type(1) { flex-basis: 30%; }
+    .logo-wrapper:nth-of-type(2) { flex-basis: 15%; }
     .logo {max-width: 70%;}
   }
 

@@ -4,7 +4,8 @@
       <div class="container">
         <div class="row">
             <div class="eventLogo">
-              <img class="eventLogo" src="../../static/logo_white.png">
+              <img src="../../static/idc_25_white_english.png">
+              <img src="../../static/logo_white.png">
             </div>
         </div>
         <div class="row">
@@ -26,7 +27,6 @@ export default {
     return {
       logos: [
         require('../../static/efi_arazi_logo.png'),
-        require('../../static/idc_herzliya_logo.png'),
         require('../../static/student_union_logo.png'),
         require('../../static/adelson_logo.png'),
       ]
@@ -47,23 +47,20 @@ export default {
     display: flex;
     justify-content: center;
   }
-  .coop {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    flex-wrap: wrap;
-  }
   .eventLogo {
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 0 1.5rem;
   }
   .eventLogo img {
-    width: 25%;
+    flex-basis: 35%;
     margin: 0 auto;
   }
+  .eventLogo img:nth-of-type(1) {width: 50%;}
+  .eventLogo img:nth-of-type(2) {width: 25%;}
   .footerLogo {
-    flex-basis: 20%;
+    flex-basis: 25%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -71,10 +68,9 @@ export default {
     padding: 1rem 0;
   }
   .footerLogo img {width: 50%;}
+  .footerLogo:nth-of-type(2) img {width: 50%;}
   .footerLogo:nth-of-type(1) img,
-  .footerLogo:nth-of-type(2) img,
-  .footerLogo:nth-of-type(3) img {width: 80%;}
-  .footerLogo:nth-of-type(4) img {width: 70%;}
+  .footerLogo:nth-of-type(3) img {width: 70%;}
 
   @media screen and (max-width: 1440px) and (min-width: 1201px) {
     .container {width: 75%;}
@@ -83,12 +79,14 @@ export default {
   @media screen and (max-width: 1200px) {
     .container-fluid {padding: 2rem .5rem;}
     .footerLogo {padding: 0;}
+    .eventLogo { padding: 0 .5rem; }
+    .eventLogo img { flex-basis: 20%; }
   }
 
   @media screen and (max-width: 767px) {
     .eventLogo img {width: 50%;}
     .footerLogo {flex-basis: 30%; padding: 0;}
     .footerLogo img {width: 65%;}
-    .footerLogo:nth-of-type(2) img {width: 95%;}
+    .footerLogo:nth-of-type(2) img {width: 55%;}
   }
 </style>
