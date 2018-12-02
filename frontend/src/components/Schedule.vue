@@ -22,7 +22,7 @@
           </tr>
           <tr>
             <th scope="row">10:00</th>
-            <td>Hacking starts!</td>
+            <td class="bg-success"><strong>Hacking starts!</strong></td>
             <td>Floors 1,2,3,4</td>
           </tr>
           <tr>
@@ -41,6 +41,11 @@
             <td>Outside</td>
           </tr>
           <tr>
+            <th scope="row">20:30</th>
+            <td>Pitch Workshop</td>
+            <td>TBD</td>
+          </tr>
+          <tr>
             <th scope="row">00:00</th>
             <td>Midnight Snack!</td>
             <td>Outside</td>
@@ -55,37 +60,37 @@
         </thead>
         <tbody>
           <tr>
-            <th scope="row">07:30</th>
+            <th scope="row">07:00</th>
             <td>Breakfast</td>
             <td>Outside</td>
           </tr>
           <tr>
-            <th scope="row">09:00</th>
+            <th scope="row">08:30</th>
             <td>Opening Ceremony</td>
             <td>Adelson* Auditorium EL03</td>
           </tr>
           <tr>
-            <th scope="row">10:30</th>
+            <th scope="row">09:00</th>
+            <td class="bg-danger"><strong>Hacking Ends</strong></td>
+            <td>Outside</td>
+          </tr>
+          <tr>
+            <th scope="row">09:30</th>
             <td>Judging - Challenges</td>
             <td>TBD</td>
           </tr>
           <tr>
-            <th scope="row">11:00</th>
-            <td><strong>Hacking Ends</strong></td>
-            <td>Outside</td>
-          </tr>
-          <tr>
-            <th scope="row">11:10</th>
+            <th scope="row">10:30</th>
             <td>Judging - Round #1</td>
             <td>TBD</td>
           </tr>
           <tr>
-            <th scope="row">12:00</th>
+            <th scope="row">11:30</th>
             <td>Lunch</td>
             <td>Outside</td>
           </tr>
           <tr>
-            <th scope="row">13:00</th>
+            <th scope="row">12:30</th>
             <td>Final Judging & Ceremony</td>
             <td>Lobby Main Hall</td>
           </tr>
@@ -96,6 +101,7 @@
         </tbody>
       </table>
       <h5 class="text-muted"><strong>*</strong> All locations refer to Adelson School of Entrepreneurship Building</h5>
+      <h5 class="text-muted"><strong>*</strong> Please note that the schedule may be subject to change</h5>
     </div>
   </div>
 </template>
@@ -132,6 +138,13 @@
     text-align: center;
     padding: .5rem 1rem;
     font-size: 1.2rem;
+  }
+
+  @media screen and (max-width: 1440px) and (min-width: 1201px) {
+    .container {width: 75%;}
+    th, td, tr {
+      font-size: 1rem;
+    }
   }
 
   @media screen and (max-width: 1200px) {

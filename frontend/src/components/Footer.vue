@@ -3,14 +3,18 @@
     <div class="container-fluid logos">
       <div class="container">
         <div class="row">
-            <div class="eventLogo">
-              <img src="../../static/idc_25_white_english.png">
-              <img src="../../static/logo_white.png">
+          <div class="logos-col">
+            <div v-for="(l,i) in leftColLogos" class="logos-col-item" :key="i">
+              <img :src="l">
             </div>
-        </div>
-        <div class="row">
-          <div v-for="(l,i) in logos" class="footerLogo" :key="i">
-            <img :src="l">
+          </div>
+          <div class="eventLogo">
+            <img src="../../static/logo_white.png">
+          </div>
+          <div class="logos-col">
+            <div v-for="(l,i) in rightColLogos" class="logos-col-item" :key="i">
+              <img :src="l">
+            </div>
           </div>
         </div>
       </div>
@@ -25,8 +29,11 @@ import AddToCalendar from './AddToCalendar.vue'
 export default {
   data() {
     return {
-      logos: [
+      leftColLogos: [
+        require('../../static/idc_25_white_english.png'),
         require('../../static/efi_arazi_logo.png'),
+      ],
+      rightColLogos: [
         require('../../static/student_union_logo.png'),
         require('../../static/adelson_logo.png'),
       ]
@@ -38,6 +45,7 @@ export default {
   }
 }
 </script>
+
 <style scoped>
   .container-fluid.logos {
     background-color: #3a3f45;
@@ -45,48 +53,54 @@ export default {
   }
   .container .row {
     display: flex;
-    justify-content: center;
-  }
-  .eventLogo {
-    display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
-    padding: 0 1.5rem;
   }
-  .eventLogo img {
-    flex-basis: 35%;
-    margin: 0 auto;
+  .logos-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-basis: 31%;
   }
-  .eventLogo img:nth-of-type(1) {width: 50%;}
-  .eventLogo img:nth-of-type(2) {width: 25%;}
-  .footerLogo {
-    flex-basis: 25%;
+  .logos-col-item { height: 110px; padding: .5rem 1rem; }
+  .logos-col-item img { max-height: 90%; }
+  .eventLogo {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 1rem 0;
+    flex-basis: 31%;
   }
-  .footerLogo img {width: 50%;}
-  .footerLogo:nth-of-type(2) img {width: 50%;}
-  .footerLogo:nth-of-type(1) img,
-  .footerLogo:nth-of-type(3) img {width: 70%;}
+  .eventLogo img { max-width: 80%; }
 
   @media screen and (max-width: 1440px) and (min-width: 1201px) {
     .container {width: 75%;}
   }
 
   @media screen and (max-width: 1200px) {
-    .container-fluid {padding: 2rem .5rem;}
-    .footerLogo {padding: 0;}
-    .eventLogo { padding: 0 .5rem; }
-    .eventLogo img { flex-basis: 20%; }
+    .logos-col-item { height: 90px; }
   }
 
   @media screen and (max-width: 767px) {
-    .eventLogo img {width: 50%;}
-    .footerLogo {flex-basis: 30%; padding: 0;}
-    .footerLogo img {width: 65%;}
-    .footerLogo:nth-of-type(2) img {width: 55%;}
+    .container .row { flex-direction: column; }
+    .logos-col {
+      display: flex;
+      flex-direction: row;
+      padding: 0;
+    }
+    .eventLogo { order: 1; }
+    .logos-col:nth-of-type(1) { order: 2; }
+    .logos-col:nth-of-type(3) { order: 2; flex-direction: row-reverse;}
+    .logos-col-item {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      height: 110px;
+      padding: .5rem 0;
+    }
+    .logos-col-item img { max-width: 80%; }
+    .eventLogo img {width: 60%;}
   }
 </style>

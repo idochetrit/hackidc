@@ -2,6 +2,7 @@ import Vue from "vue";
 import Router from "vue-router";
 import { store } from "../store/store";
 import Home from "../components/Home.vue";
+import Terms from "../components/Terms.vue";
 import Schedule from "../components/Schedule.vue";
 import Resources from "../components/Resources.vue";
 import SponsorProposal from "../components/SponsorProposal.vue";
@@ -47,6 +48,14 @@ export default new Router({
         title: "HackIDC 2019 | Home"
       },
       component: Home
+    },
+    {
+      path: "/terms",
+      name: "terms",
+      meta: {
+        title: "HackIDC 2019 | Terms & Conditions"
+      },
+      component: Terms
     },
     {
       path: "/schedule",

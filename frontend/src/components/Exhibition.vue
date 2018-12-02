@@ -7,7 +7,7 @@
                 <div class="offset-lg-1 col-lg-10 col-md-12">
                     <p>HackIDC is the largest student Hackathon in Israel. This annual event is being held for the sixth time and will take place on
                         <span class="larger blueBold">April 11-12, 2019</span> at the Interdisciplinary Center in Herzliya. HackIDC selects approximately 300 of Israel's top computer science and engineering students from all academic institutions in the country.</p>
-                    <p><span class="larger yellowBold">For the first time in the Hackathon world, HackIDC presents a digital art exhibition.</span>
+                    <p><span class="larger yellowBold">For the first time, HackIDC presents a digital art exhibition!</span>
                         The event will combine different art pieces and leaders in the digital art industry. HackIDC believes that creative freedom is essential in enabling true innovation.
                         By integrating creativity and technology, new and fascinating creations can be developed. In the last couple of years, digital art has begun breaking boundaries and typical conventions in the art world.</p>
                     <p>The exhibition will feature innovative artistic representation from leading artists in the digital art world, start-ups that combine technology music and art, computer-generated projects and cutting edge displays from IDC Herzliya that combine art and technology.</p>
