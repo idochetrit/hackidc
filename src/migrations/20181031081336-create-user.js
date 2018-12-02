@@ -1,5 +1,9 @@
+const { sequelize } = require("../../dist/db/sequelize");
+
 module.exports = {
   up: async (queryInterface, Sequelize) => {
+    await sequelize.sync({ force: true });
+    await queryInterface.dropTable("Users");
     await queryInterface.createTable(
       "Users",
       {

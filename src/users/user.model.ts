@@ -3,7 +3,8 @@ import {
   DataTypeBlob,
   DataTypeDouble,
   DataTypeEnum,
-  DataTypeJSONB
+  DataTypeJSONB,
+  DataTypeString
 } from "sequelize";
 import {
   BelongsTo,
@@ -105,7 +106,9 @@ export class User extends Model<User> {
   @Column
   public linkedInProfileUrl: string;
 
-  @Column
+  @Column({
+    type: DataType.STRING({ length: 2048 })
+  })
   public authToken: string;
 
   @CreatedAt

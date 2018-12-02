@@ -4,8 +4,9 @@ import * as pluralize from "pluralize";
 import { Sequelize } from "sequelize-typescript";
 import { User } from "../users/user.model";
 import { Team } from "./team.model";
+import { Challenge } from "../challenges/challenge.model";
 
-export const SANITIZED_FIELDS = ["title", "description", "codeNumber", "codeName"];
+export const SANITIZED_FIELDS = ["title", "description", "codeNumber", "codeName", "challengeName"];
 
 export class TeamService {
   public static async create(attributes) {
@@ -14,7 +15,15 @@ export class TeamService {
 
   public static async buildTeam({ builder, teamParams }: { builder: User; teamParams: any }) {
     try {
-      const newTeam = _.extend({ builderId: builder.id }, teamParams);
+      const { challengeName } = teamParams;
+      const { id: challengeId } = await Challenge.getByName(challengeName || "General");
+      const newTeam = _.extend(
+        {
+          builderId: builder.id,
+          challengeId
+        },
+        teamParams
+      );
       const { codeName, codeNumber } = newTeam;
       const [team] = await Team.findOrCreate({
         defaults: newTeam,

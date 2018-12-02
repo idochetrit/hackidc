@@ -1,5 +1,4 @@
 import * as _ from "lodash";
-import { User } from "./user.model";
 export default class UserScore {
   public static readonly WEIGHTS = {
     studyYear: 0.08,
@@ -94,7 +93,7 @@ export default class UserScore {
     return _.get(
       {
         "no-experience": 0,
-        "experienced-other": 3,
+        "experienced-other": 2,
         basic: 1,
         intermediate: 4,
         experienced: 5
