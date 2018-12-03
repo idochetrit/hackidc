@@ -3,7 +3,7 @@ import moment from 'moment';
 const dateCalculation = {
   data() {
     return {
-      registration_opening_date: "2018-12-15",    //set the registration opening date (yyyy-mm-dd)
+      registration_opening_date: "2018-12-16",    //set the registration opening date (yyyy-mm-dd)
       registration_closing_date: "2019-03-08",    //set the registration closing date (yyyy-mm-dd)
       hackathon_date: "2019-04-11",               //set the hackathon event date (yyyy-mm-dd)
       counter: {

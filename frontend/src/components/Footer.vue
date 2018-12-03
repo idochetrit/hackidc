@@ -30,8 +30,8 @@ export default {
   data() {
     return {
       leftColLogos: [
-        require('../../static/idc_25_white_english.png'),
-        require('../../static/efi_arazi_logo.png'),
+        require('../../static/25_idc_logo_english.png'),
+        require('../../static/25_efi_arazi_white_english.png'),
       ],
       rightColLogos: [
         require('../../static/student_union_logo.png'),
@@ -63,7 +63,7 @@ export default {
     align-items: center;
     flex-basis: 31%;
   }
-  .logos-col-item { height: 110px; padding: .5rem 1rem; }
+  .logos-col-item { height: 90px; padding: .5rem 1rem; }
   .logos-col-item img { max-height: 90%; }
   .eventLogo {
     display: flex;
@@ -79,14 +79,14 @@ export default {
   }
 
   @media screen and (max-width: 1200px) {
-    .logos-col-item { height: 90px; }
+    .logos-col-item { height: 75px; }
   }
 
   @media screen and (max-width: 767px) {
     .container .row { flex-direction: column; }
     .logos-col {
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
       padding: 0;
     }
     .eventLogo { order: 1; }
@@ -97,10 +97,10 @@ export default {
       flex-direction: row;
       align-items: center;
       justify-content: center;
-      height: 110px;
+      height: 80px;
       padding: .5rem 0;
     }
-    .logos-col-item img { max-width: 80%; }
-    .eventLogo img {width: 60%;}
+    .logos-col-item img { max-width: 90%; }
+    .eventLogo img {width: 60%; margin-bottom: 1rem;}
   }
 </style>

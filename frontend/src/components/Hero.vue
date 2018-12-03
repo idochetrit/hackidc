@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <div class="container">
       <div class="row topBanners">
-        <div class="logo-wrapper"><img class="topBannerLogo" src="../../static/efi_arazi_logo.png"></div>
+        <div class="logo-wrapper"><img class="topBannerLogo" src="../../static/25_idc_logo_english.png"></div>
         <div class="logo-wrapper"><img class="topBannerLogo" src="../../static/student_union_logo.png"></div>
       </div>
       <div class="row">

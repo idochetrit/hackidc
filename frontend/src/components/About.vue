@@ -31,7 +31,7 @@
           <h5><strong>Introducing this year <span class="bolder text-info">ACTIVE RECRUITMENT</span> functionality.</strong></h5>
           <p><strong>Industry's top companies will be recruiting during the entire event.</strong></p>
           <p>More details to come, stay tuned!</p>
-          <button v-scroll-to="'#sponsors'" class="btn btn-md btn-info">CHECK OUT THIS YEAR SPONSORS</button>
+          <div class="button-wrapper"><button v-scroll-to="'#sponsors'" class="btn btn-md btn-info">CHECK OUT THIS YEAR SPONSORS</button></div>
         </div>
       </div>
       <br>
@@ -45,7 +45,7 @@
           <p><strong>This is your chance to turn your CS101 knowledge into a real deal.</strong></p>
           <p>Learn about the topics you find important before the competition starts.
             <br>We gathered lots of resources to help turn your basic coding skills into real experience, through you first Hackathon.</p>
-          <button @click="toResources" class="btn btn-md btn-info">VIEW THE RESOURCES</button>
+          <div class="button-wrapper"><button @click="toResources" class="btn btn-md btn-info">VIEW THE RESOURCES</button></div>
         </div>
         <div class="col-lg-4 col-md-4">
           <span class="fas fa-code"></span>
@@ -66,7 +66,7 @@
           As artists discovered the power of technology, they continue to break boundaries and push the limits of their creativity.</p>
           <p>For the first time in Hackathon's history, HackIDC will present a digital art exhibition, combining different pieces from the digital art world and highlights leading artists from the industry.</p>
           <p>Come see the magic yourself!</p>
-          <button @click="toExhibition" class="btn btn-md btn-info">READ MORE ABOUT THE EXHIBITION</button>
+          <div class="button-wrapper"><button @click="toExhibition" class="btn btn-md btn-info">READ MORE ABOUT THE EXHIBITION</button></div>
         </div>
       </div>
     </div>
@@ -135,6 +135,7 @@ export default {
     .col-lg-4 {padding: 3rem 0 0 0; font-size: 9rem;}
     .row:nth-of-type(2) {flex-direction: column-reverse;}
     .row:nth-of-type(4) {flex-direction: column-reverse;}
+    .button-wrapper { width:100%; display: flex; justify-content: center; }
   }
 
   @media screen and (max-width: 380px) {
