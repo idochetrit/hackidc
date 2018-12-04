@@ -5,12 +5,12 @@ import { Sequelize } from "sequelize-typescript";
 import { User } from "../users/user.model";
 import { Team } from "./team.model";
 import { Challenge } from "../challenges/challenge.model";
-import { handleError } from "../routers.helper";
 import { UserService } from "../users/user.service";
+import { SANITIZED_PUBLIC_FIELDS } from "../users/user.constants";
 
-export const SANITIZED_FIELDS = ["description", "codeNumber", "codeName", "challengeId"];
+export const SANITIZED_FIELDS = ["description", "codeNumber", "codeName", "challengeId", "users"];
 export const PATCH_SANITIZED_FIELDS = ["description"];
-
+export const TEAM_CAPACITY: number = Number(process.env.TEAM_CAPACITY) || 5;
 export class TeamService {
   public static async buildTeam({ builder, teamParams }: { builder: User; teamParams: any }) {
     try {
@@ -35,30 +35,34 @@ export class TeamService {
     }
   }
 
-  public static async validateTeam(codeNumber: number) {
-    //: Promise<{ valid: false; errorCode: string }>
-    const team: Team = await this.findOneByCode(codeNumber);
+  public static async validateTeam(
+    codeNumber: number
+  ): Promise<{ valid: boolean; errorCode: string }> {
+    const team: Team = await this.findOneByCode(codeNumber).catch(() => null);
     if (!team) {
       return {
         valid: false,
         errorCode: "team_not_found"
       };
     }
-    // const users = await UserService.findByTeamId(team.id);
-    // if (users.length >= 5) {
-    //   return {
-    //     valid: false,
-    //     errorCode: "team_full"
-    //   };
-    // }
+    const users: User[] = await UserService.findUsersByTeamId(team.id);
+    if (users.length >= TEAM_CAPACITY - 1) {
+      return {
+        valid: false,
+        errorCode: "team_full"
+      };
+    }
     return { valid: true, errorCode: null };
   }
 
   public static async findOneByCode(codeNumber: number) {
     const team = await Team.findOne({
-      where: {
-        codeNumber
-      }
+      where: Sequelize.and(
+        {
+          codeNumber
+        },
+        Sequelize.or({ isDeleted: false }, { isDeleted: { $is: null } })
+      )
     });
     if (!team) {
       throw new Error(`Team with code: ${codeNumber}, not found.`);
@@ -82,8 +86,20 @@ export class TeamService {
     return `${codeNumber}-${codeName}`;
   }
 
-  public static sanitize(team: Team, { withDeps = false } = {}) {
-    const sanitizedParams = _.pick(team, ...SANITIZED_FIELDS);
+  public static async sanitize(team: Team, { withDeps = true } = {}) {
+    let sanitizedParams: any = _.pick(team, ...SANITIZED_FIELDS);
+
+    // add users
+    if (withDeps) {
+      const users: User[] = await UserService.findUsersByTeamId(team.id);
+      const sanitizedUsers: any = await Promise.all(
+        users.map(user => {
+          return UserService.sanitize(user, SANITIZED_PUBLIC_FIELDS, { withDeps: false });
+        })
+      );
+      sanitizedParams.users = sanitizedUsers;
+    }
+
     return sanitizedParams;
   }
 

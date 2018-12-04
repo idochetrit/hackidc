@@ -15,7 +15,7 @@ router.get("/public/:codeNumber", async (req, res) => {
     if (!team) {
       handleNotFound(new Error(`No team found ${teamCodeNumber}`), res);
     }
-    const sanitizedTeam: any = TeamService.sanitize(team);
+    const sanitizedTeam: any = await TeamService.sanitize(team);
     res.json(sanitizedTeam);
   } catch (err) {
     handleError(err, res);
@@ -25,7 +25,7 @@ router.get("/public/:codeNumber", async (req, res) => {
 router.patch("/self", async (req, res) => {
   try {
     const attributes: number = req.body;
-    const userId: number = Number(req.params.id);
+    const userId: number = Number(_.get(req, "user.id")) || req.headers.userid;
 
     const newAttributes: any = _.omitBy(
       TeamService.extractTeamParams(attributes, PATCH_SANITIZED_FIELDS),
@@ -37,7 +37,7 @@ router.patch("/self", async (req, res) => {
     if (!team) {
       handleNotFound(new Error(`No team found ${team.codeNumber}`), res);
     }
-    const sanitizedTeam: any = TeamService.sanitize(team);
+    const sanitizedTeam: any = await TeamService.sanitize(team, { withDeps: false });
     res.json(sanitizedTeam);
   } catch (err) {
     handleError(err, res);
@@ -58,11 +58,9 @@ router.get("/code", async (req, res) => {
 
 router.get("/validate/:codeNumber", async (req, res) => {
   try {
-    const codeNumber: number = Number(res.params.codeNumber);
-    const valid = await TeamService.validateTeam(codeNumber);
-    res.json({
-      isTeamValid: valid
-    });
+    const codeNumber: number = Number(req.params.codeNumber);
+    const validResponse = await TeamService.validateTeam(codeNumber);
+    res.json(validResponse);
   } catch (err) {
     handleError(err, res);
   }

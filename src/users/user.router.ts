@@ -43,19 +43,19 @@ router.post("/register", ensureAuthenticated, async (req, res) => {
     return handleUnauthorize(new Error("Currently unavailable"), res);
   }
   try {
-    const userId = _.get(req, "user.id") || req.headers.userid;
+    const userId: number = Number(_.get(req, "user.id")) || req.headers.userid;
 
-    const user = await UserService.findById(userId);
-    const userParams = UserService.extractUserParams(req.body);
-    const teamParams = TeamService.extractTeamParams(req.body);
+    const user: User = await UserService.findById(userId);
+    const userParams: any = UserService.extractUserParams(req.body);
+    const teamParams: any = TeamService.extractTeamParams(req.body);
 
-    const updatedUser = await UserService.finishRegistration({
+    const updatedUser: User = await UserService.finishRegistration({
       user,
       userParams,
       teamParams
     });
     const sanitizedUser = await UserService.sanitize(updatedUser);
-    const userScore = UserScore.calculateScore(user);
+    const userScore: number = UserScore.calculateScore(user);
 
     res.json({
       user: _.extend(sanitizedUser, { userScore })

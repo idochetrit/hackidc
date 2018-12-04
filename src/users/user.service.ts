@@ -7,6 +7,7 @@ import { User } from "./user.model";
 import userRole from "./user.role";
 import UserScore from "./user.score";
 import { PATH_SANITIZED_FIELDS, SANITIZED_FIELDS, academicInstitutesMap } from "./user.constants";
+import { Sequelize } from "sequelize-typescript";
 
 export class UserService {
   public static createLinkedInUser(profile: any, authToken: string) {
@@ -23,7 +24,10 @@ export class UserService {
 
     return User.findOrCreate({
       defaults: defaultAttrs,
-      where: { linkedInId: { $eq: defaultAttrs.linkedInId } }
+      where: Sequelize.and(
+        { linkedInId: defaultAttrs.linkedInId },
+        Sequelize.or({ isDeleted: false }, { isDeleted: { $is: null } })
+      )
     })
       .spread((user: any, _created: any) => user)
       .catch((err: Error) => {
@@ -84,9 +88,6 @@ export class UserService {
     return updatedUser;
   }
 
-  /**
-   * updateUserWith
-   */
   public static async updateUserWith(user: User, attrs: any = {}) {
     this.validateUserParams(attrs, PATH_SANITIZED_FIELDS);
     await user.update(attrs).catch(err => {
@@ -97,25 +98,41 @@ export class UserService {
     return true;
   }
 
-  public static async findByTeamId(codeNumber: number) {}
+  public static async findUsersByTeamId(teamId: number): Promise<User[]> {
+    const foundUsers: User[] = await User.findAll({
+      where: Sequelize.and(
+        { teamId },
+        Sequelize.or({ isDeleted: false }, { isDeleted: { $is: null } })
+      )
+    });
+    return foundUsers;
+  }
 
   public static async getTeamByUserId(userId: number) {
     const user: User = await this.findById(userId, { includeDeps: true });
     return user.team;
   }
 
-  public static async sanitize(user: User, sanitizeFields = SANITIZED_FIELDS) {
+  public static async sanitize(
+    user: User,
+    sanitizeFields = SANITIZED_FIELDS,
+    { withDeps = true } = {}
+  ) {
     if (!user) {
       return null;
     }
-    const sanitizedParams = _.pick(user, ...sanitizeFields);
+    let sanitizedParams = _.pick(user, ...sanitizeFields);
     sanitizedParams.academicInstitute =
       academicInstitutesMap[sanitizedParams.academicInstitute] || "Unknown";
-    const role = await user.$get("role");
-    const team: Team = user.team || ((await user.$get("team")) as Team);
 
-    sanitizedParams.role = _.get(role, "name") || "Unavailable";
-    sanitizedParams.team = TeamService.sanitize(team);
+    if (withDeps) {
+      const role = await user.$get("role");
+      const team: Team = user.team || ((await user.$get("team")) as Team);
+
+      sanitizedParams.role = _.get(role, "name") || "Unavailable";
+      sanitizedParams.team = await TeamService.sanitize(team);
+    }
+
     return sanitizedParams;
   }
 
@@ -178,7 +195,10 @@ export class UserService {
       includes = [Team, Role];
     }
     const user = await User.findOne({
-      where: { id },
+      where: Sequelize.and(
+        { id },
+        Sequelize.or({ isDeleted: false }, { isDeleted: { $is: null } })
+      ),
       include: includes
     });
 
