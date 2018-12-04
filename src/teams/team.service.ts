@@ -107,7 +107,7 @@ export class TeamService {
     return _.chain(params)
       .get("team")
       .pick(sanitizedFields)
-      .mapValues(i => (typeof i === "string" ? _.toLower(i) : i))
+      .mapValues((v, k) => (k === "codeName" ? _.toLower(v) : v))
       .omit("id")
       .value();
   }
