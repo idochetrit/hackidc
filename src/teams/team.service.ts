@@ -6,6 +6,7 @@ import { User } from "../users/user.model";
 import { Team } from "./team.model";
 import { Challenge } from "../challenges/challenge.model";
 import { handleError } from "../routers.helper";
+import { UserService } from "../users/user.service";
 
 export const SANITIZED_FIELDS = ["description", "codeNumber", "codeName", "challengeId"];
 export const PATCH_SANITIZED_FIELDS = ["description"];
@@ -32,6 +33,25 @@ export class TeamService {
       console.error(`Failed to create user: ${err.message}, ${err.stack}`);
       throw err;
     }
+  }
+
+  public static async validateTeam(codeNumber: number) {
+    //: Promise<{ valid: false; errorCode: string }>
+    const team: Team = await this.findOneByCode(codeNumber);
+    if (!team) {
+      return {
+        valid: false,
+        errorCode: "team_not_found"
+      };
+    }
+    // const users = await UserService.findByTeamId(team.id);
+    // if (users.length >= 5) {
+    //   return {
+    //     valid: false,
+    //     errorCode: "team_full"
+    //   };
+    // }
+    return { valid: true, errorCode: null };
   }
 
   public static async findOneByCode(codeNumber: number) {

@@ -2,8 +2,8 @@ import * as _ from "lodash";
 export default class UserScore {
   public static readonly WEIGHTS = {
     studyYear: 0.08,
-    fieldOfStudy: 0.3,
-    degreeType: 0.15,
+    fieldOfStudy: 0.37,
+    degreeType: 0.08,
     academicInstitute: 0.15,
     experienceType: 0.32
   };
@@ -12,7 +12,7 @@ export default class UserScore {
     "computer-science": 10,
     engineering: 10,
     business: 7,
-    design: 6,
+    design: 7,
     entrepreneurship: 5,
     economics: 4,
     sustainability: 3,
@@ -39,18 +39,21 @@ export default class UserScore {
     const fieldOfStudyScore: number =
       this.normalizeScore(fieldOfStudyVal, 1, 10) * this.WEIGHTS.fieldOfStudy;
 
-    const studyYearValue = studyYear > 1 ? 2 : 1;
-    const studyYearScore = this.normalizeScore(studyYearValue, 1, 2) * this.WEIGHTS.studyYear;
-
     const experienceTypeValue = this.quantifyExperienceType(experienceType);
     const experienceTypeScore =
       this.normalizeScore(experienceTypeValue, 0, 5) * this.WEIGHTS.experienceType;
 
-    // const techExperienceValue = techExperience ? 1 : 0;
-    // const techExperienceScore = techExperienceValue * this.WEIGHTS.techExperience;
-
     const degreeTypeValue = _.get({ master: 2, bachelor: 1 }, degreeType, 1);
     const degreeTypeScore = this.normalizeScore(degreeTypeValue, 1, 2) * this.WEIGHTS.degreeType;
+
+    let studyYearValue = 2;
+    if (
+      _.includes(["computer-science", "engineering", "business"], fieldOfStudy) &&
+      degreeType === "bachelor"
+    ) {
+      studyYearValue = studyYear > 1 ? 2 : 1;
+    }
+    const studyYearScore = this.normalizeScore(studyYearValue, 1, 2) * this.WEIGHTS.studyYear;
 
     const academicInstituteValue = this.quantifyAcademicInstitute(academicInstitute);
     const academicInstituteScore =

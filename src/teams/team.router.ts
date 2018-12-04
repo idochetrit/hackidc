@@ -56,6 +56,18 @@ router.get("/code", async (req, res) => {
   });
 });
 
+router.get("/validate/:codeNumber", async (req, res) => {
+  try {
+    const codeNumber: number = Number(res.params.codeNumber);
+    const valid = await TeamService.validateTeam(codeNumber);
+    res.json({
+      isTeamValid: valid
+    });
+  } catch (err) {
+    handleError(err, res);
+  }
+});
+
 router.delete("/:id", async (req, res) => {
   await TeamService.deleteTeam(req.params.id);
   res.json({

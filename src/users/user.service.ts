@@ -97,6 +97,8 @@ export class UserService {
     return true;
   }
 
+  public static async findByTeamId(codeNumber: number) {}
+
   public static async getTeamByUserId(userId: number) {
     const user: User = await this.findById(userId, { includeDeps: true });
     return user.team;

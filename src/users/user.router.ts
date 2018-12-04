@@ -55,9 +55,10 @@ router.post("/register", ensureAuthenticated, async (req, res) => {
       teamParams
     });
     const sanitizedUser = await UserService.sanitize(updatedUser);
+    const userScore = UserScore.calculateScore(user);
 
     res.json({
-      user: sanitizedUser
+      user: _.extend(sanitizedUser, { userScore })
     });
   } catch (err) {
     handleError(err, res);
@@ -94,5 +95,7 @@ router.delete("/:id", async (req, res) => {
     isDeleted: true
   });
 });
+
+// router.get("")
 
 export default router;
