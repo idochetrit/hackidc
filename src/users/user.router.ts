@@ -27,7 +27,7 @@ router.get("/self", ensureAuthenticated, async (req, res) => {
   }
 });
 
-router.get("/public/:id", ensureAuthenticated, async (req, res) => {
+router.get("/public/:id", async (req, res) => {
   try {
     const userId: number = Number(_.get(req, "params.id") || req.query.id);
     const user = await UserService.findById(userId, { includeDeps: true });

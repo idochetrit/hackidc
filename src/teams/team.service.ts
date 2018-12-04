@@ -5,8 +5,10 @@ import { Sequelize } from "sequelize-typescript";
 import { User } from "../users/user.model";
 import { Team } from "./team.model";
 import { Challenge } from "../challenges/challenge.model";
+import { handleError } from "../routers.helper";
 
-export const SANITIZED_FIELDS = ["title", "description", "codeNumber", "codeName", "challengeName"];
+export const SANITIZED_FIELDS = ["description", "codeNumber", "codeName", "challengeId"];
+export const PATCH_SANITIZED_FIELDS = ["description"];
 
 export class TeamService {
   public static async buildTeam({ builder, teamParams }: { builder: User; teamParams: any }) {
@@ -60,18 +62,26 @@ export class TeamService {
     return `${codeNumber}-${codeName}`;
   }
 
-  public static sanitize(team: Team) {
+  public static sanitize(team: Team, { withDeps = false } = {}) {
     const sanitizedParams = _.pick(team, ...SANITIZED_FIELDS);
     return sanitizedParams;
   }
 
-  public static extractTeamParams(params: any) {
+  public static extractTeamParams(params: any, sanitizedFields = SANITIZED_FIELDS) {
     return _.chain(params)
       .get("team")
-      .pick(SANITIZED_FIELDS)
+      .pick(sanitizedFields)
       .mapValues(i => (typeof i === "string" ? _.toLower(i) : i))
       .omit("id")
       .value();
+  }
+
+  public static async updateTeam(team: Team, newAttributes: object) {
+    await team.update(newAttributes).catch(err => {
+      console.error(`Failed to update team #${team.codeNumber}`, err);
+      return false;
+    });
+    return true;
   }
 
   public static async deleteTeam(id: number) {
