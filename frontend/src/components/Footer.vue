@@ -35,7 +35,7 @@ export default {
       ],
       rightColLogos: [
         require('../../static/student_union_logo.png'),
-        require('../../static/adelson_logo.png'),
+        require('../../static/25_adelson_logo_english.png'),
       ]
     }
   },

@@ -8,6 +8,7 @@
         </div>
         <div class="main-view">
             <div class="dashboard-header">
+                <span class="fas fa-users fa-4x"></span>
                 <div class="dashboard-username">
                     <h2>Team {{ team.codeName | nameFormatter }}</h2>
                     <h5>team number: <strong class="text-info">{{ user.team.codeNumber }}</strong></h5>
@@ -18,7 +19,7 @@
                 <h3>Description</h3>
                 <p class="bio">{{ team.description }}</p>
                 <div class="section" v-if="this.$store.getters.isAuthenticated">
-                    <button @click="toggleEdit" v-if="!editArea" class="btn btn-sm btn-info"><strong>Edit your information</strong></button>
+                    <button @click="toggleEdit" v-if="!editArea" class="btn btn-sm btn-info"><strong>Edit the team information</strong></button>
                     <transition mode="out-in" enter-active-class="animated fadeIn">
                         <div v-if="editArea || !team.description">
                             <hr>
@@ -32,6 +33,16 @@
                         </div>
                     </transition>
                 </div>
+                <h5>Team Members:</h5>
+                <br>
+                <div class="team-members-wrapper">
+                    <a :href="'/users/' + m.id" target="_blank" :key="m.id" v-for="m in team.users" class="team-member">
+                        <img v-if="!m.userPicture" src="https://hairo.e.f1v.co/wp-content/themes/romisa/images/placeholder.jpg"
+                             class="img-responsive img-thumbnail teammate-thumbnail">
+                        <img v-else :src="m.userPicture" class="img-responsive img-thumbnail teammate-thumbnail">
+                        <h5>{{ m.name | nameFormatter }}</h5>
+                    </a>
+                </div>
             </div>
 
         </div>
@@ -41,6 +52,7 @@
 <script>
   import linkedInIntegration from "../assets/linkedInIntegration"
   import filters from "../assets/filters"
+  import axios from "axios";
   export default {
     mixins: [linkedInIntegration, filters],
     data() {
@@ -63,7 +75,7 @@
         this.editFlag = !this.editFlag;
       },
       editDes_done() {
-        axios.patch(`/api/users/${this.team.codeNumber}`,
+        axios.patch("/api/teams/self",
           {
             team: {
               description: this.newDescription,
@@ -85,5 +97,4 @@
 </script>
 
 <style src="../assets/dashboard.css" scoped>
-
 </style>

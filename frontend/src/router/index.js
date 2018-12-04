@@ -17,6 +17,7 @@ import TeamDashboard from "../components/TeamDashboard.vue";
 import TeamPage from "../components/TeamPage.vue";
 import UserPage from "../components/UserPage.vue";
 import StatusMessage from "../components/StatusMessage.vue";
+import PageNotFound from "../components/PageNotFound.vue";
 
 Vue.use(Router);
 
@@ -186,6 +187,11 @@ export default new Router({
         title: "HackIDC 2019 | Users"
       },
       component: UserPage
+    },
+    {
+      path: "/404",
+      name: "404",
+      component: PageNotFound
     },
     {
       path: "*",

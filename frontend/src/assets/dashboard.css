@@ -87,12 +87,37 @@ a.linkedinBtn, a.linkedinBtn:hover {color: #fff;}
     padding-right: 1.5rem;
     padding-left: 1.5rem;
 }
+.team-members-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+.team-member {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-basis: 20%;
+}
+.team-member h5 { text-align: center; font-size: 1.1rem; }
+.teammate-thumbnail {
+    margin-bottom: .5rem;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+}
+a { color: #000; text-decoration: none; }
+a.btn { color: #fff; }
 
 @media screen and (max-width: 1200px) {
     .main-view { padding: 3rem; }
-    .bio {
-        padding: 0;
-    }
+    .bio { padding: 0; }
+    .team-members-wrapper { justify-content: flex-start; }
+    .team-member { flex-basis: 25%; margin-bottom: 1rem; }
+    .team-member h5 { padding: 0; font-size: 1rem; }
+    .teammate-thumbnail { height: 100px; width: 100px; }
 }
 
 @media screen and (max-width: 767px) {
@@ -117,10 +142,18 @@ a.linkedinBtn, a.linkedinBtn:hover {color: #fff;}
     .dashboard-header img { margin: 0; }
     .dashboard-username h5 { font-size: 1.15rem; }
     .dashboard-body { padding: 1rem 0; }
+    .team-member { flex-basis: 33.3333%; margin-bottom: 1rem; }
+    .team-member h5 { padding: 0; font-size: 1rem; }
+    .teammate-thumbnail { height: 100px; width: 100px; }
 }
 
 @media screen and (max-width: 380px) {
     .main-view { padding: .8rem 2rem; }
     .main-view { font-size: .8rem; }
+    h3 { font-size: 1.4rem; }
+    p.bio { font-size: .9rem; }
     .dashboard-username { padding: .8rem; }
+    .team-member { flex-basis: 33.3333%; margin-bottom: 1rem; }
+    .team-member h5 { padding: 0; font-size: .7rem; }
+    .teammate-thumbnail { height: 70px; width: 70px; }
 }
