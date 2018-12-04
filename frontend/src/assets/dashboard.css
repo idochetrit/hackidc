@@ -38,6 +38,7 @@
 }
 .side-nav li:hover {
     cursor: pointer;
+    background-color: #373737;
 }
 h2 {font-weight: bold; margin: 0;}
 h5 {margin: 0;}

@@ -31,8 +31,8 @@
               <span class="fas fa-user fa-lg"></span>Hi, <strong>{{ this.$store.getters.getUser.name | firstName }}</strong>
             </button>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
-              <router-link tag="button" to="/dashboard/profile" class="dropdown-item mainNav-item" type="button">My profile</router-link>
-              <router-link tag="button" to="/dashboard/team" class="dropdown-item mainNav-item" type="button">My team</router-link>
+              <router-link  class="dropdown-item mainNav-item" tag="a" :to="{ name: 'user-dashboard' }" active-class="active" exact>My Profile</router-link>
+              <router-link  class="dropdown-item mainNav-item" tag="a" :to="{ name: 'team-dashboard', params: { codeNumber: user.team.codeNumber } }" active-class="active" exact>My Team</router-link>
               <div class="dropdown-divider"></div>
               <button @click="signout" class="dropdown-item text-danger mainNav-item"><strong>Sign out</strong></button>
             </div>
@@ -79,7 +79,8 @@ export default {
     }
   },
   computed: {
-    registration() {return this.$store.getters.isRegistrationOpen;}
+    registration() {return this.$store.getters.isRegistrationOpen;},
+    user() { return this.$store.getters.getUser },
   },
   mounted() {
     let links = Array.prototype.slice.call(document.getElementsByClassName('mainNav-item'), 0);

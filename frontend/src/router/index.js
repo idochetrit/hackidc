@@ -14,6 +14,8 @@ import Registration from "../components/Registration.vue";
 import Login from "../components/Login.vue";
 import UserDashboard from "../components/UserDashboard.vue";
 import TeamDashboard from "../components/TeamDashboard.vue";
+import TeamPage from "../components/TeamPage.vue";
+import UserPage from "../components/UserPage.vue";
 import StatusMessage from "../components/StatusMessage.vue";
 
 Vue.use(Router);
@@ -139,7 +141,7 @@ export default new Router({
       component: StatusMessage
     },
     {
-      path: "/dashboard/profile",
+      path: "/dashboard/users/profile",
       name: "user-dashboard",
       meta: {
         title: "HackIDC 2019 | Dashboard"
@@ -154,12 +156,36 @@ export default new Router({
       }
     },
     {
-      path: "/dashboard/team",
+      path: "/dashboard/teams/:codeNumber",
       name: "team-dashboard",
       meta: {
         title: "HackIDC 2019 | Dashboard"
       },
-      component: TeamDashboard
+      component: TeamDashboard,
+      beforeEnter: (to, from, next) => {
+        if (store.getters.isAuthenticated) {
+          next();
+        } else {
+          next({ name: "home" });
+        }
+      }
+    },
+    // public routes
+    {
+      path: "teams/:codeNumber",
+      name: "team-page",
+      meta: {
+        title: "HackIDC 2019 | Teams"
+      },
+      component: TeamPage
+    },
+    {
+      path: "users/:id",
+      name: "user-page",
+      meta: {
+        title: "HackIDC 2019 | Users"
+      },
+      component: UserPage
     }
   ],
   mode: "history",

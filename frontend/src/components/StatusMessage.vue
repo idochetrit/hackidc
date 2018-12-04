@@ -43,17 +43,12 @@ import linkedInIntegration from '../assets/linkedInIntegration'
 export default {
   mixins: [linkedInIntegration],
   computed: {
-    status() {
-      return this.$store.getters.getUser.registerStatus;
-    }
+    user() { return this.$store.getters.getUser; },
+    status() { return this.user.registerStatus; }
   },
   methods: {
-    toHome() {
-      this.$router.push({ name: "home" });
-    },
-    toProfile() {
-      this.$router.push({ name: "user-dashboard" });
-    }
+    toHome() { this.$router.push({ name: "home" }); },
+    toProfile() { this.$router.push({ name: "user-dashboard" }); }
   },
   created() {
     this.authRequest();

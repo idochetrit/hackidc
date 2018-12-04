@@ -2,13 +2,13 @@
     <div class="container-fluid">
         <div v-if="this.$store.getters.isAuthenticated" class="side-nav">
             <ul>
-                <router-link tag="li" to="/dashboard/profile" active-class="active" exact><span class="fas fa-user"></span> My Profile</router-link>
-                <router-link tag="li" to="/dashboard/team" active-class="active" exact><span class="fas fa-users"></span> My Team</router-link>
+                <router-link  class="dropdown-item mainNav-item" tag="li" :to="{ name: 'user-dashboard' }" active-class="active" exact><span class="fas fa-user"></span> My Profile</router-link>
+                <router-link  class="dropdown-item mainNav-item" tag="li" :to="{ name: 'team-dashboard', params: { codeNumber: user.team.codeNumber } }" active-class="active" exact><span class="fas fa-users"></span> My Team</router-link>
             </ul>
         </div>
         <div class="main-view">
             <div class="dashboard-header">
-
+                <h1>HELLO</h1>
             </div>
             <hr>
             <div class="dashboard-body">
