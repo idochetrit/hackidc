@@ -172,7 +172,7 @@ export default new Router({
     },
     // public routes
     {
-      path: "teams/:codeNumber",
+      path: "/teams/:codeNumber",
       name: "team-page",
       meta: {
         title: "HackIDC 2019 | Teams"
@@ -180,12 +180,16 @@ export default new Router({
       component: TeamPage
     },
     {
-      path: "users/:id",
+      path: "/users/:id",
       name: "user-page",
       meta: {
         title: "HackIDC 2019 | Users"
       },
       component: UserPage
+    },
+    {
+      path: "*",
+      redirect: { name: "home" }
     }
   ],
   mode: "history",

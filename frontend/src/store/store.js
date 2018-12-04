@@ -33,7 +33,6 @@ export const store = new Vuex.Store({
       state.user = {};
       state.token = "";
       state.authenticated = false;
-      // localStorage.setItem('local')
     },
     updateUserObject: (state, payload) => {
       state.user = { ...payload };
