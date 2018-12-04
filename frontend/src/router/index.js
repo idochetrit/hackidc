@@ -6,6 +6,7 @@ import Terms from "../components/Terms.vue";
 import Schedule from "../components/Schedule.vue";
 import Resources from "../components/Resources.vue";
 import SponsorProposal from "../components/SponsorProposal.vue";
+import MentorsProposal from "../components/MentorsProposal.vue";
 import FAQ from "../components/FAQ.vue";
 import Team from "../components/Team.vue";
 import Exhibition from "../components/Exhibition.vue";
@@ -109,6 +110,14 @@ export default new Router({
       component: SponsorProposal
     },
     {
+      path: "/mentors-and-judges",
+      name: "mentors-and-judges",
+      meta: {
+        title: "HackIDC 2019 | Mentors & Judges"
+      },
+      component: MentorsProposal
+    },
+    {
       path: "/faq",
       name: "faq",
       meta: {
@@ -189,8 +198,11 @@ export default new Router({
       component: UserPage
     },
     {
-      path: "/404",
+      path: "/page-not-found",
       name: "404",
+      meta: {
+        title: "Page Not Found"
+      },
       component: PageNotFound
     },
     {
