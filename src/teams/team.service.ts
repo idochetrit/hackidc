@@ -9,10 +9,6 @@ import { Challenge } from "../challenges/challenge.model";
 export const SANITIZED_FIELDS = ["title", "description", "codeNumber", "codeName", "challengeName"];
 
 export class TeamService {
-  public static async create(attributes) {
-    return attributes;
-  }
-
   public static async buildTeam({ builder, teamParams }: { builder: User; teamParams: any }) {
     try {
       const { challengeName } = teamParams;
@@ -36,9 +32,11 @@ export class TeamService {
     }
   }
 
-  public static async findByCode(codeNumber: number) {
+  public static async findOneByCode(codeNumber: number) {
     const team = await Team.findOne({
-      where: { codeNumber }
+      where: {
+        codeNumber
+      }
     });
     if (!team) {
       throw new Error(`Team with code: ${codeNumber}, not found.`);

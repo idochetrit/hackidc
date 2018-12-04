@@ -89,7 +89,7 @@ export class UserService {
    */
   public static async updateUserWith(user: User, attrs: any = {}) {
     this.validateUserParams(attrs, PATH_SANITIZED_FIELDS);
-    await user.updateAttributes(attrs).catch(err => {
+    await user.update(attrs).catch(err => {
       console.error(`Failed to update user #${user.id}`, err);
       return false;
     });
@@ -97,11 +97,11 @@ export class UserService {
     return true;
   }
 
-  public static async sanitize(user: User) {
+  public static async sanitize(user: User, sanitizeFields = SANITIZED_FIELDS) {
     if (!user) {
       return null;
     }
-    const sanitizedParams = _.pick(user, ...SANITIZED_FIELDS);
+    const sanitizedParams = _.pick(user, ...sanitizeFields);
     sanitizedParams.academicInstitute =
       academicInstitutesMap[sanitizedParams.academicInstitute] || "Unknown";
     const role = await user.$get("role");
@@ -142,7 +142,7 @@ export class UserService {
     codeNumber: number;
     team: any;
   }) {
-    const { id: teamId } = team || (await TeamService.findByCode(codeNumber));
+    const { id: teamId } = team || (await TeamService.findOneByCode(codeNumber));
 
     await user.update({ teamId });
     return user;

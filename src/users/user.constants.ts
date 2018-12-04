@@ -6,7 +6,6 @@ export const SANITIZED_FIELDS = [
   "userPicture",
   "registerStatus",
   "studyYear",
-  "isStudent",
   "volunteerToAcceptLoner",
   "experienceType",
   "techExperience",
@@ -22,6 +21,20 @@ export const SANITIZED_FIELDS = [
   "linkedInProfileUrl",
   "authToken",
   "cvAgree",
+  "role",
+  "team"
+];
+
+export const SANITIZED_PUBLIC_FIELDS = [
+  "id",
+  "name",
+  "userPicture",
+  "studyYear",
+  "gender",
+  "bio",
+  "fieldOfStudy",
+  "academicInstitute",
+  "linkedInProfileUrl",
   "role",
   "team"
 ];

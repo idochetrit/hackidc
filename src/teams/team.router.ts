@@ -1,16 +1,30 @@
 import { Router } from "express";
 import * as _ from "lodash";
-import { handleUnauthorize } from "../routers.helper";
+import { handleError } from "../routers.helper";
 import { TeamService } from "./team.service";
+import { ensureAuthenticated } from "../concerns/auth.users";
 import { Team } from "./team.model";
-import { extname } from "path";
 
 const router = new Router();
 
-router.post("/", async (req, res) => handleUnauthorize("Not Available.", res));
+router.post("/public/:codeNumber", ensureAuthenticated, async (req, res) => {
+  try {
+    const teamCodeNumber: number = Number(req.data.codeNumber);
+    const team: Team = await TeamService.findOneByCode(teamCodeNumber);
+    const sanitizedTeam: any = TeamService.sanitize(team);
+    res.json({
+      team: sanitizedTeam
+    });
+  } catch (err) {
+    handleError(err, res);
+  }
+});
 
 router.get("/code", async (req, res) => {
-  const { codeNumber, codeName } = await TeamService.generateTeamCode();
+  const {
+    codeNumber,
+    codeName
+  }: { codeNumber: number; codeName: number } = await TeamService.generateTeamCode();
 
   res.json({
     codeName,

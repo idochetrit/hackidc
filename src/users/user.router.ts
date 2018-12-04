@@ -7,7 +7,7 @@ import UserScore from "./user.score";
 import { UserService } from "./user.service";
 import userUploadsRouter from "./user.upload.router";
 import { User } from "./user.model";
-import { PATH_SANITIZED_FIELDS } from "./user.constants";
+import { PATH_SANITIZED_FIELDS, SANITIZED_PUBLIC_FIELDS } from "./user.constants";
 
 const router = new Router();
 
@@ -22,6 +22,17 @@ router.get("/self", ensureAuthenticated, async (req, res) => {
     // temp calculate lazy score
     const userScore = UserScore.calculateScore(user);
     res.json(_.extend(sanitizedUser, { userScore }));
+  } catch (err) {
+    handleError(err, res);
+  }
+});
+
+router.get("/public/:id", ensureAuthenticated, async (req, res) => {
+  try {
+    const userId: number = Number(_.get(req, "params.id") || req.query.id);
+    const user = await UserService.findById(userId, { includeDeps: true });
+    const sanitizedUser = await UserService.sanitize(user, SANITIZED_PUBLIC_FIELDS);
+    res.json(sanitizedUser);
   } catch (err) {
     handleError(err, res);
   }
