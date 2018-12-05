@@ -15,7 +15,7 @@
                     <h5>Competition Outline</h5>
                     <p>Each participating team counts up to five participants.
                         HackIDC believes that creative freedom is essential in enabling true innovation. Therefore, HackIDC does not limit its participants to a specific theme, and allows the students to develop any project they choose. This provides a unique opportunity for sponsors to host a challenge in any field of their choice.</p>
-                    <p>At the end of the 36 hours, the teams will be judged first by the team of judges (round A). At the end of the above stage, 7 teams will be chosen to move to Round B.</p>
+                    <p>After 36 hours (round A) ,our staff of judges will pick 7 teams which will proceed to round B.</p>
                     <p>Round B contain 8-10 senior judges, the judges will determine the teams winning the competition:</p>
                     <ol>
                         <li>First place - a prize of 15,000 NIS.</li>
@@ -26,8 +26,8 @@
                     <h4><strong>We are interested in recruiting Mentors and Judges for the event!</strong></h4>
                     <h5>Mentor - Description</h5>
                     <p>A mentor is a person with one or more of the following skills:
-                        Back-End, Front-End, UX / UI, Product Manager, Graphic Design, Pitch, Biz-Dev and more.
-                        The role requires the accompaniment and mentoring of participating teams during the event.</p>
+                        Back-End, Front-End, UX / UI, Product Manager, Graphic Design, Pitch, and Biz-Dev.
+                        The role requires advising and counseling participating teams during the event.</p>
                     <h5>Judge - Round A - Description</h5>
                     <p>A judge in Round A is a person with one or more of the following skills:
                         Back-End, Front-End, UX / UI Investment, Product Manager, Graphic Design, Pitch, Biz-Dev and more.

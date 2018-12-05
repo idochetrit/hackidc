@@ -7,6 +7,7 @@
                 <h5>team number: <strong class="text-info">{{ team.codeNumber }}</strong></h5>
             </div>
             <div class="team-members-wrapper">
+                <h5>Members:</h5>
                 <a :href="'/users/' + m.id" target="_blank" :key="m.id" v-for="m in team.users" class="team-member">
                     <img v-if="!m.userPicture" src="https://hairo.e.f1v.co/wp-content/themes/romisa/images/placeholder.jpg"
                          class="img-responsive img-thumbnail teammate-thumbnail">

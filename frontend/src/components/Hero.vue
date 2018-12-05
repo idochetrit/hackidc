@@ -112,6 +112,12 @@
     .logo-wrapper:nth-of-type(1) { flex-basis: 30%; }
     .logo-wrapper:nth-of-type(2) { flex-basis: 15%; }
     .logo {max-width: 70%;}
+    button {
+      padding-right: 1.5rem;
+      padding-left: 1.5rem;
+      margin: 0 .3rem;
+      font-size: 1rem;
+    }
   }
 
   @media screen and (max-width: 380px) {

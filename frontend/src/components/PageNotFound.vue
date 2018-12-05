@@ -50,10 +50,27 @@ export default {
     }
     .herzel-wrapper { width: 10%; padding: 1rem; }
     .text-wrapper { display: flex; flex-direction: column; align-items: center; }
-    .herzel {
-        max-width: 100%;
-    }
+    .herzel { max-width: 100%; }
     h1 { text-align: center;  color: #fff; font-size: 5rem; font-weight: bold; margin: 0; }
     h4 {  text-align: center; color: #fff; font-size: 2.5rem; font-weight: bold; margin-bottom: 1rem; }
     button { padding-right: 2rem; padding-left: 2rem; }
+
+    @media screen and (max-width: 1200px) {
+        .herzel-wrapper { width: 15%; padding: 1rem; }
+        h1 { font-size: 4.5rem; }
+        h4 { font-size: 2rem; }
+    }
+
+    @media screen and (max-width: 767px) {
+        .herzel-wrapper { width: 30%; padding: 1rem; }
+        h1 { font-size: 4rem; }
+        h4 { font-size: 2rem; }
+    }
+
+    @media screen and (max-width: 380px) {
+        h1 { font-size: 3rem; }
+        h4 { font-size: 1.5rem; }
+    }
+
+
 </style>

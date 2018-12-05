@@ -31,7 +31,10 @@
           <h5><strong>Introducing this year <span class="bolder text-info">ACTIVE RECRUITMENT</span> functionality.</strong></h5>
           <p><strong>Industry's top companies will be recruiting during the entire event.</strong></p>
           <p>More details to come, stay tuned!</p>
-          <div class="button-wrapper"><button v-scroll-to="'#sponsors'" class="btn btn-md btn-info">CHECK OUT THIS YEAR SPONSORS</button></div>
+          <div class="button-wrapper">
+            <button v-scroll-to="'#sponsors'" class="btn btn-md btn-info">THIS YEAR SPONSORS</button>
+            <button @click="toMentorsAndJudges" class="btn btn-md btn-secondary">BECOME A MENTOR</button>
+          </div>
         </div>
       </div>
       <br>
@@ -78,7 +81,8 @@ export default {
   methods: {
     toSchedule() {this.$router.push({ name: "schedule" });},
     toResources() {this.$router.push({ name: "resources" });},
-    toExhibition() {this.$router.push({ name: "exhibition" });}
+    toExhibition() {this.$router.push({ name: "exhibition" });},
+    toMentorsAndJudges() {this.$router.push({ name: "mentors-and-judges" });}
   }
 }
 </script>
@@ -135,7 +139,7 @@ export default {
     .col-lg-4 {padding: 3rem 0 0 0; font-size: 9rem;}
     .row:nth-of-type(2) {flex-direction: column-reverse;}
     .row:nth-of-type(4) {flex-direction: column-reverse;}
-    .button-wrapper { width:100%; display: flex; justify-content: center; }
+    .button-wrapper { width:100%; display: flex; justify-content: space-around; }
   }
 
   @media screen and (max-width: 380px) {

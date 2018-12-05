@@ -2,6 +2,7 @@
   <div class="container-fluid">
     <div class="container">
       <h2>The Judges</h2>
+      <h5>Want to become a HackIDC judge? <router-link :to="{ name: 'mentors-and-judges' }"><a><strong>More details here</strong></a></router-link></h5>
       <br>
       <div class="row">
         <div v-for="(j,i) in judges" :key="i" class="judges-item">
@@ -19,35 +20,25 @@ export default {
     return {
       judges: [
         {
-          name: 'Ariel Shamir',
-          title: 'Dean of Efi Arazi school of Computer Science, IDC Herzliya',
+          name: 'Prof. Uriel Reichman',
+          title: 'President and Founder of IDC Hezliya',
+          thumbnail: 'http://www.deliveringchangeforum.com/wp-content/uploads/2016/10/DSC_4044-2-295x305.jpg'
+        },
+        {
+          name: 'Prof. Ariel (Arik) Shamir',
+          title: 'Dean of Efi Arazi school of Computer Science at IDC Herzliya',
           thumbnail: 'https://res.cloudinary.com/bizzaboprod/image/upload/v1521130553/kwmjgbfyvxkmnlwd9nhx.png'
         },
         {
-          name: 'Ariel Shamir',
-          title: 'Dean of Efi Arazi school of Computer Science, IDC Herzliya',
-          thumbnail: 'https://res.cloudinary.com/bizzaboprod/image/upload/v1521130553/kwmjgbfyvxkmnlwd9nhx.png'
+          name: 'Iddo Gino',
+          title: 'CEO and Founder of RapidAPI',
+          thumbnail: require('../../static/iddo_gino.jpg')
         },
-        {
-          name: 'Ariel Shamir',
-          title: 'Dean of Efi Arazi school of Computer Science, IDC Herzliya',
-          thumbnail: 'https://res.cloudinary.com/bizzaboprod/image/upload/v1521130553/kwmjgbfyvxkmnlwd9nhx.png'
-        },
-        {
-          name: 'Ariel Shamir',
-          title: 'Dean of Efi Arazi school of Computer Science, IDC Herzliya',
-          thumbnail: 'https://res.cloudinary.com/bizzaboprod/image/upload/v1521130553/kwmjgbfyvxkmnlwd9nhx.png'
-        },
-        {
-          name: 'Ariel Shamir',
-          title: 'Dean of Efi Arazi school of Computer Science, IDC Herzliya',
-          thumbnail: 'https://res.cloudinary.com/bizzaboprod/image/upload/v1521130553/kwmjgbfyvxkmnlwd9nhx.png'
-        },
-        {
-          name: 'Ariel Shamir',
-          title: 'Dean of Efi Arazi school of Computer Science, IDC Herzliya',
-          thumbnail: 'https://res.cloudinary.com/bizzaboprod/image/upload/v1521130553/kwmjgbfyvxkmnlwd9nhx.png'
-        },
+        // {
+        //   name: 'Moran Nir',
+        //   title: 'Executive Director of the Zell Program, IDC Herzliya',
+        //   thumbnail: 'https://res.cloudinary.com/bizzaboprod/image/upload/c_crop,g_custom,f_auto/v1520354856/pcl1u7pmq8yhy1ismedk.jpg'
+        // },
       ]
     }
   }
@@ -73,7 +64,9 @@ export default {
     justify-content: center;
     align-items: center;
   }
-  h5 {font-weight: bold;}
+  .judges-item h5 { font-weight: bold; }
+  h5 {text-align: center; padding: 0; font-size: 1rem;}
+  a {color: #000; text-decoration: none;}
   p {
     padding: 0 1rem;
     text-align: center;
@@ -95,6 +88,9 @@ export default {
   }
 
   @media screen and (max-width: 767px) {
+    h5 { font-size: 1rem; }
     .judges-item {flex-basis: 50%; padding: .2rem 0;}
+    .judges-item p { font-size: .8rem; padding: 0 .5rem; }
+    .judges-item h5 { font-size: .9rem; }
   }
 </style>
