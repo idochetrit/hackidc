@@ -428,7 +428,7 @@ export default {
     });
   },
   beforeRouteLeave(to, from, next) {
-    if (!this.isCompleted) {
+    if (!this.isCompleted && this.currentStep > 1) {
       if(confirm("Stop the registration process? Your information will be lost.")) {
         next();
       }
