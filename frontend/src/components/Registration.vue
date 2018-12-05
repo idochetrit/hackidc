@@ -380,9 +380,6 @@ export default {
         }
       }.bind(this), 1000);
       this.$scrollTo('.herzel', 1300);
-      // if (view <= 767) {
-      //   this.$scrollTo('.herzel', 1300)
-      // }
     },
     handleFileUpload() {
       this.cvFileName = this.$refs.cvFile.files[0].name;
@@ -416,9 +413,6 @@ export default {
         this.isCompleted = true;
       }.bind(this), 1000);
       this.$scrollTo('.herzel', 1300);
-      // if (view <= 767) {
-      //
-      // }
     },
     toHome() {
       this.$router.push({ name: "home" });
