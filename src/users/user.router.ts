@@ -15,7 +15,8 @@ router.use("/self/uploads", userUploadsRouter);
 
 router.get("/self", ensureAuthenticated, async (req, res) => {
   try {
-    const userId: number = Number(_.get(req, "user.id") || req.query.id);
+    const userId: number = Number(_.get(req, "user.id")) || req.query.id;
+    if (_.isUndefined(userId) || _.isNaN(userId)) throw new Error("userId is missing");
     const user = await UserService.findById(userId, { includeDeps: true });
     const sanitizedUser = await UserService.sanitize(user);
 
@@ -29,7 +30,8 @@ router.get("/self", ensureAuthenticated, async (req, res) => {
 
 router.get("/public/:id", async (req, res) => {
   try {
-    const userId: number = Number(_.get(req, "params.id") || req.query.id);
+    const userId: number = Number(req.params.id) || req.query.id;
+    if (_.isUndefined(userId) || _.isNaN(userId)) throw new Error("userId is missing");
     const user = await UserService.findById(userId, { includeDeps: true });
     const sanitizedUser = await UserService.sanitize(user, SANITIZED_PUBLIC_FIELDS);
     res.json(sanitizedUser);
