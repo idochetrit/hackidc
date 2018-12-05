@@ -6,8 +6,8 @@
                 <h1>Team {{ team.codeName | nameFormatter }}</h1>
                 <h5>team number: <strong class="text-info">{{ team.codeNumber }}</strong></h5>
             </div>
+            <h5>Members:</h5>
             <div class="team-members-wrapper">
-                <h5>Members:</h5>
                 <a :href="'/users/' + m.id" target="_blank" :key="m.id" v-for="m in team.users" class="team-member">
                     <img v-if="!m.userPicture" src="https://hairo.e.f1v.co/wp-content/themes/romisa/images/placeholder.jpg"
                          class="img-responsive img-thumbnail teammate-thumbnail">
@@ -26,6 +26,7 @@
 </template>
 <script>
 import axios from "axios";
+import { store } from "../store/store";
 import filters from "../assets/filters";
 export default {
   mixins: [filters],
@@ -39,14 +40,17 @@ export default {
   computed: {
     code() { return this.$route.params.codeNumber; },
   },
-  mounted() {
-    axios.get(`/api/teams/public/${this.code}`)
+  beforeRouteEnter (to, from, next) {
+    store.dispatch("loadingStart");
+    axios.get(`/api/teams/public/${to.params.codeNumber}`)
       .then(res => {
-        this.team = res.data;
+        next(vm => {
+          vm.team = res.data;
+        });
       })
       .catch(err => {
         console.warn(err);
-        this.$router.push({ name: "404" });
+        next({ name: "404" });
       });
   }
 }
@@ -82,6 +86,7 @@ export default {
     .profile-body {
         align-items: flex-start;
     }
+    .des-wrapper { width: 70%; }
     .description {
         white-space: pre-line;
         font-size: 1.1rem;

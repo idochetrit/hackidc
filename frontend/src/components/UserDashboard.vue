@@ -23,7 +23,7 @@
                 <h3>Bio</h3>
                 <p class="bio">{{ user.bio }}</p>
                 <div class="section" v-if="this.$store.getters.isAuthenticated">
-                    <button @click="toggleEdit" v-if="!editArea" class="btn btn-sm btn-info"><strong>Edit your information</strong></button>
+                    <button @click="toggleEdit" v-if="!editArea && user.bio.length > 0" class="btn btn-sm btn-info"><strong>Edit your information</strong></button>
                     <transition mode="out-in" enter-active-class="animated fadeIn">
                         <div v-if="editArea || user.bio.length === 0">
                             <hr>
@@ -31,6 +31,7 @@
                                 <label for="bio-edit">Edit your Bio:</label>
                                 <textarea class="form-control" id="bio-edit" rows="4" placeholder="Edit your Bio..."
                                           v-model="newBio"></textarea>
+                                <small class="text-muted">Your bio should include a few words about yourself and your skills.</small>
                             </div>
                             <div class="form-group">
                                 <label for="email-edit">Edit your phone number:</label>
@@ -59,7 +60,7 @@
                             <tr>
                                 <th scope="row">Registration Status</th>
                                 <td :class="{'text-success': user.registerStatus === 'approved',
-                                    'text-danger': user.registerStatus === 'reject',
+                                    'text-danger': user.registerStatus === 'rejected',
                                     'text-warning': user.registerStatus === 'review'}"><strong>{{ user.registerStatus | statusFormatter }}</strong></td>
                             </tr>
                             <tr>
@@ -102,9 +103,7 @@ export default {
   },
   computed: {
     user() {return this.$store.getters.getUser;},
-    editArea() {
-      return this.editFlag;
-    }
+    editArea() { return this.editFlag; },
   },
   methods: {
     toggleEdit() {this.editFlag = !this.editFlag},
@@ -113,6 +112,7 @@ export default {
       this.editFlag = !this.editFlag;
     },
     editBio_done() {
+      this.editFlag = false;
       axios.patch(`/api/users/${this.user.id}`,
         {
           user: {
@@ -127,7 +127,6 @@ export default {
         .catch(err => {
           console.log(err);
         });
-      this.editFlag = !this.editFlag;
     },
     signout() {
       this.$store.dispatch("signOut")

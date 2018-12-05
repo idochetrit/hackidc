@@ -92,7 +92,7 @@ a.linkedinBtn, a.linkedinBtn:hover {color: #fff;}
     flex-wrap: wrap;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     width: 100%;
 }
 .team-member {
@@ -110,7 +110,7 @@ a.linkedinBtn, a.linkedinBtn:hover {color: #fff;}
 }
 a { color: #000; text-decoration: none; }
 a.btn { color: #fff; }
-
+textarea { max-height: 120px; }
 @media screen and (max-width: 1200px) {
     .main-view { padding: 3rem; }
     .bio { padding: 0; }

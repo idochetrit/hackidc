@@ -19,7 +19,7 @@
                 <h3>Description</h3>
                 <p class="bio">{{ team.description }}</p>
                 <div class="section" v-if="this.$store.getters.isAuthenticated">
-                    <button @click="toggleEdit" v-if="!editArea" class="btn btn-sm btn-info"><strong>Edit the team information</strong></button>
+                    <button @click="toggleEdit" v-if="!editArea && team.description" class="btn btn-sm btn-info"><strong>Edit the team information</strong></button>
                     <transition mode="out-in" enter-active-class="animated fadeIn">
                         <div v-if="editArea || !team.description">
                             <hr>
@@ -27,6 +27,7 @@
                                 <label for="bio-edit">Edit your team description:</label>
                                 <textarea class="form-control" id="bio-edit" rows="4" placeholder="Edit your Description..."
                                           v-model="newDescription"></textarea>
+                                <small class="text-muted">Your team description should include a few words about yourselves and about your idea for HackIDC 2019.</small>
                             </div>
                             <button @click="editDes_done" class="btn btn-sm btn-success">Done</button>
                             <button v-if="team.description" @click="editDes_cancel" class="btn btn-sm btn-secondary">Cancel</button>
@@ -64,9 +65,7 @@
     computed: {
       user() {return this.$store.getters.getUser;},
       team() {return this.user.team; },
-      editArea() {
-        return this.editFlag;
-      }
+      editArea() { return this.editFlag; }
     },
     methods: {
       toggleEdit() {this.editFlag = !this.editFlag},
@@ -75,6 +74,7 @@
         this.editFlag = !this.editFlag;
       },
       editDes_done() {
+        this.editFlag = false;
         axios.patch("/api/teams/self",
           {
             team: {
@@ -87,7 +87,6 @@
           .catch(err => {
             console.log(err);
           });
-        this.editFlag = !this.editFlag;
       },
     },
     created() {

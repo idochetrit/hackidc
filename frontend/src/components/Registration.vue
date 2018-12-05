@@ -228,8 +228,9 @@
                             <div v-else-if="userData.role === 'participant'" class="form-group" :class="{invalid: $v.teamData.codeNumber.$error}">
                                 <label for="teamId">Enter your Team Number (received from your Team Builder)</label>
                                 <input id="teamId" type="number" class="form-control"
-                                       @blur="$v.teamData.codeNumber.$touch()"
+                                       @blur="validateTeamID_handler"
                                        v-model="teamData.codeNumber">
+                                <small class="text-danger" v-if="teamIdError.length > 0">{{ teamIdError }}</small>
                             </div>
                             <hr>
                             <div class="form-group" :class="{invalid: $v.userData.shirtSize.$error}">
@@ -334,6 +335,7 @@ const view = document.getElementsByTagName('body')[0].clientWidth;
 export default {
   data() {
     return {
+      teamIdError: "",
       currentStep: 1,
       isCompleted: false,
       cv: '',
@@ -352,6 +354,10 @@ export default {
           this.currentStep = 2;
         });
       }
+    },
+    validateTeamID_handler() {
+      this.$v.teamData.codeNumber.$touch();
+      this.validateTeamID(this.teamData.codeNumber);
     },
     generate() {
       axios.get('/api/teams/code')
@@ -373,9 +379,10 @@ export default {
           return;
         }
       }.bind(this), 1000);
-      if (view <= 767) {
-        this.$scrollTo('.herzel', 1300)
-      }
+      this.$scrollTo('.herzel', 1300);
+      // if (view <= 767) {
+      //   this.$scrollTo('.herzel', 1300)
+      // }
     },
     handleFileUpload() {
       this.cvFileName = this.$refs.cvFile.files[0].name;
@@ -408,9 +415,10 @@ export default {
         this.currentStep = 0;
         this.isCompleted = true;
       }.bind(this), 1000);
-      if (view <= 767) {
-        this.$scrollTo('.herzel', 1300)
-      }
+      this.$scrollTo('.herzel', 1300);
+      // if (view <= 767) {
+      //
+      // }
     },
     toHome() {
       this.$router.push({ name: "home" });
@@ -424,6 +432,15 @@ export default {
       const user = this.$store.getters.getUser;
       this.setStep(user);
     });
+  },
+  beforeRouteLeave(to, from, next) {
+    if (!this.isCompleted) {
+      if(confirm("Stop the registration process? Your information will be lost.")) {
+        next();
+      }
+    } else {
+      next();
+    }
   }
 }
 </script>

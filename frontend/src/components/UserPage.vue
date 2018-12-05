@@ -38,6 +38,7 @@
 </template>
 <script>
 import axios from "axios";
+import { store } from "../store/store";
 import filters from "../assets/filters";
 export default {
   mixins: [filters],
@@ -55,14 +56,17 @@ export default {
       return this.user.team.users.filter(m => m.id !== Number(this.id));
     }
   },
-  mounted() {
-    axios.get(`/api/users/public/${this.id}`)
+  beforeRouteEnter (to, from, next) {
+    store.dispatch("loadingStart");
+    axios.get(`/api/users/public/${to.params.id}`)
       .then(res => {
-        this.user = res.data;
+        next(vm => {
+          vm.user = res.data;
+        });
       })
       .catch(err => {
         console.warn(err);
-        this.$router.push({ name: "404" });
+        next({ name: "404" });
       });
   }
 }
@@ -113,6 +117,7 @@ export default {
     .profile-body {
         align-items: flex-start;
     }
+    .bio-wrapper { width: 70%; }
     .bio {
         white-space: pre-line;
         font-size: 1.1rem;
