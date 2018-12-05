@@ -7,8 +7,10 @@
       <div class="row">
         <div v-for="(j,i) in judges" :key="i" class="judges-item">
           <img class="img-responsive" :src="j.thumbnail">
-          <h5>{{ j.name }}</h5>
-          <p>{{ j.title }}</p>
+          <div>
+            <h5>{{ j.name }}</h5>
+            <p>{{ j.title }}</p>
+          </div>
         </div>
       </div>
     </div>
@@ -34,11 +36,11 @@ export default {
           title: 'CEO and Founder of RapidAPI',
           thumbnail: require('../../static/iddo_gino.jpg')
         },
-        // {
-        //   name: 'Moran Nir',
-        //   title: 'Executive Director of the Zell Program, IDC Herzliya',
-        //   thumbnail: 'https://res.cloudinary.com/bizzaboprod/image/upload/c_crop,g_custom,f_auto/v1520354856/pcl1u7pmq8yhy1ismedk.jpg'
-        // },
+        {
+          name: 'Moran Nir',
+          title: 'Executive Director of the Zell Program, IDC Herzliya',
+          thumbnail: 'https://res.cloudinary.com/bizzaboprod/image/upload/c_crop,g_custom,f_auto/v1520354856/pcl1u7pmq8yhy1ismedk.jpg'
+        },
       ]
     }
   }
@@ -61,7 +63,7 @@ export default {
     padding: 1rem;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
   }
   .judges-item h5 { font-weight: bold; }

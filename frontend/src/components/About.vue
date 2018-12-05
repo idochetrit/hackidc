@@ -145,7 +145,7 @@ export default {
   @media screen and (max-width: 380px) {
     h2 { font-size: 1.6rem; }
     h5 { font-size: 1.1rem; }
-
+    button { font-size: .8rem; margin: 0 .1rem; }
   }
 
 </style>
