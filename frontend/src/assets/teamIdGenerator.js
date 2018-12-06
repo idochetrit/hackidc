@@ -3,7 +3,9 @@ import axios from "axios";
 const generator = {
   methods: {
     generateTeamID() {
-      if (this.userData.role === "team-builder") {
+      if (this.userData.role === "loner") {
+        this.teamData.codeNumber = "001";
+      } else if (this.userData.role === "team-builder") {
         axios
           .get("/api/teams/code")
           .then(res => {

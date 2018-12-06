@@ -3,7 +3,7 @@
         <div v-if="this.$store.getters.isAuthenticated" class="side-nav">
             <ul>
                 <router-link  class="dropdown-item mainNav-item" tag="li" :to="{ name: 'user-dashboard' }" active-class="active" exact><span class="fas fa-user"></span> My Profile</router-link>
-                <router-link  class="dropdown-item mainNav-item" tag="li" :to="{ name: 'team-dashboard', params: { codeNumber: user.team.codeNumber } }" active-class="active" exact><span class="fas fa-users"></span> My Team</router-link>
+                <router-link v-if="user.role != 'Loner'" class="dropdown-item mainNav-item" tag="li" :to="{ name: 'team-dashboard', params: { codeNumber: user.team.codeNumber } }" active-class="active" exact><span class="fas fa-users"></span> My Team</router-link>
             </ul>
         </div>
         <div class="main-view">
@@ -13,7 +13,7 @@
                 <img v-else :src="user.userPicture" class="img-responsive img-thumbnail userThumbnail">
                 <div class="dashboard-username">
                     <h2>{{ user.name | nameFormatter }}</h2>
-                    <h5>Team <strong class="text-info">{{ user.team.codeName | nameFormatter }}</strong></h5>
+                    <h5 v-if="user.role != 'Loner'">Team <strong class="text-info">{{ user.team.codeName | nameFormatter }}</strong></h5>
                     <h5>{{ user.studyYear | yearFormatter }} year {{ user.fieldOfStudy | fieldFormatter | nameFormatter }} student, at {{ user.academicInstitute }}</h5>
                     <a :href="user.linkedInProfileUrl" target="_blank" class="btn btn-md linkedinBtn"><span class="fab fa-linkedin-in fa-lg"></span></a>
                 </div>

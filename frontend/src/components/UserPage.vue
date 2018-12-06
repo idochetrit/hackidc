@@ -10,7 +10,7 @@
                 <a :href="user.linkedInProfileUrl" target="_blank" class="btn btn-md linkedinBtn"><span class="fab fa-linkedin-in fa-lg"></span></a>
             </div>
             <div class="row profile-body">
-                <h4>
+                <h4 v-if="user.role != 'Loner'">
                     <span class="fas fa-user-tie fa-lg"></span> Member of team
                     <a :href="'/teams/' + user.team.codeNumber" target="_blank">
                         <strong class="text-info">{{ user.team.codeName | nameFormatter }}</strong>
@@ -22,7 +22,7 @@
                 </div>
             </div>
             <hr>
-            <div class="row">
+            <div v-if="user.role != 'Loner'" class="row">
                 <h5>Other members in team <strong>{{ user.team.codeName | nameFormatter }}</strong></h5>
                 <div class="team-members-wrapper">
                     <a :href="'/users/' + m.id" target="_blank" :key="m.id" v-for="m in teammates" class="team-member">
