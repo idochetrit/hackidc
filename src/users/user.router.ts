@@ -1,7 +1,7 @@
 import { Router } from "express";
 import * as _ from "lodash";
 import { ensureAuthenticated } from "../concerns/auth.users";
-import { handleError, handleUnauthorize } from "../routers.helper";
+import { handleError, handleUnauthorize, handleNotFound } from "../routers.helper";
 import { TeamService } from "../teams/team.service";
 import UserScore from "./user.score";
 import { UserService } from "./user.service";
@@ -16,7 +16,8 @@ router.use("/self/uploads", userUploadsRouter);
 router.get("/self", ensureAuthenticated, async (req, res) => {
   try {
     const userId: number = Number(_.get(req, "user.id")) || req.query.id;
-    if (_.isUndefined(userId) || _.isNaN(userId)) throw new Error("userId is missing");
+    if (_.isUndefined(userId) || _.isNaN(userId))
+      throw handleNotFound(new Error("userId is missing"), res);
     const user = await UserService.findById(userId, { includeDeps: true });
     const sanitizedUser = await UserService.sanitize(user);
 
