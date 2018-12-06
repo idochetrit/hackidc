@@ -24,10 +24,7 @@ export class UserService {
 
     return User.findOrCreate({
       defaults: defaultAttrs,
-      where: Sequelize.and(
-        { linkedInId: defaultAttrs.linkedInId },
-        Sequelize.or({ isDeleted: false }, { isDeleted: { $is: null } })
-      )
+      where: Sequelize.and({ linkedInId: defaultAttrs.linkedInId })
     })
       .spread((user: any, _created: any) => user)
       .catch((err: Error) => {
@@ -100,10 +97,7 @@ export class UserService {
 
   public static async findUsersByTeamId(teamId: number): Promise<User[]> {
     const foundUsers: User[] = await User.findAll({
-      where: Sequelize.and(
-        { teamId },
-        Sequelize.or({ isDeleted: false }, { isDeleted: { $is: null } })
-      )
+      where: Sequelize.and({ teamId })
     });
     return foundUsers;
   }
@@ -192,19 +186,12 @@ export class UserService {
   ) {
     let includes = [];
     if (includeDeps) {
-      includes = [Team, Role];
+      includes = [{ model: Team, required: false }, { model: Role, required: false }];
     }
     const user = await User.findOne({
-      where: Sequelize.and(
-        { id },
-        Sequelize.or({ isDeleted: false }, { isDeleted: { $is: null } })
-      ),
+      where: { id },
       include: includes
     });
-
-    if (!user) {
-      throw new Error("No user found!");
-    }
     return user;
   }
 

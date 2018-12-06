@@ -56,14 +56,7 @@ export class TeamService {
   }
 
   public static async findOneByCode(codeNumber: number) {
-    const team = await Team.findOne({
-      where: Sequelize.and(
-        {
-          codeNumber
-        },
-        Sequelize.or({ isDeleted: false }, { isDeleted: { $is: null } })
-      )
-    });
+    const team = await Team.findOne({ where: { codeNumber } });
     if (!team) {
       throw new Error(`Team with code: ${codeNumber}, not found.`);
     }

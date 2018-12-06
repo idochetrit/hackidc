@@ -20,9 +20,7 @@ router.get("/self", ensureAuthenticated, async (req, res) => {
     const user = await UserService.findById(userId, { includeDeps: true });
     const sanitizedUser = await UserService.sanitize(user);
 
-    // temp calculate lazy score
-    const userScore = UserScore.calculateScore(user);
-    res.json(_.extend(sanitizedUser, { userScore }));
+    res.json(sanitizedUser);
   } catch (err) {
     handleError(err, res);
   }
@@ -57,11 +55,8 @@ router.post("/register", ensureAuthenticated, async (req, res) => {
       teamParams
     });
     const sanitizedUser = await UserService.sanitize(updatedUser);
-    const userScore: number = UserScore.calculateScore(user);
 
-    res.json({
-      user: _.extend(sanitizedUser, { userScore })
-    });
+    res.json({ user: sanitizedUser });
   } catch (err) {
     handleError(err, res);
   }
