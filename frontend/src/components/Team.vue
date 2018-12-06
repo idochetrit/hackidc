@@ -31,7 +31,7 @@
   data() {
     return {
       topRow: [
-        {name: 'Alon Howben', linkedin: '#', thumbnail: require('../../static/alon.jpg')},
+        {name: 'Alon Howben', linkedin: 'https://www.linkedin.com/in/alon-howben-7397a8176', thumbnail: require('../../static/alon.jpg')},
         {name: 'Golan Romano', linkedin: 'https://www.linkedin.com/in/golan-romano-29933714a/', thumbnail: 'https://media.licdn.com/dms/image/C5603AQFu2bm_Mvsp5g/profile-displayphoto-shrink_800_800/0?e=1545264000&v=beta&t=_Dx7XCJTqdgolASgnnUIJSoCHlZoq3bjamBzH8Vq4sU'},
         {name: 'Ori Zilka', linkedin: 'https://www.linkedin.com/in/ori-zilka-802450153/', thumbnail: 'https://media.licdn.com/dms/image/C4D03AQHLIb55li32qw/profile-displayphoto-shrink_800_800/0?e=1545264000&v=beta&t=tFGTmvxoJi0NzWJNOH_dT08avAT0EFk0Y5H1EVriqJ4'},
       ],

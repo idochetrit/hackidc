@@ -63,9 +63,8 @@
   }
   .logo-wrapper:nth-of-type(1) { flex-basis: 20%; }
   .logo-wrapper:nth-of-type(2) { flex-basis: 10%; }
-  .topBannerLogo {
-    max-width: 100%;
-  }
+  .topBannerLogo { max-width: 100%; }
+  .topBannerLogo:last-of-type { margin-top: .5rem; }
   .logo {
     max-width: 50%;
     animation: pulse 5s 2.5s infinite ease-in-out;
@@ -108,6 +107,7 @@
   }
 
   @media screen and (max-width: 767px) {
+    .topBannerLogo:last-of-type { margin-top: 0; }
     .container-fluid {padding: 2.5rem 0 6rem 0;}
     .logo-wrapper:nth-of-type(1) { flex-basis: 30%; }
     .logo-wrapper:nth-of-type(2) { flex-basis: 15%; }
