@@ -29,7 +29,6 @@ export class UserService {
       .spread((user: any, _created: any) => user)
       .catch((err: Error) => {
         console.log(err, defaultAttrs);
-        throw err;
       });
   }
 
