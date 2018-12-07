@@ -166,7 +166,7 @@ export class UserService {
   }
 
   public static async updateCV({ user, fileParams }: { user: any; fileParams: any }) {
-    console.log("Uplading", fileParams.mimetype, fileParams.name);
+    // console.log("Uplading", fileParams.mimetype, fileParams.name);
     if (fileParams.mimetype !== "application/pdf") {
       throw new Error("File type is not PDF");
     }
