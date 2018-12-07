@@ -37,6 +37,9 @@ export class Team extends Model<Team> {
   @BelongsTo(() => Challenge, "challengeId")
   public challenge: Challenge;
 
+  @BelongsTo(() => Challenge, "defaultChallengeId")
+  public defaultChallenge: Challenge;
+
   @Column
   public codeName: string;
   @Column

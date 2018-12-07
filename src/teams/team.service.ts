@@ -15,11 +15,11 @@ export class TeamService {
   public static async buildTeam({ builder, teamParams }: { builder: User; teamParams: any }) {
     try {
       const { challengeName } = teamParams;
-      const { id: challengeId } = await Challenge.getByName(challengeName || "General");
+      const { id: defaultChallengeId } = await Challenge.getByName(challengeName || "General");
       const newTeam = _.extend(
         {
           builderId: builder.id,
-          challengeId
+          defaultChallengeId
         },
         teamParams
       );
