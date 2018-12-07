@@ -29,7 +29,7 @@
     },
     methods: {
       toRegistrationForm() {
-        this.$router.push({name: 'signup'})
+        this.$router.push({name: 'signup-info'})
       }
     }
   }
@@ -56,6 +56,7 @@
     color: #fff;
   }
   .topBanners {
+    margin-top: 1rem;
     padding: 0 1rem;
     display: flex;
     flex-direction: row;
@@ -63,9 +64,8 @@
   }
   .logo-wrapper:nth-of-type(1) { flex-basis: 20%; }
   .logo-wrapper:nth-of-type(2) { flex-basis: 10%; }
-  .topBannerLogo {
-    max-width: 100%;
-  }
+  .topBannerLogo { max-width: 100%; }
+  .topBannerLogo:last-of-type { margin-top: .5rem; }
   .logo {
     max-width: 50%;
     animation: pulse 5s 2.5s infinite ease-in-out;
@@ -108,10 +108,17 @@
   }
 
   @media screen and (max-width: 767px) {
+    .topBannerLogo:last-of-type { margin-top: 0; }
     .container-fluid {padding: 2.5rem 0 6rem 0;}
     .logo-wrapper:nth-of-type(1) { flex-basis: 30%; }
     .logo-wrapper:nth-of-type(2) { flex-basis: 15%; }
     .logo {max-width: 70%;}
+    button {
+      padding-right: 1.5rem;
+      padding-left: 1.5rem;
+      margin: 0 .3rem;
+      font-size: 1rem;
+    }
   }
 
   @media screen and (max-width: 380px) {

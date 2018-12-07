@@ -8,12 +8,10 @@ import { UserService } from "./user.service";
 const router = new Router();
 
 router.post("/cv", ensureAuthenticated, async (req, res) => {
-  const userId = req.user.id;
-  let user;
-  try {
-    user = await UserService.findById(userId);
-  } catch (err) {
-    handleNotFound(err, res);
+  const userId: number = Number(_.get(req, "user.id")) || req.headers.userid;
+  const user = await UserService.findById(userId);
+  if (!user) {
+    handleNotFound(new Error("user not found!"), res);
   }
 
   try {
@@ -22,19 +20,18 @@ router.post("/cv", ensureAuthenticated, async (req, res) => {
     }
 
     const { file: fileParams } = req.files;
-    await UserService.updateCV({ user, fileParams });
+    UserService.updateCV({ user, fileParams });
+    res.json({
+      success: true,
+      message: "File uploaded"
+    });
   } catch (err) {
-    handleError(err, res);
+    handleError(err, null);
   }
-
-  res.json({
-    success: true,
-    message: "File uploaded"
-  });
 });
 
 router.get("/cv", ensureAuthenticated, async (req, res) => {
-  const userId = req.user.id;
+  const userId: number = Number(_.get(req, "user.id")) || req.headers.userid;
   let user;
   try {
     user = await UserService.findById(userId);

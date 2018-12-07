@@ -65,6 +65,8 @@ export class User extends Model<User> {
   public hearAboutUs: string;
   @Column
   public shirtSize: string;
+  @Column
+  public whyShouldIJoinAnswer: string;
   @Column({
     type: DataType.ARRAY(DataType.STRING)
   })

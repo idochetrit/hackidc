@@ -3,7 +3,7 @@
         <div v-if="this.$store.getters.isAuthenticated" class="side-nav">
             <ul>
                 <router-link  class="dropdown-item mainNav-item" tag="li" :to="{ name: 'user-dashboard' }" active-class="active" exact><span class="fas fa-user"></span> My Profile</router-link>
-                <router-link  class="dropdown-item mainNav-item" tag="li" :to="{ name: 'team-dashboard', params: { codeNumber: user.team.codeNumber } }" active-class="active" exact><span class="fas fa-users"></span> My Team</router-link>
+                <router-link v-if="user.role != 'Loner'" class="dropdown-item mainNav-item" tag="li" :to="{ name: 'team-dashboard', params: { codeNumber: user.team.codeNumber } }" active-class="active" exact><span class="fas fa-users"></span> My Team</router-link>
             </ul>
         </div>
         <div class="main-view">
@@ -13,7 +13,7 @@
                 <img v-else :src="user.userPicture" class="img-responsive img-thumbnail userThumbnail">
                 <div class="dashboard-username">
                     <h2>{{ user.name | nameFormatter }}</h2>
-                    <h5>Team <strong class="text-info">{{ user.team.codeName | nameFormatter }}</strong></h5>
+                    <h5 v-if="user.role != 'Loner'">Team <strong class="text-info">{{ user.team.codeName | nameFormatter }}</strong></h5>
                     <h5>{{ user.studyYear | yearFormatter }} year {{ user.fieldOfStudy | fieldFormatter | nameFormatter }} student, at {{ user.academicInstitute }}</h5>
                     <a :href="user.linkedInProfileUrl" target="_blank" class="btn btn-md linkedinBtn"><span class="fab fa-linkedin-in fa-lg"></span></a>
                 </div>
@@ -23,7 +23,7 @@
                 <h3>Bio</h3>
                 <p class="bio">{{ user.bio }}</p>
                 <div class="section" v-if="this.$store.getters.isAuthenticated">
-                    <button @click="toggleEdit" v-if="!editArea" class="btn btn-sm btn-info"><strong>Edit your information</strong></button>
+                    <button @click="toggleEdit" v-if="!editArea && user.bio.length > 0" class="btn btn-sm btn-info"><strong>Edit your information</strong></button>
                     <transition mode="out-in" enter-active-class="animated fadeIn">
                         <div v-if="editArea || user.bio.length === 0">
                             <hr>
@@ -31,6 +31,7 @@
                                 <label for="bio-edit">Edit your Bio:</label>
                                 <textarea class="form-control" id="bio-edit" rows="4" placeholder="Edit your Bio..."
                                           v-model="newBio"></textarea>
+                                <small class="text-muted">Your bio should include a few words about yourself and your skills.</small>
                             </div>
                             <div class="form-group">
                                 <label for="email-edit">Edit your phone number:</label>
@@ -59,7 +60,7 @@
                             <tr>
                                 <th scope="row">Registration Status</th>
                                 <td :class="{'text-success': user.registerStatus === 'approved',
-                                    'text-danger': user.registerStatus === 'reject',
+                                    'text-danger': user.registerStatus === 'rejected',
                                     'text-warning': user.registerStatus === 'review'}"><strong>{{ user.registerStatus | statusFormatter }}</strong></td>
                             </tr>
                             <tr>
@@ -102,9 +103,7 @@ export default {
   },
   computed: {
     user() {return this.$store.getters.getUser;},
-    editArea() {
-      return this.editFlag;
-    }
+    editArea() { return this.editFlag; },
   },
   methods: {
     toggleEdit() {this.editFlag = !this.editFlag},
@@ -113,6 +112,7 @@ export default {
       this.editFlag = !this.editFlag;
     },
     editBio_done() {
+      this.editFlag = false;
       axios.patch(`/api/users/${this.user.id}`,
         {
           user: {
@@ -127,7 +127,6 @@ export default {
         .catch(err => {
           console.log(err);
         });
-      this.editFlag = !this.editFlag;
     },
     signout() {
       this.$store.dispatch("signOut")

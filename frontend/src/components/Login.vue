@@ -9,7 +9,7 @@
                 <button @click="signin" class="btn btn-lg linkedinBtn"><span class="fab fa-linkedin fa-lg"></span>Log In with LinkedIn</button>
                 <hr>
                 <h5>Not registered yet? Join HackIDC 2019!
-                    <br><router-link :to="{name: 'signup'}"><a class="text-info">Register here</a></router-link></h5>
+                    <br><router-link :to="{name: 'signup-info'}"><a class="text-info">Register here</a></router-link></h5>
             </div>
         </div>
         <div class="overlay"></div>

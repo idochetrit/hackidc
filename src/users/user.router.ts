@@ -1,7 +1,7 @@
 import { Router } from "express";
 import * as _ from "lodash";
 import { ensureAuthenticated } from "../concerns/auth.users";
-import { handleError, handleUnauthorize } from "../routers.helper";
+import { handleError, handleUnauthorize, handleNotFound } from "../routers.helper";
 import { TeamService } from "../teams/team.service";
 import UserScore from "./user.score";
 import { UserService } from "./user.service";
@@ -15,13 +15,13 @@ router.use("/self/uploads", userUploadsRouter);
 
 router.get("/self", ensureAuthenticated, async (req, res) => {
   try {
-    const userId: number = Number(_.get(req, "user.id") || req.query.id);
+    const userId: number = Number(_.get(req, "user.id")) || req.query.id;
+    if (_.isUndefined(userId) || _.isNaN(userId))
+      throw handleNotFound(new Error("userId is missing"), res);
     const user = await UserService.findById(userId, { includeDeps: true });
     const sanitizedUser = await UserService.sanitize(user);
 
-    // temp calculate lazy score
-    const userScore = UserScore.calculateScore(user);
-    res.json(_.extend(sanitizedUser, { userScore }));
+    res.json(sanitizedUser);
   } catch (err) {
     handleError(err, res);
   }
@@ -29,7 +29,8 @@ router.get("/self", ensureAuthenticated, async (req, res) => {
 
 router.get("/public/:id", async (req, res) => {
   try {
-    const userId: number = Number(_.get(req, "params.id") || req.query.id);
+    const userId: number = Number(req.params.id) || req.query.id;
+    if (_.isUndefined(userId) || _.isNaN(userId)) throw new Error("userId is missing");
     const user = await UserService.findById(userId, { includeDeps: true });
     const sanitizedUser = await UserService.sanitize(user, SANITIZED_PUBLIC_FIELDS);
     res.json(sanitizedUser);
@@ -55,11 +56,8 @@ router.post("/register", ensureAuthenticated, async (req, res) => {
       teamParams
     });
     const sanitizedUser = await UserService.sanitize(updatedUser);
-    const userScore: number = UserScore.calculateScore(user);
 
-    res.json({
-      user: _.extend(sanitizedUser, { userScore })
-    });
+    res.json({ user: sanitizedUser });
   } catch (err) {
     handleError(err, res);
   }

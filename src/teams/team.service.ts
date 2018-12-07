@@ -15,11 +15,11 @@ export class TeamService {
   public static async buildTeam({ builder, teamParams }: { builder: User; teamParams: any }) {
     try {
       const { challengeName } = teamParams;
-      const { id: challengeId } = await Challenge.getByName(challengeName || "General");
+      const { id: defaultChallengeId } = await Challenge.getByName(challengeName || "General");
       const newTeam = _.extend(
         {
           builderId: builder.id,
-          challengeId
+          defaultChallengeId
         },
         teamParams
       );
@@ -46,7 +46,7 @@ export class TeamService {
       };
     }
     const users: User[] = await UserService.findUsersByTeamId(team.id);
-    if (users.length >= TEAM_CAPACITY - 1) {
+    if (users.length + 1 > TEAM_CAPACITY) {
       return {
         valid: false,
         errorCode: "team_full"
@@ -56,14 +56,7 @@ export class TeamService {
   }
 
   public static async findOneByCode(codeNumber: number) {
-    const team = await Team.findOne({
-      where: Sequelize.and(
-        {
-          codeNumber
-        },
-        Sequelize.or({ isDeleted: false }, { isDeleted: { $is: null } })
-      )
-    });
+    const team = await Team.findOne({ where: { codeNumber } });
     if (!team) {
       throw new Error(`Team with code: ${codeNumber}, not found.`);
     }
@@ -107,7 +100,7 @@ export class TeamService {
     return _.chain(params)
       .get("team")
       .pick(sanitizedFields)
-      .mapValues(i => (typeof i === "string" ? _.toLower(i) : i))
+      .mapValues((v, k) => (k === "codeName" ? _.toLower(v) : v))
       .omit("id")
       .value();
   }

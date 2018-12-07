@@ -15,7 +15,7 @@
           <div class="point">
             <h4>Who can apply?</h4>
             <hr>
-            <p><strong>Any current student studying at any academic institution, pursuing a first degree and majoring in any subject.</strong></p>
+            <p><strong>Any current student studying at any academic institution, pursuing either a first or second degree and majoring in any subject.</strong></p>
             <p>Most accepted participants come with some coding or design background, to make sure they can contribute to the event.</p>
             <p>If you believe you are able to contribute in another way, we encourage you to apply.</p>
           </div>

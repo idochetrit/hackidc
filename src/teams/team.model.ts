@@ -1,18 +1,26 @@
-import { DataTypeDouble, DataTypeEnum, DataTypeJSONB } from "sequelize";
 import {
   BelongsTo,
-  BelongsToMany,
   Column,
   CreatedAt,
-  DataType,
   Model,
-  Scopes,
   Table,
   UpdatedAt,
-  ForeignKey
+  ForeignKey,
+  Sequelize,
+  DefaultScope
 } from "sequelize-typescript";
 import { Challenge } from "../challenges/challenge.model";
 
+@DefaultScope({
+  where: Sequelize.or(
+    { isDeleted: false },
+    {
+      isDeleted: {
+        $is: null
+      }
+    }
+  )
+})
 @Table({
   tableName: "Teams"
 })
@@ -28,6 +36,13 @@ export class Team extends Model<Team> {
 
   @BelongsTo(() => Challenge, "challengeId")
   public challenge: Challenge;
+
+  @ForeignKey(() => Challenge)
+  @Column
+  public defaultChallengeId: number;
+
+  @BelongsTo(() => Challenge, "defaultChallengeId")
+  public defaultChallenge: Challenge;
 
   @Column
   public codeName: string;

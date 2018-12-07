@@ -17,22 +17,18 @@ export class UserService {
       name: _.get(profile, "displayName"),
       rawLinkedin: profile._raw,
       registerStatus: "pending",
-      userPicture: _.get(profile, "photos[0].value"),
+      userPicture: _.get(profile, "_json.pictureUrls.values[0]"),
       linkedInProfileUrl: _.get(profile, "_json.publicProfileUrl"),
       authToken
     };
 
     return User.findOrCreate({
       defaults: defaultAttrs,
-      where: Sequelize.and(
-        { linkedInId: defaultAttrs.linkedInId },
-        Sequelize.or({ isDeleted: false }, { isDeleted: { $is: null } })
-      )
+      where: Sequelize.and({ linkedInId: defaultAttrs.linkedInId })
     })
       .spread((user: any, _created: any) => user)
       .catch((err: Error) => {
         console.log(err, defaultAttrs);
-        throw err;
       });
   }
 
@@ -100,10 +96,7 @@ export class UserService {
 
   public static async findUsersByTeamId(teamId: number): Promise<User[]> {
     const foundUsers: User[] = await User.findAll({
-      where: Sequelize.and(
-        { teamId },
-        Sequelize.or({ isDeleted: false }, { isDeleted: { $is: null } })
-      )
+      where: Sequelize.and({ teamId })
     });
     return foundUsers;
   }
@@ -130,7 +123,7 @@ export class UserService {
       const team: Team = user.team || ((await user.$get("team")) as Team);
 
       sanitizedParams.role = _.get(role, "name") || "Unavailable";
-      sanitizedParams.team = await TeamService.sanitize(team);
+      sanitizedParams.team = team && (await TeamService.sanitize(team));
     }
 
     return sanitizedParams;
@@ -173,7 +166,7 @@ export class UserService {
   }
 
   public static async updateCV({ user, fileParams }: { user: any; fileParams: any }) {
-    console.log("Uplading", fileParams.mimetype, fileParams.name);
+    // console.log("Uplading", fileParams.mimetype, fileParams.name);
     if (fileParams.mimetype !== "application/pdf") {
       throw new Error("File type is not PDF");
     }
@@ -192,19 +185,12 @@ export class UserService {
   ) {
     let includes = [];
     if (includeDeps) {
-      includes = [Team, Role];
+      includes = [{ model: Team, required: false }, { model: Role, required: false }];
     }
     const user = await User.findOne({
-      where: Sequelize.and(
-        { id },
-        Sequelize.or({ isDeleted: false }, { isDeleted: { $is: null } })
-      ),
+      where: { id },
       include: includes
     });
-
-    if (!user) {
-      throw new Error("No user found!");
-    }
     return user;
   }
 

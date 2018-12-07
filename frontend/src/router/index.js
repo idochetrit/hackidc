@@ -6,17 +6,20 @@ import Terms from "../components/Terms.vue";
 import Schedule from "../components/Schedule.vue";
 import Resources from "../components/Resources.vue";
 import SponsorProposal from "../components/SponsorProposal.vue";
+import MentorsProposal from "../components/MentorsProposal.vue";
 import FAQ from "../components/FAQ.vue";
 import Team from "../components/Team.vue";
 import Exhibition from "../components/Exhibition.vue";
 import Gallery from "../components/Gallery.vue";
 import Registration from "../components/Registration.vue";
+import RegistrationInfo from "../components/RegistrationInfo.vue";
 import Login from "../components/Login.vue";
 import UserDashboard from "../components/UserDashboard.vue";
 import TeamDashboard from "../components/TeamDashboard.vue";
 import TeamPage from "../components/TeamPage.vue";
 import UserPage from "../components/UserPage.vue";
 import StatusMessage from "../components/StatusMessage.vue";
+import PageNotFound from "../components/PageNotFound.vue";
 
 Vue.use(Router);
 
@@ -108,12 +111,28 @@ export default new Router({
       component: SponsorProposal
     },
     {
+      path: "/mentors-and-judges",
+      name: "mentors-and-judges",
+      meta: {
+        title: "HackIDC 2019 | Mentors & Judges"
+      },
+      component: MentorsProposal
+    },
+    {
       path: "/faq",
       name: "faq",
       meta: {
         title: "HackIDC 2019 | FAQ"
       },
       component: FAQ
+    },
+    {
+      path: "/signup-info",
+      name: "signup-info",
+      meta: {
+        title: "HackIDC 2019 | Registration"
+      },
+      component: RegistrationInfo
     },
     {
       path: "/signup",
@@ -186,6 +205,14 @@ export default new Router({
         title: "HackIDC 2019 | Users"
       },
       component: UserPage
+    },
+    {
+      path: "/page-not-found",
+      name: "404",
+      meta: {
+        title: "Page Not Found"
+      },
+      component: PageNotFound
     },
     {
       path: "*",

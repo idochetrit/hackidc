@@ -28,6 +28,14 @@ export default {
           description: 'Teams of  3-5 participants are allowed. All team members must have completed the participation agreement to compete.'
         },
         {
+          title: 'participants',
+          description: 'Team members must be students, pursuing either a first or second degree.'
+        },
+        {
+          title: 'student verification',
+          description: 'All participants will be subject to a student ID check for verification, prior to the event.'
+        },
+        {
           title: 'ownership',
           description: 'Teams have full ownership of everything they build at our events and are free to do with it as they wish.'
         },
@@ -38,10 +46,6 @@ export default {
         {
           title: 'fresh code',
           description: 'You may not begin your project until the competition officially begins. Please don’t come in and build on top of previous projects if you want to win.'
-        },
-        {
-          title: 'student verification',
-          description: 'All participants will be subject to a student ID check for verification, prior to the event.'
         },
       ]
     }

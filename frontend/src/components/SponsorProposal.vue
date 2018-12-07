@@ -86,6 +86,11 @@
     h2 {font-weight: bold; margin-bottom: 4rem;}
     h4 {font-weight: bold; text-align: center; margin: 1rem 0;}
     a {font-weight: bold; text-decoration: underline; color: #000;}
+
+    @media screen and (max-width: 1440px) and (min-width: 1201px) {
+        .container {width: 80%;}
+    }
+
     @media screen and (max-width: 767px) {
         .container-fluid {padding: 8rem 0 4rem 0;}
         .herzel {width: 20%;}

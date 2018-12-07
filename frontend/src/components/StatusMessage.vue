@@ -29,8 +29,7 @@
                 <h5><strong>HackIDC 2019 Team</strong></h5>
                 <br>
                 <div class="controls">
-                    <button @click="toHome" class="btn btn-lg btn-secondary"><strong>Back Home</strong></button>
-                    <button @click="toProfile" class="btn btn-lg btn-info"><strong>See your Profile</strong></button>
+                    <button @click="toHome" class="btn btn-lg btn-info"><strong>Back Home</strong></button>
                 </div>
             </div>
         </div>
