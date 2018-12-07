@@ -12,6 +12,7 @@ import Team from "../components/Team.vue";
 import Exhibition from "../components/Exhibition.vue";
 import Gallery from "../components/Gallery.vue";
 import Registration from "../components/Registration.vue";
+import RegistrationInfo from "../components/RegistrationInfo.vue";
 import Login from "../components/Login.vue";
 import UserDashboard from "../components/UserDashboard.vue";
 import TeamDashboard from "../components/TeamDashboard.vue";
@@ -124,6 +125,14 @@ export default new Router({
         title: "HackIDC 2019 | FAQ"
       },
       component: FAQ
+    },
+    {
+      path: "/signup-info",
+      name: "signup-info",
+      meta: {
+        title: "HackIDC 2019 | Registration"
+      },
+      component: RegistrationInfo
     },
     {
       path: "/signup",

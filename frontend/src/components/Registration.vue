@@ -15,10 +15,8 @@
                         <br>Registration is open for groups of 3-5 people or for participants who would like to register on their own.</h5>
                     <hr>
                     <div class="alert alert-light" role="alert">
-                        <h4 class="alert-heading text-danger"><strong>Please notice!</strong></h4>
-                        <h5><strong>For groups: </strong> please nominate a <strong>Team Builder</strong> - he should register first, and select the 'Team Builder' option when asked so.
-                            <br>Doing this will generate a <strong>team number</strong> which each other team member should fill in later.</h5>
-                        <h6>* All the fields are mandatory.</h6>
+                        <h4 style="text-align: center;"><strong><span class="text-info">Remember:</span>
+                            <br>Team Builder should register first!</strong></h4>
                     </div>
                     <h5>Please connect your LinkedIn account to fill in your personal basic details. <br>
                         Don't have a LinkedIn account? <a class="text-info" target="_blank" href="https://www.linkedin.com/">Create one here.</a>

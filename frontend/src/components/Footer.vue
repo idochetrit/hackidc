@@ -3,18 +3,8 @@
     <div class="container-fluid logos">
       <div class="container">
         <div class="row">
-          <div class="logos-col">
-            <div v-for="(l,i) in leftColLogos" class="logos-col-item" :key="i">
-              <img :src="l">
-            </div>
-          </div>
-          <div class="eventLogo">
-            <img src="../../static/logo_white.png">
-          </div>
-          <div class="logos-col">
-            <div v-for="(l,i) in rightColLogos" class="logos-col-item" :key="i">
-              <img :src="l">
-            </div>
+          <div v-for="(l,i) in logos" class="logos-row-item" :key="i">
+            <img :src="l">
           </div>
         </div>
       </div>
@@ -29,14 +19,11 @@ import AddToCalendar from './AddToCalendar.vue'
 export default {
   data() {
     return {
-      leftColLogos: [
-        require('../../static/25_idc_logo_english.png'),
+      logos: [
         require('../../static/25_efi_arazi_white_english.png'),
-      ],
-      rightColLogos: [
         require('../../static/student_union_logo.png'),
         require('../../static/25_adelson_logo_english.png'),
-      ]
+      ],
     }
   },
   components: {
@@ -57,42 +44,27 @@ export default {
     justify-content: center;
     align-items: center;
   }
-  .logos-col {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    flex-basis: 31%;
-  }
-  .logos-col-item { height: 90px; padding: .5rem 1rem; }
-  .logos-col-item img { max-height: 90%; }
-  .eventLogo {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    flex-basis: 31%;
-  }
-  .eventLogo img { max-width: 80%; }
+  .logos-row-item { height: 110px; padding: .5rem 2rem; }
+  .logos-row-item img { max-height: 100%; }
 
   @media screen and (max-width: 1440px) and (min-width: 1201px) {
     .container {width: 75%;}
   }
 
   @media screen and (max-width: 1200px) {
-    .logos-col-item { height: 75px; }
+    .logos-row-item { height: 75px; }
   }
 
   @media screen and (max-width: 767px) {
     .container .row { flex-direction: column; }
-    .logos-col {
+    .logos-row {
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       padding: 0;
     }
-    .eventLogo { order: 1; }
-    .logos-col:nth-of-type(1) { order: 2; }
-    .logos-col:nth-of-type(3) { order: 2; flex-direction: row-reverse;}
-    .logos-col-item {
+    .logos-row:nth-of-type(1) { order: 2; }
+    .logos-row:nth-of-type(3) { order: 2; flex-direction: row-reverse;}
+    .logos-row-item {
       display: flex;
       flex-direction: row;
       align-items: center;

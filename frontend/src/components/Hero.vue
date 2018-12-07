@@ -29,7 +29,7 @@
     },
     methods: {
       toRegistrationForm() {
-        this.$router.push({name: 'signup'})
+        this.$router.push({name: 'signup-info'})
       }
     }
   }
@@ -56,6 +56,7 @@
     color: #fff;
   }
   .topBanners {
+    margin-top: 1rem;
     padding: 0 1rem;
     display: flex;
     flex-direction: row;
