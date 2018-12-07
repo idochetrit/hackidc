@@ -8,7 +8,7 @@ import { UserService } from "./user.service";
 const router = new Router();
 
 router.post("/cv", ensureAuthenticated, async (req, res) => {
-  const userId = req.user.id;
+  const userId: number = Number(_.get(req, "user.id")) || req.headers.userid;
   let user;
   try {
     user = await UserService.findById(userId);
