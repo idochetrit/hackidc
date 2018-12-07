@@ -25,7 +25,7 @@
                 <!--hebrew section-->
                 <div :key="2" v-else class="row heb">
                     <div class="col-lg-12">
-                        <p class="disclaimer"><strong>*</strong> English participation agreement will be added soon.</p>
+                        <p class="disclaimer"><strong>*</strong> English version of the Participation Agreement will be added soon.</p>
                         <h4>HackIDC 2019 - הסכם משתתפים</h4>
                         <h5>מבוא</h5>
                         <ol>
@@ -167,6 +167,7 @@ export default {
     }
 
     @media screen and (max-width: 767px) {
+        ol li ol { padding: .5rem; }
         .herzel {width: 20%;}
         .flags { margin-bottom: 1rem; }
         .flag-icon { flex-basis: 15%; }
