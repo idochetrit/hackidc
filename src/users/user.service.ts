@@ -17,7 +17,7 @@ export class UserService {
       name: _.get(profile, "displayName"),
       rawLinkedin: profile._raw,
       registerStatus: "pending",
-      userPicture: _.get(profile, "photos[0].value"),
+      userPicture: _.get(profile, "_json.pictureUrls.values[0]"),
       linkedInProfileUrl: _.get(profile, "_json.publicProfileUrl"),
       authToken
     };
