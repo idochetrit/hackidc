@@ -37,6 +37,10 @@ export class Team extends Model<Team> {
   @BelongsTo(() => Challenge, "challengeId")
   public challenge: Challenge;
 
+  @ForeignKey(() => Challenge)
+  @Column
+  public defaultChallengeId: number;
+
   @BelongsTo(() => Challenge, "defaultChallengeId")
   public defaultChallenge: Challenge;
 

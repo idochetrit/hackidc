@@ -46,7 +46,7 @@ export class TeamService {
       };
     }
     const users: User[] = await UserService.findUsersByTeamId(team.id);
-    if (users.length >= TEAM_CAPACITY - 1) {
+    if (users.length + 1 > TEAM_CAPACITY) {
       return {
         valid: false,
         errorCode: "team_full"
