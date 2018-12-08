@@ -29,6 +29,7 @@ const formValidations = {
       studyYear: { required, minVal: minValue(1) },
       experienceType: { required },
       techExperience: { required },
+      whyShouldIJoinAnswer: { required },
       role: { required },
       volunteerToAcceptLoner: { required },
       shirtSize: { required },
@@ -63,7 +64,8 @@ const formValidations = {
         if (
           this.cvFileName === "" ||
           this.$v.userData.experienceType.$invalid ||
-          this.$v.userData.techExperience.$invalid
+          this.$v.userData.techExperience.$invalid ||
+          this.$v.userData.whyShouldIJoinAnswer.$invalid
         )
           return true;
         return false;

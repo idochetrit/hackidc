@@ -182,6 +182,13 @@
                                     <option :value="true">Yes</option>
                                 </select>
                             </div>
+                            <div class="form-group" :class="{invalid: $v.userData.whyShouldIJoinAnswer.$error}">
+                                <label for="whyShouldIJoin">Tell us in a few words: Why should you, and your team, participate in HackIDC 2019?</label>
+                                <textarea id="whyShouldIJoin" placeholder="Write a few words..." rows="4"
+                                        @blur="$v.userData.whyShouldIJoinAnswer.$touch()"
+                                        v-model="userData.whyShouldIJoinAnswer" class="form-control">
+                                </textarea>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -208,10 +215,8 @@
                     <div class="form-row">
                         <div class="form-col">
                             <div v-if="userData.role === 'team-builder'">
-                                <h5>Your team number is</h5>
-                                <h1 class="text-info" style="text-align: center;"><strong>{{ this.teamData.codeNumber }}</strong></h1>
-                                <h5>Write down this number.
-                                    <br>Your teammates will need it in order to register.</h5>
+                                <div class="alert alert-success"><h6>Great! After submitting the registration form, you will get your generated <strong>Team Number</strong>.
+                                    <br>Write it down, you teammates will need it in order to sign up.</h6></div>
                                 <hr>
                                 <div class="form-group" :class="{invalid: $v.userData.volunteerToAcceptLoner.$error}">
                                     <label for="accept-loner">This year we are accepting "alone" participants. Would you like us to connect your group with one of these talented candidates?</label>
@@ -281,7 +286,9 @@
                     <br>
                     <h2>That's it!</h2>
                     <h4>We're looking forward to read your application form. Good-luck!</h4>
-                    <h5 v-if="userData.role != 'loner'">Your team's number is: <span class="text-info"><strong style="font-size: 1.3rem;">{{ teamData.codeNumber }}</strong></span>
+                    <h5 v-if="userData.role != 'loner'">Your team's number is: <span class="text-info">
+                        <br><strong style="font-size: 1.7rem;">{{ teamData.codeNumber }}</strong>
+                    </span>
                         <br>This number will follow you throughout the whole contest.</h5>
                     <hr>
                     <h5><strong>Good Luck!</strong></h5>
@@ -329,7 +336,6 @@ import formValidations from '../assets/validations'
 import newUserData from '../assets/newUserData'
 import teamIdGenerator from '../assets/teamIdGenerator'
 import axios from 'axios';
-const view = document.getElementsByTagName('body')[0].clientWidth;
 export default {
   data() {
     return {
@@ -356,15 +362,6 @@ export default {
     validateTeamID_handler() {
       this.$v.teamData.codeNumber.$touch();
       this.validateTeamID(this.teamData.codeNumber);
-    },
-    generate() {
-      axios.get('/api/teams/code')
-        .then(res => {
-          console.log(res.data);
-        })
-        .catch(err => {
-          console.log(err);
-        });
     },
     move(v) {
       setTimeout(function() {

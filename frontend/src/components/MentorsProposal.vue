@@ -45,7 +45,7 @@
                         <a target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLSdOsKiYRCzePJSbcBrtoehb_bMVjIWNnC_SaSeuZKJWP8GviQ/viewform"
                            class="btn btn-info btn-md">Sign Up for Mentor or Judge Position</a>
                     </div>
-                    <p>For any additional information please contact our Judges and Mentor Manager, at
+                    <p class="footerMail">For any additional information please contact our Judges and Mentor Manager, at
                         <a href="mailto:lidorhezkelo@hackidc.com">lidorhezkelo@hackidc.com</a></p>
 
                     <h5 style="text-align: center;"><strong>Thank you for your cooperation!</strong></h5>
@@ -83,22 +83,28 @@
     h4 { margin: 2rem 0 .5rem 0; text-align: center; }
     a:not(.btn) {font-weight: bold; text-decoration: none; color: #000;}
     a.btn { margin-bottom: 1rem; }
+    p.footerMail { text-align: center; }
 
     @media screen and (max-width: 1440px) and (min-width: 1201px) {
         .container {width: 80%;}
     }
 
-    @media screen and (max-width: 767px) {
-        .container-fluid {padding: 8rem 0 4rem 0;}
-        .herzel {width: 20%;}
-        h3 { font-size: 1.2rem; padding: 0 .5rem; }
+    @media screen and (max-width: 1200px) {
         .button-wrapper {
+            margin-top: 2rem;
             text-align: center;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
         }
+    }
+
+    @media screen and (max-width: 767px) {
+        .container-fluid {padding: 8rem 0 4rem 0;}
+        .row { padding: 0 1rem; }
+        .herzel {width: 20%;}
+        h3 { font-size: 1.2rem; padding: 0 .5rem; }
     }
     @media screen and (max-width: 380px) {
         .container-fluid {padding: 6rem 0 4rem 0;}

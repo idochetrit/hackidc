@@ -108,6 +108,7 @@
   }
 
   @media screen and (max-width: 767px) {
+    .topBanners { margin-top: 0; }
     .topBannerLogo:last-of-type { margin-top: 0; }
     .container-fluid {padding: 2.5rem 0 6rem 0;}
     .logo-wrapper:nth-of-type(1) { flex-basis: 30%; }

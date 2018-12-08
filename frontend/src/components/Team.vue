@@ -14,6 +14,15 @@
         </a>
       </div>
       <div class="row">
+        <a v-for="(t, i) in secondRow" :key="i" class="team-item" :href="t.linkedin" target="_blank">
+          <div class="wrapper">
+            <div class="overlay"><span class="fab fa-linkedin-in fa-lg"></span></div>
+            <img class="img-responsive" :src="t.thumbnail">
+          </div>
+          <h5>{{ t.name }}</h5>
+        </a>
+      </div>
+      <div class="row">
         <a v-for="(t, i) in shuffle(team.slice())" :key="i" class="team-item" :href="t.linkedin" target="_blank">
           <div class="wrapper">
             <div class="overlay"><span class="fab fa-linkedin-in fa-lg"></span></div>
@@ -32,6 +41,8 @@
     return {
       topRow: [
         {name: 'Alon Howben', linkedin: 'https://www.linkedin.com/in/alon-howben-7397a8176', thumbnail: require('../../static/alon.jpg')},
+      ],
+      secondRow: [
         {name: 'Golan Romano', linkedin: 'https://www.linkedin.com/in/golan-romano-29933714a/', thumbnail: 'https://media.licdn.com/dms/image/C5603AQFu2bm_Mvsp5g/profile-displayphoto-shrink_800_800/0?e=1545264000&v=beta&t=_Dx7XCJTqdgolASgnnUIJSoCHlZoq3bjamBzH8Vq4sU'},
         {name: 'Ori Zilka', linkedin: 'https://www.linkedin.com/in/ori-zilka-802450153/', thumbnail: 'https://media.licdn.com/dms/image/C4D03AQHLIb55li32qw/profile-displayphoto-shrink_800_800/0?e=1545264000&v=beta&t=tFGTmvxoJi0NzWJNOH_dT08avAT0EFk0Y5H1EVriqJ4'},
       ],
@@ -83,7 +94,7 @@
     flex-wrap: wrap;
   }
   .team-item {
-    padding: 1rem 2rem;
+    padding: 1rem 3rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -129,8 +140,23 @@
     .container {width: 75%;}
   }
 
+  @media screen and (max-width: 1200px) {
+    .team-item {flex-basis: 20%; padding: .3rem 1.2rem;}
+  }
+
   @media screen and (max-width: 767px) {
     .herzel {width: 20%;}
-    .team-item {flex-basis: 50%; padding: .3rem 1.2rem;}
+    .team-item {flex-basis: 40%; padding: .3rem 1rem;}
+    h5 { font-size: 1rem; }
+    .fa-lg { font-size: 1.1rem; }
+    .overlay {
+      width: 30px;
+      height: 30px;
+    }
+  }
+
+  @media screen and (max-width: 380px) {
+    .team-item {flex-basis: 50%; padding: .3rem 1.5rem;}
+    h5 { font-size: 1rem; }
   }
 </style>

@@ -130,6 +130,7 @@
     font-weight: bold;
     text-align: center;
   }
+  h5 { text-align: left; font-size: 1.1rem; }
   table {
     width: 70%;
     margin: 2rem 0 1rem 0;
@@ -149,24 +150,25 @@
 
   @media screen and (max-width: 1200px) {
     .herzel {margin-bottom: 2rem;}
-    h2 { margin-bottom: 2rem; }
+    h2 { margin-bottom: 1rem; }
     table {
       width: 90%;
-      margin: 1rem 0;
+      margin-bottom: 1rem;
     }
+    th, td, tr { font-size: 1rem; }
   }
 
   @media screen and (max-width: 767px) {
     .herzel {width: 20%; margin-bottom: 2rem;}
     table {
-      width: 100%;
-      margin: 1rem 0;
+      width: 95%;
+      margin-bottom: 1rem;
     }
     th, td, tr {
       text-align: center;
       padding: .5rem .5rem;
       font-size: 1rem;
     }
-    h5 {text-align: center;}
+    h5 { font-size: 1rem; padding-left: 1rem; }
   }
 </style>

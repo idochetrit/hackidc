@@ -57,13 +57,7 @@ export default {
 
   @media screen and (max-width: 767px) {
     .container .row { flex-direction: column; }
-    .logos-row {
-      display: flex;
-      flex-direction: row;
-      padding: 0;
-    }
-    .logos-row:nth-of-type(1) { order: 2; }
-    .logos-row:nth-of-type(3) { order: 2; flex-direction: row-reverse;}
+    .logos-row-item:nth-of-type(2) { order: -1; height: 110px; }
     .logos-row-item {
       display: flex;
       flex-direction: row;
@@ -73,6 +67,5 @@ export default {
       padding: .5rem 0;
     }
     .logos-col-item img { max-width: 90%; }
-    .eventLogo img {width: 60%; margin-bottom: 1rem;}
   }
 </style>

@@ -63,6 +63,7 @@ hr {width: 90%;}
     align-items: center;
 }
 .bg-success {background-color: #28a745 !important;}
+.alert-success { width: 100%; }
 button {margin: 0 .3rem; flex-basis: 25%;}
 .linkedinBtn {
     margin: 2rem 0;
@@ -91,11 +92,11 @@ button:disabled {
     background-color: #ccc !important;
     border-color: #ccc !important;
 }
-h5, h3 {text-align: center;}
+h5, h4, h3 {text-align: center;}
 h5.sectionTitle, h6.sectionTitle {margin: .5rem 0 1.5rem 0;}
 a {text-decoration: none; font-weight: bold; color: #232323;}
 
-.invalid input, .invalid select {
+.invalid input, .invalid select, .invalid textarea {
     border: 2px solid rgba(217,83,79, .3);
     background-color: rgba(217, 83, 79, .1);
     animation: shake .9s 0s forwards linear;
@@ -121,7 +122,7 @@ a {text-decoration: none; font-weight: bold; color: #232323;}
     .form-col {flex-basis: 100%; padding: 0 1rem;}
     h1 {font-size: 2rem;}
     .row h3 {font-size: 1.4rem;}
-    .row h2 {font-size: 1.7rem;}
+    .row h2 {font-size: 1.7rem; margin-bottom: 1rem;}
     .fas {font-size: 4rem;}
 }
 
@@ -130,6 +131,7 @@ a {text-decoration: none; font-weight: bold; color: #232323;}
     .herzel {width: 20%;}
     .row {padding: 2rem 1rem;}
     .form-col {flex-basis: 100%; padding: 0;}
+
 }
 
 @media screen and (max-width: 380px) {

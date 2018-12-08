@@ -36,11 +36,11 @@ export default {
           title: 'CEO and Founder of RapidAPI',
           thumbnail: require('../../static/iddo_gino.jpg')
         },
-        // {
-        //   name: 'Moran Nir',
-        //   title: 'Executive Director of the Zell Program, IDC Herzliya',
-        //   thumbnail: 'https://res.cloudinary.com/bizzaboprod/image/upload/c_crop,g_custom,f_auto/v1520354856/pcl1u7pmq8yhy1ismedk.jpg'
-        // },
+        {
+          name: 'Moran Nir',
+          title: 'Executive Director at Zell Entrepreneurship Program at IDC Herzliya',
+          thumbnail: 'https://res.cloudinary.com/bizzaboprod/image/upload/c_crop,g_custom,f_auto/v1520354856/pcl1u7pmq8yhy1ismedk.jpg'
+        },
       ]
     }
   }
@@ -94,5 +94,9 @@ export default {
     .judges-item {flex-basis: 50%; padding: .2rem 0;}
     .judges-item p { font-size: .8rem; padding: 0 .5rem; }
     .judges-item h5 { font-size: .9rem; }
+  }
+
+  @media screen and (max-width: 380px) {
+    h5 { font-size: .9rem; }
   }
 </style>
