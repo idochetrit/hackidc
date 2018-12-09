@@ -3,7 +3,6 @@ import * as _ from "lodash";
 import { ensureAuthenticated } from "../concerns/auth.users";
 import { handleError, handleUnauthorize, handleNotFound } from "../routers.helper";
 import { TeamService } from "../teams/team.service";
-import UserScore from "./user.score";
 import { UserService } from "./user.service";
 import userUploadsRouter from "./user.upload.router";
 import { User } from "./user.model";
@@ -94,6 +93,10 @@ router.delete("/:id", async (req, res) => {
   });
 });
 
-// router.get("")
+router.get("/setTestUsers" async (req, res) => {
+  const { count }= req.query;
+  await UserService.createTestUsers(count);
+  res.json({usersCreated: count})
+}) 
 
 export default router;

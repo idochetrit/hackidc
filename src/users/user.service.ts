@@ -8,7 +8,8 @@ import userRole from "./user.role";
 import UserScore from "./user.score";
 import { PATH_SANITIZED_FIELDS, SANITIZED_FIELDS, academicInstitutesMap } from "./user.constants";
 import { Sequelize } from "sequelize-typescript";
-
+//temp
+import * as faker from "faker";
 export class UserService {
   public static createLinkedInUser(profile: any, authToken: string) {
     const defaultAttrs = {
@@ -216,5 +217,57 @@ export class UserService {
         experienceType
       })
     });
+  }
+
+  public static async createTestUsers(count = 20) {
+    const fieldOfStudies = [
+      "computer-science",
+      "engineering",
+      "business",
+      "design",
+      "entrepreneurship",
+      "economics",
+      "sustainability",
+      "law",
+      "communications",
+      "psychology",
+      "other"
+    ];
+    const experienceTypes = [
+      "no-experience",
+      "experienced-other",
+      "basic",
+      "intermediate",
+      "experienced"
+    ];
+    const teams = [];
+    for (let i = 0; i < 20; i++) {
+      const studyYear = Math.floor(Math.random() * 4 + 1);
+      const role = _.sample(["TeamBuilder", "Participant", "Loner"]);
+      const userParams = {
+        name: faker.name.findName(),
+        email: faker.internet.email(),
+        mobile: faker.phone.phoneNumber(),
+        gender: _.sample(["male", "female"]),
+        academicInstitute: _.sample(_.keys(academicInstitutesMap)),
+        fieldOfStudy: _.sample(fieldOfStudies),
+        degreeType: _.sample(["bachelor", "master"]),
+        experienceType: _.sample(experienceTypes),
+        registerStatus: "review",
+        role,
+        studyYear
+      };
+      const user: User = await User.create({ linkedInId: faker.random.uuid() });
+      let teamParams: any = {};
+      if (role === "TeamBuilder" || (role === "Participant" && _.isEmpty(teams))) {
+        const { codeName, codeNumber } = await TeamService.generateTeamCode();
+        teamParams = { codeName, codeNumber };
+        teams.push(teamParams);
+      } else if (role === "Participant") {
+        const { codeNumber } = _.sample(teams);
+        teamParams = { codeNumber };
+      }
+      await this.finishRegistration({ user, userParams, teamParams });
+    }
   }
 }

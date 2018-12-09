@@ -63,7 +63,7 @@ export class TeamService {
     return team;
   }
 
-  public static async generateTeamCode() {
+  public static async generateTeamCode(): Promise<{ codeNumber: number; codeName: string }> {
     const generateNumber = () => Math.floor(Math.random() * 899 + 100);
     const codeNumber = generateNumber();
     const codeName = pluralize(animals());
