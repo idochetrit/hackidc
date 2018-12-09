@@ -101,6 +101,14 @@
 
   @media screen and (max-width: 1440px) and (min-width: 1201px) {
     .container {width: 75%;}
+    h1 { font-size: 3.5rem; }
+    .logo {max-width: 45%;}
+    button {
+      padding-right: 2rem;
+      padding-left: 2rem;
+      margin: 0 .3rem;
+      font-size: 1.1rem;
+    }
   }
 
   @media screen and (max-width: 1200px) {

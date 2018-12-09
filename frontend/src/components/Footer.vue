@@ -49,6 +49,15 @@ export default {
 
   @media screen and (max-width: 1440px) and (min-width: 1201px) {
     .container {width: 75%;}
+    .container .row { flex-direction: row; justify-content: center; }
+    .logos-row-item {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      height: 90px;
+      padding: .5rem 2rem;
+    }
   }
 
   @media screen and (max-width: 1200px) {
