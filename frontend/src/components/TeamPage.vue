@@ -127,7 +127,10 @@ export default {
     @media screen and (max-width: 767px) {
         .container-fluid { padding: 4rem 0; }
         .row { padding: 1rem 0; }
+        .fas { font-size: 4rem; }
         h1 { margin-bottom: 0; }
+        h3 { font-size: 1.5rem; }
+        h4 { font-size: 1.2rem; }
         h5 { padding: 0; }
         .profile-body { align-items: center; }
         .des-wrapper {
@@ -141,6 +144,10 @@ export default {
     }
 
     @media screen and (max-width: 380px) {
-
+        .fas { font-size: 3.5rem; }
+        p.description { font-size: .9rem; }
+        h1 { font-size: 2rem; }
+        h5 { font-size: 1rem; padding: 0 1rem; }
+        .team-member h5 { padding: 0; font-size: 1rem; }
     }
 </style>

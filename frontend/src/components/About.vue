@@ -6,7 +6,7 @@
         <div class="col-md-7">
           <h2 id="about">What is HackIDC?</h2>
           <br>
-          <h5><strong>300+ students, 36 hours, valuable prizes.</strong></h5>
+          <h5><strong>350+ students, 36 hours, valuable prizes.</strong></h5>
           <p><strong>Are you as creative as you think you are? <br> Do you have the guts to push yourself further than ever before?</strong></p>
           <h5>Come join us at HackIDC 2019 and show us what you're made of.</h5>
           <hr>

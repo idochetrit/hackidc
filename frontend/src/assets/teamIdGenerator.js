@@ -25,12 +25,12 @@ const generator = {
             if (res.data.errorCode === "team_full") {
               console.log("invalid");
               this.teamData.codeNumber = 0;
-              this.teamIdError = `Team number ${v} is full. Are you sure this is the correct Team Number?`;
+              this.teamIdError = `Team number ${v} is full. Make sure it's the correct number and try again.`;
             }
             if (res.data.errorCode === "team_not_found") {
               console.log("invalid");
               this.teamData.codeNumber = 0;
-              this.teamIdError = `Team number ${v} doesn't exist. Are you sure this is the correct Team Number?`;
+              this.teamIdError = `Team number ${v} doesn't exist. Make sure it's the correct number and try again.`;
             }
           } else {
             this.teamIdError = "";

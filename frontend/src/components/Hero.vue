@@ -69,7 +69,6 @@
   .logo {
     max-width: 50%;
     animation: pulse 5s 2.5s infinite ease-in-out;
-
   }
   .buttons {
     display: flex;
@@ -98,7 +97,6 @@
     50% {transform: scale(1);}
     100% {transform: scale(1);}
   }
-
   @media screen and (max-width: 1440px) and (min-width: 1201px) {
     .container {width: 75%;}
     h1 { font-size: 3.5rem; }
@@ -110,11 +108,9 @@
       font-size: 1.1rem;
     }
   }
-
   @media screen and (max-width: 1200px) {
     .container-fluid {padding: 3.5rem 0 6rem 0;}
   }
-
   @media screen and (max-width: 767px) {
     .topBanners { margin-top: 0; }
     .topBannerLogo:last-of-type { margin-top: 0; }
@@ -129,7 +125,6 @@
       font-size: 1rem;
     }
   }
-
   @media screen and (max-width: 380px) {
     button {
       padding-right: 1.5rem;

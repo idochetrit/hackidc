@@ -15,8 +15,8 @@
                         <br>Registration is open for groups of 3-5 people or for participants who would like to register on their own.</h5>
                     <hr>
                     <div class="alert alert-light" role="alert">
-                        <h4 style="text-align: center;"><strong><span class="text-info">Remember:</span>
-                            <br>Team Builder should register first!</strong></h4>
+                        <h5 style="text-align: center;"><strong><span class="text-info">Remember:</span>
+                            <br>Team Builder should register first!</strong></h5>
                     </div>
                     <h5>Please connect your LinkedIn account to fill in your personal basic details. <br>
                         Don't have a LinkedIn account? <a class="text-info" target="_blank" href="https://www.linkedin.com/">Create one here.</a>
@@ -97,6 +97,7 @@
                                     <option value="2">2</option>
                                     <option value="3">3</option>
                                     <option value="4">4</option>
+                                    <option value="5">5</option>
                                 </select>
                             </div>
                         </div>
@@ -153,7 +154,7 @@
                                        @blur="$v.cv.$touch()"
                                        accept="application/pdf" v-on:change="handleFileUpload">
                                 <label class="custom-file-label" for="customFile">{{ cvFileName }}</label>
-                                <small id="cv-help" class="form-text">Make sure to upload <strong>only PDF files</strong></small>
+                                <small id="cv-help" class="form-text">Make sure to upload <strong>only PDF files, up to 4MB</strong></small>
                             </div>
                         </div>
                     </div>
@@ -183,7 +184,7 @@
                                 </select>
                             </div>
                             <div class="form-group" :class="{invalid: $v.userData.whyShouldIJoinAnswer.$error}">
-                                <label for="whyShouldIJoin">Tell us in a few words: Why should you, and your team, participate in HackIDC 2019?</label>
+                                <label for="whyShouldIJoin">Tell us in a few words: Why should you and your team be accepted to HackIDC 2019?</label>
                                 <textarea id="whyShouldIJoin" placeholder="Write a few words..." rows="4"
                                         @blur="$v.userData.whyShouldIJoinAnswer.$touch()"
                                         v-model="userData.whyShouldIJoinAnswer" class="form-control">
@@ -215,8 +216,7 @@
                     <div class="form-row">
                         <div class="form-col">
                             <div v-if="userData.role === 'team-builder'">
-                                <div class="alert alert-success"><h6>Great! After submitting the registration form, you will get your generated <strong>Team Number</strong>.
-                                    <br>Write it down, you teammates will need it in order to sign up.</h6></div>
+                                <div class="alert alert-success"><h6>After submitting the registration form, you will get your <strong>Team Number</strong>. Your teammates will need it in order to sign up.</h6></div>
                                 <hr>
                                 <div class="form-group" :class="{invalid: $v.userData.volunteerToAcceptLoner.$error}">
                                     <label for="accept-loner">This year we are accepting "alone" participants. Would you like us to connect your group with one of these talented candidates?</label>
@@ -286,10 +286,12 @@
                     <br>
                     <h2>That's it!</h2>
                     <h4>We're looking forward to read your application form. Good-luck!</h4>
-                    <h5 v-if="userData.role != 'loner'">Your team's number is: <span class="text-info">
-                        <br><strong style="font-size: 1.7rem;">{{ teamData.codeNumber }}</strong>
-                    </span>
-                        <br>This number will follow you throughout the whole contest.</h5>
+                    <div class="alert alert-light">
+                        <h5 style="text-align: center;" v-if="userData.role != 'loner'">Your team's number is: <span class="text-info">
+                        <br><strong style="font-size: 1.7rem;">{{ teamData.codeNumber }}</strong></span>
+                            <br>Write it down, this number will follow you throughout the whole contest.</h5>
+                    </div>
+
                     <hr>
                     <h5><strong>Good Luck!</strong></h5>
                     <h5><strong>HackIDC 2019 Team</strong></h5>
@@ -305,7 +307,7 @@
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" id="cv-agree" v-model="userData.cvAgree">
                     <label class="form-check-label" for="cv-agree">
-                        I approve sending my CV to eligible sponsors for potential job offers.
+                        I approve sending my CV to this year sponsors for potential job offers.
                     </label>
                 </div>
                 <div class="form-check" :class="{invalid: $v.userData.termsAgree.$invalid}">

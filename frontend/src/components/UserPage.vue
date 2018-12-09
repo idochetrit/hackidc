@@ -22,7 +22,8 @@
                 </div>
             </div>
             <hr>
-            <div v-if="user.role != 'Loner'" class="row">
+            <h5 v-if="teammates.length === 0">There are no other members in team {{ user.team.codeName | nameFormatter }} yet!</h5>
+            <div v-else-if="user.role != 'Loner'" class="row">
                 <h5>Other members in team <strong>{{ user.team.codeName | nameFormatter }}</strong></h5>
                 <div class="team-members-wrapper">
                     <a :href="'/users/' + m.id" target="_blank" :key="m.id" v-for="m in teammates" class="team-member">
@@ -99,10 +100,12 @@ export default {
     .userThumbnail {
         border-radius: 50%;
         width: 150px;
+        height: 150px;
         margin-bottom: 2rem;
     }
     h1 {font-weight: bold; text-align: center;}
-    h3 { margin: 1rem 0 .5rem 0; }
+    h3 { margin: 1rem 0 .5rem 0; font-size: 1.6rem; }
+    h4 { font-size: 1.3rem; }
     h5 {margin-bottom: 1rem; text-align: center;}
     .linkedinBtn {
         background-color: #0077B5;
@@ -153,7 +156,6 @@ export default {
     @media screen and (max-width: 1200px) {
 
     }
-
     @media screen and (max-width: 767px) {
         .container-fluid { padding: 4rem 0; }
         .row { padding: 1rem 0; }
@@ -167,5 +169,17 @@ export default {
             align-items: flex-start;
         }
         .team-member { flex-basis: 50%; }
+    }
+    @media screen and (max-width: 380px) {
+        .userThumbnail {
+            width: 150px;
+            height: 150px;
+            margin-bottom: 1.5rem;
+        }
+        p.bio { font-size: .9rem; }
+        h1 { font-size: 2rem; }
+        h3 { font-size: 1.5rem; }
+        h5 { font-size: 1rem; padding: 0 1rem; }
+        h4 { font-size: 1.2rem; }
     }
 </style>
