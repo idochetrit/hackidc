@@ -93,10 +93,10 @@ router.delete("/:id", async (req, res) => {
   });
 });
 
-router.get("/setTestUsers" async (req, res) => {
-  const { count }= req.query;
-  await UserService.createTestUsers(count);
-  res.json({usersCreated: count})
-}) 
+router.get("/setTestUsers", async (req, res) => {
+  const { count } = req.query;
+  UserService.createTestUsers(count);
+  res.json({ usersCreated: count });
+});
 
 export default router;

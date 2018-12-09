@@ -241,33 +241,40 @@ export class UserService {
       "experienced"
     ];
     const teams = [];
-    for (let i = 0; i < 20; i++) {
-      const studyYear = Math.floor(Math.random() * 4 + 1);
-      const role = _.sample(["TeamBuilder", "Participant", "Loner"]);
-      const userParams = {
-        name: faker.name.findName(),
-        email: faker.internet.email(),
-        mobile: faker.phone.phoneNumber(),
-        gender: _.sample(["male", "female"]),
-        academicInstitute: _.sample(_.keys(academicInstitutesMap)),
-        fieldOfStudy: _.sample(fieldOfStudies),
-        degreeType: _.sample(["bachelor", "master"]),
-        experienceType: _.sample(experienceTypes),
-        registerStatus: "review",
-        role,
-        studyYear
-      };
-      const user: User = await User.create({ linkedInId: faker.random.uuid() });
-      let teamParams: any = {};
-      if (role === "TeamBuilder" || (role === "Participant" && _.isEmpty(teams))) {
-        const { codeName, codeNumber } = await TeamService.generateTeamCode();
-        teamParams = { codeName, codeNumber };
-        teams.push(teamParams);
-      } else if (role === "Participant") {
-        const { codeNumber } = _.sample(teams);
-        teamParams = { codeNumber };
-      }
-      await this.finishRegistration({ user, userParams, teamParams });
-    }
+    const userLinkedIds = [];
+    for (let i = 0; i < count; i++) userLinkedIds.push(faker.random.uuid());
+
+    await Promise.all(
+      userLinkedIds.map(async linkedInId => {
+        const studyYear = Math.floor(Math.random() * 4 + 1);
+        const role = _.sample(["TeamBuilder", "Participant", "Loner"]);
+        const userParams = {
+          name: faker.name.findName(),
+          email: faker.internet.email(),
+          mobile: faker.phone.phoneNumber(),
+          gender: _.sample(["male", "female"]),
+          academicInstitute: _.sample(_.keys(academicInstitutesMap)),
+          fieldOfStudy: _.sample(fieldOfStudies),
+          degreeType: _.sample(["bachelor", "master"]),
+          experienceType: _.sample(experienceTypes),
+          registerStatus: "review",
+          role,
+          studyYear
+        };
+        const user: User = await User.create({ linkedInId });
+        let teamParams: any = {};
+        if (role === "TeamBuilder" || (role === "Participant" && _.isEmpty(teams))) {
+          const { codeName, codeNumber } = await TeamService.generateTeamCode();
+          teamParams = { codeName, codeNumber };
+          teams.push(teamParams);
+        } else if (role === "Participant") {
+          const { codeNumber } = _.sample(teams);
+          teamParams = { codeNumber };
+        }
+        await this.finishRegistration({ user, userParams, teamParams });
+        console.log(`created ${userParams.name} with id: ${user.id}`);
+      })
+    );
+    console.log("Done");
   }
 }
