@@ -20,6 +20,7 @@ import TeamPage from "../components/TeamPage.vue";
 import UserPage from "../components/UserPage.vue";
 import StatusMessage from "../components/StatusMessage.vue";
 import PageNotFound from "../components/PageNotFound.vue";
+import ErrorPage from "../components/ErrorPage.vue";
 
 Vue.use(Router);
 
@@ -205,6 +206,14 @@ export default new Router({
         title: "HackIDC 2019 | Users"
       },
       component: UserPage
+    },
+    {
+      path: "/error-page",
+      name: "error-page",
+      meta: {
+        title: "Oops!"
+      },
+      component: ErrorPage
     },
     {
       path: "/page-not-found",
