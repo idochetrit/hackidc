@@ -396,7 +396,7 @@ export default {
           }
         }
       )
-        .then(res => {
+        .then(() => {
           axios.post('/api/users/register', {
             user: this.userData,
             team: this.teamData
@@ -404,6 +404,7 @@ export default {
         })
         .catch(err => {
           console.log(err);
+          this.$router.push({ name: "error-page" });
         });
       setTimeout(function() {
         this.currentStep = 0;
