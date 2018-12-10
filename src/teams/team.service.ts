@@ -69,7 +69,7 @@ export class TeamService {
     const codeName = pluralize(animals());
     const team = await this.checkAvailability({ codeNumber, codeName });
     if (team) {
-      return this.generateTeamCode();
+      return await this.generateTeamCode();
     }
     return { codeNumber, codeName };
   }

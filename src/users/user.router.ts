@@ -6,6 +6,7 @@ import { TeamService } from "../teams/team.service";
 import { UserService } from "./user.service";
 import userUploadsRouter from "./user.upload.router";
 import { User } from "./user.model";
+import { UserTests } from "./user.tests";
 import { PATH_SANITIZED_FIELDS, SANITIZED_PUBLIC_FIELDS } from "./user.constants";
 
 const router = new Router();
@@ -95,7 +96,8 @@ router.delete("/:id", async (req, res) => {
 
 router.get("/setTestUsers", async (req, res) => {
   const { count } = req.query;
-  UserService.createTestUsers(count);
+  await UserTests.createTestUsers(count);
+  console.log("Done");
   res.json({ usersCreated: count });
 });
 
