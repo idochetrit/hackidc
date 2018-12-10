@@ -3,7 +3,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <h4>Please note - before registering:</h4>
+                    <h4>Please note - before signing up:</h4>
                     <p class="lead text-info">Before starting the registration process, please take a minute to fully read the following points.</p>
                     <ol>
                         <li>For your Hackathon project, you can either:
@@ -98,9 +98,22 @@ export default {
         ol ul { padding: 1rem; }
     }
 
-    @media screen and (max-width: 380px) {
+    @media screen and (max-width: 767px) {
         .container-fluid { padding: 4rem 0; }
+        .button-wrapper { display: flex; flex-direction: row; }
+        button { margin: 0 .2rem; }
         h4 { font-size: 1.2rem; }
         ol li { padding: 0 .2rem; }
+    }
+
+    @media screen and (max-width: 380px) {
+        .container-fluid { padding: 4rem 0; }
+        .container { padding: 0 .5rem; }
+        .row { padding: 0 .5rem; }
+        h4 { font-size: 1.2rem; }
+        ol { padding: 0 0 0 1rem; }
+
+        ol li { padding: 0 .2rem; font-size: .8rem; }
+        button { font-size: .8rem; }
     }
 </style>

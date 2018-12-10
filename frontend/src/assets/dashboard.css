@@ -45,6 +45,7 @@ h5 {margin: 0;}
 .userThumbnail {
     border-radius: 50%;
     width: 150px;
+    height: 150px;
     margin-right: 1rem;
 }
 .dashboard-header {
@@ -129,9 +130,7 @@ textarea { max-height: 120px; }
         width: 100%;
         flex-basis: 10%;
     }
-    .main-view {
-        padding: 1rem 2rem;
-    }
+    .main-view { padding: 1rem 2rem; }
     .dashboard-header { flex-direction: column; align-items: center; }
     .dashboard-username {
         padding: 1rem;
@@ -142,17 +141,25 @@ textarea { max-height: 120px; }
     .dashboard-header img { margin: 0; }
     .dashboard-username h5 { font-size: 1.15rem; }
     .dashboard-body { padding: 1rem 0; }
+    .signoutBtn { font-size: .8rem; }
     .team-member { flex-basis: 33.3333%; margin-bottom: 1rem; }
     .team-member h5 { padding: 0; font-size: 1rem; }
     .teammate-thumbnail { height: 100px; width: 100px; }
 }
 
 @media screen and (max-width: 380px) {
+    .side-nav { padding-top: 3rem; }
     .main-view { padding: .8rem 2rem; }
     .main-view { font-size: .8rem; }
-    h3 { font-size: 1.4rem; }
+    .userThumbnail {
+        width: 120px;
+        height: 120px;
+    }
+    h2 { font-size: 1.7rem; }
+    h3 { font-size: 1.3rem; }
     p.bio { font-size: .9rem; }
-    .dashboard-username { padding: .8rem; }
+    .dashboard-username { padding: .8rem;}
+    .dashboard-username h5 { font-size: 1rem; }
     .team-member { flex-basis: 33.3333%; margin-bottom: 1rem; }
     .team-member h5 { padding: 0; font-size: .7rem; }
     .teammate-thumbnail { height: 70px; width: 70px; }

@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="container">
             <img class="herzel" src="../../static/herzel_black.png">
-            <h2>HackIDC 2019 - Registration</h2>
+            <h2 class="page-header">HackIDC 2019 - Registration</h2>
             <div v-if="!isCompleted" class="progress-bar">
                 <span class="progress-inside bg-info"
                       :class="{'bg-success': currentStep === 4}"
@@ -263,6 +263,7 @@
                                     <input class="form-check-input" type="checkbox" id="gluten-free" value="glutten-free" v-model="userData.foodRestrictionType">
                                     <label class="form-check-label" for="gluten-free">Gluten-Free</label>
                                 </div>
+                                <small>* If you don't have any restriction, don't check anything.</small>
                             </div>
                             <hr>
                             <div class="form-group" :class="{invalid: $v.userData.hearAboutUs.$error}">
@@ -376,7 +377,7 @@ export default {
           return;
         }
       }.bind(this), 1000);
-      this.$scrollTo('.herzel', 1300);
+      this.$scrollTo('.page-header', 1300);
     },
     handleFileUpload() {
       this.cvFileName = this.$refs.cvFile.files[0].name;
@@ -410,7 +411,7 @@ export default {
         this.currentStep = 0;
         this.isCompleted = true;
       }.bind(this), 1000);
-      this.$scrollTo('.herzel', 1300);
+      this.$scrollTo('.page-header', 1300);
     },
     toHome() {
       this.$router.push({ name: "home" });

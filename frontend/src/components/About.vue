@@ -146,7 +146,7 @@ export default {
     }
     .row:nth-of-type(2) {flex-direction: column-reverse;}
     .row:nth-of-type(4) {flex-direction: column-reverse;}
-    .button-wrapper { width:100%; display: flex; justify-content: space-around; }
+    .button-wrapper { width:100%; display: flex; justify-content: center; }
   }
 
   @media screen and (max-width: 380px) {
