@@ -56,7 +56,10 @@ export class TeamService {
   }
 
   public static async findOneByCode(codeNumber: number) {
-    const team = await Team.findOne({ where: { codeNumber } });
+    const team = await Team.findOne({ where: { codeNumber } }).catch(err => {
+      console.log(err);
+      return null;
+    });
     if (!team) {
       throw new Error(`Team with code: ${codeNumber}, not found.`);
     }
@@ -68,7 +71,8 @@ export class TeamService {
     const codeNumber = generateNumber();
     const codeName = pluralize(animals());
     const team = await this.checkAvailability({ codeNumber, codeName });
-    if (team) {
+    if (!_.isNull(team)) {
+      console.log("retries building team... ", codeName, codeNumber);
       return await this.generateTeamCode();
     }
     return { codeNumber, codeName };

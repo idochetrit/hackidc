@@ -3,8 +3,8 @@ import * as _ from "lodash";
 import { User } from "./user.model";
 import { academicInstitutesMap } from "./user.constants";
 import { TeamService } from "../teams/team.service";
-import { Team } from "../teams/team.model";
 import { UserService } from "./user.service";
+import { sequelize } from "../../dist/db/sequelize";
 
 export namespace UserTests {
   const fieldOfStudies = [
@@ -30,43 +30,55 @@ export namespace UserTests {
 
   export async function createTestUsers(count = 20) {
     const teams = [];
-    // const userLinkedIds = [];
-    // for (let i = 0; i < count; i++) userLinkedIds.push(faker.random.uuid());
+    const userLinkedIds = [];
+    for (let i = 0; i < count; i++) userLinkedIds.push(faker.random.uuid());
     console.log(`starting to create ${count} fake users`);
 
-    for (let i = 0; i < count; i++) {
-      const linkedInId = faker.random.uuid();
-      await createFakeUser(linkedInId, teams).catch(err => {
-        console.log("error creating user", err);
-      });
-    }
+    await Promise.all([
+      userLinkedIds.map(async linkedInId => {
+        const user: User = await User.create(linkedInId);
+        await createFakeUser(user).catch(err => {
+          console.log("error creating user", err);
+        });
+      })
+    ]);
   }
 
-  async function createFakeUser(linkedInId: number, teams: Team[]): Promise<any> {
-    console.log("creating user: ", linkedInId);
-    const user: User = await User.create({ linkedInId });
-    let teamParams: any = {};
-    const userParams = sampleFakeUserFields();
-    const { role } = userParams;
-    if (role === "TeamBuilder" || (role === "Participant" && _.isEmpty(teams))) {
-      const { codeName, codeNumber } = await TeamService.generateTeamCode();
-      teamParams = { codeName, codeNumber };
-      teams.push(teamParams);
-    } else if (role === "Participant") {
-      const { codeNumber } = _.sample(teams);
-      teamParams = { codeNumber };
+  async function createFakeUser(user: User): Promise<any> {
+    try {
+      let teamParams: any = {};
+      const userParams = sampleFakeUserFields();
+      const { role } = userParams;
+      if (role === "TeamBuilder") {
+        const { codeName, codeNumber } = await TeamService.generateTeamCode();
+        userParams.role = "TeamBuilder";
+        teamParams = { codeName, codeNumber };
+      } else if (role === "Participant") {
+        const [rows, _] = await sequelize.query(
+          'select * from "Teams" offset floor(random()*(select count(*) from "Teams")) limit 1;'
+        );
+        if (rows.length === 0) {
+          userParams.role = "Loner";
+        } else {
+          const { codeNumber } = rows[0];
+          teamParams = { codeNumber };
+        }
+      }
+      const updatedUser: User = await UserService.finishRegistration({
+        user,
+        userParams,
+        teamParams
+      });
+      console.log(`created ${updatedUser.name} with id: ${updatedUser.id}`);
+    } catch (err) {
+      console.log("oops somthing went wrong", err);
     }
-    const updatedUser: User = await UserService.finishRegistration({
-      user,
-      userParams,
-      teamParams
-    });
-    console.log(`created ${updatedUser.name} with id: ${updatedUser.id}`);
   }
 
   function sampleFakeUserFields(): any {
     const studyYear = Math.floor(Math.random() * 4 + 1);
-    const role = _.sample(["TeamBuilder", "Participant", "Loner"]);
+    const role = _.sample(["TeamBuilder", "Participant", "Participant", "Loner"]);
+    console.log(role);
     return {
       name: faker.name.findName(),
       email: faker.internet.email(),

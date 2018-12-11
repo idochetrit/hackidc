@@ -96,7 +96,7 @@ router.delete("/:id", async (req, res) => {
 
 router.get("/setTestUsers", async (req, res) => {
   const { count } = req.query;
-  await UserTests.createTestUsers(count);
+  UserTests.createTestUsers(count);
   console.log("Done");
   res.json({ usersCreated: count });
 });
