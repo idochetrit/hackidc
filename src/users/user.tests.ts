@@ -4,7 +4,7 @@ import { User } from "./user.model";
 import { academicInstitutesMap } from "./user.constants";
 import { TeamService } from "../teams/team.service";
 import { UserService } from "./user.service";
-import { sequelize } from "../../dist/db/sequelize";
+import { sequelize } from "../db/sequelize";
 
 export namespace UserTests {
   const fieldOfStudies = [
