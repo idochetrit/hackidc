@@ -29,9 +29,11 @@
                     @click="toLogin" class="btn btn-md btn-info" :data-toggle="collapse" data-target="#navbarCollapsedDiv"><strong>Sign in</strong></button>
             <div v-else class="dropdown">
               <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <img v-if="!user.userPicture" class="img-responsive userThumbnail" src="https://hairo.e.f1v.co/wp-content/themes/romisa/images/placeholder.jpg">
-                <img v-else class="img-responsive userThumbnail" :src="user.userPicture">
-                Hi, <strong>{{ this.$store.getters.getUser.name | firstName }}</strong>
+                <div class="thumbnail-wrapper">
+                  <img v-if="!user.userPicture" class="img-responsive userThumbnail" src="https://hairo.e.f1v.co/wp-content/themes/romisa/images/placeholder.jpg">
+                  <img v-else class="img-responsive userThumbnail" :src="user.userPicture">
+                </div>
+                <strong>{{ this.$store.getters.getUser.name | firstName }}</strong>
               </button>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
                 <router-link  class="dropdown-item" :data-toggle="collapse" data-target="#navbarCollapsedDiv" tag="a" :to="{ name: 'user-dashboard' }" active-class="active" exact>My Profile</router-link>
@@ -141,6 +143,12 @@ export default {
   button {padding: .3rem 1rem; font-size: 1rem;}
   button.btn-link {color: #fff; text-decoration: none;}
   button:focus {outline: none !important;}
+  button.dropdown-toggle {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
   a.dropdown-item {
     text-transform: capitalize;
     transition: all .2s ease-out;
@@ -162,11 +170,19 @@ export default {
     transition: all .2s ease-out;
   }
   .fas {margin-right: .7rem;}
-  .userThumbnail {
+  .thumbnail-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
     border-radius: 50%;
     width: 30px;
     height: 30px;
-    margin-right: .2rem;
+    margin-right: .5rem;
+  }
+  .userThumbnail {
+    max-width: 100%;
   }
 
   /*fix devices navigation alignment*/

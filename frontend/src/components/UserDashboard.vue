@@ -8,9 +8,11 @@
         </div>
         <div class="main-view">
             <div class="dashboard-header">
-                <img v-if="!user.userPicture" src="https://hairo.e.f1v.co/wp-content/themes/romisa/images/placeholder.jpg"
-                     class="img-responsive img-thumbnail userThumbnail">
-                <img v-else :src="user.userPicture" class="img-responsive img-thumbnail userThumbnail">
+                <div class="thumbnail-wrapper">
+                    <img v-if="!user.userPicture" src="https://hairo.e.f1v.co/wp-content/themes/romisa/images/placeholder.jpg"
+                         class="img-responsive img-thumbnail userThumbnail">
+                    <img v-else :src="user.userPicture" class="img-responsive userThumbnail">
+                </div>
                 <div class="dashboard-username">
                     <h2>{{ user.name | nameFormatter }}</h2>
                     <h5 v-if="user.role != 'Loner'">Team <strong class="text-info">{{ user.team.codeName | nameFormatter }}</strong></h5>

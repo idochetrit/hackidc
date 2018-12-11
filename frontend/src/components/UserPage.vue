@@ -2,9 +2,11 @@
     <div class="container-fluid">
         <div class="container">
             <div class="row">
-                <img v-if="!user.userPicture" src="https://hairo.e.f1v.co/wp-content/themes/romisa/images/placeholder.jpg"
-                 class="img-responsive img-thumbnail userThumbnail">
-                <img v-else :src="user.userPicture" class="img-responsive img-thumbnail userThumbnail">
+                <div class="thumbnail-wrapper">
+                    <img v-if="!user.userPicture" src="https://hairo.e.f1v.co/wp-content/themes/romisa/images/placeholder.jpg"
+                         class="img-responsive userThumbnail">
+                    <img v-else :src="user.userPicture" class="img-responsive userThumbnail">
+                </div>
                 <h1>{{ user.name | nameFormatter }}</h1>
                 <h5>{{ user.studyYear | yearFormatter }} year {{ user.fieldOfStudy | fieldFormatter | nameFormatter }} student, at {{ user.academicInstitute }}</h5>
                 <a :href="user.linkedInProfileUrl" target="_blank" class="btn btn-md linkedinBtn"><span class="fab fa-linkedin-in fa-lg"></span></a>
@@ -97,11 +99,20 @@ export default {
         width: 90%;
         border: .5px solid rgba(0,0,0,.05);
     }
-    .userThumbnail {
+    .thumbnail-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
         border-radius: 50%;
         width: 150px;
         height: 150px;
-        margin-bottom: 2rem;
+        margin-bottom: 1rem;
+        border: 4px solid white;
+    }
+    .userThumbnail {
+        max-width: 100%;
     }
     h1 {font-weight: bold; text-align: center;}
     h3 { margin: 1rem 0 .5rem 0; font-size: 1.6rem; }
