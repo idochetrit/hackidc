@@ -18,46 +18,6 @@
                         <h5>{{ m.name | nameFormatter }}</h5>
                     </a>
                 </div>
-                <div class="team-member">
-                    <a :href="'/users/' + m.id" target="_blank" :key="m.id" v-for="m in team.users">
-                        <div class="team-member-thumbnail-wrapper">
-                            <img v-if="!m.userPicture" src="https://hairo.e.f1v.co/wp-content/themes/romisa/images/placeholder.jpg"
-                                 class="img-responsive">
-                            <img v-else :src="m.userPicture" class="img-responsive">
-                        </div>
-                        <h5>{{ m.name | nameFormatter }}</h5>
-                    </a>
-                </div>
-                <div class="team-member">
-                    <a :href="'/users/' + m.id" target="_blank" :key="m.id" v-for="m in team.users">
-                        <div class="team-member-thumbnail-wrapper">
-                            <img v-if="!m.userPicture" src="https://hairo.e.f1v.co/wp-content/themes/romisa/images/placeholder.jpg"
-                                 class="img-responsive">
-                            <img v-else :src="m.userPicture" class="img-responsive">
-                        </div>
-                        <h5>{{ m.name | nameFormatter }}</h5>
-                    </a>
-                </div>
-                <div class="team-member">
-                    <a :href="'/users/' + m.id" target="_blank" :key="m.id" v-for="m in team.users">
-                        <div class="team-member-thumbnail-wrapper">
-                            <img v-if="!m.userPicture" src="https://hairo.e.f1v.co/wp-content/themes/romisa/images/placeholder.jpg"
-                                 class="img-responsive">
-                            <img v-else :src="m.userPicture" class="img-responsive">
-                        </div>
-                        <h5>{{ m.name | nameFormatter }}</h5>
-                    </a>
-                </div>
-                <div class="team-member">
-                    <a :href="'/users/' + m.id" target="_blank" :key="m.id" v-for="m in team.users">
-                        <div class="team-member-thumbnail-wrapper">
-                            <img v-if="!m.userPicture" src="https://hairo.e.f1v.co/wp-content/themes/romisa/images/placeholder.jpg"
-                                 class="img-responsive">
-                            <img v-else :src="m.userPicture" class="img-responsive">
-                        </div>
-                        <h5>{{ m.name | nameFormatter }}</h5>
-                    </a>
-                </div>
             </div>
             <div class="row profile-body">
                 <div class="des-wrapper">
