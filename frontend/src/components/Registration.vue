@@ -387,7 +387,6 @@ export default {
     submit() {
       let formData = new FormData();
       formData.append("file", this.cv);
-      console.log(formData);
       axios.post("/api/users/self/uploads/cv",
         formData,
         {
@@ -401,17 +400,19 @@ export default {
           axios.post('/api/users/register', {
             user: this.userData,
             team: this.teamData
-          });
+          })
+        })
+        .then(() => {
+          setTimeout(function() {
+            this.currentStep = 0;
+            this.isCompleted = true;
+          }.bind(this), 1000);
+          this.$scrollTo('.page-header', 1300);
         })
         .catch(err => {
           console.log(err);
           this.$router.push({ name: "error-page" });
         });
-      setTimeout(function() {
-        this.currentStep = 0;
-        this.isCompleted = true;
-      }.bind(this), 1000);
-      this.$scrollTo('.page-header', 1300);
     },
     toHome() {
       this.$router.push({ name: "home" });

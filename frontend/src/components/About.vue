@@ -147,12 +147,13 @@ export default {
     .row:nth-of-type(2) {flex-direction: column-reverse;}
     .row:nth-of-type(4) {flex-direction: column-reverse;}
     .button-wrapper { width:100%; display: flex; justify-content: center; }
+    button { margin: 0 .2rem; }
   }
 
   @media screen and (max-width: 380px) {
     h2 { font-size: 1.6rem; }
     h5 { font-size: 1.1rem; }
-    button { font-size: .8rem; margin: 0 .1rem; }
+    button { font-size: .8rem; }
   }
 
 </style>
