@@ -17,24 +17,24 @@ const generator = {
           });
       }
     },
-    validateTeamID(v) {
+    validateTeamID(teamCodeNumber) {
       axios
-        .get(`/api/teams/validate/${v}`)
+        .get(`/api/teams/validate/${teamCodeNumber}`)
         .then(res => {
           if (!res.data.valid) {
             if (res.data.errorCode === "team_full") {
               console.log("invalid");
               this.teamData.codeNumber = 0;
-              this.teamIdError = `Team number ${v} is full. Make sure it's the correct number and try again.`;
+              this.teamIdError = `Team number ${teamCodeNumber} is full. Make sure it's the correct number and try again.`;
             }
             if (res.data.errorCode === "team_not_found") {
               console.log("invalid");
               this.teamData.codeNumber = 0;
-              this.teamIdError = `Team number ${v} doesn't exist. Make sure it's the correct number and try again.`;
+              this.teamIdError = `Team number ${teamCodeNumber} doesn't exist. Make sure it's the correct number and try again.`;
             }
           } else {
             this.teamIdError = "";
-            this.teamData.codeNumber = v;
+            this.teamData.codeNumber = teamCodeNumber;
           }
         })
         .catch(err => {

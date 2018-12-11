@@ -149,12 +149,13 @@
                     <br>
                     <div class="form-row">
                         <div class="form-col">
-                            <div class="custom-file" :class="{invalid: $v.userData.experienceType.$error}">
+                            <div class="custom-file" :class="{invalid: $v.cv.$error}">
                                 <input ref="cvFile" type="file" class="custom-file-input" id="customFile"
                                        @blur="$v.cv.$touch()"
                                        accept="application/pdf" v-on:change="handleFileUpload">
                                 <label class="custom-file-label" for="customFile">{{ cvFileName }}</label>
                                 <small id="cv-help" class="form-text">Make sure to upload <strong>only PDF files, up to 4MB</strong></small>
+                                <label class="text-danger" v-if="!!cvFileError">{{ cvFileError }}</label>
                             </div>
                         </div>
                     </div>
@@ -343,6 +344,7 @@ export default {
   data() {
     return {
       teamIdError: "",
+      cvFileError: "",
       currentStep: 1,
       isCompleted: false,
       cv: '',
@@ -380,14 +382,13 @@ export default {
       this.$scrollTo('.page-header', 1300);
     },
     handleFileUpload() {
+      this.$v.cv.$touch();
       this.cvFileName = this.$refs.cvFile.files[0].name;
       this.cv = this.$refs.cvFile.files[0];
       console.log(this.cv);
-    },
-    submit() {
       let formData = new FormData();
       formData.append("file", this.cv);
-      axios.post("/api/users/self/uploads/cv",
+      return axios.post("/api/users/self/uploads/cv",
         formData,
         {
           withCredentials: true,
@@ -395,24 +396,30 @@ export default {
             'Content-Type': 'multipart/form-data'
           }
         }
-      )
-        .then(() => {
-          axios.post('/api/users/register', {
-            user: this.userData,
-            team: this.teamData
-          })
+      ).then((res) => {
+        delete this.userData.cvFile;
+      }).catch((err) => {
+        console.log(err);
+        this.$v.cv.$touch();
+        this.cvFileError = "Invalid file type (PDF only) or is bigger than 4 MB"; 
+      })
+    },
+    submit() {
+      return axios.post('/api/users/register', {
+          user: this.userData,
+          team: this.teamData
         })
-        .then(() => {
-          setTimeout(function() {
-            this.currentStep = 0;
-            this.isCompleted = true;
-          }.bind(this), 1000);
-          this.$scrollTo('.page-header', 1300);
-        })
-        .catch(err => {
-          console.log(err);
-          this.$router.push({ name: "error-page" });
-        });
+      .then(() => {
+        setTimeout(function() {
+          this.currentStep = 0;
+          this.isCompleted = true;
+        }.bind(this), 1000);
+        this.$scrollTo('.page-header', 1300);
+      })
+      .catch(err => {
+        console.log(err);
+        this.$router.push({ name: "error-page" });
+      });
     },
     toHome() {
       this.$router.push({ name: "home" });
@@ -422,7 +429,7 @@ export default {
     }
   },
   created(){
-    this.authRequest().then(() => {
+    return this.authRequest().then(() => {
       const user = this.$store.getters.getUser;
       this.setStep(user);
     });

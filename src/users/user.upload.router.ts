@@ -20,13 +20,13 @@ router.post("/cv", ensureAuthenticated, async (req, res) => {
     }
 
     const { file: fileParams } = req.files;
-    UserService.updateCV({ user, fileParams });
+    await UserService.updateCV({ user, fileParams });
     res.json({
       success: true,
       message: "File uploaded"
     });
   } catch (err) {
-    handleError(err, null);
+    handleError(err, res);
   }
 });
 
