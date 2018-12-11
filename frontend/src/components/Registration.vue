@@ -155,7 +155,7 @@
                                        accept="application/pdf" v-on:change="handleFileUpload">
                                 <label class="custom-file-label" for="customFile">{{ cvFileName }}</label>
                                 <small id="cv-help" class="form-text">Make sure to upload <strong>only PDF files, up to 4MB</strong></small>
-                                <label class="text-danger" v-if="!!cvFileError">{{ cvFileError }}</label>
+                                <small class="text-danger" v-if="!!cvFileError">{{ cvFileError }}</small>
                             </div>
                         </div>
                     </div>
@@ -347,8 +347,8 @@ export default {
       cvFileError: "",
       currentStep: 1,
       isCompleted: false,
-      cv: '',
-      cvFileName: ''
+      cv: "",
+      cvFileName: ""
     }
   },
   mixins: [formValidations, newUserData, linkedInIntegration, teamIdGenerator],
@@ -397,11 +397,15 @@ export default {
           }
         }
       ).then((res) => {
+        this.cvFileError = "";
         delete this.userData.cvFile;
       }).catch((err) => {
         console.log(err);
         this.$v.cv.$touch();
-        this.cvFileError = "Invalid file type (PDF only) or is bigger than 4 MB"; 
+        this.cvFileError = "Invalid file type (PDF only) or file is bigger than 4 MB";
+        //  in order to prevent the user from advancing the registration form (validation is performed via this.cv)
+        this.cv = "";
+        this.cvFileName = "";
       })
     },
     submit() {
