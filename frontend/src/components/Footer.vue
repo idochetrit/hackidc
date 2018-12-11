@@ -20,9 +20,8 @@ export default {
   data() {
     return {
       logos: [
-        require('../../static/25_efi_arazi_white_english.png'),
+        require('../../static/25_adelson+arazi_logo_white.png'),
         require('../../static/student_union_logo.png'),
-        require('../../static/25_adelson_logo_english.png'),
       ],
     }
   },
@@ -76,5 +75,10 @@ export default {
       padding: .5rem 0;
     }
     .logos-col-item img { max-width: 90%; }
+  }
+
+  @media screen and (max-width: 380px) {
+    .logos-row-item { height: 70px; }
+    .logos-col-item img { max-width: 80%; }
   }
 </style>
