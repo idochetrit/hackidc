@@ -26,6 +26,9 @@
                             <br>If you do not have one, <a class="text-info" href="https://www.linkedin.com/" target="_blank">open one here</a>, then start the registration.
                         </li>
                         <li>
+                            As places are limited, all application forms will be examined. We will inform you regarding your participation in HackIDC 2019 shortly after the registration closes.
+                        </li>
+                        <li>
                             All fields in the registration form are required.
                         </li>
                     </ol>
