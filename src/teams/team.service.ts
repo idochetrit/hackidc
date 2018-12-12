@@ -8,7 +8,14 @@ import { Challenge } from "../challenges/challenge.model";
 import { UserService } from "../users/user.service";
 import { SANITIZED_PUBLIC_FIELDS } from "../users/user.constants";
 
-export const SANITIZED_FIELDS = ["description", "codeNumber", "codeName", "challengeId", "users"];
+export const SANITIZED_FIELDS = [
+  "description",
+  "codeNumber",
+  "codeName",
+  "requiredEquipment",
+  "challengeId",
+  "users"
+];
 export const PATCH_SANITIZED_FIELDS = ["description", "requiredEquipment"];
 export const TEAM_CAPACITY: number = Number(process.env.TEAM_CAPACITY) || 5;
 export class TeamService {
