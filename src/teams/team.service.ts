@@ -56,10 +56,7 @@ export class TeamService {
   }
 
   public static async findOneByCode(codeNumber: number) {
-    const team = await Team.findOne({ where: { codeNumber } }).catch(err => {
-      console.log(err);
-      return null;
-    });
+    const team = await Team.findOne({ where: { codeNumber } });
     if (!team) {
       throw new Error(`Team with code: ${codeNumber}, not found.`);
     }
