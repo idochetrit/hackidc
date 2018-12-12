@@ -56,9 +56,6 @@ module.exports = {
         foodRestrictionType: {
           type: Sequelize.ARRAY(Sequelize.STRING)
         },
-        requiredEquipment: {
-          type: Sequelize.ARRAY(Sequelize.STRING)
-        },
         volunteerToAcceptLoner: {
           type: Sequelize.BOOLEAN
         },

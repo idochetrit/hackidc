@@ -9,7 +9,7 @@ import { UserService } from "../users/user.service";
 import { SANITIZED_PUBLIC_FIELDS } from "../users/user.constants";
 
 export const SANITIZED_FIELDS = ["description", "codeNumber", "codeName", "challengeId", "users"];
-export const PATCH_SANITIZED_FIELDS = ["description"];
+export const PATCH_SANITIZED_FIELDS = ["description", "requiredEquipment"];
 export const TEAM_CAPACITY: number = Number(process.env.TEAM_CAPACITY) || 5;
 export class TeamService {
   public static async buildTeam({ builder, teamParams }: { builder: User; teamParams: any }) {

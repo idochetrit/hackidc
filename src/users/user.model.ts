@@ -71,10 +71,6 @@ export class User extends Model<User> {
     type: DataType.ARRAY(DataType.STRING)
   })
   public foodRestrictionType: DataTypeArray;
-  @Column({
-    type: DataType.ARRAY(DataType.STRING)
-  })
-  public requiredEquipment: DataTypeArray;
   @Column
   public volunteerToAcceptLoner: boolean;
   @Column

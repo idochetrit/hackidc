@@ -7,9 +7,11 @@ import {
   UpdatedAt,
   ForeignKey,
   Sequelize,
-  DefaultScope
+  DefaultScope,
+  DataType
 } from "sequelize-typescript";
 import { Challenge } from "../challenges/challenge.model";
+import { DataTypeArray } from "sequelize";
 
 @DefaultScope({
   where: Sequelize.or(
@@ -50,6 +52,11 @@ export class Team extends Model<Team> {
   public codeNumber: number;
   @Column
   public builderId: number;
+
+  @Column({
+    type: DataType.ARRAY(DataType.STRING)
+  })
+  public requiredEquipment: DataTypeArray;
 
   @CreatedAt
   @Column
