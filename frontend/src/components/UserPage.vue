@@ -2,9 +2,11 @@
     <div class="container-fluid">
         <div class="container">
             <div class="row">
-                <img v-if="!user.userPicture" src="https://hairo.e.f1v.co/wp-content/themes/romisa/images/placeholder.jpg"
-                 class="img-responsive img-thumbnail userThumbnail">
-                <img v-else :src="user.userPicture" class="img-responsive img-thumbnail userThumbnail">
+                <div class="thumbnail-wrapper">
+                    <img v-if="!user.userPicture" src="https://hairo.e.f1v.co/wp-content/themes/romisa/images/placeholder.jpg"
+                         class="img-responsive userThumbnail">
+                    <img v-else :src="user.userPicture" class="img-responsive userThumbnail">
+                </div>
                 <h1>{{ user.name | nameFormatter }}</h1>
                 <h5>{{ user.studyYear | yearFormatter }} year {{ user.fieldOfStudy | fieldFormatter | nameFormatter }} student, at {{ user.academicInstitute }}</h5>
                 <a :href="user.linkedInProfileUrl" target="_blank" class="btn btn-md linkedinBtn"><span class="fab fa-linkedin-in fa-lg"></span></a>
@@ -22,7 +24,8 @@
                 </div>
             </div>
             <hr>
-            <div v-if="user.role != 'Loner'" class="row">
+            <h5 v-if="teammates.length === 0">There are no other members in team {{ user.team.codeName | nameFormatter }} yet!</h5>
+            <div v-else-if="user.role != 'Loner'" class="row">
                 <h5>Other members in team <strong>{{ user.team.codeName | nameFormatter }}</strong></h5>
                 <div class="team-members-wrapper">
                     <a :href="'/users/' + m.id" target="_blank" :key="m.id" v-for="m in teammates" class="team-member">
@@ -96,13 +99,24 @@ export default {
         width: 90%;
         border: .5px solid rgba(0,0,0,.05);
     }
-    .userThumbnail {
+    .thumbnail-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
         border-radius: 50%;
         width: 150px;
-        margin-bottom: 2rem;
+        height: 150px;
+        margin-bottom: 1rem;
+        border: 4px solid white;
+    }
+    .userThumbnail {
+        max-width: 100%;
     }
     h1 {font-weight: bold; text-align: center;}
-    h3 { margin: 1rem 0 .5rem 0; }
+    h3 { margin: 1rem 0 .5rem 0; font-size: 1.6rem; }
+    h4 { font-size: 1.3rem; }
     h5 {margin-bottom: 1rem; text-align: center;}
     .linkedinBtn {
         background-color: #0077B5;
@@ -153,7 +167,6 @@ export default {
     @media screen and (max-width: 1200px) {
 
     }
-
     @media screen and (max-width: 767px) {
         .container-fluid { padding: 4rem 0; }
         .row { padding: 1rem 0; }
@@ -167,5 +180,17 @@ export default {
             align-items: flex-start;
         }
         .team-member { flex-basis: 50%; }
+    }
+    @media screen and (max-width: 380px) {
+        .userThumbnail {
+            width: 150px;
+            height: 150px;
+            margin-bottom: 1.5rem;
+        }
+        p.bio { font-size: .9rem; }
+        h1 { font-size: 2rem; }
+        h3 { font-size: 1.5rem; }
+        h5 { font-size: 1rem; padding: 0 1rem; }
+        h4 { font-size: 1.2rem; }
     }
 </style>

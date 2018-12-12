@@ -8,12 +8,16 @@
             </div>
             <h5>Members:</h5>
             <div class="team-members-wrapper">
-                <a :href="'/users/' + m.id" target="_blank" :key="m.id" v-for="m in team.users" class="team-member">
-                    <img v-if="!m.userPicture" src="https://hairo.e.f1v.co/wp-content/themes/romisa/images/placeholder.jpg"
-                         class="img-responsive img-thumbnail teammate-thumbnail">
-                    <img v-else :src="m.userPicture" class="img-responsive img-thumbnail teammate-thumbnail">
-                    <h5>{{ m.name | nameFormatter }}</h5>
-                </a>
+                <div class="team-member">
+                    <a :href="'/users/' + m.id" target="_blank" :key="m.id" v-for="m in team.users">
+                        <div class="team-member-thumbnail-wrapper">
+                            <img v-if="!m.userPicture" src="https://hairo.e.f1v.co/wp-content/themes/romisa/images/placeholder.jpg"
+                                 class="img-responsive">
+                            <img v-else :src="m.userPicture" class="img-responsive">
+                        </div>
+                        <h5>{{ m.name | nameFormatter }}</h5>
+                    </a>
+                </div>
             </div>
             <div class="row profile-body">
                 <div class="des-wrapper">
@@ -81,7 +85,7 @@ export default {
         border: .5px solid rgba(0,0,0,.05);
     }
     h1 {font-weight: bold; text-align: center; margin: 1rem;}
-    h3 { margin: 1rem 0 .5rem 0; }
+    h3 { margin: 1rem 0 .5rem 0; font-size: 1.5rem; }
     h5 {margin-bottom: 1rem; }
     .profile-body {
         align-items: flex-start;
@@ -101,33 +105,44 @@ export default {
         justify-content: center;
         width: 100%;
     }
+    .team-member h5 { text-align: center; font-size: 1rem; padding: 0; }
     .team-member {
         display: flex;
         flex-direction: column;
         align-items: center;
-        flex-basis: 25%;
-        margin: 1.5rem;
+        flex-basis: 15%;
+        margin: 1rem;
     }
-    .teammate-thumbnail {
-        margin-bottom: .5rem;
+    .team-member-thumbnail-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
         border-radius: 50%;
         width: 120px;
         height: 120px;
+        margin-bottom: .5rem;
+        border: 4px solid white;
     }
+    .team-member-thumbnail-wrapper img { max-width: 100%; }
     @media screen and (max-width: 1440px) and (min-width: 1201px) {
         .container {width: 80%;}
     }
 
     @media screen and (max-width: 1200px) {
+        .container-fluid { min-height: 1200px; }
         .team-member { margin: 0; flex-basis: 20%; text-align: center; }
         .team-member h5 { font-size: 1.1rem; }
-        .teammate-thumbnail { height: 100px; width: 100px; }
     }
 
     @media screen and (max-width: 767px) {
         .container-fluid { padding: 4rem 0; }
         .row { padding: 1rem 0; }
+        .fas { font-size: 4rem; }
         h1 { margin-bottom: 0; }
+        h3 { font-size: 1.5rem; }
+        h4 { font-size: 1.2rem; }
         h5 { padding: 0; }
         .profile-body { align-items: center; }
         .des-wrapper {
@@ -137,10 +152,15 @@ export default {
             flex-direction: column;
             align-items: flex-start;
         }
-        .team-member { margin: 0; flex-basis: 33.33333%; }
+        .team-member { margin: .5rem; flex-basis: 20%; }
+        .team-member-thumbnail-wrapper { height: 100px; width: 100px; }
     }
 
     @media screen and (max-width: 380px) {
-
+        .fas { font-size: 3.5rem; }
+        p.description { font-size: .9rem; }
+        h1 { font-size: 2rem; }
+        h5 { font-size: 1rem; padding: 0 1rem; }
+        .team-member h5 { padding: 0; font-size: 1rem; }
     }
 </style>

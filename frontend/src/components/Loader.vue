@@ -42,7 +42,15 @@
     span {font-size: 1.8rem;}
   }
 
+  @media screen and (max-width: 1200px) {
+    span {font-size: 1.5rem;}
+  }
+
   @media screen and (max-width: 767px) {
-    span {font-size: 2rem;}
+    span {font-size: 1.8rem;}
+  }
+
+  @media screen and (max-width: 380px) {
+    span {font-size: 1.5rem;}
   }
 </style>

@@ -92,6 +92,19 @@ export default {
     }
     hr {width: 100%; margin: 2rem 0;}
 
+    @media screen and (max-width: 1440px) {
+        .container-fluid {min-height: 1200px;}
+        .box {
+            padding: 2rem 0 1rem 0;
+            width: 400px;
+            height: 400px;
+        }
+        .herzel {margin-bottom: 1rem;}
+        h5 {font-size: 1.1rem;}
+        .linkedinBtn {font-size: 1rem;}
+        hr {margin: 1.5rem; width: 80%;}
+    }
+
     @media screen and (max-width: 767px) {
         .container-fluid {min-height: 0;}
         .box {
@@ -102,6 +115,20 @@ export default {
         .herzel {margin-bottom: 1rem;}
         h5 {font-size: 1.1rem;}
         .linkedinBtn {font-size: 1rem;}
+        hr {margin: 1.5rem; width: 80%;}
+    }
+
+    @media screen and (max-width: 380px) {
+        .container-fluid {min-height: 0;}
+        .box {
+            padding: 1rem 0 1rem 0;
+            width: 80%;
+            height: 350px;
+        }
+        .herzel {margin-bottom: .5rem;}
+        h2 { font-size: 1.6rem; }
+        h5 {font-size: 1rem;}
+        .linkedinBtn {font-size: .9rem;}
         hr {margin: 1.5rem; width: 80%;}
     }
 </style>

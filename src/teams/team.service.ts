@@ -63,13 +63,14 @@ export class TeamService {
     return team;
   }
 
-  public static async generateTeamCode() {
+  public static async generateTeamCode(): Promise<{ codeNumber: number; codeName: string }> {
     const generateNumber = () => Math.floor(Math.random() * 899 + 100);
     const codeNumber = generateNumber();
     const codeName = pluralize(animals());
     const team = await this.checkAvailability({ codeNumber, codeName });
-    if (team) {
-      return this.generateTeamCode();
+    if (!_.isNull(team)) {
+      console.log("retries building team... ", codeName, codeNumber);
+      return await this.generateTeamCode();
     }
     return { codeNumber, codeName };
   }

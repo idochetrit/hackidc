@@ -17,7 +17,7 @@ export class UserService {
       name: _.get(profile, "displayName"),
       rawLinkedin: profile._raw,
       registerStatus: "pending",
-      userPicture: _.get(profile, "_json.pictureUrls.values[0]"),
+      userPicture: _.get(profile, "_json.pictureUrl"),
       linkedInProfileUrl: _.get(profile, "_json.publicProfileUrl"),
       authToken
     };
@@ -37,7 +37,7 @@ export class UserService {
     userParams,
     teamParams
   }: {
-    user: any;
+    user: User;
     userParams: any;
     teamParams: any;
   }) {
@@ -79,7 +79,7 @@ export class UserService {
     await this.updateUserScore(user);
     if (team) {
       // optimize later sanitized team attribute
-      user.team = TeamService.sanitize(team);
+      user.team = await TeamService.sanitize(team);
     }
     return updatedUser;
   }
@@ -112,7 +112,7 @@ export class UserService {
     { withDeps = true } = {}
   ) {
     if (!user) {
-      return null;
+      throw new Error("no user given");
     }
     let sanitizedParams = _.pick(user, ...sanitizeFields);
     sanitizedParams.academicInstitute =
@@ -159,9 +159,14 @@ export class UserService {
     codeNumber: number;
     team: any;
   }) {
-    const { id: teamId } = team || (await TeamService.findOneByCode(codeNumber));
+    try {
+      const { id: teamId } = team || (await TeamService.findOneByCode(codeNumber));
 
-    await user.update({ teamId });
+      await user.update({ teamId });
+    } catch (err) {
+      console.log(err);
+      throw err;
+    }
     return user;
   }
 

@@ -42,10 +42,20 @@
 }
 h2 {font-weight: bold; margin: 0;}
 h5 {margin: 0;}
-.userThumbnail {
+.thumbnail-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
     border-radius: 50%;
     width: 150px;
+    height: 150px;
     margin-right: 1rem;
+    border: 4px solid white;
+}
+.userThumbnail {
+    max-width: 100%;
 }
 .dashboard-header {
     display: flex;
@@ -95,29 +105,45 @@ a.linkedinBtn, a.linkedinBtn:hover {color: #fff;}
     justify-content: flex-start;
     width: 100%;
 }
+.team-member h5 { text-align: center; font-size: 1rem; padding: 0; }
 .team-member {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: flex-start;
     flex-basis: 20%;
 }
-.team-member h5 { text-align: center; font-size: 1.1rem; }
-.teammate-thumbnail {
-    margin-bottom: .5rem;
+.team-member-thumbnail-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
     border-radius: 50%;
     width: 120px;
     height: 120px;
+    margin-bottom: .5rem;
+    border: 4px solid white;
 }
+.team-member-thumbnail-wrapper img { max-width: 100%; }
 a { color: #000; text-decoration: none; }
 a.btn { color: #fff; }
 textarea { max-height: 120px; }
+
 @media screen and (max-width: 1200px) {
-    .main-view { padding: 3rem; }
+    .main-view { padding: 2rem; }
+    .dashboard-header { align-items: center; }
+    .dashboard-username { padding: 0 1rem; }
+    .thumbnail-wrapper {
+        width: 120px;
+        height: 120px;
+        margin-right: 0;
+    }
     .bio { padding: 0; }
     .team-members-wrapper { justify-content: flex-start; }
     .team-member { flex-basis: 25%; margin-bottom: 1rem; }
     .team-member h5 { padding: 0; font-size: 1rem; }
-    .teammate-thumbnail { height: 100px; width: 100px; }
+    .team-member-thumbnail-wrapper { height: 100px; width: 100px; }
 }
 
 @media screen and (max-width: 767px) {
@@ -129,9 +155,7 @@ textarea { max-height: 120px; }
         width: 100%;
         flex-basis: 10%;
     }
-    .main-view {
-        padding: 1rem 2rem;
-    }
+    .main-view { padding: 1rem 2rem; }
     .dashboard-header { flex-direction: column; align-items: center; }
     .dashboard-username {
         padding: 1rem;
@@ -142,18 +166,22 @@ textarea { max-height: 120px; }
     .dashboard-header img { margin: 0; }
     .dashboard-username h5 { font-size: 1.15rem; }
     .dashboard-body { padding: 1rem 0; }
+    .signoutBtn { font-size: .8rem; }
     .team-member { flex-basis: 33.3333%; margin-bottom: 1rem; }
     .team-member h5 { padding: 0; font-size: 1rem; }
-    .teammate-thumbnail { height: 100px; width: 100px; }
 }
 
 @media screen and (max-width: 380px) {
+    .side-nav { padding-top: 3rem; }
     .main-view { padding: .8rem 2rem; }
     .main-view { font-size: .8rem; }
-    h3 { font-size: 1.4rem; }
+    h2 { font-size: 1.7rem; }
+    h3 { font-size: 1.3rem; }
+    h5 { font-size: 1rem; }
     p.bio { font-size: .9rem; }
-    .dashboard-username { padding: .8rem; }
+    .dashboard-username { padding: .8rem;}
+    .dashboard-username h5 { font-size: 1rem; }
     .team-member { flex-basis: 33.3333%; margin-bottom: 1rem; }
     .team-member h5 { padding: 0; font-size: .7rem; }
-    .teammate-thumbnail { height: 70px; width: 70px; }
+    .team-member-thumbnail-wrapper { height: 80px; width: 80px; }
 }

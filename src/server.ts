@@ -7,8 +7,11 @@ import * as morgan from "morgan";
 import * as passport from "passport";
 import { sequelize } from "./db/sequelize";
 import routers from "./routers";
+import * as Sentry from "@sentry/node";
 
 import * as fileUpload from "express-fileupload";
+
+Sentry.init({ dsn: process.env.SENTRY_URI });
 
 const app = express();
 app.use(morgan("dev"));
@@ -25,6 +28,10 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(fileUpload({}));
+if (process.env.NODE_ENV === "production") {
+  app.use(Sentry.Handlers.requestHandler() as express.RequestHandler);
+  app.use(Sentry.Handlers.errorHandler() as express.ErrorRequestHandler);
+}
 
 // api routers
 app.use("/api", routers);

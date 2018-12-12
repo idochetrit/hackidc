@@ -8,9 +8,11 @@
         </div>
         <div class="main-view">
             <div class="dashboard-header">
-                <img v-if="!user.userPicture" src="https://hairo.e.f1v.co/wp-content/themes/romisa/images/placeholder.jpg"
-                     class="img-responsive img-thumbnail userThumbnail">
-                <img v-else :src="user.userPicture" class="img-responsive img-thumbnail userThumbnail">
+                <div class="thumbnail-wrapper">
+                    <img v-if="!user.userPicture" src="https://hairo.e.f1v.co/wp-content/themes/romisa/images/placeholder.jpg"
+                         class="img-responsive img-thumbnail userThumbnail">
+                    <img v-else :src="user.userPicture" class="img-responsive userThumbnail">
+                </div>
                 <div class="dashboard-username">
                     <h2>{{ user.name | nameFormatter }}</h2>
                     <h5 v-if="user.role != 'Loner'">Team <strong class="text-info">{{ user.team.codeName | nameFormatter }}</strong></h5>
@@ -34,17 +36,15 @@
                                 <small class="text-muted">Your bio should include a few words about yourself and your skills.</small>
                             </div>
                             <div class="form-group">
-                                <label for="email-edit">Edit your phone number:</label>
+                                <label for="email-edit">Edit your email address:</label>
                                 <input class="form-control" id="email-edit"
                                        type="email" :placeholder="user.email" v-model="newEmail">
-                                <small class="text-muted">digits only, i.e: 0521234567</small>
                             </div>
                             <div class="form-group">
                                 <label for="mobile-edit">Edit your phone number:</label>
                                 <input class="form-control" id="mobile-edit"
                                        type="text" minlength="10" maxlength="10" :placeholder="user.mobile"
                                        v-model="newMobile">
-                                <small class="text-muted">digits only, i.e: 0521234567</small>
                             </div>
                             <button @click="editBio_done" class="btn btn-sm btn-success">Done</button>
                             <button v-if="user.bio.length > 0" @click="editBio_cancel" class="btn btn-sm btn-secondary">Cancel</button>

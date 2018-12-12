@@ -24,6 +24,7 @@ const newUserData = {
         termsAgree: false,
         bio: "",
         linkedInProfileUrl: "",
+        whyShouldIJoinAnswer: ""
       },
       teamData: {
         codeName: "",

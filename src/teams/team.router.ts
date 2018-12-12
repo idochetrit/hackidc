@@ -45,10 +45,7 @@ router.patch("/self", async (req, res) => {
 });
 
 router.get("/code", async (req, res) => {
-  const {
-    codeNumber,
-    codeName
-  }: { codeNumber: number; codeName: number } = await TeamService.generateTeamCode();
+  const { codeNumber, codeName } = await TeamService.generateTeamCode();
 
   res.json({
     codeName,

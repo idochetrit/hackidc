@@ -17,7 +17,11 @@ if (config.use_env_variable) {
     dialect: "postgres",
     database: config.database,
     username: config.username,
-    password: config.password
+    password: config.password,
+    pool: {
+      max: 20,
+      idle: 3600
+    }
   });
 }
 

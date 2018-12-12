@@ -6,16 +6,18 @@
         <div class="col-md-7">
           <h2 id="about">What is HackIDC?</h2>
           <br>
-          <h5><strong>300+ students, 36 hours, valuable prizes.</strong></h5>
+          <h5><strong>350+ students, 36 hours, valuable prizes.</strong></h5>
           <p><strong>Are you as creative as you think you are? <br> Do you have the guts to push yourself further than ever before?</strong></p>
           <h5>Come join us at HackIDC 2019 and show us what you're made of.</h5>
           <hr>
           <p>This is an event for students who choose to learn because they can, and to build because they love to. Let us take care of the details — just bring your creativity and watch your ideas come to life.</p>
           <p>Run by students from IDC Herzliya, HackIDC is the largest student-run hackathon in Israel, gathering the most innovative, enthusiastic and determined to succeed students that have an idea and want to execute it - fast!</p>
-          <!--<button @click="toSchedule" class="btn btn-info btn-md">VIEW SCHEDULE</button>-->
+          <div class="button-wrapper">
+            <button @click="toSchedule" class="btn btn-info btn-md">VIEW SCHEDULE</button>
+          </div>
         </div>
         <div class="col-md-5 col-sm-4">
-          <img  class="herzel" src="https://s3.amazonaws.com/bizzabo.users.files/BBBur1GrQ2f5CxkoDWjH_%D7%94%D7%A8%D7%A6%D7%9C%20%D7%9C%D7%91%D7%9F-01.png">
+          <img class="herzel section-image" src="https://s3.amazonaws.com/bizzabo.users.files/BBBur1GrQ2f5CxkoDWjH_%D7%94%D7%A8%D7%A6%D7%9C%20%D7%9C%D7%91%D7%9F-01.png">
         </div>
       </div>
       <br>
@@ -23,7 +25,7 @@
       <br>
       <div class="row">
         <div class="col-lg-5 col-md-5">
-          <span class="fas fa-handshake"></span>
+          <span class="fas fa-handshake section-image"></span>
         </div>
         <div class="col-lg-7 col-md-7">
           <h2>Endless opportunities</h2>
@@ -51,7 +53,7 @@
           <div class="button-wrapper"><button @click="toResources" class="btn btn-md btn-info">VIEW THE RESOURCES</button></div>
         </div>
         <div class="col-lg-4 col-md-4">
-          <span class="fas fa-code"></span>
+          <span class="fas fa-code section-image"></span>
         </div>
       </div>
       <br>
@@ -59,7 +61,7 @@
       <br>
       <div class="row">
         <div class="col-lg-5 col-md-5">
-          <span class="fas fa-palette"></span>
+          <span class="fas fa-palette section-image"></span>
         </div>
         <div class="col-lg-7 col-md-7">
           <h2>Digital Art Exhibition</h2>
@@ -127,7 +129,7 @@ export default {
   }
 
   @media screen and (max-width: 767px) {
-    .herzel {width: 70%;}
+    .herzel {width: 50%;}
     .container-fluid {padding: 2rem .5rem;}
     .col-lg-5, .col-sm-4 {
       padding: 2rem 0 0 0;
@@ -137,15 +139,21 @@ export default {
       font-size: 9rem;
     }
     .col-lg-4 {padding: 3rem 0 0 0; font-size: 9rem;}
+    .section-image {
+      font-size: 7rem;
+      text-align: center;
+      margin: 0 auto;
+    }
     .row:nth-of-type(2) {flex-direction: column-reverse;}
     .row:nth-of-type(4) {flex-direction: column-reverse;}
-    .button-wrapper { width:100%; display: flex; justify-content: space-around; }
+    .button-wrapper { width:100%; display: flex; justify-content: center; }
+    button { margin: 0 .2rem; }
   }
 
   @media screen and (max-width: 380px) {
     h2 { font-size: 1.6rem; }
     h5 { font-size: 1.1rem; }
-    button { font-size: .8rem; margin: 0 .1rem; }
+    button { font-size: .8rem; }
   }
 
 </style>

@@ -51,7 +51,9 @@ export default {
 <style scoped>
   .container-fluid {
     padding: 4rem;
-    background-color: #f7f7f7;
+    background: #f7f7f7;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to bottom, #fff, #f7f7f7);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to bottom, #fff, #f7f7f7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   }
   .row {
     width: 100%;
@@ -108,5 +110,8 @@ export default {
     .silver a {height: 65px;}
     .bronze {flex-basis: 25%;}
     .bronze a {height: 60px;}
+  }
+  @media screen and (max-width: 380px) {
+    h5 { font-size: .9rem; }
   }
 </style>

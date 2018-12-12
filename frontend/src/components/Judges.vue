@@ -23,7 +23,7 @@ export default {
       judges: [
         {
           name: 'Prof. Uriel Reichman',
-          title: 'President and Founder of IDC Hezliya',
+          title: 'President and Founder of IDC Herzliya',
           thumbnail: 'http://www.deliveringchangeforum.com/wp-content/uploads/2016/10/DSC_4044-2-295x305.jpg'
         },
         {
@@ -32,15 +32,15 @@ export default {
           thumbnail: 'https://res.cloudinary.com/bizzaboprod/image/upload/v1521130553/kwmjgbfyvxkmnlwd9nhx.png'
         },
         {
+          name: 'Moran Nir',
+          title: 'Executive Director at Zell Entrepreneurship Program at IDC Herzliya',
+          thumbnail: 'https://res.cloudinary.com/bizzaboprod/image/upload/c_crop,g_custom,f_auto/v1520354856/pcl1u7pmq8yhy1ismedk.jpg'
+        },
+        {
           name: 'Iddo Gino',
           title: 'CEO and Founder of RapidAPI',
           thumbnail: require('../../static/iddo_gino.jpg')
         },
-        // {
-        //   name: 'Moran Nir',
-        //   title: 'Executive Director of the Zell Program, IDC Herzliya',
-        //   thumbnail: 'https://res.cloudinary.com/bizzaboprod/image/upload/c_crop,g_custom,f_auto/v1520354856/pcl1u7pmq8yhy1ismedk.jpg'
-        // },
       ]
     }
   }
@@ -94,5 +94,9 @@ export default {
     .judges-item {flex-basis: 50%; padding: .2rem 0;}
     .judges-item p { font-size: .8rem; padding: 0 .5rem; }
     .judges-item h5 { font-size: .9rem; }
+  }
+
+  @media screen and (max-width: 380px) {
+    h5 { font-size: .9rem; }
   }
 </style>

@@ -20,9 +20,8 @@ export default {
   data() {
     return {
       logos: [
-        require('../../static/25_efi_arazi_white_english.png'),
+        require('../../static/25_adelson+arazi_logo_white.png'),
         require('../../static/student_union_logo.png'),
-        require('../../static/25_adelson_logo_english.png'),
       ],
     }
   },
@@ -49,6 +48,15 @@ export default {
 
   @media screen and (max-width: 1440px) and (min-width: 1201px) {
     .container {width: 75%;}
+    .container .row { flex-direction: row; justify-content: center; }
+    .logos-row-item {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      height: 90px;
+      padding: .5rem 2rem;
+    }
   }
 
   @media screen and (max-width: 1200px) {
@@ -57,13 +65,7 @@ export default {
 
   @media screen and (max-width: 767px) {
     .container .row { flex-direction: column; }
-    .logos-row {
-      display: flex;
-      flex-direction: row;
-      padding: 0;
-    }
-    .logos-row:nth-of-type(1) { order: 2; }
-    .logos-row:nth-of-type(3) { order: 2; flex-direction: row-reverse;}
+    .logos-row-item:nth-of-type(2) { order: -1; height: 110px; }
     .logos-row-item {
       display: flex;
       flex-direction: row;
@@ -73,6 +75,10 @@ export default {
       padding: .5rem 0;
     }
     .logos-col-item img { max-width: 90%; }
-    .eventLogo img {width: 60%; margin-bottom: 1rem;}
+  }
+
+  @media screen and (max-width: 380px) {
+    .logos-row-item { height: 70px; }
+    .logos-col-item img { max-width: 80%; }
   }
 </style>

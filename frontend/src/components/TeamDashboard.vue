@@ -37,12 +37,16 @@
                 <h5>Team Members:</h5>
                 <br>
                 <div class="team-members-wrapper">
-                    <a :href="'/users/' + m.id" target="_blank" :key="m.id" v-for="m in team.users" class="team-member">
-                        <img v-if="!m.userPicture" src="https://hairo.e.f1v.co/wp-content/themes/romisa/images/placeholder.jpg"
-                             class="img-responsive img-thumbnail teammate-thumbnail">
-                        <img v-else :src="m.userPicture" class="img-responsive img-thumbnail teammate-thumbnail">
-                        <h5>{{ m.name | nameFormatter }}</h5>
-                    </a>
+                    <div class="team-member">
+                        <a :href="'/users/' + m.id" target="_blank" :key="m.id" v-for="m in team.users">
+                            <div class="team-member-thumbnail-wrapper">
+                                <img v-if="!m.userPicture" src="https://hairo.e.f1v.co/wp-content/themes/romisa/images/placeholder.jpg"
+                                     class="img-responsive">
+                                <img v-else :src="m.userPicture" class="img-responsive">
+                            </div>
+                            <h5>{{ m.name | nameFormatter }}</h5>
+                        </a>
+                    </div>
                 </div>
             </div>
 

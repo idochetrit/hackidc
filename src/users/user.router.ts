@@ -3,10 +3,10 @@ import * as _ from "lodash";
 import { ensureAuthenticated } from "../concerns/auth.users";
 import { handleError, handleUnauthorize, handleNotFound } from "../routers.helper";
 import { TeamService } from "../teams/team.service";
-import UserScore from "./user.score";
 import { UserService } from "./user.service";
 import userUploadsRouter from "./user.upload.router";
 import { User } from "./user.model";
+import { UserTests } from "./user.tests";
 import { PATH_SANITIZED_FIELDS, SANITIZED_PUBLIC_FIELDS } from "./user.constants";
 
 const router = new Router();
@@ -16,8 +16,7 @@ router.use("/self/uploads", userUploadsRouter);
 router.get("/self", ensureAuthenticated, async (req, res) => {
   try {
     const userId: number = Number(_.get(req, "user.id")) || req.query.id;
-    if (_.isUndefined(userId) || _.isNaN(userId))
-      throw handleNotFound(new Error("userId is missing"), res);
+    if (_.isUndefined(userId) || _.isNaN(userId)) throw new Error("userId is missing");
     const user = await UserService.findById(userId, { includeDeps: true });
     const sanitizedUser = await UserService.sanitize(user);
 
@@ -94,6 +93,11 @@ router.delete("/:id", async (req, res) => {
   });
 });
 
-// router.get("")
+router.get("/setTestUsers", async (req, res) => {
+  const { count } = req.query;
+  UserTests.createTestUsers(count);
+  console.log("Done");
+  res.json({ usersCreated: count });
+});
 
 export default router;

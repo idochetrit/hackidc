@@ -3,34 +3,38 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <h4>Please note - before registering:</h4>
+                    <h4>Please note - before signing up:</h4>
                     <p class="lead text-info">Before starting the registration process, please take a minute to fully read the following points.</p>
                     <ol>
-                        <li>For your Hackathon project, you can choose one of the two:
+                        <li>For your Hackathon project, you can either:
                             <ul>
-                                <li>To take on a challenge from one of our sponsors, and compete other teams on this challenge.</li>
-                                <li>To compete in the general competition, with your own special idea - HackIDC 2019 has no particular theme.</li>
+                                <li>Take on a challenge from one of our sponsors, and compete other teams on this challenge.</li>
+                                <li>Compete in the general competition, with your own special idea - HackIDC 2019 has no particular theme.</li>
                             </ul>
+                            <small class="text-muted"><strong>*</strong> Teams that take on a challenge are judged in both challenge and general competition.</small>
                         </li>
                         <li>The sponsors' challenges will be officially introduced on Pre-Hack day, taking place on April 1st.
                             <br><strong>Attendance of at-least 2 team-members is mandatory.</strong>
                         </li>
                         <li>
-                            Teams - please nominate a Team Builder.
+                            Teams: please nominate a Team Builder.
                             <br>Team Builders should sign up before the other team-members, and specify they are signing up as Team Builders. At the end of the registration,
-                            we will generate a team number, which each other team-member should specify when signing up.
+                            we will generate a team number, which each other team-member should fill in when signing up.
                         </li>
                         <li>
-                            In order to register to HackIDC 2019, you will need a LinkedIn account. It does not have to be fully active, but it's looks better for you :)
+                            In order to register to HackIDC 2019, you will need a LinkedIn account (it does not have to be fully active).
                             <br>If you do not have one, <a class="text-info" href="https://www.linkedin.com/" target="_blank">open one here</a>, then start the registration.
                         </li>
                         <li>
-                            All the fields in the registration form are mandatory.
+                            As places are limited, all application forms will be examined. We will inform you regarding your participation in HackIDC 2019 shortly after the registration closes.
+                        </li>
+                        <li>
+                            All fields in the registration form are required.
                         </li>
                     </ol>
                     <div class="button-wrapper">
                         <button @click="toHome" class="btn btn-md btn-secondary">Back home</button>
-                        <button @click="toSignUp" class="btn btn-md btn-success">I understand. Start the registration</button>
+                        <button @click="toSignUp" class="btn btn-md btn-success">Continue</button>
                     </div>
                 </div>
             </div>
@@ -97,9 +101,22 @@ export default {
         ol ul { padding: 1rem; }
     }
 
-    @media screen and (max-width: 380px) {
+    @media screen and (max-width: 767px) {
         .container-fluid { padding: 4rem 0; }
+        .button-wrapper { display: flex; flex-direction: row; }
+        button { margin: 0 .2rem; }
         h4 { font-size: 1.2rem; }
         ol li { padding: 0 .2rem; }
+    }
+
+    @media screen and (max-width: 380px) {
+        .container-fluid { padding: 4rem 0; }
+        .container { padding: 0 .5rem; }
+        .row { padding: 0 .5rem; }
+        h4 { font-size: 1.2rem; }
+        ol { padding: 0 0 0 1rem; }
+
+        ol li { padding: 0 .2rem; font-size: .8rem; }
+        button { font-size: .8rem; }
     }
 </style>

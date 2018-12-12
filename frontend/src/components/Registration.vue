@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="container">
             <img class="herzel" src="../../static/herzel_black.png">
-            <h2>HackIDC 2019 - Registration</h2>
+            <h2 class="page-header">HackIDC 2019 - Registration</h2>
             <div v-if="!isCompleted" class="progress-bar">
                 <span class="progress-inside bg-info"
                       :class="{'bg-success': currentStep === 4}"
@@ -15,8 +15,8 @@
                         <br>Registration is open for groups of 3-5 people or for participants who would like to register on their own.</h5>
                     <hr>
                     <div class="alert alert-light" role="alert">
-                        <h4 style="text-align: center;"><strong><span class="text-info">Remember:</span>
-                            <br>Team Builder should register first!</strong></h4>
+                        <h5 style="text-align: center;"><strong><span class="text-info">Remember:</span>
+                            <br>Team Builder should register first!</strong></h5>
                     </div>
                     <h5>Please connect your LinkedIn account to fill in your personal basic details. <br>
                         Don't have a LinkedIn account? <a class="text-info" target="_blank" href="https://www.linkedin.com/">Create one here.</a>
@@ -97,6 +97,7 @@
                                     <option value="2">2</option>
                                     <option value="3">3</option>
                                     <option value="4">4</option>
+                                    <option value="5">5</option>
                                 </select>
                             </div>
                         </div>
@@ -148,12 +149,13 @@
                     <br>
                     <div class="form-row">
                         <div class="form-col">
-                            <div class="custom-file" :class="{invalid: $v.userData.experienceType.$error}">
+                            <div class="custom-file" :class="{invalid: $v.cv.$error}">
                                 <input ref="cvFile" type="file" class="custom-file-input" id="customFile"
                                        @blur="$v.cv.$touch()"
                                        accept="application/pdf" v-on:change="handleFileUpload">
                                 <label class="custom-file-label" for="customFile">{{ cvFileName }}</label>
-                                <small id="cv-help" class="form-text">Make sure to upload <strong>only PDF files</strong></small>
+                                <small id="cv-help" class="form-text">Make sure to upload <strong>only PDF files, up to 4MB</strong></small>
+                                <small class="text-danger" v-if="!!cvFileError">{{ cvFileError }}</small>
                             </div>
                         </div>
                     </div>
@@ -182,6 +184,13 @@
                                     <option :value="true">Yes</option>
                                 </select>
                             </div>
+                            <div class="form-group" :class="{invalid: $v.userData.whyShouldIJoinAnswer.$error}">
+                                <label for="whyShouldIJoin">Tell us in a few words: Why should you and your team be accepted to HackIDC 2019?</label>
+                                <textarea id="whyShouldIJoin" placeholder="Write a few words..." rows="4"
+                                        @blur="$v.userData.whyShouldIJoinAnswer.$touch()"
+                                        v-model="userData.whyShouldIJoinAnswer" class="form-control">
+                                </textarea>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -208,10 +217,7 @@
                     <div class="form-row">
                         <div class="form-col">
                             <div v-if="userData.role === 'team-builder'">
-                                <h5>Your team number is</h5>
-                                <h1 class="text-info" style="text-align: center;"><strong>{{ this.teamData.codeNumber }}</strong></h1>
-                                <h5>Write down this number.
-                                    <br>Your teammates will need it in order to register.</h5>
+                                <div class="alert alert-success"><h6>After submitting the registration form, you will get your <strong>Team Number</strong>. Your teammates will need it in order to sign up.</h6></div>
                                 <hr>
                                 <div class="form-group" :class="{invalid: $v.userData.volunteerToAcceptLoner.$error}">
                                     <label for="accept-loner">This year we are accepting "alone" participants. Would you like us to connect your group with one of these talented candidates?</label>
@@ -258,6 +264,7 @@
                                     <input class="form-check-input" type="checkbox" id="gluten-free" value="glutten-free" v-model="userData.foodRestrictionType">
                                     <label class="form-check-label" for="gluten-free">Gluten-Free</label>
                                 </div>
+                                <small>* If you don't have any restriction, don't check anything.</small>
                             </div>
                             <hr>
                             <div class="form-group" :class="{invalid: $v.userData.hearAboutUs.$error}">
@@ -281,8 +288,12 @@
                     <br>
                     <h2>That's it!</h2>
                     <h4>We're looking forward to read your application form. Good-luck!</h4>
-                    <h5 v-if="userData.role != 'loner'">Your team's number is: <span class="text-info"><strong style="font-size: 1.3rem;">{{ teamData.codeNumber }}</strong></span>
-                        <br>This number will follow you throughout the whole contest.</h5>
+                    <div class="alert alert-light">
+                        <h5 style="text-align: center;" v-if="userData.role != 'loner'">Your team's number is: <span class="text-info">
+                        <br><strong style="font-size: 1.7rem;">{{ teamData.codeNumber }}</strong></span>
+                            <br>Write it down, this number will follow you throughout the whole contest.</h5>
+                    </div>
+
                     <hr>
                     <h5><strong>Good Luck!</strong></h5>
                     <h5><strong>HackIDC 2019 Team</strong></h5>
@@ -298,7 +309,7 @@
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" id="cv-agree" v-model="userData.cvAgree">
                     <label class="form-check-label" for="cv-agree">
-                        I approve sending my CV to eligible sponsors for potential job offers.
+                        I approve sending my CV to this year sponsors for potential job offers.
                     </label>
                 </div>
                 <div class="form-check" :class="{invalid: $v.userData.termsAgree.$invalid}">
@@ -329,15 +340,15 @@ import formValidations from '../assets/validations'
 import newUserData from '../assets/newUserData'
 import teamIdGenerator from '../assets/teamIdGenerator'
 import axios from 'axios';
-const view = document.getElementsByTagName('body')[0].clientWidth;
 export default {
   data() {
     return {
       teamIdError: "",
+      cvFileError: "",
       currentStep: 1,
       isCompleted: false,
-      cv: '',
-      cvFileName: ''
+      cv: "",
+      cvFileName: ""
     }
   },
   mixins: [formValidations, newUserData, linkedInIntegration, teamIdGenerator],
@@ -357,15 +368,6 @@ export default {
       this.$v.teamData.codeNumber.$touch();
       this.validateTeamID(this.teamData.codeNumber);
     },
-    generate() {
-      axios.get('/api/teams/code')
-        .then(res => {
-          console.log(res.data);
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    },
     move(v) {
       setTimeout(function() {
         if (v === 'next') {
@@ -377,18 +379,16 @@ export default {
           return;
         }
       }.bind(this), 1000);
-      this.$scrollTo('.herzel', 1300);
+      this.$scrollTo('.page-header', 1300);
     },
     handleFileUpload() {
+      this.$v.cv.$touch();
       this.cvFileName = this.$refs.cvFile.files[0].name;
       this.cv = this.$refs.cvFile.files[0];
       console.log(this.cv);
-    },
-    submit() {
       let formData = new FormData();
       formData.append("file", this.cv);
-      console.log(formData);
-      axios.post("/api/users/self/uploads/cv",
+      return axios.post("/api/users/self/uploads/cv",
         formData,
         {
           withCredentials: true,
@@ -396,21 +396,34 @@ export default {
             'Content-Type': 'multipart/form-data'
           }
         }
-      )
-        .then(res => {
-          axios.post('/api/users/register', {
-            user: this.userData,
-            team: this.teamData
-          });
+      ).then((res) => {
+        this.cvFileError = "";
+        delete this.userData.cvFile;
+      }).catch((err) => {
+        console.log(err);
+        this.$v.cv.$touch();
+        this.cvFileError = "Invalid file type (PDF only) or file is bigger than 4 MB";
+        //  in order to prevent the user from advancing the registration form (validation is performed via this.cv)
+        this.cv = "";
+        this.cvFileName = "";
+      })
+    },
+    submit() {
+      return axios.post('/api/users/register', {
+          user: this.userData,
+          team: this.teamData
         })
-        .catch(err => {
-          console.log(err);
-        });
-      setTimeout(function() {
-        this.currentStep = 0;
-        this.isCompleted = true;
-      }.bind(this), 1000);
-      this.$scrollTo('.herzel', 1300);
+      .then(() => {
+        setTimeout(function() {
+          this.currentStep = 0;
+          this.isCompleted = true;
+        }.bind(this), 1000);
+        this.$scrollTo('.page-header', 1300);
+      })
+      .catch(err => {
+        console.log(err);
+        this.$router.push({ name: "error-page" });
+      });
     },
     toHome() {
       this.$router.push({ name: "home" });
@@ -420,7 +433,7 @@ export default {
     }
   },
   created(){
-    this.authRequest().then(() => {
+    return this.authRequest().then(() => {
       const user = this.$store.getters.getUser;
       this.setStep(user);
     });
