@@ -22,6 +22,9 @@
                             we will generate a team number, which each other team-member should fill in when signing up.
                         </li>
                         <li>
+                            This year, you can sign up as "Loner" - meaning, signing up on your own. After registration closes, we will team you up with other participants.
+                        </li>
+                        <li>
                             In order to register to HackIDC 2019, you will need a LinkedIn account (it does not have to be fully active).
                             <br>If you do not have one, <a class="text-info" href="https://www.linkedin.com/" target="_blank">open one here</a>, then start the registration.
                         </li>

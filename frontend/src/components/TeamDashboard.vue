@@ -17,7 +17,7 @@
             <hr>
             <div class="dashboard-body">
                 <h3>Description</h3>
-                <p class="bio">{{ team.description }}</p>
+                <p class="description">{{ team.description }}</p>
                 <div class="section" v-if="this.$store.getters.isAuthenticated">
                     <button @click="toggleEdit" v-if="!editArea && team.description" class="btn btn-sm btn-info"><strong>Edit the team information</strong></button>
                     <transition mode="out-in" enter-active-class="animated fadeIn">
@@ -28,6 +28,17 @@
                                 <textarea class="form-control" id="bio-edit" rows="4" placeholder="Edit your Description..."
                                           v-model="newDescription"></textarea>
                                 <small class="text-muted">Your team description should include a few words about yourselves and about your idea for HackIDC 2019.</small>
+                            </div>
+                            <div class="form-group">
+                                <label>If you think you'll need any technological hardware, please check it's box down below.</label>
+                                <div class="hardware-wrapper">
+                                    <div class="form-check" v-for="(o, i) in hardwareOptions" :key="i">
+                                        <input class="form-check-input" type="checkbox" :id="o.val" :value="o.val" v-model="newRequiredEquipment">
+                                        <label class="form-check-label" :for="o.val">{{ o.name }}</label>
+                                    </div>
+                                </div>
+                                <small>* Please note that this <strong>does not</strong> guarantee anything at this time.</small>
+                                <small>** For other equipment, please contact us specifically.</small>
                             </div>
                             <button @click="editDes_done" class="btn btn-sm btn-success">Done</button>
                             <button v-if="team.description" @click="editDes_cancel" class="btn btn-sm btn-secondary">Cancel</button>
@@ -56,19 +67,22 @@
 
 <script>
   import linkedInIntegration from "../assets/linkedInIntegration"
+  import hardwareList from "../assets/hardware_list"
   import filters from "../assets/filters"
   import axios from "axios";
   export default {
-    mixins: [linkedInIntegration, filters],
+    mixins: [linkedInIntegration, filters, hardwareList],
     data() {
       return {
         editFlag: false,
         newDescription: "",
+        newRequiredEquipment: []
       }
     },
     computed: {
       user() {return this.$store.getters.getUser;},
       team() {return this.user.team; },
+      equipment() { return this.user.team.requiredEquipment; },
       editArea() { return this.editFlag; }
     },
     methods: {
@@ -83,6 +97,7 @@
           {
             team: {
               description: this.newDescription,
+              requiredEquipment: this.newRequiredEquipment
             }
           })
           .then(res => {
@@ -96,6 +111,9 @@
     created() {
       this.authRequest();
     },
+    mounted() {
+      this.newRequiredEquipment = this.equipment;
+    }
   }
 </script>
 
