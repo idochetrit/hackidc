@@ -112,7 +112,7 @@ export class UserService {
     { withDeps = true } = {}
   ) {
     if (!user) {
-      return null;
+      throw new Error("no user given");
     }
     let sanitizedParams = _.pick(user, ...sanitizeFields);
     sanitizedParams.academicInstitute =
