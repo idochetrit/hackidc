@@ -190,6 +190,12 @@ export default {
     .navbar-nav { align-items: flex-start; }
   }
 
+  @media screen and (min-width: 1441px) {
+    nav { padding: .5rem 2rem; }
+    .navbar-wrapper { display: flex; flex-direction: row; align-items: center; width: 100%; }
+    .dropdown-menu { background-color: rgba(33, 36, 38, 1); }
+  }
+
   @media screen and (max-width: 1440px) {
     nav { padding: .5rem 2rem; }
     .navbar-wrapper { display: flex; flex-direction: row; align-items: center; width: 100%; }

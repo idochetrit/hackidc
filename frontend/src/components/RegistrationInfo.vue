@@ -6,6 +6,13 @@
                     <h4>Please note - before signing up:</h4>
                     <p class="lead text-info">Before starting the registration process, please take a minute to fully read the following points.</p>
                     <ol>
+                        <li>
+                            This year, you can decide whether you:
+                            <ul>
+                                <li>Sign up as a team of 3-5 members.</li>
+                                <li>Sign up as "Loner" - meaning, signing up on your own. After registration closes, we will team you up with other participants</li>
+                            </ul>
+                        </li>
                         <li>For your Hackathon project, you can either:
                             <ul>
                                 <li>Take on a challenge from one of our sponsors, and compete other teams on this challenge.</li>
@@ -20,9 +27,6 @@
                             Teams: please nominate a Team Builder.
                             <br>Team Builders should sign up before the other team-members, and specify they are signing up as Team Builders. At the end of the registration,
                             we will generate a team number, which each other team-member should fill in when signing up.
-                        </li>
-                        <li>
-                            This year, you can sign up as "Loner" - meaning, signing up on your own. After registration closes, we will team you up with other participants.
                         </li>
                         <li>
                             In order to register to HackIDC 2019, you will need a LinkedIn account (it does not have to be fully active).
