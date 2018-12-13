@@ -30,7 +30,7 @@ router.post("/cv", ensureAuthenticated, async (req, res) => {
   }
 });
 
-router.get("/cv", ensureAuthenticated, async (req, res) => {
+router.get("/cv", async (req, res) => {
   const userId: number = Number(_.get(req, "user.id")) || req.headers.userid;
   let user;
   try {

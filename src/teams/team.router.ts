@@ -27,9 +27,9 @@ router.patch("/self", async (req, res) => {
     const attributes: number = req.body;
     const userId: number = Number(_.get(req, "user.id")) || req.headers.userid;
 
-    const newAttributes: any = _.omitBy(
+    const newAttributes: any = _.pickBy(
       TeamService.extractTeamParams(attributes, PATCH_SANITIZED_FIELDS),
-      _.isEmpty
+      _.identity
     );
 
     const team: Team = await UserService.getTeamByUserId(userId);
