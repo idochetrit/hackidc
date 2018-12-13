@@ -33,8 +33,8 @@
                                 <label>If you think you'll need any technological hardware, please check it's box down below.</label>
                                 <div class="hardware-wrapper">
                                     <div class="form-check" v-for="(o, i) in hardwareOptions" :key="i">
-                                        <input class="form-check-input" type="checkbox" :id="o.val" :value="o.val" v-model="newRequiredEquipment">
-                                        <label class="form-check-label" :for="o.val">{{ o.name }}</label>
+                                        <input class="form-check-input" type="checkbox" :id="'id-'+o.val" :value="o.val" v-model="newRequiredEquipment">
+                                        <label class="form-check-label" :for="'id-'+o.val">{{ o.name }}</label>
                                     </div>
                                 </div>
                                 <small>* Please note that this <strong>does not</strong> guarantee anything at this time.</small>
@@ -112,7 +112,7 @@
       this.authRequest();
     },
     mounted() {
-      this.newRequiredEquipment = this.equipment;
+      this.newRequiredEquipment = !this.equipment ? [] : this.equipment;
     }
   }
 </script>

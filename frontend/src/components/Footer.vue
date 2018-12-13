@@ -78,7 +78,7 @@ export default {
   }
 
   @media screen and (max-width: 380px) {
-    .logos-row-item { height: 70px; }
+    .logos-row-item { height: 60px; }
     .logos-col-item img { max-width: 80%; }
   }
 </style>

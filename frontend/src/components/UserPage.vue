@@ -112,7 +112,7 @@ export default {
         border: 4px solid white;
     }
     .userThumbnail {
-        max-width: 100%;
+        min-width: 100%;
     }
     h1 {font-weight: bold; text-align: center;}
     h3 { margin: 1rem 0 .5rem 0; font-size: 1.6rem; }

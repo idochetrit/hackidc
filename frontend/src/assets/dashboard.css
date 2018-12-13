@@ -134,7 +134,7 @@ a.linkedinBtn, a.linkedinBtn:hover {color: #fff;}
     max-height: 250px;
     padding: 1rem;
 }
-.team-member-thumbnail-wrapper img { max-width: 100%; }
+.team-member-thumbnail-wrapper img { min-width: 100%; }
 a { color: #000; text-decoration: none; }
 a.btn { color: #fff; }
 textarea { max-height: 120px; }
