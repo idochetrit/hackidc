@@ -47,6 +47,7 @@ export const PATH_SANITIZED_FIELDS = [
   "gender",
   "bio",
   "mobile",
+  "teamId",
   "shirtSize"
 ];
 
