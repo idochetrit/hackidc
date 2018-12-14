@@ -17,7 +17,7 @@
     padding: 10rem 0;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-itemsw: center;
   }
   .fas {
     margin: 0 1rem;

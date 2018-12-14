@@ -39,5 +39,5 @@ router.beforeEach((to, from, next) => {
 router.afterEach((to, from, next) => {
   setTimeout(() => {
     store.dispatch("loadingEnd");
-  }, 1000);
+  }, 1600);
 });

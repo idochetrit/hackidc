@@ -15,12 +15,13 @@ import linkedInIntegration from "./assets/linkedInIntegration";
 import Navigation from "./components/Navigation.vue"
 import Footer from './components/Footer.vue'
 import Loader from './components/Loader.vue'
+import BinaryLoader from './components/BinaryLoader.vue'
 export default {
   computed: {
     loading() {return this.$store.getters.isLoading},
   },
   components: {
-    'app-loader': Loader,
+    'app-loader': BinaryLoader,
     'app-nav': Navigation,
     'app-footer': Footer,
   },
