@@ -12,7 +12,7 @@ export const store = new Vuex.Store({
       registerStatus: ""
     },
     loading: false,
-    registration: "under-construction" // valid values: 'under-construction' ,'opened' or 'closed'
+    registration: "ֿopened" // valid values: 'under-construction' ,'opened' or 'closed'
   },
   getters: {
     isLoading: state => state.loading,
