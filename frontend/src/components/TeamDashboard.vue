@@ -48,8 +48,8 @@
                 <h5>Team Members:</h5>
                 <br>
                 <div class="team-members-wrapper">
-                    <div class="team-member">
-                        <a :href="'/users/' + m.id" target="_blank" :key="m.id" v-for="m in team.users">
+                    <div class="team-member" v-for="m in team.users" :key="m.id">
+                        <a :href="'/users/' + m.id" target="_blank">
                             <div class="team-member-thumbnail-wrapper">
                                 <img v-if="!m.userPicture" src="https://hairo.e.f1v.co/wp-content/themes/romisa/images/placeholder.jpg"
                                      class="img-responsive">

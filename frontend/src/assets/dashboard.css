@@ -206,7 +206,7 @@ textarea { max-height: 120px; }
     .dashboard-username h5 { font-size: 1rem; }
     .team-member { flex-basis: 33.3333%; margin-bottom: 1rem; }
     .team-member h5 { padding: 0; font-size: .7rem; }
-    .team-member-thumbnail-wrapper { height: 80px; width: 80px; }
+    .team-member-thumbnail-wrapper { height: 85px; width: 85px; }
     .hardware-wrapper {
         max-height: 450px;
         padding: .5rem;
