@@ -8,8 +8,8 @@
             </div>
             <h5>Members:</h5>
             <div class="team-members-wrapper">
-                <div class="team-member">
-                    <a :href="'/users/' + m.id" target="_blank" :key="m.id" v-for="m in team.users">
+                <div class="team-member" :key="m.id" v-for="m in team.users">
+                    <a :href="'/users/' + m.id" target="_blank">
                         <div class="team-member-thumbnail-wrapper">
                             <img v-if="!m.userPicture" src="https://hairo.e.f1v.co/wp-content/themes/romisa/images/placeholder.jpg"
                                  class="img-responsive">
