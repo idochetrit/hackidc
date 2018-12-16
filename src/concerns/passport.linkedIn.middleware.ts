@@ -20,6 +20,7 @@ passport.use(
       clientID: LINKEDIN_CLIENT_ID,
       clientSecret: LINKEDIN_CLIENT_SECRET,
       callbackURL: `${process.env.HOST}/api/auth/linkedin/callback`,
+      profileFields: ["formatted-name", "id", "public-profile-url", "picture-url", "email-address"],
       scope: ["r_basicprofile", "r_emailaddress"],
       passReqToCallback: true
     },
