@@ -28,10 +28,9 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(fileUpload({}));
-if (process.env.NODE_ENV === "production") {
-  app.use(Sentry.Handlers.requestHandler() as express.RequestHandler);
-  app.use(Sentry.Handlers.errorHandler() as express.ErrorRequestHandler);
-}
+
+app.use(Sentry.Handlers.requestHandler() as express.RequestHandler);
+app.use(Sentry.Handlers.errorHandler() as express.ErrorRequestHandler);
 
 // api routers
 app.use("/api", routers);
