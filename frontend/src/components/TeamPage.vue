@@ -125,7 +125,7 @@ export default {
         margin-bottom: .5rem;
         border: 4px solid white;
     }
-    .team-member-thumbnail-wrapper img { min-width: 100%; }
+    .team-member-thumbnail-wrapper img { min-width: 100%; width: 100%; }
     @media screen and (max-width: 1440px) and (min-width: 1201px) {
         .container {width: 80%;}
     }

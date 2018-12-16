@@ -56,6 +56,7 @@ h5 {margin: 0;}
 }
 .userThumbnail {
     min-width: 100%;
+    width: 100%;
 }
 .dashboard-header {
     display: flex;
@@ -134,7 +135,7 @@ a.linkedinBtn, a.linkedinBtn:hover {color: #fff;}
     max-height: 250px;
     padding: 1rem;
 }
-.team-member-thumbnail-wrapper img { min-width: 100%; }
+.team-member-thumbnail-wrapper img { min-width: 100%; width: 100%; }
 a { color: #000; text-decoration: none; }
 a.btn { color: #fff; }
 textarea { max-height: 120px; }
