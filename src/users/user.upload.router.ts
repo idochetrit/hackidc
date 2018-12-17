@@ -44,9 +44,8 @@ router.get("/cv", async (req, res) => {
   const fileContents = Buffer.from(file, "base64");
   const readStream = new stream.PassThrough();
   readStream.end(fileContents);
-
-  const fileName = `${_.snakeCase(user.name)}_${user.id}_cvFile.pdf`;
-  res.set("Content-disposition", `attachment; filename=${fileName}`);
+  const filename: string = UserService.cvFilename(user);
+  res.set("Content-disposition", `attachment; filename=${filename}`);
   res.set("Content-Type", file.type);
 
   readStream.pipe(res);

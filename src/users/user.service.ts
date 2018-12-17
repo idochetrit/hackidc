@@ -204,6 +204,11 @@ export class UserService {
     user.updateAttributes({ isDeleted: true });
   }
 
+  public static cvFilename(user: User) {
+    const userName = _.snakeCase(user.name.replace(/[^0-9a-z\s]/gi, ""));
+    return `${userName}_${user.id}_cvFile.pdf`;
+  }
+
   private static async updateUserScore(user: User) {
     if (!user) {
       throw Error("No user is given.");
