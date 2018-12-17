@@ -6,7 +6,7 @@
       <table class="table table-dark table-bordered table-striped">
         <thead class="thead-dark">
           <tr>
-            <th colspan="12">Tuesday, April 11th</th>
+            <th colspan="12">Thursday, April 11th</th>
           </tr>
         </thead>
         <tbody>
