@@ -35,10 +35,11 @@ export default {
         gold: [],
         silver: [
           {name: 'Microsoft', link: 'https://www.microsoft.com/he-il', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Microsoft_logo_%282012%29.svg/1280px-Microsoft_logo_%282012%29.svg.png'},
-          {name: 'Midgal', link: 'https://www.migdal.co.il/He/Pages/MigdalHomePage.aspx', logo: 'https://upload.wikimedia.org/wikipedia/he/thumb/3/35/Migdal_Logo.svg/475px-Migdal_Logo.svg.png'},
-          {name: 'Shookit', link: 'https://shookit.online/', logo: require('../../static/shookit.png')},
           {name: 'Wix', link: 'https://www.wix.com/', logo: require('../../static/wix_logo.png')},
+          {name: 'Midgal', link: 'https://www.migdal.co.il/He/Pages/MigdalHomePage.aspx', logo: 'https://upload.wikimedia.org/wikipedia/he/thumb/3/35/Migdal_Logo.svg/475px-Migdal_Logo.svg.png'},
           {name: 'Cybergym', link: 'https://www.cybergym.com/', logo: require('../../static/cybergym_logo.png')},
+          {name: 'Shookit', link: 'https://shookit.online/', logo: require('../../static/shookit.png')},
+          {name: 'Bizzabo', link: 'https://www.bizzabo.com/', logo: require('../../static/bizzabo_logo.png')},
         ],
         bronze: [
           {name: 'Google', link: 'https://careers.google.com/locations/tel-aviv-haifa/', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/2000px-Google_2015_logo.svg.png'},
