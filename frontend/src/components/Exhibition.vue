@@ -1,7 +1,7 @@
 <template>
     <div class="container-fluid">
         <div class="container">
-            <img class="exhibitionLogo" src="../../static/exhibition_logo.png">
+            <img class="exhibitionLogo" src="../../static/new_exhibition_logo.png">
             <h3>HackIDC digital art exhibition 2019 - <span class="redBold">When tech meets art!</span></h3>
             <div class="row">
                 <div class="offset-lg-1 col-lg-10 col-md-12">
@@ -39,8 +39,8 @@
     }
     .row { padding: 1rem 3rem; }
     .exhibitionLogo {
-        width: 25%;
-        margin-bottom: 2rem;
+        width: 35%;
+        margin-bottom: 3rem;
     }
     h3 { text-align: center; font-weight: bold; color: #fff; text-transform: uppercase; }
     p { color: #fff; font-size: 1.1rem; }
@@ -57,12 +57,12 @@
     h4 a:hover { text-decoration: none; }
 
     @media screen and (max-width: 1200px) {
-        .exhibitionLogo { width: 30%; }
+        .exhibitionLogo { width: 30%; margin-bottom: 2rem; }
         h3 { font-size: 1.5rem; }
     }
 
     @media screen and (max-width: 767px) {
-        .exhibitionLogo { width: 50%; }
+        .exhibitionLogo { width: 60%; }
         h3 { font-size: 1.2rem; padding: 0 1rem; }
         .row { padding: 1rem .5rem; }
     }
