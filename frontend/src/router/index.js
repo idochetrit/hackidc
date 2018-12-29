@@ -14,6 +14,7 @@ import Gallery from "../components/Gallery.vue";
 import Registration from "../components/Registration.vue";
 import RegistrationInfo from "../components/RegistrationInfo.vue";
 import Login from "../components/Login.vue";
+import JudgesLogin from "../components/JudgesLogin.vue";
 import UserDashboard from "../components/UserDashboard.vue";
 import TeamDashboard from "../components/TeamDashboard.vue";
 import TeamPage from "../components/TeamPage.vue";
@@ -151,6 +152,14 @@ export default new Router({
         title: "HackIDC 2019 | Login"
       },
       component: Login
+    },
+    {
+      path: "/judges-login",
+      name: "judges-login",
+      meta: {
+        title: "HackIDC 2019 | Judges Login"
+      },
+      component: JudgesLogin
     },
     {
       path: "/status-message",
