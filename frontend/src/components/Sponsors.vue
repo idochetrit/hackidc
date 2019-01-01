@@ -45,6 +45,7 @@ export default {
           {name: 'Google', link: 'https://careers.google.com/locations/tel-aviv-haifa/', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/2000px-Google_2015_logo.svg.png'},
           {name: 'Essence Group', link: 'https://www.essence-grp.com/', logo: require('../../static/essence_logo.png')},
           {name: 'Minute Media', link: 'https://www.minutemedia.com/', logo: require('../../static/minutemedia_logo.png')},
+          {name: 'BLU Energy Drink', link: 'https://www.facebook.com/BLUyourmind/', logo: require('../../static/blu_logo.png')},
         ]
       }
     }
