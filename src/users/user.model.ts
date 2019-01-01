@@ -44,6 +44,8 @@ export class User extends Model<User> {
   })
   public email: string;
   @Column
+  public password: string;
+  @Column
   public gender: string;
   @Column
   public mobile: string;

@@ -73,3 +73,5 @@ export const academicInstitutesMap = {
   shenkar: "Shenkar College",
   other: "Other"
 };
+
+export const JUDGE_SANITIZED_FIELDS = ["id", "name", "email", "password", "canViewCV", "role"];

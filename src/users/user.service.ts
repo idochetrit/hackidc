@@ -8,6 +8,7 @@ import userRole from "./user.role";
 import UserScore from "./user.score";
 import { PATH_SANITIZED_FIELDS, SANITIZED_FIELDS, academicInstitutesMap } from "./user.constants";
 import { Sequelize } from "sequelize-typescript";
+import * as bcrypt from "bcryptjs";
 
 export class UserService {
   public static createLinkedInUser(profile: any, authToken: string) {
@@ -182,6 +183,22 @@ export class UserService {
     }
 
     await user.update({ cvFile: fileParams.data });
+  }
+
+  public static async verifyPassword(user: User, password: string) {
+    const hashedPass = user.password;
+    await bcrypt.compare(password, hashedPass, (err, isMatch) => {
+      if (err) {
+        return err;
+      }
+      return isMatch;
+    });
+  }
+
+  public static async createPasswordForUser(user: User, newPassword: string) {
+    const salt = await bcrypt.genSalt(10);
+    const newHashedPassword = bcrypt.hash(newPassword, salt);
+    await user.update({ password: newHashedPassword });
   }
 
   public static async findById(

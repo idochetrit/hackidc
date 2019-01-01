@@ -2,6 +2,7 @@ import { Router } from "express";
 import * as _ from "lodash";
 import { getRedirectPathStatus } from "../concerns/auth.users";
 import passportLinkedin from "../concerns/passport.linkedIn.middleware";
+import passportLocal from "../concerns/passport.local.middleware";
 
 const router = new Router();
 
@@ -10,6 +11,10 @@ router.get("/logout", (req, res) => {
   req.logout();
   res.status(204).send("");
 });
+
+// for judges
+// GET /auth/login
+router.get("/login", passportLocal.authenticate("local"));
 
 // GET /auth/linkedin
 router.get("/linkedin", passportLinkedin.authenticate("linkedin", { state: "loginState" }));
