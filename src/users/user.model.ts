@@ -124,4 +124,7 @@ export class User extends Model<User> {
   public updatedAt: Date;
   @Column
   public isDeleted: boolean;
+
+  @Column
+  public canViewCV: boolean;
 }
