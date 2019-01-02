@@ -1,7 +1,5 @@
 import * as _ from "lodash";
 
-import { Team } from "../../teams/team.model";
-import { TeamService } from "../../teams/team.service";
 import { User } from "../user.model";
 import { Sequelize } from "sequelize-typescript";
 import * as bcrypt from "bcryptjs";

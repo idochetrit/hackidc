@@ -1,16 +1,12 @@
 import { Router } from "express";
 import * as _ from "lodash";
-import { ensureAuthenticated } from "../concerns/auth.users";
-import { TeamService } from "../teams/team.service";
-import { UserService } from "./user.service";
-import userUploadsRouter from "./user.upload.router";
-import { User } from "./user.model";
+import { ensureAuthenticated } from "../../concerns/auth.users";
+import { UserService } from "../user.service";
+import { User } from "../user.model";
 import { JudgeService } from "./judge.service";
 import { handleError } from "../../routers.helper";
 
 const router = new Router();
-
-router.use("/self/uploads", userUploadsRouter);
 
 router.get("/self", ensureAuthenticated, async (req, res) => {
   try {

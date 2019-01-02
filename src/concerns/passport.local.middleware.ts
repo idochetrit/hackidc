@@ -1,7 +1,8 @@
 import * as passport from "passport";
 import { UserService } from "../users/user.service";
 import { User } from "../users/user.model";
-import { LocalStrategy } from "passport-local";
+import { Strategy } from "passport-local";
+const LocalStrategy = Strategy;
 
 passport.serializeUser((user, done) => {
   done(null, user.id);
