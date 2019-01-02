@@ -3,11 +3,11 @@
         <div class="row">
             <div class="box">
                 <img class="herzel" src="../../static/herzel_black.png">
-                <h2>Judges Area - Sign In</h2>
+                <h2>Mentors Area - Sign In</h2>
                 <h5>Welcome! Sign in to your account</h5>
                 <br>
                 <div class="form-group">
-                    <input v-model="email" id="judges-username" placeholder="Username" class="form-control" type="text">
+                    <input v-model="email" id="judges-username" placeholder="Email" class="form-control" type="text">
                 </div>
                 <div class="form-group">
                     <input v-model="password" id="judges-password" placeholder="Password" class="form-control" type="password">
