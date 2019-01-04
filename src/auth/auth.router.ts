@@ -14,7 +14,14 @@ router.get("/logout", (req, res) => {
 
 // for judges
 // GET /auth/login
-router.get("/login", passportLocal.authenticate("local"));
+router.get(
+  "/login",
+  passportLocal.authenticate("local", {
+    state: "passwordLogin",
+    failureRedirect: "/login",
+    successRedirect: "/judges/dashboard"
+  })
+);
 
 // GET /auth/linkedin
 router.get("/linkedin", passportLinkedin.authenticate("linkedin", { state: "loginState" }));
