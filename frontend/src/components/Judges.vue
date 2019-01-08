@@ -38,8 +38,13 @@ export default {
         },
         {
           name: 'Iddo Gino',
-          title: 'CEO and Founder of RapidAPI',
+          title: 'CEO & Founder of RapidAPI',
           thumbnail: require('../../static/iddo_gino.jpg')
+        },
+        {
+          name: 'Roei Deutsch',
+          title: 'Co-Founder & CEO of Jolt',
+          thumbnail: require('../../static/roei_deutsch.jpeg')
         },
       ]
     }
