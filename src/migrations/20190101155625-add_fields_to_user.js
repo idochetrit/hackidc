@@ -1,8 +1,7 @@
-'use strict';
-
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.addColumn("Users", "password", Sequelize.STRING);
+    const tableDef = await queryInterface.describeTable("Users");
+    if (!tableDef.password) await queryInterface.addColumn("Users", "password", Sequelize.BOOLEAN);
   },
 
   down: async (queryInterface, Sequelize) => {

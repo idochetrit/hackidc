@@ -19,7 +19,7 @@ router.get(
   passportLocal.authenticate("local", {
     state: "passwordLogin",
     failureRedirect: "/login",
-    successRedirect: "/judges/dashboard"
+    successRedirect: "/dashboard/judges/profile"
   })
 );
 
