@@ -11,6 +11,7 @@
                 </div>
                 <div class="form-group">
                     <input v-model="auth.password" id="judges-password" placeholder="Password" class="form-control" type="password">
+                    <small v-if="showError" class="text-danger">Wrong username/password, try again.</small>
                 </div>
                 <button @click="signin" class="btn btn-info btn-md">Sign in</button>
             </div>
@@ -24,6 +25,7 @@ import axios from 'axios';
   export default {
     data() {
       return {
+        showError: false,
         auth: {
           email: "",
           password: ""
@@ -32,12 +34,18 @@ import axios from 'axios';
     },
     methods: {
       signin() {
-        console.log(this.auth);
-        axios.get("/api/auth/login", { params: this.auth})
-          .then(res => console.log(res));
-        // axios.get("/api/auth", this.auth)
-        //   .then(res => console.log(res))
-        //   .catch(err => console.log(err));
+        axios.get("/api/auth/login", { params: this.auth })
+          .then(res => {
+            this.showError = false;
+            console.log(res);
+          })
+      .catch(err => {
+            console.log(err.response);
+            if (err.response.status === 401) {
+              this.showError = true;
+              this.auth = { email: "", password: "" }
+            }
+          })
       }
     }
   }
