@@ -32,7 +32,8 @@ import axios from 'axios';
     },
     methods: {
       signin() {
-        axios.get("/api/auth/login", this.auth)
+        console.log(this.auth);
+        axios.get("/api/auth/login", { params: this.auth})
           .then(res => console.log(res));
         // axios.get("/api/auth", this.auth)
         //   .then(res => console.log(res))
