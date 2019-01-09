@@ -58,6 +58,12 @@ export class Team extends Model<Team> {
   })
   public requiredEquipment: DataTypeArray;
 
+  @Column
+  public isAccepted: boolean;
+
+  @Column
+  public isReviewd: boolean;
+
   @CreatedAt
   @Column
   public createdAt: Date;

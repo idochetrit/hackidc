@@ -1,6 +1,33 @@
 import * as _ from "lodash";
+import { Role } from "../roles/role.model";
+import { User } from "../users/user.model";
+import { UserService } from "../users/user.service";
+import userRole from "../users/user.role";
+
 export function ensureAuthenticated(req, res, next) {
   if (process.env.NODE_ENV !== "production" || req.isAuthenticated()) {
+    return next();
+  }
+  res.redirect("/login");
+}
+export const LEVELS = {
+  ADMIN: ["Judge", "Mentor"],
+  JUDGE: "JUDGE",
+  MENTOR: "Mentor"
+};
+export function isPermittedUser(level) {
+  return async function(req, res, next) {
+    const userId: number = Number(_.get(req, "user.id")) || req.query.id;
+    const user = await UserService.findById(userId);
+    return _.includes(LEVELS[level], user.role);
+  };
+}
+
+export function isSuperAdmin(req, res, next) {
+  if (
+    process.env.NODE_ENV !== "production" ||
+    req.headers["Authorization"] == process.env.defaultAdminToken
+  ) {
     return next();
   }
   res.redirect("/login");

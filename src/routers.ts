@@ -3,6 +3,8 @@ import authRouter from "./auth/auth.router";
 import teamRouter from "./teams/team.router";
 import userRouter from "./users/user.router";
 import judgesRouter from "./users/judges/judge.router";
+import testsUsersRouter from "./users/testUsers.router";
+import teamScoreRouter from "./teams/scores/teamScore.router";
 
 const router = new Router();
 
@@ -14,5 +16,7 @@ router.use("/users", userRouter);
 router.use("/judges", judgesRouter);
 router.use("/auth", authRouter);
 router.use("/teams", teamRouter);
+router.use("/teams/scores", teamScoreRouter);
+router.use("/tests/users", testsUsersRouter);
 
 export default router;

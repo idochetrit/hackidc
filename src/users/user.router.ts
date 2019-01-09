@@ -5,13 +5,14 @@ import { handleError, handleUnauthorize, handleNotFound } from "../routers.helpe
 import { TeamService } from "../teams/team.service";
 import { UserService } from "./user.service";
 import userUploadsRouter from "./user.upload.router";
+import favoriteRouter from "../favorites/favorite.router";
 import { User } from "./user.model";
-import { UserTests } from "./user.tests";
 import { PATH_SANITIZED_FIELDS, SANITIZED_PUBLIC_FIELDS } from "./user.constants";
 
 const router = new Router();
 
 router.use("/self/uploads", userUploadsRouter);
+router.use("/favorites", favoriteRouter);
 
 router.get("/self", ensureAuthenticated, async (req, res) => {
   try {
@@ -91,13 +92,6 @@ router.delete("/:id", async (req, res) => {
   res.json({
     isDeleted: true
   });
-});
-
-router.get("/setTestUsers", async (req, res) => {
-  const { count } = req.query;
-  UserTests.createTestUsers(count);
-  console.log("Done");
-  res.json({ usersCreated: count });
 });
 
 export default router;

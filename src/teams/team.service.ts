@@ -126,6 +126,12 @@ export class TeamService {
     team.updateAttributes({ isDeleted: true });
   }
 
+  public static async getTeams(): Promise<Team[]> {
+    // ignore deleted teams
+    // and isAccepeted: true
+    return [];
+  }
+
   private static async checkAvailability({
     codeNumber,
     codeName

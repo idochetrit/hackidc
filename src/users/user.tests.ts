@@ -5,6 +5,7 @@ import { academicInstitutesMap } from "./user.constants";
 import { TeamService } from "../teams/team.service";
 import { UserService } from "./user.service";
 import { sequelize } from "../db/sequelize";
+import { JudgeService } from "./judges/judge.service";
 
 export namespace UserTests {
   const fieldOfStudies = [
@@ -44,6 +45,18 @@ export namespace UserTests {
     ]);
   }
 
+  export async function createTestMentors(type, count = 20) {
+    let createdUsers = [];
+    for (let i = 0; i < count; i++) {
+      createdUsers.push(
+        User.create(sampleFakeMentorFields(type)).catch(err => {
+          console.log("error creating user", err);
+        })
+      );
+      return Promise.all(createdUsers);
+    }
+  }
+
   async function createFakeUser(user: User): Promise<any> {
     try {
       let teamParams: any = {};
@@ -75,10 +88,18 @@ export namespace UserTests {
     }
   }
 
+  function sampleFakeMentorFields({ defaultRole = "Mentor" }: { defaultRole: string }): any {
+    const baseAttrs = this.sampleFakeMentorFields();
+    baseAttrs.role = defaultRole;
+
+    // create password
+    const hashedPass = JudgeService.createPasswordForUser("Aa123123");
+    baseAttrs.password = hashedPass;
+  }
+
   function sampleFakeUserFields(): any {
     const studyYear = Math.floor(Math.random() * 4 + 1);
     const role = _.sample(["TeamBuilder", "Participant", "Participant", "Loner"]);
-    console.log(role);
     return {
       name: faker.name.findName(),
       email: faker.internet.email(),

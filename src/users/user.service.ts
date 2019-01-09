@@ -137,6 +137,13 @@ export class UserService {
     }
   }
 
+  public static async getByIds(userIds: number[]): Promise<User[]> {
+    return User.findAll({ where: { id: { $in: userIds } } }).catch(err => {
+      console.log("Error fetching users", err);
+      return [];
+    });
+  }
+
   public static extractUserParams(params: any, sanitizedFields = SANITIZED_FIELDS) {
     return _.chain(params)
       .get("user")

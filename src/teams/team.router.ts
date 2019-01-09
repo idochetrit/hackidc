@@ -70,4 +70,13 @@ router.delete("/:id", async (req, res) => {
   });
 });
 
+router.get("/", async (req, res) => {
+  const teams = await TeamService.getTeams();
+  // sanitize the team
+  const sanitizedTeams = [];
+  res.json({
+    teams: sanitizedTeams
+  });
+});
+
 export default router;

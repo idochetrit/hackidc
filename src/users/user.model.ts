@@ -115,6 +115,12 @@ export class User extends Model<User> {
   })
   public authToken: string;
 
+  @Column
+  public manualScore: number;
+
+  @Column
+  public isReviewd: boolean;
+
   @CreatedAt
   @Column
   public createdAt: Date;
