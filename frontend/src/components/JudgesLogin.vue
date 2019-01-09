@@ -7,10 +7,10 @@
                 <h5>Welcome! Sign in to your account</h5>
                 <br>
                 <div class="form-group">
-                    <input v-model="email" id="judges-username" placeholder="Username" class="form-control" type="text">
+                    <input v-model="auth.email" id="judges-username" placeholder="Username" class="form-control" type="text">
                 </div>
                 <div class="form-group">
-                    <input v-model="password" id="judges-password" placeholder="Password" class="form-control" type="password">
+                    <input v-model="auth.password" id="judges-password" placeholder="Password" class="form-control" type="password">
                 </div>
                 <button @click="signin" class="btn btn-info btn-md">Sign in</button>
             </div>
@@ -20,16 +20,23 @@
 </template>
 
 <script>
+import axios from 'axios';
   export default {
     data() {
       return {
-        email: "",
-        password: ""
+        auth: {
+          email: "",
+          password: ""
+        }
       };
     },
     methods: {
       signin() {
-        // post request with {email, password}
+        axios.get("/api/auth/login", this.auth)
+          .then(res => console.log(res));
+        // axios.get("/api/auth", this.auth)
+        //   .then(res => console.log(res))
+        //   .catch(err => console.log(err));
       }
     }
   }

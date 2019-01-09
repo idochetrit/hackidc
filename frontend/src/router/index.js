@@ -18,6 +18,7 @@ import JudgesLogin from "../components/JudgesLogin.vue";
 import MentorsLogin from "../components/MentorsLogin.vue";
 import UserDashboard from "../components/UserDashboard.vue";
 import TeamDashboard from "../components/TeamDashboard.vue";
+import JudgeDashboard from "../components/JudgeDashboard.vue";
 import TeamPage from "../components/TeamPage.vue";
 import UserPage from "../components/UserPage.vue";
 import StatusMessage from "../components/StatusMessage.vue";
@@ -207,6 +208,21 @@ export default new Router({
           next({ name: "home" });
         }
       }
+    },
+    {
+      path: "/dashboard/judges/profile",
+      name: "judge-dashboard",
+      meta: {
+        title: "HackIDC 2019 | Dashboard"
+      },
+      component: JudgeDashboard,
+      // beforeEnter: (to, from, next) => {
+      //   if (store.getters.isAuthenticated) {
+      //     next();
+      //   } else {
+      //     next({ name: "home" });
+      //   }
+      // }
     },
     // public routes
     {
