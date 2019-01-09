@@ -1,9 +1,9 @@
 import { Router } from "express";
-import { isAdmin } from "../../concerns/auth.users";
+import { isSuperAdmin } from "../../concerns/auth.users";
 
 const router = new Router();
 
-router.get("/reports", isAdmin, (req, res) => {
+router.get("/reports", isSuperAdmin, (req, res) => {
   res.json({
     message: "Under construction..."
   });
