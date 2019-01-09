@@ -13,7 +13,8 @@
                     <input v-model="auth.password" id="judges-password" placeholder="Password" class="form-control" type="password">
                     <small v-if="showError" class="text-danger">Wrong username/password, try again.</small>
                 </div>
-                <button @click="signin" class="btn btn-info btn-md">Sign in</button>
+                <button v-if="!showLoading" @click="signin" class="btn btn-info btn-md">Sign in</button>
+                <span v-else>Loading</span>
             </div>
         </div>
         <div class="overlay"></div>
@@ -25,6 +26,7 @@ import axios from 'axios';
   export default {
     data() {
       return {
+        showLoading: false,
         showError: false,
         auth: {
           email: "",
@@ -36,8 +38,11 @@ import axios from 'axios';
       signin() {
         axios.get("/api/auth/login", { params: this.auth })
           .then(res => {
+            this.showLoading = true;
             this.showError = false;
-            console.log(res);
+            if (res.status === 200) {
+              this.$router.push({name: "judge-dashboard"});
+            }
           })
       .catch(err => {
             console.log(err.response);
