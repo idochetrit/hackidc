@@ -16,12 +16,12 @@ router.get("/teamsUsers", isSuperAdmin, async (req, res) => {
 router.get("/sampleAdmins", isSuperAdmin, async (req, res) => {
   const { count } = req.query;
   const type = _.get(req.query, "type", "Mentor");
-  const newUsers = await UserTests.createTestMentors(type, count);
-  const sanitizedUsers = await Promise.all(newUsers.map(user => JudgeService.sanitize(user)));
+  UserTests.createTestMentors(type, count);
+  // const sanitizedUsers =  Promise.all(newUsers.map(user => JudgeService.sanitize(user)));
   console.log("Done");
   res.json({
-    usersCreated: count,
-    createdUsers: sanitizedUsers
+    usersCreated: count
+    // createdUsers: sanitizedUsers
   });
 });
 

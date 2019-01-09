@@ -72,8 +72,10 @@ router.delete("/:id", async (req, res) => {
 
 router.get("/", async (req, res) => {
   const teams = await TeamService.getTeams();
-  // sanitize the team
-  const sanitizedTeams = [];
+  /// [ sanitize(team1), sanitize(team2).... ]
+  const sanitizedTeams = await Promise.all(
+    teams.map(team => TeamService.sanitize(team, { withDeps: false }))
+  );
   res.json({
     teams: sanitizedTeams
   });

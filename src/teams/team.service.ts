@@ -127,9 +127,17 @@ export class TeamService {
   }
 
   public static async getTeams(): Promise<Team[]> {
-    // ignore deleted teams
-    // and isAccepeted: true
-    return [];
+    const teams: Team[] = await Team.findAll({
+      where: Sequelize.or(
+        { isDeleted: false },
+        {
+          isDeleted: {
+            $is: null
+          }
+        }
+      )
+    });
+    return teams;
   }
 
   private static async checkAvailability({
