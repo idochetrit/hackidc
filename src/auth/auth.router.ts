@@ -22,10 +22,9 @@ router.get(
   }),
   (req, res) => {
     if (!req.user) return handleError(new Error("failed to login"), res);
-    const redirectPath = req.headers.referer.match(/\/([\w+\-]+)$/)[1];
-    const succeessRedirectPath: string = `/dashboard/${redirectPath.split("-")[0]}/profile`;
-    // succeesful
-    res.redirect(succeessRedirectPath.toString());
+    res.json({
+      success: 1
+    });
   }
 );
 
