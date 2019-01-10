@@ -14,7 +14,10 @@
                     <small v-if="showError" class="text-danger">Wrong username/password, try again.</small>
                 </div>
                 <button v-if="!showLoading" @click="signin" class="btn btn-info btn-md">Sign in</button>
-                <span v-else>Loading</span>
+                <button v-else class="btn btn-info" type="button" disabled>
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    Loading...
+                </button>
             </div>
         </div>
         <div class="overlay"></div>
@@ -36,21 +39,25 @@ import axios from 'axios';
     },
     methods: {
       signin() {
-        axios.get("/api/auth/login", { params: this.auth })
-          .then(res => {
-            this.showLoading = true;
-            this.showError = false;
-            if (res.status === 200) {
-              this.$router.push({name: "judge-dashboard"});
-            }
-          })
-      .catch(err => {
-            console.log(err.response);
-            if (err.response.status === 401) {
-              this.showError = true;
-              this.auth = { email: "", password: "" }
-            }
-          })
+        this.showLoading = true;
+        setTimeout(() => {
+          axios.get("/api/auth/login", { params: this.auth })
+            .then(res => {
+              this.showLoading = false;
+              this.showError = false;
+              if (res.status === 200) {
+                this.$router.push({ name: "mentor-dashboard" });
+              }
+            })
+            .catch(err => {
+              console.log(err.response);
+              if (err.response.status === 401) {
+                this.showLoading = false;
+                this.showError = true;
+                this.auth = { email: "", password: "" }
+              }
+            })
+        }, 1000);
       }
     }
   }

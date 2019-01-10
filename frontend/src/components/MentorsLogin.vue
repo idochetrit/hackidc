@@ -7,12 +7,17 @@
                 <h5>Welcome! Sign in to your account</h5>
                 <br>
                 <div class="form-group">
-                    <input v-model="auth.email" id="judges-username" placeholder="Email" class="form-control" type="text">
+                    <input v-model="auth.email" id="mentors-username" placeholder="Email" class="form-control" type="text">
                 </div>
                 <div class="form-group">
-                    <input v-model="auth.password" id="judges-password" placeholder="Password" class="form-control" type="password">
+                    <input v-model="auth.password" id="mentors-password" placeholder="Password" class="form-control" type="password">
+                    <small v-if="showError" class="text-danger">Wrong username/password, try again.</small>
                 </div>
-                <button @click="signin" class="btn btn-info btn-md">Sign in</button>
+                <button v-if="!showLoading" @click="signin" class="btn btn-info btn-md">Sign in</button>
+                <button v-else class="btn btn-info" type="button" disabled>
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    Loading...
+                </button>
             </div>
         </div>
         <div class="overlay"></div>
@@ -20,9 +25,12 @@
 </template>
 
 <script>
+import axios from 'axios';
   export default {
     data() {
       return {
+        showLoading: false,
+        showError: false,
         auth: {
           email: "",
           password: ""
@@ -31,7 +39,25 @@
     },
     methods: {
       signin() {
-        // post request with {email, password}
+        this.showLoading = true;
+        setTimeout(() => {
+          axios.get("/api/auth/login", { params: this.auth })
+            .then(res => {
+              this.showLoading = false;
+              this.showError = false;
+              if (res.status === 200) {
+                this.$router.push({name: "mentor-dashboard"});
+              }
+            })
+            .catch(err => {
+              console.log(err.response);
+              if (err.response.status === 401) {
+                this.showLoading = false;
+                this.showError = true;
+                this.auth = { email: "", password: "" }
+              }
+            })
+        }, 1000);
       }
     }
   }
