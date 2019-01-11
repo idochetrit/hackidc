@@ -59,7 +59,7 @@
           {name: 'Maayan Rosenthal', linkedin: 'https://www.linkedin.com/in/maayan-rosenthal-1b7349123/', thumbnail: 'https://media.licdn.com/dms/image/C5603AQGdjYCctkgUsA/profile-displayphoto-shrink_800_800/0?e=1551916800&v=beta&t=qtUmZmS9NhNGxV1AbnUttSqsVsD2fBhY3ctjT7BEh6k'},
           {name: 'Miya Margalith', linkedin: 'https://www.linkedin.com/in/miya-margalith/', thumbnail: 'https://media.licdn.com/dms/image/C5603AQFqFrUtT8R60w/profile-displayphoto-shrink_800_800/0?e=1551916800&v=beta&t=nH25H-AhCk5pdb_drYs_vG8Ij4OzUDBtymWPdjZgruU'},
           {name: 'Niv Shani', linkedin: 'https://www.linkedin.com/in/niv-shani-5a3313163/', thumbnail: 'https://scontent.fsdv2-1.fna.fbcdn.net/v/t1.0-9/35551549_10212648633634137_981907507586793472_n.jpg?_nc_cat=103&_nc_ht=scontent.fsdv2-1.fna&oh=5855665884d77d85969c6af12674039b&oe=5C4BF196'},
-          {name: 'Ohad Ronen', linkedin: 'https://www.linkedin.com/in/ohad-ronen-4a045542/', thumbnail: 'https://media.licdn.com/dms/image/C5603AQFZCeAOYjpy-w/profile-displayphoto-shrink_800_800/0?e=1547078400&v=beta&t=4ImA3iRNIJlxmv36Z-gH0z0Fglx3iJnias3LCld80Kc'},
+          {name: 'Ohad Ronen', linkedin: 'https://www.linkedin.com/in/ohad-ronen-4a045542/', thumbnail: 'https://media.licdn.com/dms/image/C5603AQFZCeAOYjpy-w/profile-displayphoto-shrink_800_800/0?e=1552521600&v=beta&t=_VnVs5927wVdTPfw593xeuX72qGzMeX0UijzkTpap0o'},
           {name: 'Tal Kedmi', linkedin: 'https://www.linkedin.com/in/tal-kedmi-bb1169172/', thumbnail: require('../../static/tal.jpg')},
         ]
       }
