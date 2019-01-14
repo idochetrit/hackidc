@@ -21,11 +21,11 @@ export default {
   data() {
     return {
       judges: [
-        // {
-        //   name: 'Prof. Uriel Reichman',
-        //   title: 'President and Founder of IDC Herzliya',
-        //   thumbnail: 'http://www.deliveringchangeforum.com/wp-content/uploads/2016/10/DSC_4044-2-295x305.jpg'
-        // },
+        {
+          name: 'Prof. Uriel Reichman',
+          title: 'President and Founder of IDC Herzliya',
+          thumbnail: 'http://www.deliveringchangeforum.com/wp-content/uploads/2016/10/DSC_4044-2-295x305.jpg'
+        },
         {
           name: 'Prof. Ariel (Arik) Shamir',
           title: 'Dean of Efi Arazi school of Computer Science at IDC Herzliya',
