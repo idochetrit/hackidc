@@ -46,6 +46,11 @@ export default {
           title: 'Co-Founder & CEO of Jolt',
           thumbnail: require('../../static/roei_deutsch.jpeg')
         },
+        {
+          name: 'Lior Noy',
+          title: 'Head of Startup Growth at Google IL',
+          thumbnail: require('../../static/lior_noy.jpeg')
+        },
       ]
     }
   }
