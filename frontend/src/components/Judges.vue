@@ -51,6 +51,11 @@ export default {
           title: 'Startup Growth Lead at Google IL',
           thumbnail: require('../../static/lior_noy.jpeg')
         },
+        {
+          name: 'Dr. Yossi Maaravi',
+          title: 'Vice Dean Adelson School of Entrepreneurship',
+          thumbnail: require('../../static/yossi_maaravi.jpg')
+        },
       ]
     }
   }
