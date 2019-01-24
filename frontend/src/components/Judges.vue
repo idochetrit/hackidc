@@ -48,7 +48,7 @@ export default {
         },
         {
           name: 'Lior Noy',
-          title: 'Head of Startup Growth at Google IL',
+          title: 'Startup Growth Lead at Google IL',
           thumbnail: require('../../static/lior_noy.jpeg')
         },
       ]
