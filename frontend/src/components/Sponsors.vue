@@ -32,7 +32,9 @@ export default {
   data() {
     return {
       sponsors: {
-        gold: [],
+        gold: [
+          {name: 'Mizrahi Tefahot', link: 'https://www.mizrahi-tefahot.co.il/', logo: require('../../static/mizrahi_tefahot_logo.png')},
+        ],
         silver: [
           {name: 'Microsoft', link: 'https://www.microsoft.com/he-il', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Microsoft_logo_%282012%29.svg/1280px-Microsoft_logo_%282012%29.svg.png'},
           {name: 'Wix', link: 'https://www.wix.com/', logo: require('../../static/wix_logo.png')},
@@ -69,7 +71,7 @@ export default {
     margin: .5rem 0;
   }
   h2 {font-weight: bold; text-align: center;}
-  h5 {text-align: center; padding: 0; font-size: 1rem;}
+  h5 {text-align: center; padding: 0; font-size: 1rem; margin-bottom: 2rem;}
   a {color: #000; text-decoration: none;}
   hr {width: 75%;}
   .sponsors-item {margin: 0; padding: 0 1rem;}
@@ -96,6 +98,7 @@ export default {
 
   @media screen and (max-width: 1200px) {
     .container-fluid {padding: 2rem 1rem;}
+    h5 { margin-bottom: 2rem; }
     .gold {flex-basis: 33%;}
     .gold a {height: 150px;}
     .silver {flex-basis: 15%;}

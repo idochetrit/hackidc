@@ -77,7 +77,7 @@ export default {
             {
               title: 'Java basics',
               link: 'https://www.guru99.com/java-tutorial.html',
-              thumbnail: 'https://www.molodnews.info/wp-content/uploads/2018/02/java-bg.jpg'
+              thumbnail: 'http://graphics.kodak.com/KodakGCG/_rz/uploadedImages/About_Us/Blogs/2013/Java_620X0.jpg'
             },
             {
               title: 'Python basics',
@@ -145,7 +145,7 @@ export default {
             {
               title: 'Cloud Hosting 101',
               link: 'https://www.digitalocean.com/community/tutorials/an-introduction-to-cloud-hosting',
-              thumbnail: 'https://comtechies.com/wp-content/uploads/2017/07/7-reasons-to-switch-to-cloud-hosting-in-2017.jpg'
+              thumbnail: 'https://stackify.com/wp-content/uploads/2017/04/Cloud-Hosting-793x397.jpg'
             },
           ],
         }
