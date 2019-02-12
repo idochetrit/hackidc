@@ -33,6 +33,7 @@ export default {
     return {
       sponsors: {
         gold: [
+          {name: 'Palantir', link: 'https://www.palantir.com/', logo: require('../../static/palantir_logo.png')},
           {name: 'Mizrahi Tefahot', link: 'https://www.mizrahi-tefahot.co.il/', logo: require('../../static/mizrahi_tefahot_logo.png')},
         ],
         silver: [
