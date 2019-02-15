@@ -35,6 +35,7 @@ export default {
         gold: [
           {name: 'Palantir', link: 'https://www.palantir.com/', logo: require('../../static/palantir_logo.png')},
           {name: 'Mizrahi Tefahot', link: 'https://www.mizrahi-tefahot.co.il/', logo: require('../../static/mizrahi_tefahot_logo.png')},
+          {name: 'Artivive', link: 'https://artivive.com/', logo: require('../../static/artivive_logo.png')},
         ],
         silver: [
           {name: 'Microsoft', link: 'https://www.microsoft.com/he-il', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Microsoft_logo_%282012%29.svg/1280px-Microsoft_logo_%282012%29.svg.png'},
