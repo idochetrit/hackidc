@@ -3,7 +3,7 @@
     <app-hero></app-hero>
     <app-about></app-about>
     <app-judges></app-judges>
-    <!--<app-prizes></app-prizes>-->
+    <app-prizes></app-prizes>
     <app-sponsors></app-sponsors>
     <app-rules></app-rules>
   </div>

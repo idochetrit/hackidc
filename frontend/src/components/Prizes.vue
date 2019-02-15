@@ -44,6 +44,7 @@ export default {
   }
   h2 {font-weight: bold; text-align: center;}
   h4 {font-weight: bold;}
+  h5 {text-align: center; padding: 0; font-size: 1rem;}
 
   @media screen and (max-width: 1440px) and (min-width: 1201px) {
     .container {width: 75%;}
