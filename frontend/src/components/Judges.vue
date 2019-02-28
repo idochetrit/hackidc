@@ -56,6 +56,11 @@ export default {
           title: 'Vice Dean Adelson School of Entrepreneurship',
           thumbnail: require('../../static/yossi_maaravi.jpg')
         },
+        {
+          name: 'Tal Zackon',
+          title: 'General Manger of The Junction (by F2 Capital)',
+          thumbnail: require('../../static/tal_zackon.jpeg')
+        }
       ]
     }
   }
