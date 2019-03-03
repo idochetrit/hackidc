@@ -9,6 +9,15 @@
           <h4>{{ p.prize.toLocaleString('enUS')}} <span class="fas fa-shekel-sign fa-xs"></span></h4>
         </div>
       </div>
+      <br>
+      <div class="row">
+        <h3>
+            <span class="fas fa-medal fa-2x text-info"></span>
+                +{{ challenges.prize.toLocaleString('enUS') }}
+            <span class="fas fa-shekel-sign fa-xs"></span>
+          prizes for the challenges competition winners!
+        </h3>
+      </div>
     </div>
   </div>
 </template>
@@ -20,7 +29,8 @@ export default {
         first: {thumbnail: require('../../static/1.png'), prize: 15000},
         second: {thumbnail: require('../../static/2.png'), prize: 7000},
         third: {thumbnail: require('../../static/3.png'), prize: 3000},
-      }
+      },
+      challenges: { prize: 20000 }
     }
   }
 }
@@ -43,6 +53,17 @@ export default {
     margin-bottom: 1rem;
   }
   h2 {font-weight: bold; text-align: center;}
+  h3 {
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+    width: 100%;
+    justify-content: center;
+  }
+  h3 .fas {
+    margin: 0 .8rem 0 .3rem;
+  }
   h4 {font-weight: bold;}
   h5 {text-align: center; padding: 0; font-size: 1rem;}
 
@@ -55,6 +76,15 @@ export default {
   }
 
   @media screen and (max-width: 767px) {
+    h3 {
+      font-size: 1.2rem;
+    }
     h4 {font-size: 1.3rem;}
+  }
+
+  @media screen and (max-width: 360px) {
+      h3 {
+          font-size: .9rem;
+      }
   }
 </style>
