@@ -4,6 +4,7 @@ import { handleError, handleNotFound } from "../routers.helper";
 import { TeamService, PATCH_SANITIZED_FIELDS } from "./team.service";
 import { Team } from "./team.model";
 import { UserService } from "../users/user.service";
+import { zipTeamCvs } from "../concerns/users_utils";
 
 const router = new Router();
 
@@ -68,6 +69,20 @@ router.delete("/:id", async (req, res) => {
   res.json({
     isDeleted: true
   });
+});
+
+router.get("/:codeNumber/zipcvs", async (req, res) => {
+  const codeNumber: number = Number(req.params.codeNumber);
+  const team: Team = await TeamService.findOneByCode(codeNumber);
+  const zip = await zipTeamCvs(team.id);
+
+  res.set("Content-disposition", `attachment; filename=team_${codeNumber}_CVs.zip`);
+  res.set("Content-Type", zip.type);
+
+  zip.pipe(res);
+
+  zip.on("finish", () => res.end());
+  zip.finalize();
 });
 
 export default router;

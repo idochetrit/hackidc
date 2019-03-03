@@ -4,6 +4,8 @@ import * as stream from "stream";
 import { ensureAuthenticated } from "../concerns/auth.users";
 import { handleError, handleNotFound } from "../routers.helper";
 import { UserService } from "./user.service";
+import { User } from "./user.model";
+import { zipAllCvs } from "../concerns/users_utils";
 
 const router = new Router();
 
@@ -49,6 +51,19 @@ router.get("/cv", async (req, res) => {
   res.set("Content-Type", file.type);
 
   readStream.pipe(res);
+});
+
+router.get("/zipcvs", async (req, res) => {
+  const all: boolean = req.headers.all;
+  const zip = await zipAllCvs();
+
+  res.set("Content-disposition", `attachment; filename=allCvs.zip`);
+  res.set("Content-Type", zip.type);
+
+  zip.pipe(res);
+
+  zip.on("finish", error => res.end());
+  zip.finalize();
 });
 
 export default router;

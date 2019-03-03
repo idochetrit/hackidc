@@ -208,7 +208,7 @@ export class UserService {
     user.updateAttributes({ isDeleted: true });
   }
 
-  public static cvFilename(user: User) {
+  public static cvFilename(user: { id: number; name: string }) {
     const userName = _.snakeCase(user.name.replace(/[^0-9a-z\s]/gi, ""));
     return `${userName}_${user.id}_cvFile.pdf`;
   }

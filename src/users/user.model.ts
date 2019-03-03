@@ -76,9 +76,13 @@ export class User extends Model<User> {
   @Column
   public cvAgree: boolean;
 
+  @Column
+  public roleId: number;
   @BelongsTo(() => Role, "roleId")
   public role: Role;
 
+  @Column
+  public teamId: number;
   @BelongsTo(() => Team, "teamId")
   public team: Team;
 
