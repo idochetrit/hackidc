@@ -1,4 +1,4 @@
-import { InitialStageScore } from "./IntialStageScore";
+import { InitialStageScore } from "./intialStageScore";
 import { FinalStageScore } from "./finalStageScore";
 import { TeamScore, LEVEL_ENUMS } from "../../teams/scores/teamscore.model";
 
