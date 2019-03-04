@@ -11,7 +11,7 @@ import { Sequelize } from "sequelize-typescript";
 import * as bcrypt from "bcryptjs";
 
 export class UserService {
-  public static createLinkedInUser(profile: any, authToken: string) {
+  public static async createLinkedInUser(profile: any, authToken: string) {
     const defaultAttrs = {
       email: _.get(profile, "emails[0].value"),
       linkedInId: _.get(profile, "id"),
@@ -23,14 +23,18 @@ export class UserService {
       authToken
     };
 
-    return User.findOrCreate({
-      defaults: defaultAttrs,
-      where: Sequelize.and({ linkedInId: defaultAttrs.linkedInId })
-    })
-      .spread((user: any, _created: any) => user)
-      .catch((err: Error) => {
-        console.log(err, defaultAttrs);
+    try {
+      const [user, _created] = await User.findOrCreate({
+        defaults: defaultAttrs,
+        where: Sequelize.and({ linkedInId: defaultAttrs.linkedInId })
       });
+      if (!_created) await this.updateLinkedInImage(user, _.get(profile, "_json.pictureUrl"));
+
+      return user;
+    } catch (error) {
+      console.error(error, defaultAttrs);
+      throw error;
+    }
   }
 
   public static async finishRegistration({
@@ -231,6 +235,10 @@ export class UserService {
   public static cvFilename(user: { id: number; name: string }) {
     const userName = _.snakeCase(user.name.replace(/[^0-9a-z\s]/gi, ""));
     return `${userName}_${user.id}_cvFile.pdf`;
+  }
+
+  private static async updateLinkedInImage(user: User, userPicture: any) {
+    await user.updateAttributes({ userPicture });
   }
 
   private static async updateUserScore(user: User) {

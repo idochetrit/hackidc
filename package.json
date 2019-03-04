@@ -5,7 +5,7 @@
   "main": "index.js",
   "engines": {
     "node": ">= 10.0.0",
-    "npm": ">= 3.0.0"
+    "npm": ">= 6.0.0"
   },
   "scripts": {
     "dev-client": "PORT=3000 webpack-dev-server --inline --progress --debug --config ./build/webpack.dev.conf.js",
@@ -115,7 +115,7 @@
     "webpack-bundle-analyzer": "3.0.3",
     "webpack-cli": "3.1.2",
     "webpack-dev-middleware": "3.4.0",
-    "webpack-dev-server": "2.9.1",
+    "webpack-dev-server": "3.1.11",
     "webpack-hot-middleware": "2.24.3"
   }
 }

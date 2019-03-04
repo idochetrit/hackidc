@@ -35,6 +35,7 @@ export default {
         gold: [
           {name: 'Palantir', link: 'https://www.palantir.com/', logo: require('../../static/palantir_logo.png')},
           {name: 'Mizrahi Tefahot', link: 'https://www.mizrahi-tefahot.co.il/', logo: require('../../static/mizrahi_tefahot_logo.png')},
+          {name: 'Elbit Systems', link: 'http://elbitsystems.com/', logo: require('../../static/elbit_logo.png')},
           {name: 'Artivive', link: 'https://artivive.com/', logo: require('../../static/artivive_logo.png')},
         ],
         silver: [
