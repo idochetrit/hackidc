@@ -13,6 +13,7 @@ import { User } from "../../users/user.model";
 import { Team } from "../team.model";
 import { DataTypeEnum } from "sequelize";
 
+export const LEVEL_ENUMS = DataType.ENUM("initial", "final", "done");
 @Table({
   tableName: "TeamScores"
 })
@@ -47,10 +48,24 @@ export class TeamScore extends Model<TeamScore> {
   @Column
   public notes: string;
 
-  @Column({
-    type: DataType.ENUM("initial", "final")
-  })
+  @Column({ type: LEVEL_ENUMS })
   public level: DataTypeEnum;
+
+  @Column
+  public awesomnessScore: number;
+
+  @Column
+  public funcionalityScore: number;
+
+  @Column
+  public creativityScore: number;
+
+  @Column
+  public usabilityScore: number;
+
+  // final stage
+  @Column
+  public finalScore: number;
 
   @Column
   public locked: boolean;

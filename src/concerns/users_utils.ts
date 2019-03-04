@@ -1,6 +1,6 @@
-import { sequelize } from "../../dist/db/sequelize";
 import * as archiver from "archiver";
 import { UserService } from "../users/user.service";
+import { sequelize } from "../db/sequelize";
 
 export async function zipAllCvs() {
   const results = await sequelize.query(`
