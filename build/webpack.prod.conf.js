@@ -1,5 +1,3 @@
-"use strict";
-
 const path = require("path");
 const webpack = require("webpack");
 const merge = require("webpack-merge");
@@ -125,9 +123,7 @@ if (config.build.productionGzip) {
     new CompressionWebpackPlugin({
       asset: "[path].gz[query]",
       algorithm: "gzip",
-      test: new RegExp(
-        `\\.(${config.build.productionGzipExtensions.join("|")})$`
-      ),
+      test: new RegExp(`\\.(${config.build.productionGzipExtensions.join("|")})$`),
       threshold: 10240,
       minRatio: 0.8
     })
@@ -135,8 +131,7 @@ if (config.build.productionGzip) {
 }
 
 if (config.build.bundleAnalyzerReport) {
-  const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
-    .BundleAnalyzerPlugin;
+  const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
   webpackConfig.plugins.push(new BundleAnalyzerPlugin());
 }
 
