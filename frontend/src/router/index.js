@@ -18,6 +18,7 @@ import UserDashboard from "../components/UserDashboard.vue";
 import TeamDashboard from "../components/TeamDashboard.vue";
 import TeamPage from "../components/TeamPage.vue";
 import UserPage from "../components/UserPage.vue";
+import JudgeVotingPage from "../components/JudgeVotingPage";
 import StatusMessage from "../components/StatusMessage.vue";
 import PageNotFound from "../components/PageNotFound.vue";
 import ErrorPage from "../components/ErrorPage.vue";
@@ -189,6 +190,15 @@ export default new Router({
           next({ name: "home" });
         }
       }
+    },
+    {
+      path: "/voting",
+      name: "voting-page",
+      meta: {
+        title: "HackIDC 2019 | Voting"
+      },
+      component: JudgeVotingPage
+      // TODO: add judge auth check (beforeEnter)
     },
     // public routes
     {
