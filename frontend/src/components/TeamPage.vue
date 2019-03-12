@@ -95,6 +95,9 @@ export default {
         white-space: pre-line;
         font-size: 1.1rem;
         padding-right: 35%;
+        clear: both;
+        max-height: 250px;
+        overflow: scroll;
     }
     a { color: #000; text-decoration: none; }
     .team-members-wrapper {

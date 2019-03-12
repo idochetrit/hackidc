@@ -5,6 +5,8 @@ import { TeamService, PATCH_SANITIZED_FIELDS } from "./team.service";
 import { Team } from "./team.model";
 import { UserService } from "../users/user.service";
 import { zipTeamCvs } from "../concerns/users_utils";
+import { ensureAuthenticated } from "../concerns/auth.users";
+import { User } from "../users/user.model";
 
 const router = new Router();
 
@@ -62,6 +64,20 @@ router.get("/validate/:codeNumber", async (req, res) => {
   } catch (err) {
     handleError(err, res);
   }
+});
+
+router.post("/rsvp", ensureAuthenticated, async (req, res) => {
+  const userId: number = Number(_.get(req, "user.id")) || req.headers.userid;
+  const attributes: any = req.body;
+  const rsvpFlag = Boolean(attributes.rsvp);
+  const team: Team = await UserService.getTeamByUserId(userId);
+
+  const [updated, rsvp] = await TeamService.updateRSVP(userId, team, rsvpFlag);
+
+  res.json({
+    updated,
+    rsvp
+  });
 });
 
 router.delete("/:id", async (req, res) => {

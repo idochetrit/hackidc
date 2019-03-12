@@ -29,7 +29,10 @@ import { DataTypeArray } from "sequelize";
 export class Team extends Model<Team> {
   @Column
   public title: string;
-  @Column
+
+  @Column({
+    type: DataType.TEXT
+  })
   public description: string;
 
   @ForeignKey(() => Challenge)
@@ -52,6 +55,9 @@ export class Team extends Model<Team> {
   public codeNumber: number;
   @Column
   public builderId: number;
+
+  @Column
+  public isRSVP: boolean;
 
   @Column({
     type: DataType.ARRAY(DataType.STRING)

@@ -59,7 +59,9 @@ export class User extends Model<User> {
   public experienceType: string;
   @Column
   public techExperience: string;
-  @Column
+  @Column({
+    type: DataType.TEXT
+  })
   public bio: string;
   @Column
   public hearAboutUs: string;
