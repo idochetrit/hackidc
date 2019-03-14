@@ -66,13 +66,27 @@ router.get("/validate/:codeNumber", async (req, res) => {
   }
 });
 
-router.post("/rsvp", ensureAuthenticated, async (req, res) => {
-  const userId: number = Number(_.get(req, "user.id")) || req.headers.userid;
+router.post("/self/rsvp", ensureAuthenticated, async (req, res) => {
+  const userId: number = Number(_.get(req, "user.id")) || Number(req.headers.userid);
   const attributes: any = req.body;
   const rsvpFlag = Boolean(attributes.rsvp);
   const team: Team = await UserService.getTeamByUserId(userId);
 
-  const [updated, rsvp] = await TeamService.updateRSVP(userId, team, rsvpFlag);
+  const [updated, rsvp] = await TeamService.updateRSVP(userId, team, rsvpFlag, "isRSVP");
+
+  res.json({
+    updated,
+    rsvp
+  });
+});
+
+router.post("/self/prehackRsvp", ensureAuthenticated, async (req, res) => {
+  const userId: number = Number(_.get(req, "user.id")) || Number(req.headers.userid);
+  const attributes: any = req.body;
+  const rsvpFlag = Boolean(attributes.rsvp);
+  const team: Team = await UserService.getTeamByUserId(userId);
+
+  const [updated, rsvp] = await TeamService.updateRSVP(userId, team, rsvpFlag, "isPreHackRSVP");
 
   res.json({
     updated,

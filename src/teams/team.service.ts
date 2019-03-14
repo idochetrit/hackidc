@@ -128,14 +128,14 @@ export class TeamService {
     await team.updateAttributes({ isDeleted: true });
   }
 
-  public static async updateRSVP(userId: number, team: Team, rsvpFlag: boolean) {
-    const { isRSVP } = team;
+  public static async updateRSVP(userId: number, team: Team, rsvpFlag: boolean, field: string) {
+    const isRSVP = team[field];
     if (team.builderId !== userId) {
       Sentry.captureMessage(`user #${userId} is not TeamBuilder of ${team.codeNumber}`);
       return [false, isRSVP];
     }
     if (_.isBoolean(isRSVP)) return [false, isRSVP];
-    await team.update({ isRSVP: rsvpFlag });
+    await team.update({ [field]: rsvpFlag });
     return [true, rsvpFlag];
   }
 
