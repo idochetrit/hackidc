@@ -2,10 +2,11 @@
     <div class="container-fluid">
         <div class="container">
             <img class="herzel" src="../../static/herzel_black.png">
-            <h2>HackIDC 2019 - Voting Page</h2>
+            <h2>Elbit Challenge Scoring</h2>
+            <img class="company_logo" src="../../static/elbit_logo.png" alt="ElbitLogo">
             <h3>Select the team number down below and vote by the given parameters</h3>
             <div class="row">
-                <Scoring :judge="judge" />
+                <Scoring :challengeName="challengeName" :judge="mockjudge" />
             </div>
         </div>
     </div>
@@ -18,8 +19,12 @@
   export default {
     data() {
       return {
-        judge: mockJudgeObject
+        challengeName: "elbit",
+        mockjudge: mockJudgeObject
       }
+    },
+    computed: {
+      judge() {return this.$store.getters.getUser;},
     },
     components: {
       Scoring
@@ -47,7 +52,13 @@
         margin-bottom: 2rem;
     }
 
+    .company_logo {
+        width: 20%;
+        margin-bottom: 2rem;
+    }
+
     h2 {
+        text-align: center;
         font-weight: bold;
     }
 
@@ -82,6 +93,10 @@
 
         .herzel {
             width: 20%;
+        }
+
+        .company_logo {
+            width: 50%;
         }
 
         h3 {

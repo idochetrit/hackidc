@@ -12,6 +12,10 @@
                             :value="team.number" :key="i">{{ team.number }}
                     </option>
                 </select>
+                <hr>
+                <h4 class="text-info" v-if="teamNumber">
+                    {{ `currently scoring team number ${teamNumber}` }}
+                </h4>
             </div>
             <div v-else class="alert alert-success alert-block">
                 Your'e done for now, thank you!
@@ -41,7 +45,7 @@
 
 <script>
   export default {
-    props: ["judge"],
+    props: ["judge", "challengeName"],
     data() {
       return {
         hasMoreTeamsToJudge: true,
@@ -57,10 +61,7 @@
     },
     computed: {
       judgeTeams() {
-        return [
-          ...this.judge.judgeTeamsInChallenges,
-          ...this.judge.judgeTeamsInGeneralComp
-        ].map(team => ({
+        return this.judge[this.challengeName].map(team => ({
           number: team,
           isRanked: false
         }));
@@ -88,7 +89,9 @@
       },
       handleRank() {
         const rankObject = {
-          teamNumber: this.teamNumber,
+          judgeId: this.judge.userId,
+          teamCodeNumber: this.teamNumber,
+          challengeName: this.challengeName,
           parameters: {
             ...this.rankToFloats(this.rank)
           }
@@ -96,26 +99,29 @@
         this.sendRank(rankObject, this.teamNumber);
       },
       setupForNewRank(teamNumber) {
-        if (this.checkForVotingEnd()) return;
-        this.removeTeamFromJudgeArray(teamNumber);
-        this.resetRank();
-        this.resetTeamNumber();
+        if (!this.checkForVotingEnd()) {
+          this.removeTeamFromJudgeArray(teamNumber);
+          this.resetRank();
+          this.resetTeamNumber();
+        }
       },
       checkForVotingEnd() {
-        this.judgeTeams.forEach(team => {
-          if (!team.isRanked) {
-            return false;
-          }
-        });
-        this.hasMoreTeamsToJudge = false;
-        this.resetTeamNumber();
-        this.resetRank();
-        return true;
+        const unRankedTeam = this.judgeTeams.find(team => !team.isRanked);
+        if (!unRankedTeam) {
+          this.hasMoreTeamsToJudge = false;
+          this.resetTeamNumber();
+          this.resetRank();
+          return true;
+        }
+        return false;
       },
       sendRank(rankObject, teamNumber) {
-        // TODO: send rank to DB
-        console.log(rankObject);
-        this.setupForNewRank(teamNumber);
+        if (confirm(`Are you done with team number ${this.teamNumber}?
+        * Once you send your scoring you can't go back.`)) {
+          // TODO: send rank to DB
+          console.log(rankObject);
+          this.setupForNewRank(teamNumber);
+        }
       }
     }
   };
@@ -206,6 +212,10 @@
         h3 {
             font-size: 1.2rem;
             padding: 0 .5rem;
+        }
+
+        h4 {
+            text-align: center;
         }
 
         .alert {
