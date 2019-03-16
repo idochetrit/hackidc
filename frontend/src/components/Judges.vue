@@ -60,10 +60,15 @@
             thumbnail: require("../../static/yossi_maaravi.jpg")
           },
           {
+            name: "Dr. Son Preminger",
+            title: "Founder & President of Intendu",
+            thumbnail: require("../../static/son_preminger.jpeg")
+          },
+          {
             name: "Tal Zackon",
             title: "General Manager of The Junction (by F2 Capital)",
             thumbnail: require("../../static/tal_zackon.jpeg")
-          }
+          },
         ]
       };
     }

@@ -30,7 +30,7 @@ export default {
         second: {thumbnail: require('../../static/2.png'), prize: 7000},
         third: {thumbnail: require('../../static/3.png'), prize: 3000},
       },
-      challenges: { prize: 20000 }
+      challenges: { prize: 30000 }
     }
   }
 }

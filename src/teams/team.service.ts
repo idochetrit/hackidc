@@ -7,12 +7,16 @@ import { Team } from "./team.model";
 import { Challenge } from "../challenges/challenge.model";
 import { UserService } from "../users/user.service";
 import { SANITIZED_PUBLIC_FIELDS } from "../users/user.constants";
+import * as Sentry from "@sentry/node";
 
 export const SANITIZED_FIELDS = [
   "description",
   "codeNumber",
   "codeName",
+  "isRSVP",
+  "isPreHackRSVP",
   "requiredEquipment",
+  "classRoom",
   "challengeId",
   "users"
 ];
@@ -62,7 +66,7 @@ export class TeamService {
     return { valid: true, errorCode: null };
   }
 
-  public static async findOneByCode(codeNumber: number) {
+  public static async findOneByCode(codeNumber: number): Promise<Team> {
     const team = await Team.findOne({ where: { codeNumber } });
     if (!team) {
       throw new Error(`Team with code: ${codeNumber}, not found.`);
@@ -113,7 +117,7 @@ export class TeamService {
       .value();
   }
 
-  public static async updateTeam(team: Team, newAttributes: object) {
+  public static async updateTeam(team: Team, newAttributes: object): Promise<boolean> {
     await team.update(newAttributes).catch(err => {
       console.error(`Failed to update team #${team.codeNumber}`, err);
       return false;
@@ -123,7 +127,18 @@ export class TeamService {
 
   public static async deleteTeam(id: number) {
     const team = await Team.findById(id);
-    team.updateAttributes({ isDeleted: true });
+    await team.updateAttributes({ isDeleted: true });
+  }
+
+  public static async updateRSVP(userId: number, team: Team, rsvpFlag: boolean, field: string) {
+    const isRSVP = team[field];
+    if (team.builderId !== userId) {
+      Sentry.captureMessage(`user #${userId} is not TeamBuilder of ${team.codeNumber}`);
+      return [false, isRSVP];
+    }
+    if (_.isBoolean(isRSVP)) return [false, isRSVP];
+    await team.update({ [field]: rsvpFlag });
+    return [true, rsvpFlag];
   }
 
   public static async getTeams(): Promise<Team[]> {
@@ -146,7 +161,7 @@ export class TeamService {
   }: {
     codeNumber: number;
     codeName: string;
-  }) {
+  }): Promise<Team> {
     const team = await Team.findOne({
       where: Sequelize.or({ codeName }, { codeNumber })
     });

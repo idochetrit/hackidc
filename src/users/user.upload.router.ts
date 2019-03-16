@@ -62,9 +62,7 @@ router.get("/zipcvs", async (req, res) => {
 
   zip.pipe(res);
 
-  zip.on("finish", error => {
-    return res.end();
-  });
+  zip.on("finish", error => res.end());
   zip.finalize();
 });
 
