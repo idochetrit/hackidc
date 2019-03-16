@@ -1,5 +1,3 @@
-"use strict";
-
 const webpack = require("webpack");
 const merge = require("webpack-merge");
 const path = require("path");
@@ -89,9 +87,7 @@ module.exports = new Promise((resolve, reject) => {
         new FriendlyErrorsPlugin({
           compilationSuccessInfo: {
             messages: [
-              `Your application is running here: http://${
-                devWebpackConfig.devServer.host
-              }:${port}`
+              `Your application is running here: http://${devWebpackConfig.devServer.host}:${port}`
             ]
           },
           onErrors: utils.createNotifierCallback()

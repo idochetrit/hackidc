@@ -1,6 +1,7 @@
 import * as archiver from "archiver";
 import { UserService } from "../users/user.service";
 import { sequelize } from "../db/sequelize";
+import { User } from "../users/user.model";
 
 export async function zipAllCvs() {
   const results = await sequelize.query(`
@@ -18,6 +19,25 @@ export async function zipAllCvs() {
   });
 
   usersCvs.forEach(({ id, name, cvFile }) => {
+    const filename = UserService.cvFilename({ id, name });
+    zip.append(cvFile, { name: filename });
+  });
+
+  return zip;
+}
+
+export async function zipTeamCvs(teamId: number) {
+  const users: User[] = await User.findAll({
+    where: { teamId: teamId },
+    attributes: ["id", "name", "cvFile"]
+  });
+  // cvFile:Uint8Array
+
+  const zip = archiver("zip", {
+    zlib: { level: 8 } // Sets the compression level.
+  });
+
+  users.forEach(({ id, name, cvFile }) => {
     const filename = UserService.cvFilename({ id, name });
     zip.append(cvFile, { name: filename });
   });

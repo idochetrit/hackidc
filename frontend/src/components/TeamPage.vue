@@ -4,7 +4,11 @@
             <div class="row">
                 <span class="fas fa-users fa-4x"></span>
                 <h1>Team {{ team.codeName | nameFormatter }}</h1>
-                <h5>team number: <strong class="text-info">{{ team.codeNumber }}</strong></h5>
+                <h5>team number: <strong class="text-info">{{ team.codeNumber }}</strong>
+                    <span v-if="team.classRoom">,&nbsp;class room: 
+                        <strong class="text-info">{{ team.classRoom }}</strong>
+                    </span>
+                </h5>
             </div>
             <h5>Members:</h5>
             <div class="team-members-wrapper">
@@ -95,6 +99,9 @@ export default {
         white-space: pre-line;
         font-size: 1.1rem;
         padding-right: 35%;
+        clear: both;
+        max-height: 250px;
+        overflow: scroll;
     }
     a { color: #000; text-decoration: none; }
     .team-members-wrapper {

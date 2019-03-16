@@ -11,11 +11,30 @@
                 <span class="fas fa-users fa-4x"></span>
                 <div class="dashboard-username">
                     <h2>Team {{ team.codeName | nameFormatter }}</h2>
-                    <h5>team number: <strong class="text-info">{{ user.team.codeNumber }}</strong></h5>
+                    <h5>team number: <strong class="text-info">{{ user.team.codeNumber }}</strong>
+                      <span v-if="team.classRoom">,&nbsp;class room: 
+                          <strong class="text-info">{{ user.team.classRoom }}</strong>
+                      </span>
+                    </h5>
                 </div>
             </div>
             <hr>
             <div class="dashboard-body">
+              <div class="form-group rsvpdiv">
+                <h3>Please RSVP below</h3>
+                <button @click="update_RSVP" id="rsvp" :disabled="user.team.isRSVP" 
+                    :class="{'btn-success': user.team.isRSVP, 'btn-warning': !user.team.isRSVP}" class="btn btn-lg">
+                  {{(user.team.isRSVP) ? "RSVP was sent for HackIDC" : "Click here to RSVP for HackIDC !"}}
+                </button><br/>
+                <small class="text-muted">* Only groups which clicked the RSVP button will enter the contest</small>
+                <br /><br/>
+                <button @click="update_prehackRSVP" :disabled="user.team.isPreHackRSVP" class="btn btn-lg" 
+                    :class="{'btn-success': user.team.isPreHackRSVP, 'btn-warning': !user.team.isPreHackRSVP}">
+                  {{(user.team.isPreHackRSVP) ? "RSVP was sent for PreHack" : "Click here to RSVP for PreHack"}}
+                </button><br/>
+                <small class="text-muted">* At least 2 representative from the team will attend the event</small>
+              </div>
+              <hr />
                 <h3>Description</h3>
                 <p class="description">{{ team.description }}</p>
                 <div class="section" v-if="this.$store.getters.isAuthenticated">
@@ -107,12 +126,36 @@
             console.log(err);
           });
       },
+      update_isRSVP_API(method) {
+        let action, rsvpFlag; 
+        if (method === "rsvp") {
+          action = "rsvp";
+          rsvpFlag = this.isRSVP;
+        } else {
+          action = "prehackRsvp";
+          rsvpFlag = this.isPrehackRSVP;
+        }
+
+        return axios.post(`/api/teams/self/${action}`, { rsvp: true }).then(res => {
+          this.$store.dispatch("updateUser", res.data);
+        }).catch(err => {
+          console.log(err);
+        });
+      },
+      update_RSVP() {
+        return this.update_isRSVP_API("rsvp");
+      },
+      update_prehackRSVP() {
+        return this.update_isRSVP_API("prehackRsvp");
+      }
     },
     created() {
       this.authRequest();
     },
     mounted() {
       this.newRequiredEquipment = !this.equipment ? [] : this.equipment;
+      this.isPrehackRSVP = false;
+      this.isRSVP = false;
     }
   }
 </script>

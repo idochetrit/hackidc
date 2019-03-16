@@ -84,10 +84,19 @@ a.linkedinBtn, a.linkedinBtn:hover {color: #fff;}
 .dashboard-body {
     padding: 2rem 2rem 8rem 0;
 }
+.des-wrapper { width: 70%; }
+.description {
+    clear: both;
+    max-height: 250px;
+    overflow: scroll;
+}
 .bio {
     white-space: pre-line;
     font-size: 1.1rem;
     padding-right: 35%;
+    clear: both;
+    max-height: 250px;
+    overflow: scroll;
 }
 .section {
     padding: 1rem 0;

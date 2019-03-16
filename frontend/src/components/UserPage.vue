@@ -20,7 +20,9 @@
                 </h4>
                 <div class="bio-wrapper">
                     <h3>Bio</h3>
-                    <p class="bio">{{ user.bio }}</p>
+                    <div class="bio-wrapper">
+                        <p class="bio">{{ user.bio }}</p>
+                    </div>
                 </div>
             </div>
             <hr>
@@ -137,6 +139,9 @@ export default {
         white-space: pre-line;
         font-size: 1.1rem;
         padding-right: 35%;
+        clear: both;
+        max-height: 250px;
+        overflow: scroll;
     }
     .fas { margin-right: .5rem; margin-bottom: 1rem; }
     .team-members-wrapper {

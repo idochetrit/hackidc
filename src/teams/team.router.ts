@@ -4,6 +4,8 @@ import { handleError, handleNotFound } from "../routers.helper";
 import { TeamService, PATCH_SANITIZED_FIELDS } from "./team.service";
 import { Team } from "./team.model";
 import { UserService } from "../users/user.service";
+import { zipTeamCvs } from "../concerns/users_utils";
+import { ensureAuthenticated } from "../concerns/auth.users";
 
 const router = new Router();
 
@@ -63,6 +65,34 @@ router.get("/validate/:codeNumber", async (req, res) => {
   }
 });
 
+router.post("/self/rsvp", ensureAuthenticated, async (req, res) => {
+  const userId: number = Number(_.get(req, "user.id")) || Number(req.headers.userid);
+  const attributes: any = req.body;
+  const rsvpFlag = Boolean(attributes.rsvp);
+  const team: Team = await UserService.getTeamByUserId(userId);
+
+  const [updated, rsvp] = await TeamService.updateRSVP(userId, team, rsvpFlag, "isRSVP");
+
+  res.json({
+    updated,
+    rsvp
+  });
+});
+
+router.post("/self/prehackRsvp", ensureAuthenticated, async (req, res) => {
+  const userId: number = Number(_.get(req, "user.id")) || Number(req.headers.userid);
+  const attributes: any = req.body;
+  const rsvpFlag = Boolean(attributes.rsvp);
+  const team: Team = await UserService.getTeamByUserId(userId);
+
+  const [updated, rsvp] = await TeamService.updateRSVP(userId, team, rsvpFlag, "isPreHackRSVP");
+
+  res.json({
+    updated,
+    rsvp
+  });
+});
+
 router.delete("/:id", async (req, res) => {
   await TeamService.deleteTeam(req.params.id);
   res.json({
@@ -79,6 +109,20 @@ router.get("/", async (req, res) => {
   res.json({
     teams: sanitizedTeams
   });
+});
+
+router.get("/:codeNumber/zipcvs", async (req, res) => {
+  const codeNumber: number = Number(req.params.codeNumber);
+  const team: Team = await TeamService.findOneByCode(codeNumber);
+  const zip = await zipTeamCvs(team.id);
+
+  res.set("Content-disposition", `attachment; filename=team_${codeNumber}_CVs.zip`);
+  res.set("Content-Type", zip.type);
+
+  zip.pipe(res);
+
+  zip.on("finish", () => res.end());
+  zip.finalize();
 });
 
 export default router;

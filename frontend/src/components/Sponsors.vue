@@ -51,6 +51,7 @@ export default {
           {name: 'Essence Group', link: 'https://www.essence-grp.com/', logo: require('../../static/essence_logo.png')},
           {name: 'Minute Media', link: 'https://www.minutemedia.com/', logo: require('../../static/minutemedia_logo.png')},
           {name: 'BLU Energy Drink', link: 'https://www.facebook.com/BLUyourmind/', logo: require('../../static/blu_logo.png')},
+          {name: 'T Factor', link: 'http://www.tfactor.co.il/', logo: require('../../static/t_factor_logo.png')},
         ]
       }
     }
