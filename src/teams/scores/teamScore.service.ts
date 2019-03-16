@@ -1,10 +1,7 @@
-import * as animals from "animals";
-import * as _ from "lodash";
-import * as pluralize from "pluralize";
-import { Sequelize } from "sequelize-typescript";
 import { Team } from "../team.model";
 import { ScoreService } from "../../concerns/scores/scoreService";
 import { TeamScore } from "./teamscore.model";
+import { Challenge } from "../../challenges/challenge.model";
 
 const stagesSteps = {
   intial: "final",
@@ -13,26 +10,26 @@ const stagesSteps = {
 
 /**
  * @param {any} - either finalScore or
- *  {awesomnessScore, funcionalityScore, creativityScore, usabilityScore}
+ *      {awesomnessScore, functionalityScore, creativityScore, usabilityScore}
  * @returns {void} succeeded updating the correct record with the appropriate data
  */
 export class TeamScoreService {
   public static async scoreTeamWithChallenge({
     team,
     judgeId,
-    challengId,
+    challengeName,
     scoreData
   }: {
     team: Team;
     judgeId: number;
-    challengId: number;
+    challengeName: string;
     scoreData: any;
   }) {
     // update score if not locked
-    const teamScore = await this.findTeamScoreBy({ teamId: team.id, judgeId, challengId });
+    const { id: challengeId } = await this.findChallengeByName(challengeName);
+    const teamScore = await this.findTeamScoreBy({ teamId: team.id, judgeId, challengeId });
     const scoreService = new ScoreService(teamScore);
-    await scoreService.score();
-    return scoreService.finalize();
+    await scoreService.score(scoreData);
   }
 
   public static async lockTeamScores() {
@@ -58,19 +55,20 @@ export class TeamScoreService {
     await Promise.all(updates);
   }
 
-  public static async sortRankedTeams(): Promise<Team[]> {
-    return [];
-  }
+  public static async unlockTeamScores() {
+    // bulk update to unlock all the teams and increase the level.
 
-  public static async calculateFinalWinningTeams() {}
-
-  public static async qualifyingTeams() {
-    //verify that there are level 'initial'
-    // average the scores and sort them
+    return TeamScore.update(
+      { locked: false },
+      {
+        where: {
+          locked: true
+        }
+      }
+    );
   }
 
   public async createScoreRecord({ teamId, challengeId, judgeId }) {
-    // default: level "initial"
     await TeamScore.create({
       level: "initial",
       locked: false,
@@ -80,9 +78,17 @@ export class TeamScoreService {
     });
   }
 
-  private static async findTeamScoreBy({ teamId, judgeId, challengId }): Promise<TeamScore> {
+  private static async findTeamScoreBy({ teamId, judgeId, challengeId }): Promise<TeamScore> {
     return TeamScore.findOne({
-      where: { teamId: teamId, judgeId: judgeId, challengeId: challengId }
+      where: { teamId, judgeId, challengeId }
+    });
+  }
+
+  private static async findChallengeByName(challengeName: string): Promise<Challenge> {
+    return Challenge.findOne({
+      where: {
+        name: challengeName
+      }
     });
   }
 }

@@ -22,9 +22,9 @@ router.get(
   }),
   (req, res) => {
     if (!req.user) return handleError(new Error("failed to login"), res);
-    res.json({
-      success: 1
-    });
+    const redirectPath: string = getRedirectPathStatus("judge");
+
+    res.redirect(redirectPath);
   }
 );
 

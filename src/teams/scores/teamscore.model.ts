@@ -55,7 +55,7 @@ export class TeamScore extends Model<TeamScore> {
   public awesomnessScore: number;
 
   @Column
-  public funcionalityScore: number;
+  public functionalityScore: number;
 
   @Column
   public creativityScore: number;

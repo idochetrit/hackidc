@@ -37,6 +37,7 @@ export function getRedirectPathStatus(registerStatus: string): string {
   // pending: signup, approved: dashboard/profile, review: reject status-message,
 
   const map = {
+    judge: "/judging/general-_scoring",
     pending: "/signup",
     approved: "/dashboard/profile",
     review: "/status-message",

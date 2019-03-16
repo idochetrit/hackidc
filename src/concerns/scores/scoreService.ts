@@ -13,16 +13,12 @@ export class ScoreService {
       level === LEVEL_ENUMS["final"] ? new FinalStageScore(model) : new InitialStageScore(model);
   }
 
-  async score() {
+  async score(data: any) {
     if (this._model.locked) {
       const teamCodeNumber = await this._model.team.codeNumber;
       throw new Error(`scoring is locked for team #${teamCodeNumber}`);
     }
-    return this._proto.score();
-  }
-
-  async finalize() {
-    return this._proto.finalize();
+    await this._proto.score(data);
   }
 
   // calculations

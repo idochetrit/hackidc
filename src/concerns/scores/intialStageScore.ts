@@ -9,19 +9,19 @@ export class InitialStageScore {
 
   async score({
     awesomnessScore,
-    funcionalityScore,
+    functionalityScore,
     creativityScore,
     usabilityScore
   }: {
     awesomnessScore: number;
-    funcionalityScore: number;
+    functionalityScore: number;
     creativityScore: number;
     usabilityScore: number;
   }) {
     // Scoring accroding to finalScore property
     this._model.updateAttributes({
       awesomnessScore,
-      funcionalityScore,
+      functionalityScore,
       creativityScore,
       usabilityScore
     });
