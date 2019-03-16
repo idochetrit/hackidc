@@ -62,6 +62,9 @@ export class Team extends Model<Team> {
   @Column
   public isPreHackRSVP: boolean;
 
+  @Column
+  public classRoom: string;
+
   @Column({
     type: DataType.ARRAY(DataType.STRING)
   })

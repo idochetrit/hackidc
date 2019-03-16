@@ -6,7 +6,6 @@ import { Team } from "./team.model";
 import { UserService } from "../users/user.service";
 import { zipTeamCvs } from "../concerns/users_utils";
 import { ensureAuthenticated } from "../concerns/auth.users";
-import { User } from "../users/user.model";
 
 const router = new Router();
 

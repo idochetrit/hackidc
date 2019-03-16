@@ -14,11 +14,13 @@ export const SANITIZED_FIELDS = [
   "codeNumber",
   "codeName",
   "isRSVP",
+  "isPreHackRSVP",
   "requiredEquipment",
+  "classRoom",
   "challengeId",
   "users"
 ];
-export const PATCH_SANITIZED_FIELDS = ["description", "requiredEquipment", "isRSVP"];
+export const PATCH_SANITIZED_FIELDS = ["description", "requiredEquipment"];
 export const TEAM_CAPACITY: number = Number(process.env.TEAM_CAPACITY) || 5;
 export class TeamService {
   public static async buildTeam({ builder, teamParams }: { builder: User; teamParams: any }) {
