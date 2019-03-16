@@ -20,7 +20,6 @@
     "seed": "./node_modules/.bin/sequelize db:seed:all",
     "migrate-clean": "./node_modules/.bin/sequelize db:migrate:undo:all",
     "setup": "npm run migrate-clean && npm run migrate && npm run seed",
-    "postinstall": "npm run build",
     "start": "node ./dist/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
