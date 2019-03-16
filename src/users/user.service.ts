@@ -128,7 +128,7 @@ export class UserService {
       const team: Team = user.team || ((await user.$get("team")) as Team);
 
       sanitizedParams.role = _.get(role, "name") || "Unavailable";
-      sanitizedParams.team = team && (await TeamService.sanitize(team));
+      sanitizedParams.team = await TeamService.sanitize(team);
     }
 
     return sanitizedParams;

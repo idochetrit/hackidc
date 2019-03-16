@@ -1,24 +1,20 @@
 <template>
     <div class="container-fluid">
         <div class="row">
-            <div class="box">
+            <form class="box" action="/api/auth/login" method="post">
                 <img class="herzel" src="../../static/herzel_black.png">
                 <h2>Judges Area - Sign In</h2>
                 <h5>Welcome! Sign in to your account</h5>
                 <br>
                 <div class="form-group">
-                    <input v-model="auth.email" id="judges-username" placeholder="Username" class="form-control" type="text">
+                    <input id="judges-username" placeholder="Username" class="form-control" type="text" name="email">
                 </div>
                 <div class="form-group">
-                    <input v-model="auth.password" id="judges-password" placeholder="Password" class="form-control" type="password">
+                    <input id="judges-password" placeholder="Password" class="form-control" type="password" name="password">
                     <small v-if="showError" class="text-danger">Wrong username/password, try again.</small>
                 </div>
-                <button v-if="!showLoading" @click="signin" class="btn btn-info btn-md">Sign in</button>
-                <button v-else class="btn btn-info" type="button" disabled>
-                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                    Loading...
-                </button>
-            </div>
+                <button class="btn btn-info btn-md">Sign in</button>
+            </form>
         </div>
         <div class="overlay"></div>
     </div>
@@ -28,37 +24,9 @@
 import axios from 'axios';
   export default {
     data() {
-      return {
-        showLoading: false,
-        showError: false,
-        auth: {
-          email: "",
-          password: ""
-        }
-      };
+      return {};
     },
     methods: {
-      signin() {
-        this.showLoading = true;
-        setTimeout(() => {
-          axios.get("/api/auth/login", { params: this.auth })
-            .then(res => {
-              this.showLoading = false;
-              this.showError = false;
-              if (res.status === 200) {
-                this.$router.push({ name: "mentor-dashboard" });
-              }
-            })
-            .catch(err => {
-              console.log(err.response);
-              if (err.response.status === 401) {
-                this.showLoading = false;
-                this.showError = true;
-                this.auth = { email: "", password: "" }
-              }
-            })
-        }, 1000);
-      }
     }
   }
 </script>

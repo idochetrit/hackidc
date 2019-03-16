@@ -92,6 +92,7 @@ export class TeamService {
   }
 
   public static async sanitize(team: Team, { withDeps = true } = {}) {
+    if (!team) return {};
     let sanitizedParams: any = _.pick(team, ...SANITIZED_FIELDS);
 
     // add users

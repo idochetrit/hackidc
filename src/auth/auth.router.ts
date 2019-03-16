@@ -14,8 +14,8 @@ router.get("/logout", (req, res) => {
 });
 
 // for judges
-// GET /auth/login
-router.get(
+// POST /auth/login
+router.post(
   "/login",
   passportLocal.authenticate("local", {
     state: "loginState"
