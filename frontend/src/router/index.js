@@ -22,6 +22,10 @@ import JudgeDashboard from "../components/JudgeDashboard.vue";
 import MentorDashboard from "../components/MentorDashboard.vue";
 import TeamPage from "../components/TeamPage.vue";
 import UserPage from "../components/UserPage.vue";
+import GeneralCompScoringPage from "../components/GeneralCompScoringPage";
+import ElbitScoringPage from "../components/ElbitScoringPage";
+import PalantirScoringPage from "../components/PalantirScoringPage";
+import MizrahiScoringPage from "../components/MizrahiScoringPage";
 import StatusMessage from "../components/StatusMessage.vue";
 import PageNotFound from "../components/PageNotFound.vue";
 import ErrorPage from "../components/ErrorPage.vue";
@@ -131,23 +135,23 @@ export default new Router({
       },
       component: FAQ
     },
-    {
-      path: "/signup-info",
-      name: "signup-info",
-      meta: {
-        title: "HackIDC 2019 | Registration"
-      },
-      component: RegistrationInfo
-    },
-    {
-      path: "/signup",
-      name: "signup",
-      meta: {
-        title: "HackIDC 2019 | Registration"
-      },
-      component: Registration,
-      beforeEnter: navigateRegistration
-    },
+    // {
+    //   path: "/signup-info",
+    //   name: "signup-info",
+    //   meta: {
+    //     title: "HackIDC 2019 | Registration"
+    //   },
+    //   component: RegistrationInfo
+    // },
+    // {
+    //   path: "/signup",
+    //   name: "signup",
+    //   meta: {
+    //     title: "HackIDC 2019 | Registration"
+    //   },
+    //   component: Registration,
+    //   beforeEnter: navigateRegistration
+    // },
     {
       path: "/login",
       name: "login",
@@ -211,12 +215,12 @@ export default new Router({
       }
     },
     {
-      path: "/dashboard/judges/profile",
-      name: "judge-dashboard",
+      path: "/judging/general-_scoring",
+      name: "general-scoring",
       meta: {
-        title: "HackIDC 2019 | Dashboard"
+        title: "HackIDC 2019 | General Competition Scoring"
       },
-      component: JudgeDashboard,
+      component: GeneralCompScoringPage
       // beforeEnter: (to, from, next) => {
       //   if (store.getters.isAuthenticated) {
       //     next();
@@ -226,19 +230,49 @@ export default new Router({
       // }
     },
     {
-      path: "/dashboard/mentors/profile",
-      name: "mentor-dashboard",
+      path: "/judging/elbit-_scoring",
+      name: "elbit-scoring",
       meta: {
-        title: "HackIDC 2019 | Dashboard"
+        title: "HackIDC 2019 | Elbit Scoring"
       },
-      component: MentorDashboard,
-      // beforeEnter: (to, from, next) => {
-      //   if (store.getters.isAuthenticated) {
-      //     next();
-      //   } else {
-      //     next({ name: "home" });
-      //   }
-      // }
+      component: ElbitScoringPage,
+      beforeEnter: (to, from, next) => {
+        if (store.getters.isAuthenticated) {
+          next();
+        } else {
+          next({ name: "home" });
+        }
+      }
+    },
+    {
+      path: "/judging/palantir-_scoring",
+      name: "palantir-scoring",
+      meta: {
+        title: "HackIDC 2019 | Elbit Scoring"
+      },
+      component: PalantirScoringPage,
+      beforeEnter: (to, from, next) => {
+        if (store.getters.isAuthenticated) {
+          next();
+        } else {
+          next({ name: "home" });
+        }
+      }
+    },
+    {
+      path: "/judging/mizrahi-_scoring",
+      name: "mizrahi-scoring",
+      meta: {
+        title: "HackIDC 2019 | Elbit Scoring"
+      },
+      component: MizrahiScoringPage,
+      beforeEnter: (to, from, next) => {
+        if (store.getters.isAuthenticated) {
+          next();
+        } else {
+          next({ name: "home" });
+        }
+      }
     },
     // public routes
     {
