@@ -38,7 +38,6 @@ router.get("/teams", isPermittedUser(LEVELS.JUDGE), async (req, res) => {
 router.post("/", async (req, res) => {
   try {
     const params: any = JudgeService.extractUserParams(req.body);
-
     const newJudge: User = await JudgeService.createLocalAuthUser(params);
     const sanitizedUser = await UserService.sanitize(newJudge);
 
