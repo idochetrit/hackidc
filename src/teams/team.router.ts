@@ -100,17 +100,6 @@ router.delete("/:id", async (req, res) => {
   });
 });
 
-router.get("/", async (req, res) => {
-  const teams = await TeamService.getTeams();
-  /// [ sanitize(team1), sanitize(team2).... ]
-  const sanitizedTeams = await Promise.all(
-    teams.map(team => TeamService.sanitize(team, { withDeps: false }))
-  );
-  res.json({
-    teams: sanitizedTeams
-  });
-});
-
 router.get("/:codeNumber/zipcvs", async (req, res) => {
   const codeNumber: number = Number(req.params.codeNumber);
   const team: Team = await TeamService.findOneByCode(codeNumber);
