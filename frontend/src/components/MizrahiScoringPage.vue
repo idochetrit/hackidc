@@ -5,26 +5,32 @@
             <h2>Mizrahi Tefahot Challenge Scoring</h2>
             <img class="company_logo" src="../../static/mizrahi_tefahot_logo.png" alt="MizrahiLogo">
             <h3>Select the team number down below and vote by the given parameters</h3>
+            <div class="alert alert-warning">
+                <h6>Want to go to another competition?</h6>
+                <router-link tag="button" to="/judging-landing"
+                             class="btn btn-warning text-light">
+                    <strong>Back to Judging Area</strong>
+                </router-link>
+            </div>
             <div class="row">
-                <Scoring :challengeName="challengeName" :judge="mockjudge" />
+                <Scoring :challengeName="challengeName" :judge="judge" />
             </div>
         </div>
     </div>
 </template>
 
 <script>
-  import mockJudgeObject from "../assets/mockJudge";
-  import Scoring from "./Scoring"
+  import axios from "axios";
+  import Scoring from "./Scoring";
 
   export default {
-    data() {
-      return {
-        challengeName: "mizrahi",
-        mockjudge: mockJudgeObject
-      }
-    },
     computed: {
-      judge() {return this.$store.getters.getUser;},
+      judge() {
+        return this.$store.getters.getJudgeObject;
+      },
+      challengeName() {
+        return this.$route.params.challengeName;
+      }
     },
     components: {
       Scoring
@@ -54,7 +60,15 @@
 
     .company_logo {
         width: 20%;
+        margin-top: 2rem;
         margin-bottom: 2rem;
+    }
+
+    .alert {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
 
     h2 {

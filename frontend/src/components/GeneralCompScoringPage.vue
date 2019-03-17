@@ -5,33 +5,31 @@
             <h2>General Competition Scoring</h2>
             <h3>Select the team number down below and vote by the given parameters</h3>
             <div class="alert alert-warning">
-                <h5>For sponsors' challenges scoring:</h5>
-                <div class="challengesButtons">
-                    <router-link tag="button" to="/judging/elbit-_scoring" class="btn btn-lg btn-warning">Elbit</router-link>
-                    <router-link tag="button" to="/judging/mizrahi-_scoring" class="btn btn-lg btn-warning">Mizrahi Tefahot</router-link>
-                    <router-link tag="button" to="/judging/palantir-_scoring" class="btn btn-lg btn-warning">Palantir</router-link>
-                </div>
+                <h6>Want to go to another competition?</h6>
+                <router-link tag="button" to="/judging-landing"
+                             class="btn btn-warning text-light">
+                    <strong>Back to Judging Area</strong>
+                </router-link>
             </div>
             <div class="row">
-                <Scoring :challengeName="challengeName" :judge="mockjudge" />
+                <Scoring :judge="judge" :challengeName="challengeName" />
             </div>
         </div>
     </div>
 </template>
 
 <script>
-  import mockJudgeObject from "../assets/mockJudge";
-  import Scoring from "./Scoring"
+  import axios from "axios";
+  import Scoring from "./Scoring";
 
   export default {
-    data() {
-      return {
-        challengeName: "general",
-        mockjudge: mockJudgeObject
-      }
-    },
     computed: {
-      judge() {return this.$store.getters.getUser;},
+      judge() {
+        return this.$store.getters.getJudgeObject;
+      },
+      challengeName() {
+        return this.$route.params.challengeName;
+      }
     },
     components: {
       Scoring
@@ -59,6 +57,13 @@
         margin-bottom: 2rem;
     }
 
+    .alert {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
     h2 {
         text-align: center;
         font-weight: bold;
@@ -77,18 +82,6 @@
     .row {
         width: 100%;
         padding: 1rem;
-    }
-
-    .challengesButtons {
-        display: flex;
-        flex-direction: row;
-        margin-bottom: 1rem;
-    }
-
-    .challengesButtons button {
-        margin: 0 .5rem;
-        color: #fff;
-        font-weight: bold;
     }
 
     @media screen and (max-width: 1440px) and (min-width: 1201px) {

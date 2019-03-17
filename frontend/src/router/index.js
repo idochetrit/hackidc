@@ -22,6 +22,8 @@ import JudgeDashboard from "../components/JudgeDashboard.vue";
 import MentorDashboard from "../components/MentorDashboard.vue";
 import TeamPage from "../components/TeamPage.vue";
 import UserPage from "../components/UserPage.vue";
+import JudgingLandingPage from "../components/JudgesLandingPage.vue";
+import JudgingPageWrapper from "../components/JudgingPageWrapper.vue";
 import GeneralCompScoringPage from "../components/GeneralCompScoringPage";
 import ElbitScoringPage from "../components/ElbitScoringPage";
 import PalantirScoringPage from "../components/PalantirScoringPage";
@@ -215,12 +217,13 @@ export default new Router({
       }
     },
     {
-      path: "/judging/general-_scoring",
-      name: "general-scoring",
+      path: "/judging-landing",
+      name: "judging-landing",
       meta: {
-        title: "HackIDC 2019 | General Competition Scoring"
+        title: "HackIDC 2019 | Welcome, Judge!"
       },
-      component: GeneralCompScoringPage
+      component: JudgingLandingPage
+      // TODO: beforeEnter auth check
       // beforeEnter: (to, from, next) => {
       //   if (store.getters.isAuthenticated) {
       //     next();
@@ -230,49 +233,22 @@ export default new Router({
       // }
     },
     {
-      path: "/judging/elbit-_scoring",
-      name: "elbit-scoring",
+      path: "/judging/:challengeName",
+      name: "judging-page",
       meta: {
-        title: "HackIDC 2019 | Elbit Scoring"
+        title: "HackIDC 2019 | Team Scoring"
       },
-      component: ElbitScoringPage,
+      component: JudgingPageWrapper,
       beforeEnter: (to, from, next) => {
-        if (store.getters.isAuthenticated) {
+        const challenges = ["general", "elbit", "palantir", "mizrahi"];
+        if (challenges.includes(to.params.challengeName)) {
           next();
         } else {
           next({ name: "home" });
         }
       }
-    },
-    {
-      path: "/judging/palantir-_scoring",
-      name: "palantir-scoring",
-      meta: {
-        title: "HackIDC 2019 | Elbit Scoring"
-      },
-      component: PalantirScoringPage,
-      beforeEnter: (to, from, next) => {
-        if (store.getters.isAuthenticated) {
-          next();
-        } else {
-          next({ name: "home" });
-        }
-      }
-    },
-    {
-      path: "/judging/mizrahi-_scoring",
-      name: "mizrahi-scoring",
-      meta: {
-        title: "HackIDC 2019 | Elbit Scoring"
-      },
-      component: MizrahiScoringPage,
-      beforeEnter: (to, from, next) => {
-        if (store.getters.isAuthenticated) {
-          next();
-        } else {
-          next({ name: "home" });
-        }
-      }
+      // TODO: add auth check
+      // store.getters.isAuthenticated
     },
     // public routes
     {

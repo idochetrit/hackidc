@@ -1,0 +1,197 @@
+<template>
+    <div class="container-fluid">
+        <div class="container">
+            <img class="herzel" src="../../static/herzel_black.png">
+            <h2>Judges Area</h2>
+            <h5>Welcome! Please choose below the competition you're taking part in</h5>
+            <hr>
+            <div class="row">
+                <router-link v-for="(competition, i) in competitions" :key="i"
+                             tag="button" :to="competition.path"
+                             class="btn btn-light col-lg-3 col-md-6 col-sm-12 challenge-button">
+                    <img class="company_logo" :src="competition.logo">
+                    <h5><strong>{{ competition.name }}</strong></h5>
+                </router-link>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+  import mockJudgeObject from "../assets/mockJudge"
+
+  export default {
+    data() {
+      return {
+        competitions: [
+          {
+            name: "General Competition",
+            logo: require("../../static/logo_black.png"),
+            path: "/judging/general"
+          },
+          {
+            name: "Elbit Challenge",
+            logo: require("../../static/elbit_logo.png"),
+            path: "/judging/elbit"
+          },
+          {
+            name: "Mizrahi Challenge",
+            logo: require("../../static/mizrahi_tefahot_logo.png"),
+            path: "/judging/mizrahi"
+          },
+          {
+            name: "Palantir Challenge",
+            logo: require("../../static/palantir_logo.png"),
+            path: "/judging/palantir"
+          }
+        ]
+      };
+    },
+    beforeCreate() {
+      //for Mock:
+      this.$store.dispatch("updateJudgeObject", mockJudgeObject.teams);
+
+      //TODO: connect api judge user call and update STATE judgeObject
+      // const userObject = this.$store.getters.getUser;
+      // const teams = {};
+      // axios.get("/api/judges/teams")
+      //   .then(res => res.data)
+      //   .then(data => {
+      //     teams = data;
+      //   });
+      // return {
+      //   ...teams,
+      //   ...userObject
+      // };
+    }
+  };
+</script>
+
+<style scoped>
+    .container-fluid {
+        margin-top: 3rem;
+        padding: 8rem 0;
+        min-height: 1000px;
+        background-color: #f7f7f7;
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .herzel {
+        width: 10%;
+        margin-bottom: 2rem;
+    }
+
+    .challenge-button {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .company_logo {
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+
+    h2 {
+        text-align: center;
+        font-weight: bold;
+    }
+
+    h3 {
+        font-size: 1.3rem;
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+
+    h5 {
+        text-align: center;
+    }
+
+    .row {
+        width: 100%;
+        padding: 1rem;
+    }
+
+    @media screen and (max-width: 1440px) {
+        .container-fluid {
+            min-height: 1200px;
+        }
+
+        .box {
+            padding: 2rem 0 1rem 0;
+            width: 400px;
+            height: 450px;
+        }
+
+        .herzel {
+            margin-bottom: 1rem;
+        }
+
+        .challenge-button {
+            margin: 1rem 0;
+        }
+
+        h5 {
+            font-size: 1.1rem;
+        }
+
+        hr {
+            margin: 1.5rem;
+            width: 80%;
+        }
+    }
+
+    @media screen and (max-width: 767px) {
+        .container-fluid {
+            min-height: 0;
+        }
+
+        .herzel {
+            margin-bottom: 1rem;
+        }
+
+        .challenge-button {
+            margin: 1.5rem 0;
+        }
+
+        h5 {
+            font-size: 1.1rem;
+        }
+
+        hr {
+            margin: 1.5rem;
+            width: 80%;
+        }
+    }
+
+    @media screen and (max-width: 380px) {
+        .container-fluid {
+            min-height: 0;
+        }
+
+        .herzel {
+            margin-bottom: .5rem;
+        }
+
+        h2 {
+            font-size: 1.6rem;
+        }
+
+        h5 {
+            font-size: 1rem;
+        }
+
+        hr {
+            margin: 1.5rem;
+            width: 80%;
+        }
+    }
+
+</style>

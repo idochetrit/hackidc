@@ -22,6 +22,12 @@
             </router-link>
             <li><a class="social" :data-toggle="collapse" data-target="#navbarCollapsedDiv" href="https://www.facebook.com/HackIDC/" target="_blank"><span class="fab fa-facebook fa-2x"></span></a></li>
             <li><a class="social" :data-toggle="collapse" data-target="#navbarCollapsedDiv" href="https://www.instagram.com/hackidc2019/" target="_blank"><span class="fab fa-instagram fa-2x"></span></a></li>
+            <router-link tag="li" class="nav-item" :data-toggle="collapse"
+                         data-target="#navbarCollapsedDiv" active-class="active" to="/judging-landing" exact>
+              <a class="nav-link text-danger">
+                <strong>Judging Area</strong>
+              </a>
+            </router-link>
           </ul>
           <hr class="user-divider">
           <ul class="navbar-nav" v-if="this.$store.getters.isRegistrationOpen !== 'under-construction'">

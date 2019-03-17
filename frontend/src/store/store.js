@@ -12,14 +12,16 @@ export const store = new Vuex.Store({
       registerStatus: ""
     },
     loading: false,
-    registration: "opened" // valid values: 'under-construction' ,'opened' or 'closed'
+    judgeObject: null,
+    registration: "closed" // valid values: 'under-construction' ,'opened' or 'closed'
   },
   getters: {
     isLoading: state => state.loading,
     isRegistrationOpen: state => state.registration,
     isAuthenticated: state => state.authenticated,
     getUser: state => state.user,
-    isSignedUp: state => state.authenticated && state.user.registerStatus !== "pending"
+    isSignedUp: state => state.authenticated && state.user.registerStatus !== "pending",
+    getJudgeObject: state => state.judgeObject
   },
   mutations: {
     setLoading: (state, payload) => (state.loading = payload),
@@ -36,6 +38,11 @@ export const store = new Vuex.Store({
     },
     updateUserObject: (state, payload) => {
       state.user = { ...payload };
+    },
+    setJudgeObject: (state, payload) => state.judgeObject = payload,
+    removeTeamFromJudgeArray: (state, payload) => {
+      const index = state.judgeObject[payload.challengeName].indexOf(payload.teamNumber);
+      state.judgeObject[payload.challengeName].splice(index, 1);
     }
   },
   actions: {
@@ -68,6 +75,12 @@ export const store = new Vuex.Store({
         .catch(err => {
           console.log(err);
         });
+    },
+    updateJudgeObject: (context, payload) => {
+      context.commit("setJudgeObject", payload);
+    },
+    markTeamAsRanked: (context, payload) => {
+      context.commit("removeTeamFromJudgeArray", payload);
     }
   }
 });

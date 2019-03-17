@@ -1,15 +1,23 @@
 <template>
     <div class="scoring-wrapper">
-        <div class="scoring-box">
-            <div v-if="hasMoreTeamsToJudge" class="form-group">
+        <div v-if="!teamsLeftToJudge" class="noTeamsAlertDiv">
+            <div class="alert alert-warning">
+                <strong>You don't have any teams to judge in this challenge</strong>
+            </div>
+            <router-link tag="button" to="/judging/general"
+                         class="btn btn-md btn-info">
+                <strong>Back to general challenge</strong>
+            </router-link>
+        </div>
+        <div v-else class="scoring-box">
+            <div v-if="teamsLeftToJudge.length" class="form-group">
                 <label for="teamNumber">Select the team number to judge</label>
                 <select name="teamNumber" id="teamNumber"
                         @change="resetRank"
                         class="custom-select" v-model="teamNumber">
                     <option :value="null" selected>Select...</option>
-                    <option v-for="(team, i) in judgeTeams"
-                            v-if="!team.isRanked"
-                            :value="team.number" :key="i">{{ team.number }}
+                    <option v-for="(team, i) in teamsLeftToJudge"
+                            :value="team" :key="i">{{ team }}
                     </option>
                 </select>
                 <hr>
@@ -17,9 +25,15 @@
                     {{ `currently scoring team number ${teamNumber}` }}
                 </h4>
             </div>
-            <div v-else class="alert alert-success alert-block">
-                Your'e done for now, thank you!
-                <br><strong>HackIDC 2019 team</strong>
+            <div v-else class="noTeamsAlertDiv">
+                <div class="alert alert-success">
+                    Your'e done for now, thank you!
+                </div>
+                <router-link v-if="challengeName !== 'general'"
+                             tag="button" to="/judging-landing"
+                             class="btn btn-md btn-info">
+                    <strong>Back to Judging Area</strong>
+                </router-link>
             </div>
             <hr>
             <div v-for="(f,i) in fields" :key="i"
@@ -44,11 +58,12 @@
 </template>
 
 <script>
+  import mockJudgeObject from "../assets/mockJudge"
+
   export default {
-    props: ["judge", "challengeName"],
+    props: ["judge"],
     data() {
       return {
-        hasMoreTeamsToJudge: true,
         fields: ["Creativity", "Usability", "Functionality", "Awesomeness"],
         teamNumber: null,
         rank: {
@@ -60,18 +75,25 @@
       };
     },
     computed: {
-      judgeTeams() {
-        return this.judge[this.challengeName].map(team => ({
-          number: team,
-          isRanked: false
-        }));
+      userID() {
+        //for Mock:
+        return mockJudgeObject.id;
+
+        //TODO: get userID from auth user (in STATE)
+      },
+      challengeName() {
+        return this.$route.params.challengeName;
+      },
+      teamsLeftToJudge() {
+        return this.judge[this.challengeName];
       }
     },
     methods: {
       removeTeamFromJudgeArray(teamNumber) {
-        this.judgeTeams.forEach(team => {
-          if (team.number === teamNumber) team.isRanked = true
-        })
+        this.$store.dispatch("markTeamAsRanked", {
+          challengeName: this.challengeName,
+          teamNumber
+        });
       },
       resetTeamNumber() {
         this.teamNumber = null;
@@ -89,7 +111,7 @@
       },
       handleRank() {
         const rankObject = {
-          judgeId: this.judge.userId,
+          judgeId: this.userID,
           teamCodeNumber: this.teamNumber,
           challengeName: this.challengeName,
           parameters: {
@@ -99,16 +121,14 @@
         this.sendRank(rankObject, this.teamNumber);
       },
       setupForNewRank(teamNumber) {
+        this.removeTeamFromJudgeArray(teamNumber);
         if (!this.checkForVotingEnd()) {
-          this.removeTeamFromJudgeArray(teamNumber);
           this.resetRank();
           this.resetTeamNumber();
         }
       },
       checkForVotingEnd() {
-        const unRankedTeam = this.judgeTeams.find(team => !team.isRanked);
-        if (!unRankedTeam) {
-          this.hasMoreTeamsToJudge = false;
+        if (!this.teamsLeftToJudge || !this.teamsLeftToJudge.length) {
           this.resetTeamNumber();
           this.resetRank();
           return true;
@@ -119,8 +139,10 @@
         if (confirm(`Are you done with team number ${this.teamNumber}?
         * Once you send your scoring you can't go back.`)) {
           // TODO: send rank to DB
-          console.log(rankObject);
-          this.setupForNewRank(teamNumber);
+          setTimeout(function() {
+            this.$scrollTo('.scoring-wrapper', 1000);
+            this.setupForNewRank(teamNumber);
+          }.bind(this), 200);
         }
       }
     }
@@ -131,6 +153,13 @@
     h4 {
         font-weight: bold;
     }
+
+    .noTeamsAlertDiv {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
     .scoring-wrapper {
         display: flex;
         flex-direction: column;
