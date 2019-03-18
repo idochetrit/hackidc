@@ -11,7 +11,7 @@
         </thead>
         <tbody>
           <tr>
-            <th scope="row">07:45</th>
+            <th scope="row">07:30</th>
             <td>Registration and Gathering</td>
             <td>Adelson* Entrance Floor</td>
           </tr>
@@ -21,29 +21,39 @@
             <td>Adelson* Auditorium EL03</td>
           </tr>
           <tr>
-            <th scope="row">10:00</th>
+            <th scope="row">10:30</th>
             <td class="bg-success"><strong>Hacking starts!</strong></td>
             <td>Floors 1,2,3,4</td>
           </tr>
           <tr>
             <th scope="row">13:00</th>
-            <td>Lunch</td>
+            <td>Party & Lunch</td>
             <td>Outside</td>
           </tr>
           <tr>
-            <th scope="row">17:30</th>
+            <th scope="row">17:00</th>
+            <td>Pitch workshop</td>
+            <td>TBD</td>
+          </tr>
+          <tr>
+            <th scope="row">18:00</th>
             <td>Happy Hour!</td>
             <td>Outside</td>
           </tr>
           <tr>
-            <th scope="row">19:30</th>
+            <th scope="row">19:00</th>
+            <td>Pitch Presentations Rehearsals (optional)</td>
+            <td>TBD</td>
+          </tr>
+          <tr>
+            <th scope="row">20:00</th>
             <td>Dinner</td>
             <td>Outside</td>
           </tr>
           <tr>
-            <th scope="row">20:30</th>
-            <td>Pitch Workshop</td>
-            <td>TBD</td>
+            <th scope="row">21:00</th>
+            <td>Party!</td>
+            <td>Outside</td>
           </tr>
           <tr>
             <th scope="row">00:00</th>
@@ -65,33 +75,18 @@
             <td>Outside</td>
           </tr>
           <tr>
-            <th scope="row">08:30</th>
-            <td>Opening Ceremony</td>
-            <td>Adelson* Auditorium EL03</td>
-          </tr>
-          <tr>
             <th scope="row">09:00</th>
-            <td class="bg-danger"><strong>Hacking Ends</strong></td>
-            <td>Outside</td>
-          </tr>
-          <tr>
-            <th scope="row">09:30</th>
-            <td>Judging - Challenges</td>
+            <td class="bg-danger"><strong>Hacking Ends - Judging</strong></td>
             <td>TBD</td>
           </tr>
           <tr>
-            <th scope="row">10:30</th>
-            <td>Judging - Round #1</td>
-            <td>TBD</td>
-          </tr>
-          <tr>
-            <th scope="row">11:30</th>
+            <th scope="row">11:00</th>
             <td>Lunch</td>
             <td>Outside</td>
           </tr>
           <tr>
-            <th scope="row">12:30</th>
-            <td>Final Judging & Ceremony</td>
+            <th scope="row">12:00</th>
+            <td>Ceremony</td>
             <td>Lobby Main Hall</td>
           </tr>
           <tr>
