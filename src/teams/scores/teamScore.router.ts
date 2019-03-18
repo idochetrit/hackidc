@@ -8,13 +8,19 @@ const router = new Router();
 
 router.post("/", isPermittedUser(LEVELS.JUDGE), async (req, res) => {
   //score the team according to level
-  const { challengeName, teamCodeNumber, judgeId, parameters: scoreData } = req.body;
-  await TeamScoreService.scoreTeamWithChallenge({
-    teamCodeNumber,
-    challengeName,
-    judgeId,
-    scoreData
-  });
+  try {
+    const { challengeName, teamCodeNumber, judgeId, scoreData } = req.body;
+    await TeamScoreService.scoreTeamWithChallenge({
+      teamCodeNumber,
+      challengeName,
+      judgeId,
+      scoreData
+    });
+    res.status(200).send("success");
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
 });
 
 router.get("/lockAndAdvanceTeams", isPermittedUser(LEVELS.ADMIN), async (req, res) => {

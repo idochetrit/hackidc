@@ -78,6 +78,7 @@ router.put("/self/challenge", ensureAuthenticated, async (req, res) => {
   const { challengeName } = req.body;
   let team: Team = await UserService.getTeamByUserId(userId);
 
+  // TODO check for teamBuilder validity
   // update challenge
   const challenges = await TeamService.getAllChallenges();
   const { id: challengeId } = challenges.find(({ name }) => name === _.lowerCase(challengeName));

@@ -22,17 +22,20 @@ router.get("/self", isPermittedUser(LEVELS.JUDGE), async (req, res) => {
   }
 });
 
-router.get("/teams", isPermittedUser(LEVELS.JUDGE), async (req, res) => {
-  const userId: number = Number(_.get(req, "user.id")) || Number(req.headers.judgeid);
-  const user = await UserService.findById(userId, { includeDeps: true });
-  const sanitizedUser = await JudgeService.sanitize(user);
-  res.json({
-    user: sanitizedUser,
-    teamScores: {
-      palantir: [145, 134],
-      general: [1, 2, 3]
-    }
-  });
+router.get("/self/teams", isPermittedUser(LEVELS.JUDGE), async (req, res) => {
+  try {
+    const userId: number = Number(_.get(req, "user.id")) || Number(req.headers.userid);
+    const user = await UserService.findById(userId, { includeDeps: true });
+
+    const sanitizedUser = await JudgeService.sanitize(user);
+    const teamsByChallenge = await TeamScoreService.getAllJudgeTeamIdsByChallenge(userId);
+    res.json({
+      user: sanitizedUser,
+      teamsByChallenge
+    });
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 router.post("/", async (req, res) => {

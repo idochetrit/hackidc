@@ -22,12 +22,6 @@
             </router-link>
             <li><a class="social" :data-toggle="collapse" data-target="#navbarCollapsedDiv" href="https://www.facebook.com/HackIDC/" target="_blank"><span class="fab fa-facebook fa-2x"></span></a></li>
             <li><a class="social" :data-toggle="collapse" data-target="#navbarCollapsedDiv" href="https://www.instagram.com/hackidc2019/" target="_blank"><span class="fab fa-instagram fa-2x"></span></a></li>
-            <router-link tag="li" class="nav-item" :data-toggle="collapse"
-                         data-target="#navbarCollapsedDiv" active-class="active" to="/judging-landing" exact>
-              <a class="nav-link text-danger">
-                <strong>Judging Area</strong>
-              </a>
-            </router-link>
           </ul>
           <hr class="user-divider">
           <ul class="navbar-nav" v-if="this.$store.getters.isRegistrationOpen !== 'under-construction'">
@@ -42,8 +36,9 @@
                 <strong>{{ this.$store.getters.getUser.name | firstName }}</strong>
               </button>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
-                <router-link  class="dropdown-item" :data-toggle="collapse" data-target="#navbarCollapsedDiv" tag="a" :to="{ name: 'user-dashboard' }" active-class="active" exact>My Profile</router-link>
-                <router-link  class="dropdown-item" :data-toggle="collapse" data-target="#navbarCollapsedDiv" tag="a" :to="{ name: 'team-dashboard', params: { codeNumber: user.team.codeNumber } }" active-class="active" exact>My Team</router-link>
+                <router-link v-if="user.role.toLowerCase() !== 'judge'" class="dropdown-item" :data-toggle="collapse" data-target="#navbarCollapsedDiv" tag="a" :to="{ name: 'user-dashboard' }" active-class="active" exact>My Profile</router-link>
+                <router-link v-if="user.role.toLowerCase() !== 'judge'" class="dropdown-item" :data-toggle="collapse" data-target="#navbarCollapsedDiv" tag="a" :to="{ name: 'team-dashboard', params: { codeNumber: user.team.codeNumber } }" active-class="active" exact>My Team</router-link>
+                <router-link v-if="user.role.toLowerCase() === 'judge'" class="dropdown-item" :data-toggle="collapse" data-target="#navbarCollapsedDiv" tag="a" :to="{ name: 'judging-landing' }" active-class="active"  exact>Judging Area</router-link>
                 <div class="dropdown-divider"></div>
                 <button @click="signout" class="dropdown-item text-danger" :data-toggle="collapse" data-target="#navbarCollapsedDiv"><strong>Sign out</strong></button>
               </div>

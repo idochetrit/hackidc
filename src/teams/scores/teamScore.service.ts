@@ -1,16 +1,18 @@
-import { Team } from "../team.model";
 import { ScoreService } from "../../concerns/scores/scoreService";
 import { TeamScore } from "./teamscore.model";
 import { Challenge } from "../../challenges/challenge.model";
+import * as _ from "lodash";
 
 const stagesSteps = {
   intial: "final",
   final: "done"
 };
 
+const SANITIZED_FIELDS = ["judeId", "teamId", "challengeId", "challengeName"];
+
 /**
  * @param {any} - either finalScore or
- *      {awesomnessScore, functionalityScore, creativityScore, usabilityScore}
+ *      {awesomenessScore, functionalityScore, creativityScore, usabilityScore}
  * @returns {void} succeeded updating the correct record with the appropriate data
  */
 export class TeamScoreService {
@@ -80,6 +82,25 @@ export class TeamScoreService {
       challengeId,
       judgeId
     });
+  }
+
+  public static sanitize(teamScore: TeamScore): any {
+    const attrs = _.pick(teamScore, ...SANITIZED_FIELDS);
+    return attrs;
+  }
+
+  public static async getAllJudgeTeamIdsByChallenge(judgeId: number) {
+    const teamScores: TeamScore[] = await TeamScore.findAll({
+      where: {
+        judgeId
+      },
+      include: [Challenge]
+    });
+
+    return _.chain(teamScores)
+      .groupBy("challenge.name")
+      .mapValues(teamScores => _.map(teamScores, "teamCodeNumber"))
+      .value();
   }
 
   private static async findTeamScoreBy({

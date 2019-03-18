@@ -18,12 +18,12 @@ router.get("/logout", (req, res) => {
 router.post(
   "/login",
   passportLocal.authenticate("local", {
-    state: "loginState"
+    state: "loginState",
+    failureRedirect: "/"
   }),
   (req, res) => {
     if (!req.user) return handleError(new Error("failed to login"), res);
     const redirectPath: string = getRedirectPathStatus("judge");
-
     res.redirect(redirectPath);
   }
 );

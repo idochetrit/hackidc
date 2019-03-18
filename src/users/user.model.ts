@@ -128,7 +128,7 @@ export class User extends Model<User> {
   public isReviewd: boolean;
 
   @Column
-  public attenededPreHack: boolean;
+  public attendedPreHack: boolean;
 
   @CreatedAt
   @Column

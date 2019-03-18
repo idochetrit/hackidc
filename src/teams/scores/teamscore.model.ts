@@ -6,7 +6,8 @@ import {
   Table,
   UpdatedAt,
   ForeignKey,
-  DataType
+  DataType,
+  Sequelize
 } from "sequelize-typescript";
 import { Challenge } from "../../challenges/challenge.model";
 import { User } from "../../users/user.model";
@@ -46,16 +47,24 @@ export class TeamScore extends Model<TeamScore> {
   @Column({ type: LEVEL_ENUMS })
   public level: DataTypeEnum;
 
-  @Column
-  public awesomnessScore: number;
+  @Column({
+    type: DataType.FLOAT
+  })
+  public awesomenessScore: number;
 
-  @Column
+  @Column({
+    type: DataType.FLOAT
+  })
   public functionalityScore: number;
 
-  @Column
+  @Column({
+    type: DataType.FLOAT
+  })
   public creativityScore: number;
 
-  @Column
+  @Column({
+    type: DataType.FLOAT
+  })
   public usabilityScore: number;
 
   // final stage

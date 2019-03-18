@@ -4,9 +4,9 @@
             <div class="alert alert-warning">
                 <strong>You don't have any teams to judge in this challenge</strong>
             </div>
-            <router-link tag="button" to="/judging/general"
+            <router-link tag="button" to="/judging-landing"
                          class="btn btn-md btn-info">
-                <strong>Back to general challenge</strong>
+                <strong>Back to Judges Area</strong>\
             </router-link>
         </div>
         <div v-else class="scoring-box">
@@ -58,8 +58,7 @@
 </template>
 
 <script>
-  import mockJudgeObject from "../assets/mockJudge"
-
+  import axios from "axios";
   export default {
     props: ["judge"],
     data() {
@@ -76,16 +75,13 @@
     },
     computed: {
       userID() {
-        //for Mock:
-        return mockJudgeObject.id;
-
-        //TODO: get userID from auth user (in STATE)
+        return this.judge.id;
       },
       challengeName() {
         return this.$route.params.challengeName;
       },
       teamsLeftToJudge() {
-        return this.judge[this.challengeName];
+        return this.judge.teams[this.challengeName];
       }
     },
     methods: {
@@ -138,11 +134,25 @@
       sendRank(rankObject, teamNumber) {
         if (confirm(`Are you done with team number ${this.teamNumber}?
         * Once you send your scoring you can't go back.`)) {
-          // TODO: send rank to DB
-          setTimeout(function() {
-            this.$scrollTo('.scoring-wrapper', 1000);
-            this.setupForNewRank(teamNumber);
-          }.bind(this), 200);
+          const {
+            judgeId,
+            teamCodeNumber,
+            challengeName,
+            parameters: scoreData
+          } = rankObject;
+
+          return axios.post("/api/teams/scores", {
+              judgeId,
+              teamCodeNumber,
+              challengeName,
+              scoreData
+            }, {withCredentials: true})
+            .then(data => {
+              setTimeout(function() {
+                this.$scrollTo('.scoring-wrapper', 1000);
+                this.setupForNewRank(teamNumber);
+              }.bind(this), 200);
+            });
         }
       }
     }

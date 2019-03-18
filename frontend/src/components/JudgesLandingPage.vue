@@ -18,7 +18,7 @@
 </template>
 
 <script>
-  import mockJudgeObject from "../assets/mockJudge"
+  import axios from "axios";
 
   export default {
     data() {
@@ -48,21 +48,13 @@
       };
     },
     beforeCreate() {
-      //for Mock:
-      this.$store.dispatch("updateJudgeObject", mockJudgeObject.teams);
-
-      //TODO: connect api judge user call and update STATE judgeObject
-      // const userObject = this.$store.getters.getUser;
-      // const teams = {};
-      // axios.get("/api/judges/teams")
-      //   .then(res => res.data)
-      //   .then(data => {
-      //     teams = data;
-      //   });
-      // return {
-      //   ...teams,
-      //   ...userObject
-      // };
+        if (this.$store.getters.getJudgeObject) return;
+        return axios.get("/api/judges/self/teams", { withCredentials: true })
+            .then(res => res.data)
+            .then(data => {
+                const { teamsByChallenge: teams, user} = data;
+                this.$store.dispatch("updateJudgeObject", { id: user.id, teams });
+        });
     }
   };
 </script>

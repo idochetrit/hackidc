@@ -10,7 +10,7 @@ const router = new Router();
 router.put("/prehackAttendence", isSuperAdmin, async (req, res) => {
   const { email } = req.body;
   const user = await UserService.findByEmail(email);
-  await UserService.updateUserWith(user, { attenededPreHack: true });
+  await UserService.updateUserWith(user, { attendedPreHack: true });
   res.json({
     updated: true
   });

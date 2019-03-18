@@ -7,10 +7,10 @@
                 <h5>Welcome! Sign in to your account</h5>
                 <br>
                 <div class="form-group">
-                    <input id="judges-username" placeholder="Username" class="form-control" type="text" name="email">
+                    <input id="judges-username" placeholder="Username" class="form-control" type="text" name="email" required>
                 </div>
                 <div class="form-group">
-                    <input id="judges-password" placeholder="Password" class="form-control" type="password" name="password">
+                    <input id="judges-password" placeholder="Password" class="form-control" type="password" name="password" required>
                     <small v-if="showError" class="text-danger">Wrong username/password, try again.</small>
                 </div>
                 <button class="btn btn-info btn-md">Sign in</button>
@@ -25,7 +25,10 @@
 
   export default {
     data() {
-      return {};
+      return {
+          showError: false,
+          showLoading: false
+      };
     },
     methods: {
       signin() {

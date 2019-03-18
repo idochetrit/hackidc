@@ -39,10 +39,10 @@ export const store = new Vuex.Store({
     updateUserObject: (state, payload) => {
       state.user = { ...payload };
     },
-    setJudgeObject: (state, payload) => state.judgeObject = payload,
+    setJudgeObject: (state, payload) => (state.judgeObject = payload),
     removeTeamFromJudgeArray: (state, payload) => {
-      const index = state.judgeObject[payload.challengeName].indexOf(payload.teamNumber);
-      state.judgeObject[payload.challengeName].splice(index, 1);
+      const index = state.judgeObject.teams[payload.challengeName].indexOf(payload.teamNumber);
+      state.judgeObject.teams[payload.challengeName].splice(index, 1);
     }
   },
   actions: {

@@ -12,14 +12,29 @@ export function ensureAuthenticated(req, res, next) {
 }
 export const LEVELS = {
   ADMIN: ["Judge", "Mentor"],
-  JUDGE: "JUDGE",
+  JUDGE: "Judge",
   MENTOR: "Mentor"
 };
 export function isPermittedUser(level) {
   return async function(req, res, next) {
-    const userId: number = Number(_.get(req, "user.id")) || req.query.id;
-    const user = await UserService.findById(userId);
-    return _.includes(LEVELS[level], user.role);
+    try {
+      if (process.env.NODE_ENV !== "production" || req.isAuthenticated()) {
+        const userId: number = Number(
+          _.get(req, "user.id") ||
+            req.query.id ||
+            req.headers.userid ||
+            _.get(req.session.passport, "user")
+        );
+        const user = await UserService.findById(userId, { includeDeps: true });
+        if (level === user.role.name) {
+          return next();
+        }
+        throw new Error(`user level: ${user.role.name} not permitted to: ${level}`);
+      }
+    } catch (err) {
+      console.error(err);
+      throw err;
+    }
   };
 }
 
@@ -37,7 +52,7 @@ export function getRedirectPathStatus(registerStatus: string): string {
   // pending: signup, approved: dashboard/profile, review: reject status-message,
 
   const map = {
-    judge: "/judging/general-_scoring",
+    judge: "/judging-landing",
     pending: "/signup",
     approved: "/dashboard/profile",
     review: "/status-message",

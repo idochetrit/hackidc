@@ -222,15 +222,14 @@ export default new Router({
       meta: {
         title: "HackIDC 2019 | Welcome, Judge!"
       },
-      component: JudgingLandingPage
-      // TODO: beforeEnter auth check
-      // beforeEnter: (to, from, next) => {
-      //   if (store.getters.isAuthenticated) {
-      //     next();
-      //   } else {
-      //     next({ name: "home" });
-      //   }
-      // }
+      component: JudgingLandingPage,
+      beforeEnter: (to, from, next) => {
+        if (store.getters.isAuthenticated) {
+          next();
+        } else {
+          next({ name: "home" });
+        }
+      }
     },
     {
       path: "/judging/:challengeName",
@@ -241,14 +240,12 @@ export default new Router({
       component: JudgingPageWrapper,
       beforeEnter: (to, from, next) => {
         const challenges = ["general", "elbit", "palantir", "mizrahi"];
-        if (challenges.includes(to.params.challengeName)) {
+        if (challenges.includes(to.params.challengeName) && store.getters.isAuthenticated) {
           next();
         } else {
           next({ name: "home" });
         }
       }
-      // TODO: add auth check
-      // store.getters.isAuthenticated
     },
     // public routes
     {
