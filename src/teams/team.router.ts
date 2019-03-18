@@ -65,6 +65,33 @@ router.get("/validate/:codeNumber", async (req, res) => {
   }
 });
 
+router.get("/challenges", ensureAuthenticated, async (req, res) => {
+  // const userId: number = Number(_.get(req, "user.id")) || Number(req.headers.userid);
+  const sanitizedChallenges = await TeamService.getAllChallenges(); // this method pre-sanitized the records
+  res.json({
+    challenges: sanitizedChallenges
+  });
+});
+
+router.put("/self/challenge", ensureAuthenticated, async (req, res) => {
+  const userId: number = Number(_.get(req, "user.id")) || Number(req.headers.userid);
+  const { challengeName } = req.body;
+  let team: Team = await UserService.getTeamByUserId(userId);
+
+  // update challenge
+  const challenges = await TeamService.getAllChallenges();
+  const { id: challengeId } = challenges.find(({ name }) => name === _.lowerCase(challengeName));
+  await TeamService.updateTeam(team, { challengeId });
+
+  // refetch team
+  team = await UserService.getTeamByUserId(userId);
+  const sanitizedTeam: any = await TeamService.sanitize(team, { withDeps: false });
+  res.json({
+    sanitizedTeam,
+    updated: true
+  });
+});
+
 router.post("/self/rsvp", ensureAuthenticated, async (req, res) => {
   const userId: number = Number(_.get(req, "user.id")) || Number(req.headers.userid);
   const attributes: any = req.body;

@@ -4,7 +4,7 @@ import * as pluralize from "pluralize";
 import { Sequelize } from "sequelize-typescript";
 import { User } from "../users/user.model";
 import { Team } from "./team.model";
-import { Challenge } from "../challenges/challenge.model";
+import { Challenge, CHALLENGES } from "../challenges/challenge.model";
 import { UserService } from "../users/user.service";
 import { SANITIZED_PUBLIC_FIELDS } from "../users/user.constants";
 import * as Sentry from "@sentry/node";
@@ -20,7 +20,7 @@ export const SANITIZED_FIELDS = [
   "challengeId",
   "users"
 ];
-export const PATCH_SANITIZED_FIELDS = ["description", "requiredEquipment"];
+export const PATCH_SANITIZED_FIELDS = ["description", "requiredEquipment", "challengeId"];
 export const TEAM_CAPACITY: number = Number(process.env.TEAM_CAPACITY) || 5;
 export class TeamService {
   public static async buildTeam({ builder, teamParams }: { builder: User; teamParams: any }) {
@@ -74,6 +74,13 @@ export class TeamService {
     return team;
   }
 
+  public static async getAllChallenges(): Promise<any[]> {
+    const challenges: Challenge[] = await Challenge.findAll({
+      where: { name: { $ne: CHALLENGES.GENERAL } } // exclude general challenge
+    });
+    return _.map(challenges, challenge => _.pick(challenge, "id", "name")); // sanitized challenges
+  }
+
   public static async generateTeamCode(): Promise<{ codeNumber: number; codeName: string }> {
     const generateNumber = () => Math.floor(Math.random() * 899 + 100);
     const codeNumber = generateNumber();
@@ -92,6 +99,7 @@ export class TeamService {
   }
 
   public static async sanitize(team: Team, { withDeps = true } = {}) {
+    if (!team) return {};
     let sanitizedParams: any = _.pick(team, ...SANITIZED_FIELDS);
 
     // add users
