@@ -1,7 +1,8 @@
 import { Sequelize } from "sequelize-typescript";
+import * as configJSON from "./config.json";
 
 const env = process.env.NODE_ENV || "development";
-import * as configJSON from "./config.json";
+
 const config = configJSON[env];
 
 let db: Sequelize;
@@ -25,7 +26,7 @@ if (config.use_env_variable) {
   });
 }
 
-const modelPath: string = __dirname + "/../**/*.model.*";
+const modelPath: string = `${__dirname  }/../**/*.model.*`;
 db.addModels([modelPath], (filename, member) => {
   console.log("model ", member.toLowerCase(), " loaded.");
   return filename.substring(0, filename.indexOf(".model")) === member.toLowerCase();

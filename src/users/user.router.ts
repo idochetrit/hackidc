@@ -5,7 +5,6 @@ import { handleError, handleUnauthorize, handleNotFound } from "../routers.helpe
 import { TeamService } from "../teams/team.service";
 import { UserService } from "./user.service";
 import userUploadsRouter from "./user.upload.router";
-import favoriteRouter from "../favorites/favorite.router";
 import testUsersRouter from "./testUsers.router";
 import { User } from "./user.model";
 import { PATH_SANITIZED_FIELDS, SANITIZED_PUBLIC_FIELDS } from "./user.constants";
@@ -13,7 +12,6 @@ import { PATH_SANITIZED_FIELDS, SANITIZED_PUBLIC_FIELDS } from "./user.constants
 const router = new Router();
 
 router.use("/self/uploads", userUploadsRouter);
-router.use("/favorites", favoriteRouter);
 router.use("/tests", testUsersRouter);
 
 router.get("/self", ensureAuthenticated, async (req, res) => {

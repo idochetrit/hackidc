@@ -15,19 +15,23 @@ const stagesSteps = {
  */
 export class TeamScoreService {
   public static async scoreTeamWithChallenge({
-    team,
+    teamCodeNumber,
     judgeId,
     challengeName,
     scoreData
   }: {
-    team: Team;
+    teamCodeNumber: number;
     judgeId: number;
     challengeName: string;
     scoreData: any;
   }) {
     // update score if not locked
     const { id: challengeId } = await this.findChallengeByName(challengeName);
-    const teamScore = await this.findTeamScoreBy({ teamId: team.id, judgeId, challengeId });
+    const teamScore = await this.findTeamScoreBy({
+      teamCodeNumber,
+      judgeId,
+      challengeId
+    });
     const scoreService = new ScoreService(teamScore);
     await scoreService.score(scoreData);
   }
@@ -68,19 +72,23 @@ export class TeamScoreService {
     );
   }
 
-  public async createScoreRecord({ teamId, challengeId, judgeId }) {
+  public async createScoreRecord({ teamCodeNumber, challengeId, judgeId }) {
     await TeamScore.create({
       level: "initial",
       locked: false,
-      teamId,
+      teamCodeNumber,
       challengeId,
       judgeId
     });
   }
 
-  private static async findTeamScoreBy({ teamId, judgeId, challengeId }): Promise<TeamScore> {
+  private static async findTeamScoreBy({
+    teamCodeNumber,
+    judgeId,
+    challengeId
+  }): Promise<TeamScore> {
     return TeamScore.findOne({
-      where: { teamId, judgeId, challengeId }
+      where: { teamCodeNumber, judgeId, challengeId }
     });
   }
 

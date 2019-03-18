@@ -12,7 +12,12 @@ import {
   HasMany
 } from "sequelize-typescript";
 import { Team } from "../teams/team.model";
-
+export const CHALLENGES = {
+  GENERAL: "general",
+  ELBIT: "elbit",
+  PALANTIR: "palantir",
+  MIZRAHI: "mizrahi"
+};
 @Table({
   tableName: "Challenges"
 })

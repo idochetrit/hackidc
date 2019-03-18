@@ -15,7 +15,7 @@ export class ScoreService {
 
   async score(data: any) {
     if (this._model.locked) {
-      const teamCodeNumber = await this._model.team.codeNumber;
+      const { teamCodeNumber } = await this._model;
       throw new Error(`scoring is locked for team #${teamCodeNumber}`);
     }
     await this._proto.score(data);

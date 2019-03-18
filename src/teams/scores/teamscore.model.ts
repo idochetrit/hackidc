@@ -10,7 +10,6 @@ import {
 } from "sequelize-typescript";
 import { Challenge } from "../../challenges/challenge.model";
 import { User } from "../../users/user.model";
-import { Team } from "../team.model";
 import { DataTypeEnum } from "sequelize";
 
 export const LEVEL_ENUMS = DataType.ENUM("initial", "final", "done");
@@ -28,12 +27,8 @@ export class TeamScore extends Model<TeamScore> {
   // ------
 
   // Team relation
-  @ForeignKey(() => Team)
   @Column
-  public teamId: number;
-
-  @BelongsTo(() => Team, "teamId")
-  public team: Team;
+  public teamCodeNumber: number;
   // ------
 
   // Challenge relation

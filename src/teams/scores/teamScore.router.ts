@@ -9,9 +9,8 @@ const router = new Router();
 router.post("/", isPermittedUser(LEVELS.JUDGE), async (req, res) => {
   //score the team according to level
   const { challengeName, teamCodeNumber, judgeId, parameters: scoreData } = req.body;
-  const team = await TeamService.findOneByCode(teamCodeNumber);
   await TeamScoreService.scoreTeamWithChallenge({
-    team,
+    teamCodeNumber,
     challengeName,
     judgeId,
     scoreData

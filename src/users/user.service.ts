@@ -215,7 +215,7 @@ export class UserService {
   public static async findById(
     id: number,
     { includeDeps = false }: { includeDeps?: boolean } = {}
-  ) {
+  ): Promise<User> {
     let includes = [];
     if (includeDeps) {
       includes = [{ model: Team, required: false }, { model: Role, required: false }];
@@ -225,6 +225,12 @@ export class UserService {
       include: includes
     });
     return user;
+  }
+
+  public static async findByEmail(email: string): Promise<User> {
+    return await User.findOne({
+      where: { email }
+    });
   }
 
   public static async deleteUser(id: number) {
