@@ -7,6 +7,11 @@
                 <h5>Welcome back! Sign in to your account</h5>
                 <br>
                 <button @click="signin" class="btn btn-lg linkedinBtn"><span class="fab fa-linkedin fa-lg"></span>Log In with LinkedIn</button>
+                <hr>
+                <h4><strong>Judge?</strong></h4>
+                <router-link to="/judges-login" tag="button" class="btn btn-md btn-info" exact>
+                    Judges Sign In
+                </router-link>
             </div>
         </div>
         <div class="overlay"></div>
@@ -53,7 +58,6 @@ export default {
     .box {
         z-index: 2;
         width: 500px;
-        height: 500px;
         background-color: #f7f7f7;
         border-radius: 5px;
         box-shadow: 0 8px 20px rgba(0,0,0,.9);
@@ -92,9 +96,8 @@ export default {
     @media screen and (max-width: 1440px) {
         .container-fluid {min-height: 1200px;}
         .box {
-            padding: 2rem 0 1rem 0;
+            padding: 2rem 0 3rem 0;
             width: 400px;
-            height: 400px;
         }
         .herzel {margin-bottom: 1rem;}
         h5 {font-size: 1.1rem;}
@@ -105,9 +108,8 @@ export default {
     @media screen and (max-width: 767px) {
         .container-fluid {min-height: 0;}
         .box {
-            padding: 2rem 0 1rem 0;
+            padding: 2rem 0 3rem 0;
             width: 350px;
-            height: 400px;
         }
         .herzel {margin-bottom: 1rem;}
         h5 {font-size: 1.1rem;}
@@ -120,7 +122,6 @@ export default {
         .box {
             padding: 1rem 0 1rem 0;
             width: 80%;
-            height: 350px;
         }
         .herzel {margin-bottom: .5rem;}
         h2 { font-size: 1.6rem; }
