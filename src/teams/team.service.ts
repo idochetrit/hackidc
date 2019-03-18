@@ -149,20 +149,6 @@ export class TeamService {
     return [true, rsvpFlag];
   }
 
-  public static async getTeams(): Promise<Team[]> {
-    const teams: Team[] = await Team.findAll({
-      where: Sequelize.or(
-        { isDeleted: false },
-        {
-          isDeleted: {
-            $is: null
-          }
-        }
-      )
-    });
-    return teams;
-  }
-
   private static async checkAvailability({
     codeNumber,
     codeName

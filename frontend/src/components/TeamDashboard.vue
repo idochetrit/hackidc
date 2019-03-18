@@ -20,7 +20,7 @@
             </div>
             <hr>
             <div class="dashboard-body">
-              <div class="form-group rsvpdiv">
+              <div v-if="user.role === 'TeamBuilder'" class="form-group rsvpdiv" >
                 <h3>Please RSVP below</h3>
                 <button @click="update_RSVP" id="rsvp" :disabled="user.team.isRSVP" 
                     :class="{'btn-success': user.team.isRSVP, 'btn-warning': !user.team.isRSVP}" class="btn btn-lg">
@@ -33,8 +33,8 @@
                   {{(user.team.isPreHackRSVP) ? "RSVP was sent for PreHack" : "Click here to RSVP for PreHack"}}
                 </button><br/>
                 <small class="text-muted">* At least 2 representative from the team will attend the event</small>
+                <hr />
               </div>
-              <hr />
                 <h3>Description</h3>
                 <p class="description">{{ team.description }}</p>
                 <div class="section" v-if="this.$store.getters.isAuthenticated">
