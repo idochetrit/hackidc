@@ -12,7 +12,7 @@ export class JudgeService {
       name: profile.name
     };
 
-    defaultAttrs.password = await this.createPasswordForUser(profile.password);
+    defaultAttrs.password = await this.encryptPassword(profile.password);
 
     return User.findOrCreate({
       defaults: defaultAttrs,
@@ -48,10 +48,5 @@ export class JudgeService {
       .pick(sanitizedFields)
       .omit("id")
       .value();
-  }
-
-  public static async createPasswordForUser(newPassword: string) {
-    const salt = await bcrypt.genSalt(10);
-    return bcrypt.hash(newPassword, salt);
   }
 }

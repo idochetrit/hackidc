@@ -6,6 +6,7 @@ import { TeamService } from "../teams/team.service";
 import { UserService } from "./user.service";
 import { sequelize } from "../db/sequelize";
 import { JudgeService } from "./judges/judge.service";
+import { encryptPassword } from "../concerns/users_utils";
 
 export namespace UserTests {
   const fieldOfStudies = [
@@ -93,7 +94,7 @@ export namespace UserTests {
     baseAttrs.role = defaultRole;
 
     // create password
-    const hashedPass = JudgeService.createPasswordForUser("Aa123123");
+    const hashedPass = encryptPassword("Aa123123");
     baseAttrs.password = hashedPass;
   }
 

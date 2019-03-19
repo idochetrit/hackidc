@@ -2,6 +2,7 @@ import * as archiver from "archiver";
 import { UserService } from "../users/user.service";
 import { sequelize } from "../db/sequelize";
 import { User } from "../users/user.model";
+import * as bcrypt from "bcryptjs";
 
 export async function zipAllCvs() {
   const results = await sequelize.query(`
@@ -43,4 +44,18 @@ export async function zipTeamCvs(teamId: number) {
   });
 
   return zip;
+}
+
+export async function encryptPassword(newPassword: string): Promise<string> {
+  const salt = await bcrypt.genSalt(10);
+  return bcrypt.hash(newPassword, salt);
+}
+
+export async function comparePassword(rawPass: string, hashedPass: string): Promise<boolean> {
+  try {
+    return bcrypt.compare(rawPass, hashedPass);
+  } catch (err) {
+    console.log(`failed to comapre passwords with: ${err}`);
+    throw err;
+  }
 }

@@ -8,8 +8,8 @@ import userRole from "./user.role";
 import UserScore from "./user.score";
 import { PATH_SANITIZED_FIELDS, SANITIZED_FIELDS, academicInstitutesMap } from "./user.constants";
 import { Sequelize, IsUUID } from "sequelize-typescript";
-import * as bcrypt from "bcryptjs";
 import * as uuidv4 from "uuid/v4";
+import { encryptPassword, comparePassword } from "../concerns/users_utils";
 
 export class UserService {
   public static async createLinkedInUser(profile: any, authToken: string) {
@@ -198,22 +198,20 @@ export class UserService {
   }
 
   public static async verifyPassword(user: User, password: string) {
-    const hashedPass = user.password;
     try {
-      const isMatch = await bcrypt.compare(password, hashedPass);
+      const isMatch = await comparePassword(password, user.password);
 
       // update AuthToken
       if (isMatch) await user.update({ authToken: uuidv4() });
       return isMatch;
     } catch (err) {
-      console.log(`failed to log in judge ${user.email} with: ${err}`);
+      console.log(`failed to log in judge ${user.email}`);
       throw err;
     }
   }
 
   public static async createPasswordForUser(user: User, newPassword: string) {
-    const salt = await bcrypt.genSalt(10);
-    const newHashedPassword = bcrypt.hash(newPassword, salt);
+    const newHashedPassword: string = await encryptPassword(newPassword);
     await user.update({ password: newHashedPassword });
   }
 
