@@ -4,6 +4,7 @@ import { User } from "../user.model";
 import { Sequelize } from "sequelize-typescript";
 import * as bcrypt from "bcryptjs";
 import { JUDGE_SANITIZED_FIELDS } from "../user.constants";
+import { encryptPassword } from "../../concerns/users_utils";
 
 export class JudgeService {
   public static async createLocalAuthUser(profile: any) {
@@ -12,7 +13,7 @@ export class JudgeService {
       name: profile.name
     };
 
-    defaultAttrs.password = await this.encryptPassword(profile.password);
+    defaultAttrs.password = await encryptPassword(profile.password);
 
     return User.findOrCreate({
       defaults: defaultAttrs,
