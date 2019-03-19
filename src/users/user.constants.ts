@@ -76,4 +76,4 @@ export const academicInstitutesMap = {
   other: "Other"
 };
 
-export const JUDGE_SANITIZED_FIELDS = ["id", "name", "email", "canViewCV", "role"];
+export const JUDGE_SANITIZED_FIELDS = ["id", "name", "email", "password", "canViewCV", "role"];

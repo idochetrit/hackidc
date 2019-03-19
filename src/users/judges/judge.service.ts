@@ -2,7 +2,6 @@ import * as _ from "lodash";
 
 import { User } from "../user.model";
 import { Sequelize } from "sequelize-typescript";
-import * as bcrypt from "bcryptjs";
 import { JUDGE_SANITIZED_FIELDS } from "../user.constants";
 import { encryptPassword } from "../../concerns/users_utils";
 
@@ -10,8 +9,10 @@ export class JudgeService {
   public static async createLocalAuthUser(profile: any) {
     const defaultAttrs: any = {
       email: profile.email,
-      name: profile.name
+      name: profile.name,
+      roleId: 3 // JUDGE
     };
+    console.log(profile);
 
     defaultAttrs.password = await encryptPassword(profile.password);
 

@@ -1,8 +1,7 @@
 import { Router } from "express";
 import * as _ from "lodash";
-import { ensureAuthenticated, isPermittedUser, LEVELS } from "../../concerns/auth.users";
+import { isPermittedUser, LEVELS } from "../../concerns/auth.users";
 import { UserService } from "../user.service";
-import { User } from "../user.model";
 import { JudgeService } from "./judge.service";
 import { handleError } from "../../routers.helper";
 import { TeamScoreService } from "../../teams/scores/teamScore.service";
@@ -41,7 +40,7 @@ router.get("/self/teams", isPermittedUser(LEVELS.JUDGE), async (req, res) => {
 router.post("/", async (req, res) => {
   try {
     const params: any = JudgeService.extractUserParams(req.body);
-    const newJudge: User = await JudgeService.createLocalAuthUser(params);
+    const newJudge = await JudgeService.createLocalAuthUser(params);
     const sanitizedUser = await UserService.sanitize(newJudge);
 
     res.json({ user: sanitizedUser });
