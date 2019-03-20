@@ -4,7 +4,7 @@
             <img class="herzel" src="../../static/herzel_black.png">
             <h2>General Competition Scoring</h2>
             <h3>Select the team number down below and vote by the given parameters</h3>
-            <div class="alert alert-warning">
+            <div class="alert alert-info">
                 <h6>Want to go to another competition?</h6>
                 <router-link tag="button" to="/judging-landing"
                              class="btn btn-warning text-light">

@@ -5,6 +5,17 @@ import { Sequelize } from "sequelize-typescript";
 import { JUDGE_SANITIZED_FIELDS } from "../user.constants";
 import { encryptPassword } from "../../concerns/users_utils";
 
+export const FINAL_JUDGES = [
+  "uriel_reichman",
+  "arierl_shamir",
+  "moran_nir",
+  "lior_noy",
+  "iddo_gino",
+  "roei_deutsch",
+  "yossi_maaravi",
+  "son_preminger",
+  "tal_zackon"
+];
 export class JudgeService {
   public static async createLocalAuthUser(profile: any) {
     const defaultAttrs: any = {

@@ -18,7 +18,10 @@ export class ScoreService {
       const { teamCodeNumber } = await this._model;
       throw new Error(`scoring is locked for team #${teamCodeNumber}`);
     }
-    await this._proto.score(data);
+    this._proto.score(data);
+    this._proto.lock();
+
+    await this._model.save();
   }
 
   // calculations

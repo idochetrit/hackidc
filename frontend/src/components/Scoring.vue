@@ -1,12 +1,12 @@
 <template>
     <div class="scoring-wrapper">
         <div v-if="!teamsLeftToJudge" class="noTeamsAlertDiv">
-            <div class="alert alert-warning">
+            <div class="alert alert-info">
                 <strong>You don't have any teams to judge in this challenge</strong>
             </div>
             <router-link tag="button" to="/judging-landing"
                          class="btn btn-md btn-info">
-                <strong>Back to Judges Area</strong>\
+                <strong>Back to Judges Area</strong>
             </router-link>
         </div>
         <div v-else class="scoring-box">
