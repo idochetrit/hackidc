@@ -4,6 +4,7 @@ import { store } from "../store/store";
 import Home from "../components/Home.vue";
 import Terms from "../components/Terms.vue";
 import Schedule from "../components/Schedule.vue";
+import Challenges from "../components/Challenges.vue";
 import Resources from "../components/Resources.vue";
 import SponsorProposal from "../components/SponsorProposal.vue";
 import MentorsProposal from "../components/MentorsProposal.vue";
@@ -70,6 +71,14 @@ export default new Router({
         title: "HackIDC 2019 | Schedule"
       },
       component: Schedule
+    },
+    {
+      path: "/challenges",
+      name: "challenges",
+      meta: {
+        title: "HackIDC 2019 | Challenges"
+      },
+      component: Challenges
     },
     {
       path: "/digital-art-exhibition",
