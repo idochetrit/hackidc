@@ -18,16 +18,12 @@ import JudgesLogin from "../components/JudgesLogin.vue";
 import MentorsLogin from "../components/MentorsLogin.vue";
 import UserDashboard from "../components/UserDashboard.vue";
 import TeamDashboard from "../components/TeamDashboard.vue";
-import JudgeDashboard from "../components/JudgeDashboard.vue";
-import MentorDashboard from "../components/MentorDashboard.vue";
 import TeamPage from "../components/TeamPage.vue";
 import UserPage from "../components/UserPage.vue";
 import JudgingLandingPage from "../components/JudgesLandingPage.vue";
 import JudgingPageWrapper from "../components/JudgingPageWrapper.vue";
-import GeneralCompScoringPage from "../components/GeneralCompScoringPage";
-import ElbitScoringPage from "../components/ElbitScoringPage";
-import PalantirScoringPage from "../components/PalantirScoringPage";
-import MizrahiScoringPage from "../components/MizrahiScoringPage";
+import FinalJudgingPage from "../components/FinalJudgingPage.vue";
+import ThankYouJudge from "../components/ThankYouJudge.vue";
 import StatusMessage from "../components/StatusMessage.vue";
 import PageNotFound from "../components/PageNotFound.vue";
 import ErrorPage from "../components/ErrorPage.vue";
@@ -168,7 +164,17 @@ export default new Router({
       meta: {
         title: "HackIDC 2019 | Judges Login"
       },
-      component: JudgesLogin
+      component: JudgesLogin,
+      beforeEnter(to, from, next) {
+        if (
+          store.getters.getCurrentJudgingRound >= 1 &&
+          store.getters.getCurrentJudgingRound <= 2
+        ) {
+          next();
+        } else {
+          next({ name: "home" });
+        }
+      }
     },
     {
       path: "/mentors-login",
@@ -194,11 +200,7 @@ export default new Router({
       },
       component: UserDashboard,
       beforeEnter: (to, from, next) => {
-        if (store.getters.isAuthenticated) {
-          next();
-        } else {
-          next({ name: "home" });
-        }
+        store.getters.isAuthenticated ? next() : next({ name: "home" });
       }
     },
     {
@@ -209,11 +211,7 @@ export default new Router({
       },
       component: TeamDashboard,
       beforeEnter: (to, from, next) => {
-        if (store.getters.isAuthenticated) {
-          next();
-        } else {
-          next({ name: "home" });
-        }
+        store.getters.isAuthenticated ? next() : next({ name: "home" });
       }
     },
     {
@@ -224,11 +222,7 @@ export default new Router({
       },
       component: JudgingLandingPage,
       beforeEnter: (to, from, next) => {
-        if (store.getters.isAuthenticated) {
-          next();
-        } else {
-          next({ name: "home" });
-        }
+        store.getters.isAuthenticated ? next() : next({ name: "home" });
       }
     },
     {
@@ -245,6 +239,32 @@ export default new Router({
         } else {
           next({ name: "home" });
         }
+      }
+    },
+    {
+      path: "/judging/general/final",
+      name: "judging-final",
+      meta: {
+        title: "HackIDC 2019 | Final"
+      },
+      component: FinalJudgingPage,
+      beforeEnter(to, from, next) {
+        if (store.getters.isAuthenticated && store.getters.getCurrentJudgingRound === 2) {
+          next();
+        } else {
+          next({ name: "home" });
+        }
+      }
+    },
+    {
+      path: "/judging/final/thank-you",
+      name: "thank-you-judge",
+      meta: {
+        title: "HackIDC 2019 | Thank You!"
+      },
+      component: ThankYouJudge,
+      beforeEnter(to, from, next) {
+        store.getters.isAuthenticated ? next() : next({ name: "home" });
       }
     },
     // public routes

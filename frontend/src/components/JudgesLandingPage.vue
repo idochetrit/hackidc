@@ -1,10 +1,13 @@
 <template>
     <div class="container-fluid">
-        <div class="container">
+        <div class="container" v-if="currentJudgingRound === 1">
             <img class="herzel" src="../../static/herzel_black.png">
             <h2>Judges Area</h2>
             <h5>Welcome! Please choose below the competition you're taking part in</h5>
             <hr>
+            <div class="alert alert-info alert-block">
+                <h5><strong>Round #1</strong></h5>
+            </div>
             <div class="row">
                 <router-link v-for="(competition, i) in competitions" :key="i"
                              tag="button" :to="competition.path"
@@ -13,7 +16,23 @@
                     <h5><strong>{{ competition.name }}</strong></h5>
                 </router-link>
             </div>
+        </div><div class="container" v-if="currentJudgingRound === 2">
+        <img class="herzel" src="../../static/herzel_black.png">
+        <h2>Judges Area</h2>
+        <h5>Welcome! Please choose below the competition you're taking part in</h5>
+        <hr>
+        <div class="alert alert-danger alert-block">
+            <h5><strong>Round #2</strong></h5>
         </div>
+        <div class="row">
+            <router-link v-for="(competition, i) in round2Competitions" :key="i"
+                         tag="button" :to="competition.path"
+                         class="btn btn-light col-lg-3 col-md-6 col-sm-12 challenge-button">
+                <img class="company_logo" :src="competition.logo">
+                <h5 class="text-danger"><strong>{{ competition.name }}</strong></h5>
+            </router-link>
+        </div>
+    </div>
     </div>
 </template>
 
@@ -44,8 +63,20 @@
             logo: require("../../static/palantir_logo.png"),
             path: "/judging/palantir"
           }
+        ],
+        round2Competitions: [
+          {
+            name: "General Competition - Final",
+            logo: require("../../static/logo_black.png"),
+            path: "/judging/general/final"
+          },
         ]
       };
+    },
+    computed: {
+        currentJudgingRound() {
+          return this.$store.getters.getCurrentJudgingRound;
+        }
     },
     beforeCreate() {
         if (this.$store.getters.getJudgeObject) return;
@@ -79,6 +110,15 @@
         margin-bottom: 2rem;
     }
 
+    .alert-block {
+        padding: 1rem 5rem;
+    }
+
+    .alert-block h5 {
+        margin: 0;
+        padding: 0;
+    }
+
     .challenge-button {
         display: flex;
         flex-direction: column;
@@ -109,6 +149,8 @@
     .row {
         width: 100%;
         padding: 1rem;
+        align-items: center;
+        justify-content: center;
     }
 
     @media screen and (max-width: 1440px) {

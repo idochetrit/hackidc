@@ -13,7 +13,8 @@ export const store = new Vuex.Store({
     },
     loading: false,
     judgeObject: null,
-    registration: "closed" // valid values: 'under-construction' ,'opened' or 'closed'
+    registration: "closed", // valid values: 'under-construction' ,'opened' or 'closed'
+    currentJudgingRound: 0 // 0: closed, 1: round1, 2: round2
   },
   getters: {
     isLoading: state => state.loading,
@@ -21,11 +22,13 @@ export const store = new Vuex.Store({
     isAuthenticated: state => state.authenticated,
     getUser: state => state.user,
     isSignedUp: state => state.authenticated && state.user.registerStatus !== "pending",
-    getJudgeObject: state => state.judgeObject
+    getJudgeObject: state => state.judgeObject,
+    getCurrentJudgingRound: state => state.currentJudgingRound,
   },
   mutations: {
     setLoading: (state, payload) => (state.loading = payload),
     setRegistrationStatus: (state, payload) => (state.registration = payload),
+    setCurrentJudgingRound: (state, payload) => (state.currentJudgingRound = payload),
     authenticate: (state, payload) => {
       state.authenticated = true;
       state.token = payload.authToken;
@@ -57,6 +60,9 @@ export const store = new Vuex.Store({
     },
     registrationClosed: context => {
       context.commit("setRegistrationStatus", "closed");
+    },
+    setJudgingRound: (context, payload) => {
+      context.commit("setCurrentJudgingRound", payload);
     },
     signIn: (context, payload) => {
       context.commit("authenticate", payload);
