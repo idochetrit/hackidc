@@ -22,7 +22,7 @@ router.get("/self", isPermittedUser(LEVELS.JUDGE), async (req, res) => {
   }
 });
 
-router.get("/round", isPermittedUser(LEVELS.JUDGE), async (req, res) => {
+router.get("/round", async (req, res) => {
   res.json({
     round: Number(process.env.ROUND_NUMBER) || 0
   });
