@@ -50,13 +50,11 @@
       }
     },
     beforeMount() {
-      // TODO: fetch for the teams qualified to the final round and update finalTeams array
       return axios.get("/api/judges/self/teams/final", { withCredentials: true })
         .then(res => res.data)
         .then(data => {
           this.finalTeams = data.finalRoundTeams;
         });
-
       // // notice: for mock
       // this.finalTeams = mockFinalRoundTeams;
     }

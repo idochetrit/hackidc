@@ -51,6 +51,8 @@
 </template>
 
 <script>
+  import axios from "axios";
+
   export default {
     data() {
       return {
@@ -76,23 +78,31 @@
       constructFinalScoreObject() {
         return {
           judgeId: this.judge.id,
-          firstPlace: this.judgeFirstPlace,
-          secondPlace: this.judgeSecondPlace,
-          thirdPlace: this.judgeThirdPlace
+          challengeName: "general",
+          teamCodeNumber: null,
+          scoreData: {
+            firstPlace: this.judgeFirstPlace,
+            secondPlace: this.judgeSecondPlace,
+            thirdPlace: this.judgeThirdPlace
+          }
         };
       },
       redirectToThankYouJudge() {
-        this.$router.push({name: "thank-you-judge"});
+        this.$router.push({ name: "thank-you-judge" });
       },
       sendFinalScore() {
         if (confirm("Are you sure these are your 3 winning teams?")) {
           const finalScoreObject = this.constructFinalScoreObject();
-          //TODO: send final score object to DB and redirect to thank you page
-
+          axios.post("/api/teams/scores", finalScoreObject, {withCredentials: true})
+            .then(() => {
+              this.redirectToThankYouJudge();
+            })
+            .catch(() => {
+              this.$router.push({name: "error-page"})
+            });
 
           // notice: for mock
           console.log(finalScoreObject);
-          this.redirectToThankYouJudge()
         }
       }
     }
