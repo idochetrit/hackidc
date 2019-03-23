@@ -24,10 +24,7 @@
   import FinalRoundTeamDisplay from "./FinalRoundTeamDisplay";
   import FinalRoundForm from "./FinalRoundForm";
 
-  // notice: for mock
   import axios from "axios"
-  import mockFinalRoundTeams from "../assets/mockFinalRoundTeams";
-  import mockJudge from "../assets/mockJudge";
 
   export default {
     components: {
@@ -42,8 +39,6 @@
     computed: {
       judge() {
         return this.$store.getters.getJudgeObject;
-        // // notice: for mock
-        // return mockJudge;
       },
       currentJudgingRound() {
         return this.$store.getters.getCurrentJudgingRound;
@@ -55,8 +50,6 @@
         .then(data => {
           this.finalTeams = data.finalRoundTeams;
         });
-      // // notice: for mock
-      // this.finalTeams = mockFinalRoundTeams;
     }
   };
 </script>

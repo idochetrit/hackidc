@@ -100,9 +100,6 @@
             .catch(() => {
               this.$router.push({name: "error-page"})
             });
-
-          // notice: for mock
-          console.log(finalScoreObject);
         }
       }
     }
