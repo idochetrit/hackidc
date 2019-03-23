@@ -1,48 +1,100 @@
 <template>
-    <div class="row challengeWrapper palantir">
+    <div class="row challengeWrapper palantir"
+         :class="{'challengeWrapperCollapsed': !expanded}">
         <div class="col-lg-8 col-md-12 challengeContent">
             <h2><strong>Palantir</strong></h2>
-            <p>In the past few years, the banking industry has been going through a digital transformation. As part
-                of a unique approach in the Israeli banking system, Mizrahi Tefahot believes in giving personal,
-                human service to each and every client, and that every person deserves a person in the bank.</p>
-            <p>The bank allows its clients to choose which services they prefer to use online, always giving
-                them an option to talk to a banker directly. The bank offers services to private and business
-                clients in a variety of fields: accounts, mortgages, investments, loans and pensions advisory, as
-                well as advanced digital tools and hybrid banking.</p>
-            <h4><strong>Challenge no. 1: Small Businesses</strong></h4>
-            <p>Small businesses are required to a variety of actions, similarly to large corporations, but with
-                much limited resources and abilities. The bank aspires to be an enabler in the business client&#39;s
-                activities – to take away some of the burden, and ease the handling of the ongoing operations,
-                along with growing the financial activities of the business with the bank.
-                <br>
-                Plan a technological platform (as flexible and open possible, remember there is no big internal
-                IT team in our example firm) that will bring value to the business client, from a managerial and
-                operational aspect (not necessarily financial), that will be flexible and able to evolve and
-                expand abilities down the road.</p>
+            <h4><strong>Fake News Challenge</strong></h4>
+            <p>A steady and insidious flow of untrue or misleading stories, posts and narratives enter our lives via
+                social media feeds and online news outlets. Accepting a world where evidence is no longer the foundation
+                would be detrimental to our society. It really is no less than a form of psychological warfare. Read
+                more on
+                <a target="_blank" href="https://en.wikipedia.org/wiki/Fake_news">wiki</a> in the EU’s “rise of
+                disinformation and fake news”
+                <a target="_blank"
+                   href="https://ec.europa.eu/jrc/communities/sites/jrccties/files/dewp_201802_digital_transformation_of_news_media_and_the_rise_of_fake_news_final_180418.pdf">working
+                    paper</a>.</p>
+            <p>Fake news has become a real epidemic. According to research
+                published in September 2017, it is estimated that there are 140 million bots on Facebook (5.5% of
+                accounts), 23 million bots on Twitter (8.5% of accounts) and 27 million bots on Instagram (8.2% of the
+                accounts)</p>
+            <p><strong>Identification</strong></p>
+            <p>Claire Wardle of <a target="_blank" href="https://en.wikipedia.org/wiki/First_Draft_News">First Draft News</a> (nine organizations brought together by the Google News Lab, including
+                Facebook and Twitter) identified seven types of fake news:</p>
+            <ol>
+                <li>satire/parody (no intention to cause harm but can potential fool)</li>
+                <li>false connection (headlines/visuals/captions don't support content)</li>
+                <li>misleading content (misleading use of information to frame an
+                    issue or an individual)</li>
+                <li>false context (genuine content shared with false contextual info)</li>
+                <li>impostor content (genuine sources impersonated with false sources)</li>
+                <li>manipulated content (genuine information or imagery manipulated to deceive, such as a "doctored"
+                    photo)</li>
+                <li>fabricated content (100% false content, designed to deceive/harm)</li>
+            </ol>
+            <p>The International Federation of Library Associations and Institutions (IFLA) published a summary in
+                diagram form (pictured at right) to assist people in recognizing fake news</p>
 
-            <h4><strong>Challenge no. 2: Private Customer Experience</strong></h4>
-            <p>The bank aspires to constantly upgrade its customer experience, while maintaining relevancy to
-                a wide range of clients, with varying technological abilities and financial know-how.
-                <br>
-                Plan technological and smart tools, that will enhance the connection between the personal
-                banker and the client, with emphasis on the communication between them, in a way that will
-                be entwined in the daily life of the clients.</p>
+            <p><strong>Distribution</strong></p>
+            <p>Fake news are unnaturally distributed by bot networks, fake profiles and trolls. Bots are weaponized software programs that use fake/stolen profiles to spread fake news.</p>
+            <p>The role that non-human agents play in the amplification of fake news is critical. By manipulating social signals and inflating metrics (likes, retweets, views, comments, up-votes) they’re influencing us to “join a winning trend” and “jump on the bandwagon”. Read more about the distribution path
+                <a target="_blank" href="http://www.cits.ucsb.edu/fake-news/spread">here</a> & <a target="_blank" href="https://www.sciencenews.org/article/twitter-bots-fake-news-2016-election">here</a>.</p>
+            <h4><strong>HackIDC Challenge</strong></h4>
+            <p><strong>Call For Action</strong></p>
+            <p><strong>If we could cripple fake news’ distribution channels, cutting the cord on them, we can win a major battle in this war. To do that – we must identify and report this activity in real time.</strong></p>
+            <p><strong>Scope</strong></p>
+            <ul>
+                <li>We’re focusing on the three most prominent social medias: Facebook, Twitter and Instagram.</li>
+                <li>Due to access limitations, we can control the “seed” of a fake news campaign. Let’s assume we have full access to a page/profile subject to a direct fake news assault (directly posting on its page, tagging it or tweeting while refencing it), such as an organization, movement or individual.</li>
+            </ul>
         </div>
         <div class="col-lg-4 col-md-12 companyLogoWrapper">
             <img src="../../static/palantir_logo.png" alt="" class="company-challenge-logo">
+        </div>
+        <div class="seeMoreDiv">
+            <button @click="expandChallengeWrapper"
+                    class="btn btn-small btn-info">{{ buttonText }}
+            </button>
         </div>
     </div>
 </template>
 
 <script>
-  export default {};
+  import challengesExpand from "../assets/challengesExpand";
+
+  export default {
+    mixins: [challengesExpand]
+  };
 </script>
 
 <style scoped>
     .challengeWrapper {
+        position: relative;
         margin: 2rem 0;
         box-shadow: inset 0 1px 10px 3px rgba(0, 0, 0, .1);
-        padding: 3rem 6rem;
+        padding: 4rem 6rem;
+        transition: all 1s 0s ease-in-out;
+        display: flex;
+        justify-content: center;
+        height: auto;
+    }
+
+    .challengeWrapperCollapsed {
+        height: 750px;
+        overflow: hidden;
+    }
+
+    .challengeWrapper .seeMoreDiv {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        bottom: 0;
+        height: 3rem;
+        padding: 2rem 0;
+        background-color: rgba(255, 255, 255, .8);
+        width: 100%;
+        z-index: 3;
     }
 
     .challengeContent {
@@ -55,7 +107,7 @@
     .companyLogoWrapper {
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: flex-start;
     }
 
     .palantir {
@@ -83,13 +135,17 @@
         }
 
         .challengeWrapper {
-            padding: 6rem 3rem;
+            padding: 2rem 0 4rem 0;
             display: flex;
             flex-direction: column-reverse;
         }
 
+        .challengeWrapper .seeMoreDiv {
+            margin: 0;
+        }
+
         .challengeContent {
-            padding-right: 1rem;
+            padding: 0 3rem;
         }
 
         img.company-challenge-logo {
@@ -109,13 +165,13 @@
         }
 
         .challengeWrapper {
-            padding: 6rem 1rem;
+            padding: 2rem 0 4rem 0;
             display: flex;
             flex-direction: column-reverse;
         }
 
         .challengeContent {
-            padding-right: 1rem;
+            padding: 0 2rem;
         }
     }
 </style>
