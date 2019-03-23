@@ -41,9 +41,9 @@
     },
     computed: {
       judge() {
-        // return this.$store.getters.getJudgeObject;
-        // notice: for mock
-        return mockJudge;
+        return this.$store.getters.getJudgeObject;
+        // // notice: for mock
+        // return mockJudge;
       },
       currentJudgingRound() {
         return this.$store.getters.getCurrentJudgingRound;
@@ -57,8 +57,8 @@
           this.finalTeams = data.finalRoundTeams;
         });
 
-      // notice: for mock
-      this.finalTeams = mockFinalRoundTeams;
+      // // notice: for mock
+      // this.finalTeams = mockFinalRoundTeams;
     }
   };
 </script>
