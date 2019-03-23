@@ -24,7 +24,7 @@ router.get("/self", isPermittedUser(LEVELS.JUDGE), async (req, res) => {
 
 router.get("/round", isPermittedUser(LEVELS.JUDGE), async (req, res) => {
   res.json({
-    round: process.env.ROUND_NUMBER || 0
+    round: Number(process.env.ROUND_NUMBER) || 0
   });
 });
 
