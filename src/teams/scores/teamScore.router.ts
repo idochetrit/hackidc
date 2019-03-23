@@ -2,7 +2,6 @@ import * as _ from "lodash";
 import { Router } from "express";
 import { isPermittedUser, LEVELS } from "../../concerns/auth.users";
 import { TeamScoreService } from "./teamScore.service";
-import { TeamService } from "../team.service";
 
 const router = new Router();
 
