@@ -26,7 +26,15 @@
     methods: {
       fetchCurrentJudgingRound() {
         // TODO: fetch judging round from DB and update state accordingly
-        this.$store.dispatch("setJudgingRound", 1);
+        axios.get("/api/judges/round")
+          .then(res => {
+            console.log(res);
+            res = res.data;
+          })
+          // .then(data => {
+          //   console.log(data);
+          //   this.$store.dispatch("setJudgingRound", data.round);
+          // })
       }
     },
     components: {

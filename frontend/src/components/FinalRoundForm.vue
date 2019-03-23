@@ -89,6 +89,7 @@
           const finalScoreObject = this.constructFinalScoreObject();
           //TODO: send final score object to DB and redirect to thank you page
 
+
           // notice: for mock
           console.log(finalScoreObject);
           this.redirectToThankYouJudge()

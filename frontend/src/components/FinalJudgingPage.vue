@@ -21,12 +21,13 @@
 </template>
 
 <script>
-  import FinalRoundTeamDisplay from "./FinalRoundTeamDisplay"
-  import FinalRoundForm from "./FinalRoundForm"
+  import FinalRoundTeamDisplay from "./FinalRoundTeamDisplay";
+  import FinalRoundForm from "./FinalRoundForm";
 
   // notice: for mock
+  import axios from "axios"
   import mockFinalRoundTeams from "../assets/mockFinalRoundTeams";
-  import mockJudge from "../assets/mockJudge"
+  import mockJudge from "../assets/mockJudge";
 
   export default {
     components: {
@@ -42,7 +43,7 @@
       judge() {
         // return this.$store.getters.getJudgeObject;
         // notice: for mock
-        return mockJudge
+        return mockJudge;
       },
       currentJudgingRound() {
         return this.$store.getters.getCurrentJudgingRound;
@@ -50,6 +51,11 @@
     },
     beforeMount() {
       // TODO: fetch for the teams qualified to the final round and update finalTeams array
+      return axios.get("/api/judges/self/teams/final", { withCredentials: true })
+        .then(res => res.data)
+        .then(data => {
+          this.finalTeams = data.finalRoundTeams;
+        });
 
       // notice: for mock
       this.finalTeams = mockFinalRoundTeams;

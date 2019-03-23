@@ -221,9 +221,9 @@ export default new Router({
         title: "HackIDC 2019 | Welcome, Judge!"
       },
       component: JudgingLandingPage,
-      beforeEnter: (to, from, next) => {
-        store.getters.isAuthenticated ? next() : next({ name: "home" });
-      }
+      // beforeEnter: (to, from, next) => {
+      //   store.getters.isAuthenticated ? next() : next({ name: "home" });
+      // }
     },
     {
       path: "/judging/:challengeName",
@@ -232,14 +232,14 @@ export default new Router({
         title: "HackIDC 2019 | Team Scoring"
       },
       component: JudgingPageWrapper,
-      beforeEnter: (to, from, next) => {
-        const challenges = ["general", "elbit", "palantir", "mizrahi"];
-        if (challenges.includes(to.params.challengeName) && store.getters.isAuthenticated) {
-          next();
-        } else {
-          next({ name: "home" });
-        }
-      }
+      // beforeEnter: (to, from, next) => {
+      //   const challenges = ["general", "elbit", "palantir", "mizrahi"];
+      //   if (challenges.includes(to.params.challengeName) && store.getters.isAuthenticated) {
+      //     next();
+      //   } else {
+      //     next({ name: "home" });
+      //   }
+      // }
     },
     {
       path: "/judging/general/final",
@@ -248,13 +248,13 @@ export default new Router({
         title: "HackIDC 2019 | Final"
       },
       component: FinalJudgingPage,
-      beforeEnter(to, from, next) {
-        if (store.getters.isAuthenticated && store.getters.getCurrentJudgingRound === 2) {
-          next();
-        } else {
-          next({ name: "home" });
-        }
-      }
+      // beforeEnter(to, from, next) {
+      //   if (store.getters.isAuthenticated && store.getters.getCurrentJudgingRound === 2) {
+      //     next();
+      //   } else {
+      //     next({ name: "home" });
+      //   }
+      // }
     },
     {
       path: "/judging/final/thank-you",
@@ -263,9 +263,9 @@ export default new Router({
         title: "HackIDC 2019 | Thank You!"
       },
       component: ThankYouJudge,
-      beforeEnter(to, from, next) {
-        store.getters.isAuthenticated ? next() : next({ name: "home" });
-      }
+      // beforeEnter(to, from, next) {
+      //   store.getters.isAuthenticated ? next() : next({ name: "home" });
+      // }
     },
     // public routes
     {
