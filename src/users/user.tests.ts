@@ -5,8 +5,9 @@ import { academicInstitutesMap } from "./user.constants";
 import { TeamService } from "../teams/team.service";
 import { UserService } from "./user.service";
 import { sequelize } from "../db/sequelize";
-import { JudgeService } from "./judges/judge.service";
 import { encryptPassword } from "../concerns/users_utils";
+import { Team } from "../teams/team.model";
+import { TeamScoreService } from "../teams/scores/teamScore.service";
 
 export namespace UserTests {
   const fieldOfStudies = [
@@ -114,5 +115,17 @@ export namespace UserTests {
       role,
       studyYear
     };
+  }
+
+  // ------
+  export async function createTestTeamScores() {
+    // fetch all possible teams
+    const judges = [];
+    const teams: Team[] = await Team.findAll();
+    for (const team of teams) {
+      const { codeNumber } = team;
+      const challenges = [1, 2, 3, 4];
+      // TeamScoreService.create;
+    }
   }
 }

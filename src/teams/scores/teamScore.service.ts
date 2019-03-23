@@ -1,7 +1,10 @@
 import { ScoreService } from "../../concerns/scores/scoreService";
-import { TeamScore } from "./teamscore.model";
 import { Challenge } from "../../challenges/challenge.model";
 import * as _ from "lodash";
+import { Team } from "../team.model";
+import { CHALLENGES } from "../../challenges/challenge.model";
+import { TeamScore } from "./teamscore.model";
+import { TeamService } from "../team.service";
 
 const stagesSteps = {
   intial: "final",
@@ -101,6 +104,19 @@ export class TeamScoreService {
       .groupBy("challenge.name")
       .mapValues(teamScores => _.map(teamScores, "teamCodeNumber"))
       .value();
+  }
+
+  public static async getFinalRoundTeams(judgeId: number): Promise<Team[]> {
+    const { id: challengeId } = await Challenge.getByName(CHALLENGES.GENERAL);
+    const teamScores: TeamScore[] = await TeamScore.findAll({
+      where: {
+        judgeId,
+        challengeId
+      }
+    });
+    const teamCodeNumbers = await teamScores.map(({ teamCodeNumber }) => teamCodeNumber);
+    const teams: Team[] = await TeamService.findTeamsByCode(teamCodeNumbers);
+    return teams;
   }
 
   private static async findTeamScoreBy({

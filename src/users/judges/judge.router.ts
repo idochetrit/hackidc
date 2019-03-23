@@ -5,6 +5,7 @@ import { UserService } from "../user.service";
 import { JudgeService } from "./judge.service";
 import { handleError } from "../../routers.helper";
 import { TeamScoreService } from "../../teams/scores/teamScore.service";
+import { TeamService } from "../../teams/team.service";
 
 const router = new Router();
 
@@ -21,6 +22,12 @@ router.get("/self", isPermittedUser(LEVELS.JUDGE), async (req, res) => {
   }
 });
 
+router.get("/round", isPermittedUser(LEVELS.JUDGE), async (req, res) => {
+  res.json({
+    round: process.env.ROUND_NUMBER || 0
+  });
+});
+
 router.get("/self/teams", isPermittedUser(LEVELS.JUDGE), async (req, res) => {
   try {
     const userId: number = Number(_.get(req, "user.id")) || Number(req.headers.userid);
@@ -31,6 +38,23 @@ router.get("/self/teams", isPermittedUser(LEVELS.JUDGE), async (req, res) => {
     res.json({
       user: sanitizedUser,
       teamsByChallenge
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+router.get("/self/teams/final", isPermittedUser(LEVELS.JUDGE), async (req, res) => {
+  try {
+    const userId: number = Number(_.get(req, "user.id")) || Number(req.headers.userid);
+    const user = await UserService.findById(userId, { includeDeps: true });
+
+    const sanitizedUser = await JudgeService.sanitize(user);
+    const teams = await TeamScoreService.getFinalRoundTeams(userId);
+    const sanitizedTeams = Promise.all(teams.map(team => TeamService.sanitize(team)));
+    res.json({
+      user: sanitizedUser,
+      finalRoundTeams: sanitizedTeams
     });
   } catch (err) {
     console.log(err);

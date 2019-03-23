@@ -35,4 +35,14 @@ router.get("/sampleAdmins", isSuperAdmin, async (req, res) => {
   });
 });
 
+router.get("/sampleTeamScores", isSuperAdmin, async (req, res) => {
+  const { count } = req.query;
+  // await UserTests.createTestTeamScores(type, count);
+
+  console.log("Done");
+  res.json({
+    usersCreated: count
+  });
+});
+
 export default router;

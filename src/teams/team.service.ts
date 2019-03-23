@@ -73,6 +73,9 @@ export class TeamService {
     }
     return team;
   }
+  public static async findTeamsByCode(codeNumbers: number[]): Promise<Team[]> {
+    return Team.findAll({ where: { codeNumber: { $in: codeNumbers } } });
+  }
 
   public static async getAllChallenges(): Promise<any[]> {
     const challenges: Challenge[] = await Challenge.findAll({

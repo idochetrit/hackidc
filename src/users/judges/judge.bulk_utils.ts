@@ -19,6 +19,7 @@ async function createInitalJudges(count) {
   for (let i = 100; i <= count + 100; i++) {
     const profile = {
       email: `user${i}`,
+      name: `user${i}`,
       password: _.sample(PASSWRODS)
     };
     profiles.push(profile);
@@ -41,6 +42,7 @@ async function createFinalJudges(override_judges) {
   const judgeCreationPromises = override_judges.map(judgeEmail => {
     const profile = {
       email: judgeEmail,
+      name: judgeEmail,
       password: _.sample(PASSWRODS)
     };
     profiles.push(profile);
