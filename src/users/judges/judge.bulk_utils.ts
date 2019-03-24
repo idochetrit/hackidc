@@ -42,7 +42,7 @@ async function createFinalJudges(override_judges) {
   const judgeCreationPromises = override_judges.map(judgeEmail => {
     const profile = {
       email: judgeEmail,
-      name: judgeEmail,
+      name: _.startCase(judgeEmail),
       password: _.sample(PASSWRODS)
     };
     profiles.push(profile);

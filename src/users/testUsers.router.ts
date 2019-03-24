@@ -4,6 +4,7 @@ import { UserTests } from "./user.tests";
 import { JudgeService } from "./judges/judge.service";
 import { isSuperAdmin } from "../concerns/auth.users";
 import { UserService } from "./user.service";
+import { handleError } from "../routers.helper";
 
 const router = new Router();
 
@@ -35,14 +36,18 @@ router.get("/sampleAdmins", isSuperAdmin, async (req, res) => {
   });
 });
 
-router.get("/sampleTeamScores", isSuperAdmin, async (req, res) => {
-  const { count } = req.query;
-  // await UserTests.createTestTeamScores(type, count);
+router.post("/sampleTeamScores", isSuperAdmin, async (req, res) => {
+  try {
+    await UserTests.createTestTeamScores();
 
-  console.log("Done");
-  res.json({
-    usersCreated: count
-  });
+    console.log("Done");
+    res.json({
+      created: true
+    });
+  } catch (err) {
+    console.log("error occured", err);
+    handleError(err, res);
+  }
 });
 
 export default router;

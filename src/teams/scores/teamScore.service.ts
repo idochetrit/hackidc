@@ -1,21 +1,25 @@
-import { ScoreService } from "../../concerns/scores/scoreService";
-import { Challenge } from "../../challenges/challenge.model";
 import * as _ from "lodash";
-import { Team } from "../team.model";
+import * as Sentry from "@sentry/node";
+import { Challenge } from "../../challenges/challenge.model";
 import { CHALLENGES } from "../../challenges/challenge.model";
 import { TeamScore } from "./teamscore.model";
-import { TeamService } from "../team.service";
 
-const stagesSteps = {
-  intial: "final",
-  final: "done"
+import { User } from "../../users/user.model";
+import { FINAL_JUDGES, JudgeService } from "../../users/judges/judge.service";
+import { FinalStageScore } from "../../concerns/scores/finalStageScore";
+import { InitialStageScore } from "../../concerns/scores/intialStageScore";
+import { UserService } from "../../users/user.service";
+
+export const ROUNDS = {
+  INITIAL: "initial",
+  FINAL: "final"
 };
 
 const SANITIZED_FIELDS = ["judeId", "teamId", "challengeId", "challengeName"];
 
 /**
  * @param {any} - either finalScore or
- *      {awesomenessScore, functionalityScore, creativityScore, usabilityScore}
+ *  {awesomenessScore, functionalityScore, creativityScore, usabilityScore}
  * @returns {void} succeeded updating the correct record with the appropriate data
  */
 export class TeamScoreService {
@@ -32,54 +36,45 @@ export class TeamScoreService {
   }) {
     // update score if not locked
     const { id: challengeId } = await this.findChallengeByName(challengeName);
-    const teamScore = await this.findTeamScoreBy({
-      teamCodeNumber,
-      judgeId,
-      challengeId
-    });
-    const scoreService = new ScoreService(teamScore);
-    await scoreService.score(scoreData);
+    if (!JudgeService.isFinalRoundJudge(judgeId)) {
+      const teamScore = await this.findTeamScoreBy({
+        teamCodeNumber,
+        judgeId,
+        challengeId
+      });
+      const scoreService = new InitialStageScore(teamScore);
+      await scoreService.score(scoreData);
+    } else {
+      const judge = await UserService.findById(judgeId);
+      const scoreService = new FinalStageScore(judge);
+      await scoreService.score(scoreData);
+    }
   }
 
-  public static async lockTeamScores() {
-    // bulk update to lock teams and increase the level.
-    // update all the records (include challenges) to level -> final -> done
-    const teamIdsToUpdate = await TeamScore.findAll({
-      where: {
-        locked: false
-      },
-      attributes: ["id"]
-    });
-    const updates = ["intial", "final"].map(level => {
-      return TeamScore.update(
-        { level: stagesSteps[level] },
+  public static async lockTeamScoreIds(teamScoresIds: number[]) {
+    try {
+      await TeamScore.update(
+        { locked: true },
         {
           where: {
-            id: { $in: teamIdsToUpdate },
-            level
+            id: { $in: teamScoresIds }
           }
         }
       );
-    });
-    await Promise.all(updates);
+    } catch (err) {
+      Sentry.captureMessage(`Failed to update teams scores: ${teamScoresIds} with: ${err}`);
+      throw err;
+    }
   }
 
-  public static async unlockTeamScores() {
-    // bulk update to unlock all the teams and increase the level.
-
-    return TeamScore.update(
-      { locked: false },
-      {
-        where: {
-          locked: true
-        }
-      }
-    );
-  }
-
-  public async createScoreRecord({ teamCodeNumber, challengeId, judgeId }) {
+  public static async createScoreRecord({
+    teamCodeNumber,
+    challengeId,
+    judgeId,
+    level = "initial"
+  }) {
     await TeamScore.create({
-      level: "initial",
+      level: level,
       locked: false,
       teamCodeNumber,
       challengeId,
@@ -95,6 +90,7 @@ export class TeamScoreService {
   public static async getAllJudgeTeamIdsByChallenge(judgeId: number) {
     const teamScores: TeamScore[] = await TeamScore.findAll({
       where: {
+        locked: false,
         judgeId
       },
       include: [Challenge]
@@ -106,20 +102,44 @@ export class TeamScoreService {
       .value();
   }
 
-  public static async getFinalRoundTeams(judgeId: number): Promise<Team[]> {
+  public static async getFinalRoundTeams(judgeId: number): Promise<TeamScore[]> {
     const { id: challengeId } = await Challenge.getByName(CHALLENGES.GENERAL);
     const teamScores: TeamScore[] = await TeamScore.findAll({
       where: {
+        locked: false,
         judgeId,
         challengeId
       }
     });
-    const teamCodeNumbers = await teamScores.map(({ teamCodeNumber }) => teamCodeNumber);
-    const teams: Team[] = await TeamService.findTeamsByCode(teamCodeNumbers);
-    return teams;
+
+    return teamScores;
   }
 
-  private static async findTeamScoreBy({
+  public static async qualifyTeams(teamCodeNumbers: number[]) {
+    const { id: challengeId } = await Challenge.getByName(CHALLENGES.GENERAL);
+    const finalJudges: User[] = await User.findAll({
+      where: {
+        email: { $in: FINAL_JUDGES }
+      },
+      attributes: ["id"]
+    });
+    const finalJudgesIds: number[] = finalJudges.map(({ id }) => id);
+
+    let teamsCreatedCount = 0;
+    // iterate through
+    await Promise.all(
+      finalJudgesIds.map(async judgeId => {
+        const prms = teamCodeNumbers.map(async teamCodeNumber => {
+          await this.createScoreRecord({ teamCodeNumber, judgeId, challengeId, level: "final" });
+          teamsCreatedCount++;
+        });
+        await Promise.all(prms);
+      })
+    );
+    return teamsCreatedCount;
+  }
+
+  public static async findTeamScoreBy({
     teamCodeNumber,
     judgeId,
     challengeId

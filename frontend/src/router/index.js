@@ -231,7 +231,7 @@ export default new Router({
       meta: {
         title: "HackIDC 2019 | Team Scoring"
       },
-      component: JudgingPageWrapper
+      component: JudgingPageWrapper,
       beforeEnter: (to, from, next) => {
         const challenges = ["general", "elbit", "palantir", "mizrahi"];
         if (challenges.includes(to.params.challengeName) && store.getters.isAuthenticated) {
@@ -247,7 +247,7 @@ export default new Router({
       meta: {
         title: "HackIDC 2019 | Final"
       },
-      component: FinalJudgingPage
+      component: FinalJudgingPage,
       beforeEnter(to, from, next) {
         if (store.getters.isAuthenticated && store.getters.getCurrentJudgingRound === 2) {
           next();
@@ -262,7 +262,7 @@ export default new Router({
       meta: {
         title: "HackIDC 2019 | Thank You!"
       },
-      component: ThankYouJudge
+      component: ThankYouJudge,
       beforeEnter(to, from, next) {
         store.getters.isAuthenticated ? next() : next({ name: "home" });
       }

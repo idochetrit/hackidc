@@ -4,10 +4,11 @@ import { User } from "../user.model";
 import { Sequelize } from "sequelize-typescript";
 import { JUDGE_SANITIZED_FIELDS } from "../user.constants";
 import { encryptPassword } from "../../concerns/users_utils";
+import { UserService } from "../user.service";
 
 export const FINAL_JUDGES = [
   "uriel_reichman",
-  "arierl_shamir",
+  "ariel_shamir",
   "moran_nir",
   "lior_noy",
   "iddo_gino",
@@ -35,6 +36,29 @@ export class JudgeService {
       .catch((err: Error) => {
         console.log(err, defaultAttrs);
       });
+  }
+
+  public static async getJudgeByName(email: string) {
+    try {
+      return User.findOne({
+        where: {
+          email
+        }
+      });
+    } catch (error) {
+      console.log("Failed to retrieve judge: ", error);
+      throw error;
+    }
+  }
+
+  public static async isFinalRoundJudge(judgeId: number): Promise<boolean> {
+    try {
+      const { email } = await UserService.findById(judgeId);
+      return _.includes(FINAL_JUDGES, email);
+    } catch (err) {
+      console.log("Failed to fetch user (Judge)", err);
+      throw err;
+    }
   }
 
   public static async sanitize(

@@ -50,7 +50,10 @@ router.get("/self/teams/final", isPermittedUser(LEVELS.JUDGE), async (req, res) 
     const user = await UserService.findById(userId, { includeDeps: true });
 
     const sanitizedUser = await JudgeService.sanitize(user);
-    const teams = await TeamScoreService.getFinalRoundTeams(userId);
+    const teamScores = await TeamScoreService.getFinalRoundTeams(userId);
+
+    const teamCodeNumbers = await teamScores.map(({ teamCodeNumber }) => teamCodeNumber);
+    const teams = await TeamService.findTeamsByCode(teamCodeNumbers);
     const sanitizedTeams = await Promise.all(teams.map(team => TeamService.sanitize(team)));
     res.json({
       user: sanitizedUser,

@@ -8,7 +8,7 @@ export class InitialStageScore {
     this._model = model;
   }
 
-  score({
+  public async score({
     awesomeness,
     functionality,
     creativity,
@@ -20,15 +20,25 @@ export class InitialStageScore {
     usability: number;
   }) {
     // Scoring accroding to finalScore property
+    if (this.isLocked()) {
+      throw new Error(`scoring is locked for team/s`);
+    }
     _.assign(this._model, {
       awesomenessScore: awesomeness,
       functionalityScore: functionality,
       creativityScore: creativity,
       usabilityScore: usability
     });
+    this.lock();
+
+    await this._model.save();
   }
 
-  lock() {
+  private isLocked() {
+    return this._model.locked;
+  }
+
+  private lock() {
     this._model.locked = true;
   }
 }

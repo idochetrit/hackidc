@@ -7,7 +7,9 @@ import { UserService } from "./user.service";
 import { sequelize } from "../db/sequelize";
 import { encryptPassword } from "../concerns/users_utils";
 import { Team } from "../teams/team.model";
+import { FINAL_JUDGES } from "./judges/judge.service";
 import { TeamScoreService } from "../teams/scores/teamScore.service";
+import { Sequelize } from "sequelize-typescript";
 
 export namespace UserTests {
   const fieldOfStudies = [
@@ -117,15 +119,35 @@ export namespace UserTests {
     };
   }
 
-  // ------
+  // ------ Final Round ------
   export async function createTestTeamScores() {
-    // fetch all possible teams
-    const judges = [];
+    const challenges = [2, 3, 4];
+    const generalChallengeId = 1;
+
     const teams: Team[] = await Team.findAll();
+    const sampleJudges: User[] = await User.findAll({
+      where: Sequelize.and({ roleId: 3 }, { email: { $notIn: FINAL_JUDGES } }), // judge
+      order: [Sequelize.fn("random")],
+      limit: 20
+    });
+
+    let promises = [];
     for (const team of teams) {
-      const { codeNumber } = team;
-      const challenges = [1, 2, 3, 4];
-      // TeamScoreService.create;
+      const { codeNumber: teamCodeNumber } = team;
+      const challengeId = _.sample(challenges);
+      const { id: judgeId } = _.sample(sampleJudges);
+      //cerate one for general and one for challenge
+
+      promises.push(
+        TeamScoreService.createScoreRecord({
+          teamCodeNumber,
+          challengeId: generalChallengeId,
+          judgeId
+        }),
+        TeamScoreService.createScoreRecord({ teamCodeNumber, challengeId, judgeId })
+      );
     }
+
+    await Promise.all(promises);
   }
 }
