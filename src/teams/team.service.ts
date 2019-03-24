@@ -26,7 +26,9 @@ export class TeamService {
   public static async buildTeam({ builder, teamParams }: { builder: User; teamParams: any }) {
     try {
       const { challengeName } = teamParams;
-      const { id: defaultChallengeId } = await Challenge.getByName(challengeName || "General");
+      const { id: defaultChallengeId } = await Challenge.getByName(
+        challengeName || CHALLENGES.GENERAL
+      );
       const newTeam = _.extend(
         {
           builderId: builder.id,
