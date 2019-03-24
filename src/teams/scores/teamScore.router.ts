@@ -24,14 +24,6 @@ router.post("/", isPermittedUser(LEVELS.JUDGE), async (req, res) => {
   }
 });
 
-router.get("/lockAndAdvanceTeams", isPermittedUser(LEVELS.ADMIN), async (req, res) => {
-  await TeamScoreService.lockTeamScores();
-});
-
-router.get("/unlockAndAdvanceTeams", isPermittedUser(LEVELS.ADMIN), async (req, res) => {
-  await TeamScoreService.unlockTeamScores();
-});
-
 router.post("/qualify", isSuperAdmin, async (req, res) => {
   try {
     const { teamCodeNumbers, count = 7 } = req.body;
