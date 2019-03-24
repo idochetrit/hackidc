@@ -69,6 +69,11 @@
             title: "General Manager of The Junction (by F2 Capital)",
             thumbnail: require("../../static/tal_zackon.jpeg")
           },
+          {
+            name: "Gil Golan",
+            title: "Executive Director, Technical Center Israel - General Motors",
+            thumbnail: require("../../static/gil_golan.jpeg")
+          },
         ]
       };
     }
