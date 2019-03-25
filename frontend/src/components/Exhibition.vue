@@ -33,6 +33,11 @@
                     </div>
                 </div>
             </div>
+            <div class="row videoWrapper">
+                <iframe src="https://www.youtube.com/embed/EKYYwMKidgc?autoplay=1"
+                        frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+            </div>
             <ExhibitionLogos />
             <div class="container">
                 <hr>
@@ -114,6 +119,17 @@
         padding: 1rem 3rem;
     }
 
+    .videoWrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .videoWrapper iframe {
+        width: 50%;
+        height: 500px;
+    }
+
     .exhibitionLogo {
         width: 35%;
         margin-bottom: 3rem;
@@ -172,6 +188,11 @@
 
         h3 {
             font-size: 1.5rem;
+        }
+
+        .videoWrapper iframe {
+            width: 80%;
+            height: 315px;
         }
     }
 
