@@ -5,7 +5,7 @@
             <div v-for="(challenge, i) in challenges" :key="i"
                  class="form-check form-check-inline">
                 <input v-model="challengePick" class="form-check-input" type="radio" name="challengePick"
-                       :id="challenge.name" :value="challenge.value">
+                       :id="challenge.name" :value="challenge.value" >
                 <label class="form-check-label" :for="challenge.name">{{ challenge.name }}</label>
             </div>
         </div>
@@ -20,11 +20,15 @@
         <div class="alert-inline alert alert-success"
              v-if="submitted"
              :class="{'show': submitted, 'hide': !submitted}">Got it! Thank you.</div>
+        <div class="alert-inline alert alert-danger"
+             v-if="failedToUpdate"
+             :class="{'show': failedToUpdate, 'hide': !failedToUpdate}">Oops, Challenge picking is closed.</div>
         <hr>
     </div>
 </template>
 
 <script>
+  import axios from "axios";
   export default {
     props: {
       team: {
@@ -35,6 +39,7 @@
     data() {
       return {
         submitted: false,
+        failedToUpdate: false,
         challenges: [
           { name: "None", value: null },
           { name: "Elbit", value: "elbit" },
@@ -57,14 +62,32 @@
           setTimeout(() => {
             this.submitted = false;
           }, 2000)
-        }, 500)
+        }, 500);
+      },
+      showError() {
+        setTimeout(() => {
+          this.failedToUpdate = true;
+          setTimeout(() => {
+            this.failedToUpdate = false;
+          }, 2000)
+        }, 500);
       },
       sendChallengePick() {
-        this.showConfirmation();
         const challengePickObject = this.constructChallengePickObjcet();
-        // TODO: connect to challenge update API
-        console.log(challengePickObject);
+        return axios.put("/api/teams/self/challenge", challengePickObject, { withCredentials: true })
+          .then(res => {
+            this.$store.dispatch("updateUser", res.data);
+            this.showConfirmation();
+          })
+          .catch(err => {
+            console.log(err);
+            this.challengePick = this.team.challengeName;
+            this.showError();
+          });
       }
+    },
+    mounted() {
+      this.challengePick = this.team.challengeName;
     }
   };
 </script>

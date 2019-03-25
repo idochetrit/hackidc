@@ -43,7 +43,7 @@
                     <small class="text-muted">* At least 2 representative from the team will attend the event</small>
                     <hr/>
                 </div>
-                <TeamChallengePicker v-if="user.role === 'TeamBuilder'" :team="team" />
+                <TeamChallengePicker v-if="user.role === 'TeamBuilder' && user.registerStatus === 'approved'" :team="team" />
                 <h3>Description</h3>
                 <p class="description">{{ team.description }}</p>
                 <div class="section" v-if="this.$store.getters.isAuthenticated">
