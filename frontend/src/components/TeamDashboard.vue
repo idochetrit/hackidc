@@ -20,7 +20,7 @@
             </div>
             <hr>
             <div class="dashboard-body">
-              <div v-if="user.role === 'TeamBuilder'" class="form-group rsvpdiv" >
+              <div v-if="user.role === 'TeamBuilder' && user.registerStatus === 'approved'" class="form-group rsvpdiv" >
                 <h3>Please RSVP below</h3>
                 <button @click="update_RSVP" id="rsvp" :disabled="user.team.isRSVP" 
                     :class="{'btn-success': user.team.isRSVP, 'btn-warning': !user.team.isRSVP}" class="btn btn-lg">
