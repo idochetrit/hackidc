@@ -1,8 +1,5 @@
 import * as _ from "lodash";
-import { Role } from "../roles/role.model";
-import { User } from "../users/user.model";
 import { UserService } from "../users/user.service";
-import userRole from "../users/user.role";
 
 export function ensureAuthenticated(req, res, next) {
   if (process.env.NODE_ENV !== "production" || req.isAuthenticated()) {
@@ -41,7 +38,7 @@ export function isPermittedUser(level) {
 export function isSuperAdmin(req, res, next) {
   if (
     process.env.NODE_ENV !== "production" ||
-    req.headers["Authorization"] === process.env.defaultAdminToken
+    req.headers["Authorization"] === process.env.ADMIN_TOKEN
   ) {
     return next();
   }
