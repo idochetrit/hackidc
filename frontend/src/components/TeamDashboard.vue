@@ -25,7 +25,7 @@
             </div>
             <hr>
             <div class="dashboard-body">
-                <div v-if="user.role === 'TeamBuilder'" class="form-group rsvpdiv">
+                <div v-if="user.role === 'TeamBuilder' && user.registerStatus === 'approved'" class="form-group rsvpdiv">
                     <h3>Please RSVP below</h3>
                     <button @click="update_RSVP" id="rsvp" :disabled="user.team.isRSVP"
                             :class="{'btn-success': user.team.isRSVP, 'btn-warning': !user.team.isRSVP}"
@@ -43,7 +43,7 @@
                     <small class="text-muted">* At least 2 representative from the team will attend the event</small>
                     <hr/>
                 </div>
-                <TeamChallengePicker v-if="user.role === 'TeamBuilder'" :team="team" />
+                <TeamChallengePicker v-if="user.role === 'TeamBuilder' && user.registerStatus === 'approved'" :team="team" />
                 <h3>Description</h3>
                 <p class="description">{{ team.description }}</p>
                 <div class="section" v-if="this.$store.getters.isAuthenticated">
