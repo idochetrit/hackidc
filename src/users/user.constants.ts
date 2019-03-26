@@ -38,6 +38,7 @@ export const SANITIZED_PUBLIC_FIELDS = [
   "academicInstitute",
   "linkedInProfileUrl",
   "role",
+  "canViewCV",
   "team"
 ];
 

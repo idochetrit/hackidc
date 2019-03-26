@@ -46,7 +46,7 @@ export default {
     };
   },
   computed: {
-    code() { return this.$route.params.codeNumber; },
+    code() { return this.$route.params.codeNumber; }
   },
   beforeRouteEnter (to, from, next) {
     store.dispatch("loadingStart");
