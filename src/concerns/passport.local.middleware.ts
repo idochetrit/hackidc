@@ -26,7 +26,7 @@ passport.use(
         if (!user) {
           return done(null, false);
         }
-        if (!UserService.verifyPassword(user, password)) {
+        if (!(await UserService.verifyPassword(user, password))) {
           return done(null, false);
         }
         return done(null, user);

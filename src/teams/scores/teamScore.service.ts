@@ -9,6 +9,7 @@ import { FINAL_JUDGES, JudgeService } from "../../users/judges/judge.service";
 import { FinalStageScore } from "../../concerns/scores/finalStageScore";
 import { InitialStageScore } from "../../concerns/scores/intialStageScore";
 import { UserService } from "../../users/user.service";
+import { Sequelize } from "sequelize-typescript";
 
 export const ROUNDS = {
   INITIAL: "initial",
@@ -36,7 +37,7 @@ export class TeamScoreService {
   }) {
     // update score if not locked
     const { id: challengeId } = await this.findChallengeByName(challengeName);
-    if (!JudgeService.isFinalRoundJudge(judgeId)) {
+    if (!(await JudgeService.isFinalRoundJudge(judgeId))) {
       const teamScore = await this.findTeamScoreBy({
         teamCodeNumber,
         judgeId,
@@ -89,10 +90,17 @@ export class TeamScoreService {
 
   public static async getAllJudgeTeamIdsByChallenge(judgeId: number) {
     const teamScores: TeamScore[] = await TeamScore.findAll({
-      where: {
-        locked: false,
-        judgeId
-      },
+      where: Sequelize.and(
+        Sequelize.or(
+          {
+            locked: null
+          },
+          { locked: false }
+        ),
+        {
+          judgeId
+        }
+      ),
       include: [Challenge]
     });
 
@@ -105,11 +113,18 @@ export class TeamScoreService {
   public static async getFinalRoundTeams(judgeId: number): Promise<TeamScore[]> {
     const { id: challengeId } = await Challenge.getByName(CHALLENGES.GENERAL);
     const teamScores: TeamScore[] = await TeamScore.findAll({
-      where: {
-        locked: false,
-        judgeId,
-        challengeId
-      }
+      where: Sequelize.and(
+        Sequelize.or(
+          {
+            locked: null
+          },
+          { locked: false }
+        ),
+        {
+          judgeId,
+          challengeId
+        }
+      )
     });
 
     return teamScores;

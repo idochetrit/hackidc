@@ -202,7 +202,11 @@ export class UserService {
       const isMatch = await comparePassword(password, user.password);
 
       // update AuthToken
-      if (isMatch) await user.update({ authToken: uuidv4() });
+      if (isMatch) {
+        await user.update({ authToken: uuidv4() });
+      } else {
+        await user.update({ authToken: null });
+      }
       return isMatch;
     } catch (err) {
       console.log(`failed to log in judge ${user.email}`);
