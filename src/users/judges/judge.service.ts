@@ -15,7 +15,8 @@ export const FINAL_JUDGES = [
   "roei_deutsch",
   "yossi_maaravi",
   "son_preminger",
-  "tal_zackon"
+  "tal_zackon",
+  "revital_hollander"
 ];
 export class JudgeService {
   public static async createLocalAuthUser(profile: any) {
