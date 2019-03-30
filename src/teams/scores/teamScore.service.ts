@@ -10,6 +10,7 @@ import { FinalStageScore } from "../../concerns/scores/finalStageScore";
 import { InitialStageScore } from "../../concerns/scores/intialStageScore";
 import { UserService } from "../../users/user.service";
 import { Sequelize } from "sequelize-typescript";
+import { TeamService } from "../team.service";
 
 export const ROUNDS = {
   INITIAL: "initial",
@@ -152,6 +153,15 @@ export class TeamScoreService {
       })
     );
     return teamsCreatedCount;
+  }
+
+  public static async deleteByTeamId(teamId) {
+    const { codeNumber: teamCodeNumber } = await TeamService.findOneById(teamId);
+    await TeamScore.destroy({
+      where: {
+        teamCodeNumber
+      }
+    });
   }
 
   public static async findTeamScoreBy({

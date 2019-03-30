@@ -4,6 +4,7 @@ import { isPermittedUser, LEVELS, isSuperAdmin } from "../../concerns/auth.users
 import { TeamScoreService } from "./teamScore.service";
 import { handleError } from "../../routers.helper";
 import { JudgeService, FINAL_JUDGES } from "../../users/judges/judge.service";
+import { Challenge } from "../../../dist/challenges/challenge.model";
 
 const router = new Router();
 
@@ -41,6 +42,26 @@ router.post("/qualify", isSuperAdmin, async (req, res) => {
       teamScoresCreatedForTeams: _.map(finalRoundTeams, "id"),
       teamScoresCount
     });
+  } catch (error) {
+    handleError(error, res);
+  }
+});
+
+router.post("/attachJudge", async (req, res) => {
+  try {
+    const { teamCodeNumber, challengeName, judgeId } = req.body;
+    const { id: challengeId } = await Challenge.getByName(challengeName);
+    await TeamScoreService.createScoreRecord({ teamCodeNumber, challengeId, judgeId });
+  } catch (error) {
+    handleError(error, res);
+  }
+});
+
+router.post("/retireTeam", async (req, res) => {
+  try {
+    const { teamCodeNumber } = req.body;
+
+    await TeamScoreService.createScoreRecord({ teamCodeNumber, challengeId, judgeId });
   } catch (error) {
     handleError(error, res);
   }

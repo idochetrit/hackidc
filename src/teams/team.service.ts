@@ -75,6 +75,15 @@ export class TeamService {
     }
     return team;
   }
+
+  public static async findOneById(id: number): Promise<Team> {
+    const team = await Team.findOne({ where: { id } });
+    if (!team) {
+      throw new Error(`Team with id: ${id}, not found.`);
+    }
+    return team;
+  }
+
   public static async findTeamsByCode(codeNumbers: number[]): Promise<Team[]> {
     return Team.findAll({ where: { codeNumber: { $in: codeNumbers } } });
   }
@@ -140,7 +149,7 @@ export class TeamService {
 
   public static async deleteTeam(id: number) {
     const team = await Team.findById(id);
-    await team.updateAttributes({ isDeleted: true });
+    await team.update({ isDeleted: true });
   }
 
   public static async updateRSVP(userId: number, team: Team, rsvpFlag: boolean, field: string) {

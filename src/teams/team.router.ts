@@ -5,7 +5,8 @@ import { TeamService, PATCH_SANITIZED_FIELDS } from "./team.service";
 import { Team } from "./team.model";
 import { UserService } from "../users/user.service";
 import { zipTeamCvs } from "../concerns/users_utils";
-import { ensureAuthenticated } from "../concerns/auth.users";
+import { ensureAuthenticated, isSuperAdmin } from "../concerns/auth.users";
+import { TeamScoreService } from "./scores/teamScore.service";
 
 const router = new Router();
 
@@ -121,8 +122,10 @@ router.post("/self/prehackRsvp", ensureAuthenticated, async (req, res) => {
   });
 });
 
-router.delete("/:id", async (req, res) => {
-  await TeamService.deleteTeam(req.params.id);
+router.delete("/:id", isSuperAdmin, async (req, res) => {
+  const teamId = req.params.id;
+  await TeamService.deleteTeam(teamId);
+  await TeamScoreService.deleteByTeamId(teamId);
   res.json({
     isDeleted: true
   });
