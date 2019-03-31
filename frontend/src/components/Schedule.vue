@@ -32,8 +32,7 @@
           </tr>
           <tr>
             <th scope="row">17:00</th>
-            <td>Pitch workshop</td>
-            <td>TBD</td>
+            <td colspan="12">Pitch workshop</td>
           </tr>
           <tr>
             <th scope="row">18:00</th>
@@ -42,8 +41,7 @@
           </tr>
           <tr>
             <th scope="row">19:00</th>
-            <td>Pitch Presentations Rehearsals (optional)</td>
-            <td>TBD</td>
+            <td colspan="12">Pitch Presentations Rehearsals (optional)</td>
           </tr>
           <tr>
             <th scope="row">20:00</th>
@@ -76,8 +74,7 @@
           </tr>
           <tr>
             <th scope="row">09:00</th>
-            <td class="bg-danger"><strong>Hacking Ends - Judging</strong></td>
-            <td>TBD</td>
+            <td colspan="12" class="bg-danger"><strong>Hacking Ends - Judging</strong></td>
           </tr>
           <tr>
             <th scope="row">11:00</th>
@@ -91,7 +88,7 @@
           </tr>
           <tr>
             <th scope="row">14:00</th>
-            <td>The End :)</td>
+            <td colspan="12">The End :)</td>
           </tr>
         </tbody>
       </table>
