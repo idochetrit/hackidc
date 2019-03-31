@@ -59,7 +59,7 @@
             path: "/judging/mizrahi"
           },
           {
-            name: "Palantir Challenge",
+            name: "Fake News Challenge by myPart (sponsored by Palantir)",
             logo: require("../../static/palantir_logo.png"),
             path: "/judging/palantir"
           }
