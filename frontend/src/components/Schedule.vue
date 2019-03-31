@@ -12,13 +12,13 @@
         <tbody>
           <tr>
             <th scope="row">08:00</th>
-            <td>Registration and Gathering</td>
-            <td>Adelson* Entrance Floor</td>
+            <td>Registration & Gathering</td>
+            <td>Adelson lobby</td>
           </tr>
           <tr>
             <th scope="row">09:00</th>
             <td>Opening Ceremony</td>
-            <td>Adelson* Auditorium EL03</td>
+            <td>Auditorium EL03, Adelson building</td>
           </tr>
           <tr>
             <th scope="row">10:30</th>
@@ -87,7 +87,7 @@
           <tr>
             <th scope="row">12:00</th>
             <td>Ceremony</td>
-            <td>Lobby Main Hall</td>
+            <td>Auditorium EL03, Adelson building</td>
           </tr>
           <tr>
             <th scope="row">14:00</th>
