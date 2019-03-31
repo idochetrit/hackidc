@@ -2,8 +2,8 @@
     <div class="row challengeWrapper palantir"
          :class="{'challengeWrapperCollapsed': !expanded}">
         <div class="col-lg-8 col-md-12 challengeContent">
-            <h2><strong>Palantir</strong></h2>
-            <h4><strong>Fake News Challenge</strong></h4>
+            <h2><strong>Fake News by myPart</strong></h2>
+            <h4><strong>Sponsored by Palantir</strong></h4>
             <p>A steady and insidious flow of untrue or misleading stories, posts and narratives enter our lives via
                 social media feeds and online news outlets. Accepting a world where evidence is no longer the foundation
                 would be detrimental to our society. It really is no less than a form of psychological warfare. Read
