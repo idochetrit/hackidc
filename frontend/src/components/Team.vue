@@ -50,7 +50,6 @@
           {name: 'Adi Ninio', linkedin: 'https://www.linkedin.com/in/adi-ninio-99812910a/', thumbnail: require('../../static/adi.jpg')},
           {name: 'Amit Fainholtz', linkedin: '#', thumbnail: require('../../static/amit.jpg')},
           {name: 'Gad Zuaretz', linkedin: 'https://www.linkedin.com/in/gad-zuaretz-37613b161/', thumbnail: require('../../static/gad.jpg')},
-          {name: 'Gal Rabin', linkedin: 'https://www.linkedin.com/in/gal-rabin-473351120/', thumbnail: require('../../static/gal.jpg')},
           {name: 'Gill Samia', linkedin: 'https://www.linkedin.com/in/gillsamia/', thumbnail: require('../../static/gill.jpg')},
           {name: 'Hadar Mordechai', linkedin: 'https://www.linkedin.com/in/hadar-mordechai-7641b7159/', thumbnail: require('../../static/hadar.jpg')},
           {name: 'Ido Chetrit', linkedin: 'https://www.linkedin.com/in/ido-chetrit-a379077a/', thumbnail: require('../../static/ido.jpg')},
