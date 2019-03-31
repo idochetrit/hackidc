@@ -39,7 +39,7 @@
             <div v-for="(f,i) in fields" :key="i"
                  :class="{dim: !teamNumber}"
                  class="range-input">
-                <label class="label" :for="f">{{ f }}</label>
+                <label class="label" :for="f">{{ f }} (25%)</label>
                 <div class="input-wrapper">
                     <input :disabled="!teamNumber"
                            :id="f" v-model="rank[f.toLowerCase()]" type="range" min="0" max="10"
