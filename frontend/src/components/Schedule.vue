@@ -11,7 +11,7 @@
         </thead>
         <tbody>
           <tr>
-            <th scope="row">07:30</th>
+            <th scope="row">08:00</th>
             <td>Registration and Gathering</td>
             <td>Adelson* Entrance Floor</td>
           </tr>
