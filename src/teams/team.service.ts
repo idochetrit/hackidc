@@ -112,7 +112,8 @@ export class TeamService {
       );
       sanitizedParams.users = sanitizedUsers;
 
-      sanitizedParams.challengeName = ((await team.$get("Challenge")) as Challenge).name;
+      const challenge = (await team.$get("Challenge")) as Challenge;
+      sanitizedParams.challengeName = challenge && challenge.name;
     }
 
     return sanitizedParams;
