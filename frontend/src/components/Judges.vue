@@ -74,6 +74,11 @@
             title: "Executive Director, Technical Center Israel - General Motors",
             thumbnail: require("../../static/gil_golan.jpeg")
           },
+          {
+            name: "Dr. Revital Hollander",
+            title: "Faculty member, Adelson school of Entrepreneurship, founder of TMT-Tel Aviv Music Technology",
+            thumbnail: require("../../static/revital_hollander.jpeg")
+          },
         ]
       };
     }
