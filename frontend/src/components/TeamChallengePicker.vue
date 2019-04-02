@@ -74,7 +74,8 @@
       },
       sendChallengePick() {
         const challengePickObject = this.constructChallengePickObjcet();
-        return axios.put("/api/teams/self/challenge", challengePickObject, { withCredentials: true })
+        axios.defaults.withCredentials = true;
+        return axios.put("/api/teams/self/challenge", challengePickObject)
           .then(res => {
             this.$store.dispatch("updateUser", res.data);
             this.showConfirmation();

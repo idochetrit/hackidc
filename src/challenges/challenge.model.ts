@@ -36,7 +36,7 @@ export class Challenge extends Model<Challenge> {
   public isDeleted?: boolean;
 
   static async getByName(name: string): Promise<Challenge> {
-    const challenge = await Challenge.find({
+    const challenge = await Challenge.findOne({
       where: {
         name
       },
