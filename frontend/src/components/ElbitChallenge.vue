@@ -3,6 +3,7 @@
          :class="{'challengeWrapperCollapsed': !expanded}">
         <div class="col-lg-8 col-md-12 challengeContent">
             <h2><strong>Elbit Systems</strong></h2>
+            <p>For more information or specific questions: <a href="mailto:Tal.Poliner-Shtub@elbitsystems.com">Tal.Poliner-Shtub@elbitsystems.com</a></p>
             <h4><strong>Challenge no. 1</strong></h4>
             <p>Have you ever been in a situation in which you wanted to send a voice message to somebody, but you thought it would be very funny if the voice sounds like a famous character or with a different accent?</p>
             <p><strong>If the answer is YES, then you are invited to participate in a ‘Deep Fake’ challenge!</strong></p>
