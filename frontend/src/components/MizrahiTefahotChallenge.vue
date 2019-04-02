@@ -2,6 +2,7 @@
     <div class="row challengeWrapper mizrahi">
         <div class="col-lg-8 col-md-12 challengeContent">
             <h2><strong>Mizrahi Tefahot</strong></h2>
+            <p>For more information or specific questions: <a href="mailto:Hackidc19umtb@gmail.com">Hackidc19umtb@gmail.com</a></p>
             <p>In the past few years, the banking industry has been going through a digital transformation. As part
                 of a unique approach in the Israeli banking system, Mizrahi Tefahot believes in giving personal,
                 human service to each and every client, and that every person deserves a person in the bank.</p>
