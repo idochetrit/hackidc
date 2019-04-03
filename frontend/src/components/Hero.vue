@@ -12,6 +12,7 @@
           <div class="buttons">
             <button @click="toRegistrationForm" v-if="registration === 'opened' && !this.$store.getters.isAuthenticated" class="btn btn-info btn-lg">SIGN UP!</button>
             <button v-scroll-to="'#about'" class="btn btn-outline-light btn-lg">What's New?</button>
+            <router-link tag="button" to="/challenges" class="btn btn-outline-warning btn-lg">This Year Challenges</router-link>
           </div>
           <hr>
           <h4>April 11th-12th</h4>

@@ -11,14 +11,14 @@
         </thead>
         <tbody>
           <tr>
-            <th scope="row">07:30</th>
-            <td>Registration and Gathering</td>
-            <td>Adelson* Entrance Floor</td>
+            <th scope="row">08:00</th>
+            <td>Registration & Gathering</td>
+            <td>Adelson lobby</td>
           </tr>
           <tr>
             <th scope="row">09:00</th>
             <td>Opening Ceremony</td>
-            <td>Adelson* Auditorium EL03</td>
+            <td>Auditorium EL03, Adelson building</td>
           </tr>
           <tr>
             <th scope="row">10:30</th>
@@ -32,8 +32,7 @@
           </tr>
           <tr>
             <th scope="row">17:00</th>
-            <td>Pitch workshop</td>
-            <td>TBD</td>
+            <td colspan="12">Pitch workshop</td>
           </tr>
           <tr>
             <th scope="row">18:00</th>
@@ -42,8 +41,7 @@
           </tr>
           <tr>
             <th scope="row">19:00</th>
-            <td>Pitch Presentations Rehearsals (optional)</td>
-            <td>TBD</td>
+            <td colspan="12">Pitch Presentations Rehearsals (optional)</td>
           </tr>
           <tr>
             <th scope="row">20:00</th>
@@ -76,8 +74,7 @@
           </tr>
           <tr>
             <th scope="row">09:00</th>
-            <td class="bg-danger"><strong>Hacking Ends - Judging</strong></td>
-            <td>TBD</td>
+            <td colspan="12" class="bg-danger"><strong>Hacking Ends - Judging</strong></td>
           </tr>
           <tr>
             <th scope="row">11:00</th>
@@ -87,11 +84,11 @@
           <tr>
             <th scope="row">12:00</th>
             <td>Ceremony</td>
-            <td>Lobby Main Hall</td>
+            <td>Auditorium EL03, Adelson building</td>
           </tr>
           <tr>
             <th scope="row">14:00</th>
-            <td>The End :)</td>
+            <td colspan="12">The End :)</td>
           </tr>
         </tbody>
       </table>

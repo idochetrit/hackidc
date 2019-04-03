@@ -75,21 +75,23 @@ router.get("/challenges", ensureAuthenticated, async (req, res) => {
 });
 
 router.put("/self/challenge", ensureAuthenticated, async (req, res) => {
-  const userId: number = Number(_.get(req, "user.id")) || Number(req.headers.userid);
-  const { challengeName } = req.body;
-  let team: Team = await UserService.getTeamByUserId(userId);
+  if (process.env.DISABLE_CHALLENGE_PICK === "true")
+    return handleError(new Error("Challenge picker is blocked."), res);
 
-  // TODO check for teamBuilder validity
-  // update challenge
-  const challenges = await TeamService.getAllChallenges();
-  const { id: challengeId } = challenges.find(({ name }) => name === _.lowerCase(challengeName));
-  await TeamService.updateTeam(team, { challengeId });
+  const { challengePick: challengeName, teamCodeNumber } = req.body;
+
+  const userId: number = Number(_.get(req, "user.id")) || Number(req.headers.userid);
+  let team: Team = await UserService.getTeamByUserId(userId);
+  if (team.codeNumber !== teamCodeNumber)
+    return handleError(new Error("team submitting not matched with logged in user."), res);
+
+  await TeamService.updateTeamChallenge(team, challengeName);
 
   // refetch team
-  team = await UserService.getTeamByUserId(userId);
-  const sanitizedTeam: any = await TeamService.sanitize(team, { withDeps: false });
+  const user = await UserService.findById(userId);
+  const sanitizedUser: any = await UserService.sanitize(user);
   res.json({
-    sanitizedTeam,
+    user: sanitizedUser,
     updated: true
   });
 });

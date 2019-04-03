@@ -69,6 +69,7 @@ export default {
       navLinks: [
         {name: "home", path: "/"},
         {name: "schedule", path: "/schedule"},
+        {name: "challenges", path: "/challenges"},
         {name: "resources", path: "/resources"},
         {name: "exhibition", path: "/digital-art-exhibition"},
         {name: "the team", path: "/team"},

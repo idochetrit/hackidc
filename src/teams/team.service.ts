@@ -125,6 +125,9 @@ export class TeamService {
         })
       );
       sanitizedParams.users = sanitizedUsers;
+
+      const challenge = (await team.$get("Challenge")) as Challenge;
+      sanitizedParams.challengeName = challenge && challenge.name;
     }
 
     return sanitizedParams;
@@ -145,6 +148,11 @@ export class TeamService {
       return false;
     });
     return true;
+  }
+
+  public static async updateTeamChallenge(team: Team, challengeName: string): Promise<boolean> {
+    const { id: challengeId } = await Challenge.getByName(challengeName);
+    return this.updateTeam(team, { challengeId });
   }
 
   public static async deleteTeam(id: number) {
