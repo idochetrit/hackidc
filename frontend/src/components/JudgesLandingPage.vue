@@ -10,10 +10,18 @@
             </div>
             <div class="row">
                 <router-link v-for="(competition, i) in competitions" :key="i"
-                             tag="button" :to="competition.path"
-                             class="btn btn-light col-lg-3 col-md-6 col-sm-12 challenge-button">
-                    <img class="company_logo" :src="competition.logo">
-                    <h5><strong>{{ competition.name }}</strong></h5>
+                        tag="button" :to="competition.path"
+                        class="btn btn-light col-lg-3 col-md-6 col-sm-12 challenge-button">
+                    <div class="col-12">
+                        <img class="company_logo" :src="competition.logo">
+                    </div>
+                    
+                    <div class="w-100 d-none d-md-block"></div>
+
+                    <div class="col-12">
+                        <h5><strong>{{ competition.name }}</strong></h5>
+                        <span><strong>{{ competition.subCaption }}</strong></span>
+                    </div>
                 </router-link>
             </div>
         </div><div class="container" v-if="currentJudgingRound === 2">
@@ -58,7 +66,8 @@
             path: "/judging/mizrahi"
           },
           {
-            name: "Fake News Challenge by myPart (sponsored by Palantir)",
+            name: "Fake News Challenge",
+            subCaption: "by myPart (sponsored by Palantir)",
             logo: require("../../static/palantir_logo.png"),
             path: "/judging/palantir"
           }
