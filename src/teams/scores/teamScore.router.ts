@@ -4,7 +4,7 @@ import { isPermittedUser, LEVELS, isSuperAdmin } from "../../concerns/auth.users
 import { TeamScoreService } from "./teamScore.service";
 import { handleError } from "../../routers.helper";
 import { JudgeService, FINAL_JUDGES } from "../../users/judges/judge.service";
-import { Challenge } from "../../../dist/challenges/challenge.model";
+import { Challenge } from "../../challenges/challenge.model";
 
 const router = new Router();
 
@@ -59,7 +59,7 @@ router.post("/attachJudge", async (req, res) => {
 
 router.post("/retireTeam", async (req, res) => {
   try {
-    const { teamCodeNumber } = req.body;
+    const { teamCodeNumber, challengeId, judgeId } = req.body;
 
     await TeamScoreService.createScoreRecord({ teamCodeNumber, challengeId, judgeId });
   } catch (error) {
