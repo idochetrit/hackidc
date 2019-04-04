@@ -170,7 +170,7 @@ export class TeamScoreService {
     return teamsCreatedCount;
   }
 
-  public static async deleteByTeamId(teamId) {
+  public static async deleteByTeamId(teamId: number) {
     const { codeNumber: teamCodeNumber } = await TeamService.findOneById(teamId);
     await TeamScore.destroy({
       where: {

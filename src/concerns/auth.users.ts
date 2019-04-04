@@ -39,7 +39,7 @@ export function isPermittedUser(level) {
 export function isSuperAdmin(req, res, next) {
   if (
     process.env.NODE_ENV !== "production" ||
-    req.headers["Authorization"] === process.env.ADMIN_TOKEN
+    req.headers["authorization"] === process.env.ADMIN_TOKEN
   ) {
     return next();
   }

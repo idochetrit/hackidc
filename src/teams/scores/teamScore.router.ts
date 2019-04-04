@@ -5,6 +5,7 @@ import { TeamScoreService } from "./teamScore.service";
 import { handleError } from "../../routers.helper";
 import { JudgeService, FINAL_JUDGES } from "../../users/judges/judge.service";
 import { Challenge } from "../../challenges/challenge.model";
+import { TeamService } from "../team.service";
 
 const router = new Router();
 
@@ -47,21 +48,30 @@ router.post("/qualify", isSuperAdmin, async (req, res) => {
   }
 });
 
-router.post("/attachJudge", async (req, res) => {
+router.post("/assignJudge", isSuperAdmin, async (req, res) => {
   try {
     const { teamCodeNumber, challengeName, judgeId } = req.body;
     const { id: challengeId } = await Challenge.getByName(challengeName);
     await TeamScoreService.createScoreRecord({ teamCodeNumber, challengeId, judgeId });
+    res.json({
+      teamAssigned: teamCodeNumber,
+      withJudgeId: judgeId,
+      forChallenge: challengeName
+    });
   } catch (error) {
     handleError(error, res);
   }
 });
 
-router.post("/retireTeam", async (req, res) => {
+router.delete("/retireTeam", isSuperAdmin, async (req, res) => {
   try {
-    const { teamCodeNumber, challengeId, judgeId } = req.body;
-
-    await TeamScoreService.createScoreRecord({ teamCodeNumber, challengeId, judgeId });
+    const { teamCodeNumber } = req.body;
+    const { id: teamId } = await TeamService.findOneByCode(teamCodeNumber);
+    await TeamScoreService.deleteByTeamId(teamId);
+    res.json({
+      teamDeleted: teamCodeNumber,
+      success: true
+    });
   } catch (error) {
     handleError(error, res);
   }
