@@ -91,8 +91,8 @@
         return axios.get("/api/judges/self/teams", { withCredentials: true })
             .then(res => res.data)
             .then(data => {
-                const { teamsByChallenge: teams, user} = data;
-                this.$store.dispatch("updateJudgeObject", { id: user.id, teams });
+                const { teamsByChallenge: teams, user, summary } = data;
+                this.$store.dispatch("updateJudgeObject", { id: user.id, teams, summary });
         });
     }
   };

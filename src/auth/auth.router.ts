@@ -23,6 +23,7 @@ router.post(
   }),
   (req, res) => {
     if (!req.user) return handleError(new Error("failed to login"), res);
+
     const redirectPath: string = getRedirectPathStatus("judge");
     res.redirect(redirectPath);
   }

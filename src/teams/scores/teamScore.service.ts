@@ -111,6 +111,21 @@ export class TeamScoreService {
       .value();
   }
 
+  public static async getTeamScoreSummaryForJudgeId(judgeId: number) {
+    const teamScores: TeamScore[] = await TeamScore.findAll({
+      where: { judgeId },
+      include: [Challenge],
+      attributes: ["teamCodeNumber", "locked", "challenge.name"]
+    });
+
+    return _.chain(teamScores)
+      .groupBy("challenge.name")
+      .mapValues(teamScores =>
+        teamScores.map(({ teamCodeNumber, locked }) => ({ teamCodeNumber, locked }))
+      )
+      .value();
+  }
+
   public static async getFinalRoundTeams(judgeId: number): Promise<TeamScore[]> {
     const { id: challengeId } = await Challenge.getByName(CHALLENGES.GENERAL);
     const teamScores: TeamScore[] = await TeamScore.findAll({

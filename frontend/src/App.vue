@@ -41,11 +41,12 @@
     },
     mixins: [linkedInIntegration],
     beforeMount() {
-      this.authRequest();
-      this.fetchCurrentJudgingRound();
+      return this.authRequest().then(() =>
+        this.fetchCurrentJudgingRound()
+      );
     },
     created() {
-      axios.interceptors.response.use(undefined, function(err) {
+      return axios.interceptors.response.use(undefined, function(err) {
         return new Promise(() => {
           if (err.status === 401 && err.config) {
             this.$store.dispatch("signOut");

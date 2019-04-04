@@ -230,7 +230,7 @@ export default new Router({
         title: "HackIDC 2019 | Welcome, Judge!"
       },
       component: JudgingLandingPage,
-      beforeEnter: (to, from, next) => {
+      afterEnter: (to, from, next) => {
         store.getters.isAuthenticated ? next() : next({ name: "home" });
       }
     },

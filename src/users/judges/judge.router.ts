@@ -35,9 +35,12 @@ router.get("/self/teams", isPermittedUser(LEVELS.JUDGE), async (req, res) => {
 
     const sanitizedUser = await JudgeService.sanitize(user);
     const teamsByChallenge = await TeamScoreService.getAllJudgeTeamIdsByChallenge(userId);
+    const summary = await TeamScoreService.getTeamScoreSummaryForJudgeId(userId);
+
     res.json({
       user: sanitizedUser,
-      teamsByChallenge
+      teamsByChallenge,
+      summary
     });
   } catch (err) {
     console.log(err);

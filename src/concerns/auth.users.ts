@@ -3,6 +3,7 @@ import { UserService } from "../users/user.service";
 
 export function ensureAuthenticated(req, res, next) {
   if (process.env.NODE_ENV !== "production" || req.isAuthenticated()) {
+    if (req.user) res.set("Authorization", req.user.authToken);
     return next();
   }
   res.redirect("/login");

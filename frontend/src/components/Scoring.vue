@@ -10,49 +10,62 @@
             </router-link>
         </div>
         <div v-else class="scoring-box">
-            <div v-if="teamsLeftToJudge.length" class="form-group">
-                <label for="teamNumber">Select the team number to judge</label>
-                <select name="teamNumber" id="teamNumber"
-                        @change="resetRank"
-                        class="custom-select" v-model="teamNumber">
-                    <option :value="null" selected>Select...</option>
-                    <option v-for="(team, i) in teamsLeftToJudge"
-                            :value="team" :key="i">{{ team }}
-                    </option>
-                </select>
-                <hr>
-                <h4 class="text-info" v-if="teamNumber">
-                    {{ `currently scoring team number ${teamNumber}` }}
-                </h4>
+          <div v-if="teamsLeftToJudge.length" class="form-group">
+              <label for="teamNumber">Select the team number to judge</label>
+              <select name="teamNumber" id="teamNumber"
+                      @change="resetRank"
+                      class="custom-select" v-model="teamNumber">
+                  <option :value="null" selected>Select...</option>
+                  <option v-for="(team, i) in teamsLeftToJudge"
+                          :value="team" :key="i">{{ team }}
+                  </option>
+              </select>
+              <hr>
+              <h4 class="text-info" v-if="teamNumber">
+                  {{ `currently scoring team number ${teamNumber}` }}
+              </h4>
+          </div>
+          <div v-else class="noTeamsAlertDiv">
+              <div class="alert alert-success">
+                  Your'e done for now, thank you!
+              </div>
+              <router-link v-if="challengeName !== 'general'"
+                            tag="button" to="/judging-landing"
+                            class="btn btn-md btn-info">
+                  <strong>Back to Judging Area</strong>
+              </router-link>
+          </div>
+          <hr>
+          <div v-for="(f,i) in fields" :key="i"
+                :class="{dim: !teamNumber}"
+                class="range-input">
+              <label class="label" :for="f">{{ f }} (25%)</label>
+              <div class="input-wrapper">
+                  <input :disabled="!teamNumber"
+                          :id="f" v-model="rank[f.toLowerCase()]" type="range" min="0" max="10"
+                          value="0" step="0.1"
+                          class="custom-range" />
+                  <span class="value">{{ rank[f.toLowerCase()] }}</span>
+              </div>
+          </div>
+          <button :disabled="!teamNumber"
+                  :class="{dim: !teamNumber}"
+                  @click="handleRank"
+                  class="btn btn-md btn-info">Rank
+          </button>
+          <div class="container">
+            <hr style="margin-top: 5rem;"/>
+            <h4>Rank Summary</h4>
+            <span>(Team codes)</span>
+            
+            <div class="row align-items-center teams-summary col-10">
+              <div class="col-4 text-center" v-for="(ts, i) in teamsSummary" :key="i">
+                <span class="label" :class="{completedTeamScore: ts.locked, openTeamScore: !ts.locked}" >
+                  {{ts.teamCodeNumber}}
+                </span>
+              </div>
             </div>
-            <div v-else class="noTeamsAlertDiv">
-                <div class="alert alert-success">
-                    Your'e done for now, thank you!
-                </div>
-                <router-link v-if="challengeName !== 'general'"
-                             tag="button" to="/judging-landing"
-                             class="btn btn-md btn-info">
-                    <strong>Back to Judging Area</strong>
-                </router-link>
-            </div>
-            <hr>
-            <div v-for="(f,i) in fields" :key="i"
-                 :class="{dim: !teamNumber}"
-                 class="range-input">
-                <label class="label" :for="f">{{ f }} (25%)</label>
-                <div class="input-wrapper">
-                    <input :disabled="!teamNumber"
-                           :id="f" v-model="rank[f.toLowerCase()]" type="range" min="0" max="10"
-                           value="0" step="0.1"
-                           class="custom-range" id="customRange1">
-                    <span class="value">{{ rank[f.toLowerCase()] }}</span>
-                </div>
-            </div>
-            <button :disabled="!teamNumber"
-                    :class="{dim: !teamNumber}"
-                    @click="handleRank"
-                    class="btn btn-md btn-info">Rank
-            </button>
+          </div>
         </div>
     </div>
 </template>
@@ -70,7 +83,8 @@
           usability: 0,
           functionality: 0,
           awesomeness: 0
-        }
+        },
+        summary: []
       };
     },
     computed: {
@@ -82,6 +96,9 @@
       },
       teamsLeftToJudge() {
         return this.judge.teams[this.challengeName];
+      },
+      teamsSummary() {
+        return this.judge.summary[this.challengeName];
       }
     },
     methods: {
@@ -164,6 +181,12 @@
         font-weight: bold;
     }
 
+    .teams-summary {
+      padding-top: 5rem;
+      margin: 0 auto;
+      font-size: 1.2rem;
+    }
+
     .noTeamsAlertDiv {
         display: flex;
         flex-direction: column;
@@ -227,6 +250,15 @@
         flex-direction: row;
         justify-content: space-between;
         width: 100%;
+    }
+
+    .openTeamScore {
+      font-weight: bold;
+    }
+
+    .completedTeamScore {
+      text-decoration: line-through;
+      color: grey;
     }
 
     @media screen and (max-width: 1440px) and (min-width: 1201px) {

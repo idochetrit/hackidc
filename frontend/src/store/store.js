@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
+import _ from "lodash";
 
 Vue.use(Vuex);
 
@@ -23,7 +24,7 @@ export const store = new Vuex.Store({
     getUser: state => state.user,
     isSignedUp: state => state.authenticated && state.user.registerStatus !== "pending",
     getJudgeObject: state => state.judgeObject,
-    getCurrentJudgingRound: state => state.currentJudgingRound,
+    getCurrentJudgingRound: state => state.currentJudgingRound
   },
   mutations: {
     setLoading: (state, payload) => (state.loading = payload),
@@ -44,8 +45,17 @@ export const store = new Vuex.Store({
     },
     setJudgeObject: (state, payload) => (state.judgeObject = payload),
     removeTeamFromJudgeArray: (state, payload) => {
-      const index = state.judgeObject.teams[payload.challengeName].indexOf(payload.teamNumber);
+      const index = _.findIndex(
+        state.judgeObject.teams[payload.challengeName],
+        teamCodeNumber => teamCodeNumber === payload.teamNumber
+      );
       state.judgeObject.teams[payload.challengeName].splice(index, 1);
+
+      const sumIndex = _.findIndex(
+        state.judgeObject.summary[payload.challengeName],
+        ts => ts.teamCodeNumber === payload.teamNumber
+      );
+      if (sumIndex != -1) state.judgeObject.summary[payload.challengeName][sumIndex].locked = true;
     }
   },
   actions: {
