@@ -11,7 +11,7 @@
                 <h5>{{ user.studyYear | yearFormatter }} year {{ user.fieldOfStudy | fieldFormatter | nameFormatter }} student, at {{ user.academicInstitute }}</h5>
                 <a :href="user.linkedInProfileUrl" target="_blank" class="btn btn-md linkedinBtn"><span class="fab fa-linkedin-in fa-lg"></span></a>
             </div>
-            <div v-if="['judge', 'mentor'].includes(authUser.role.toLowerCase()) && canViewCV">
+            <div v-if="authUser.role &&['judge', 'mentor'].includes(authUser.role.toLowerCase()) && canViewCV">
                 <a :href="`/api/users/self/uploads/${user.id}/cv`" target="_blank" class="btn btn-md btn-outline-info">
                     View CV
                 </a>
