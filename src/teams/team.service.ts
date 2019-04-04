@@ -137,7 +137,11 @@ export class TeamService {
   }
 
   public static async updateTeamChallenge(team: Team, challengeName: string): Promise<boolean> {
-    const { id: challengeId } = await Challenge.getByName(challengeName);
+    let challengeId = null;
+    if (challengeName) {
+      const { id } = await Challenge.getByName(challengeName);
+      challengeId = id;
+    }
     return this.updateTeam(team, { challengeId });
   }
 
