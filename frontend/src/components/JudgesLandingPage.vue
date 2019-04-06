@@ -20,7 +20,6 @@
 
                     <div class="col-12">
                         <h5><strong>{{ competition.name }}</strong></h5>
-                        <span><strong>{{ competition.subCaption }}</strong></span>
                     </div>
                 </router-link>
             </div>
@@ -67,8 +66,7 @@
           },
           {
             name: "Fake News Challenge",
-            subCaption: "by myPart (sponsored by Palantir)",
-            logo: require("../../static/palantir_logo.png"),
+            logo: require("../../static/mypart_logo.png"),
             path: "/judging/palantir"
           }
         ],

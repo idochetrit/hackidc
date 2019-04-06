@@ -2,8 +2,8 @@
     <div class="container-fluid">
         <div class="container">
             <img class="herzel" src="../../static/herzel_black.png">
-            <h2>Palantir Challenge Scoring</h2>
-            <img class="company_logo" src="../../static/palantir_logo.png" alt="PalantirLogo">
+            <h2>MyPart Challenge Scoring</h2>
+            <img class="company_logo" src="../../static/mypart_logo.png" alt="">
             <h3>Select the team number down below and vote by the given parameters</h3>
             <div class="alert alert-info">
                 <h6>Want to go to another competition?</h6>
