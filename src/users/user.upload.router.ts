@@ -52,7 +52,7 @@ router.get("/cv", ensureAuthenticated, async (req, res) => {
   readStream.pipe(res);
 });
 
-router.get("/:id/cv", isPermittedUser(LEVELS.JUDGE), async (req, res) => {
+router.get("/:id/cv", isPermittedUser(LEVELS.ADMIN), async (req, res) => {
   const userId: number = Number(_.get(req.params, "id"));
   let user;
   try {

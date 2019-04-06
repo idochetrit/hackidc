@@ -9,7 +9,7 @@ import { TeamService } from "../../teams/team.service";
 
 const router = new Router();
 
-router.get("/self", isPermittedUser(LEVELS.JUDGE), async (req, res) => {
+router.get("/self", isPermittedUser(LEVELS.ADMIN), async (req, res) => {
   try {
     const userId: number = Number(_.get(req, "user.id")) || Number(req.query.judgeid);
     if (_.isUndefined(userId) || _.isNaN(userId)) throw new Error("userId is missing");
