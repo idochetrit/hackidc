@@ -5,7 +5,7 @@
             <h2>HackIDC 2019 Challenges</h2>
         </div>
         <ElbitChallenge />
-        <PalantirChallenge />
+        <MyPartChallenge />
         <MizrahiTefahotChallenge/>
     </div>
 </template>
@@ -13,13 +13,13 @@
 <script>
   import MizrahiTefahotChallenge from "./MizrahiTefahotChallenge";
   import ElbitChallenge from "./ElbitChallenge";
-  import PalantirChallenge from "./PalantirChallenge";
+  import MyPartChallenge from "./MyPartChallenge";
 
   export default {
     components: {
       MizrahiTefahotChallenge,
       ElbitChallenge,
-      PalantirChallenge
+      MyPartChallenge
     }
   };
 </script>

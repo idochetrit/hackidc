@@ -1,11 +1,10 @@
 <template>
-    <div class="row challengeWrapper palantir"
+    <div class="row challengeWrapper mypart"
          :class="{'challengeWrapperCollapsed': !expanded}">
         <div class="col-lg-8 col-md-12 challengeContent">
             <h2><strong>Fake News by My Part</strong></h2>
             <p>For more information or specific questions: <a href="mailto:challenge@mypart.com">challenge@mypart.com</a></p>
             <div class="alert alert-light"><strong>For the full details about My Part challenge, <a target="_blank" href="https://drive.google.com/drive/u/0/folders/1hbCdQm3TP0j-V6t1_Mdnxq71YiaLnrX5">read the challenge presentation</a></strong></div>
-            <h4><strong>Sponsored by Palantir</strong></h4>
             <p>A steady and insidious flow of untrue or misleading stories and narratives enter our lives via social media feeds and online news outlets. Accepting a world where people are not accountable for the information they spread, where organized entities utilize bots to distribute fake news and where evidence is no longer the foundation, would be detrimental to our society. It really is no less than a form of psychological warfare.
                 Read more on <a target="_blank" href="https://en.wikipedia.org/wiki/Fake_news">wiki</a> in the EU’s “rise of disinformation and fake news”
                 <a target="_blank" href="https://ec.europa.eu/jrc/communities/sites/jrccties/files/dewp_201802_digital_transformation_of_news_media_and_the_rise_of_fake_news_final_180418.pdf">working paper</a>.</p>
@@ -25,7 +24,7 @@
             <p>Produce a summary of suspected profiles, including reasoning and suspected category (bot/fake/paid profile)</p>
         </div>
         <div class="col-lg-4 col-md-12 companyLogoWrapper">
-            <img src="../../static/palantir_logo.png" alt="" class="company-challenge-logo">
+            <img src="../../static/mypart_logo.png" alt="" class="company-challenge-logo">
         </div>
         <div class="seeMoreDiv">
             <button @click="expandChallengeWrapper"
@@ -87,7 +86,7 @@
         justify-content: flex-start;
     }
 
-    .palantir {
+    .mypart {
         background: #8e9eab;
         background: -webkit-linear-gradient(to bottom, #eef2f3, #8e9eab);
         background: linear-gradient(to bottom, #eef2f3, #8e9eab);
