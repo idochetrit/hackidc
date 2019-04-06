@@ -23,7 +23,7 @@ export class JudgeService {
     const defaultAttrs: any = {
       email: profile.email,
       name: profile.name,
-      roleId: 3 // JUDGE
+      roleId: profile.roleId || 3 // JUDGE / MENTOR
     };
     console.log(profile);
 

@@ -23,6 +23,11 @@
                     </a>
                 </div>
             </div>
+            <div v-if="authUser.role &&['judge', 'mentor'].includes(authUser.role.toLowerCase())">
+                <span>
+                    * CV files can be found in each participant's page. Click on the relevant picture to view the participant's page.
+                </span>
+            </div>
             <div class="row profile-body">
                 <div class="des-wrapper">
                     <h3>Team Description</h3>
@@ -46,7 +51,8 @@ export default {
     };
   },
   computed: {
-    code() { return this.$route.params.codeNumber; }
+    code() { return this.$route.params.codeNumber; },
+    authUser() { return this.$store.getters.getUser }
   },
   beforeRouteEnter (to, from, next) {
     store.dispatch("loadingStart");

@@ -4,7 +4,7 @@ const { FINAL_JUDGES } = require("../../dist/users/judges/judge.service");
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await createJudges(100);
-    await createJudges(null, FINAL_JUDGES);
+    await createJudges(null, 0, FINAL_JUDGES);
   },
 
   down: async (queryInterface, Sequelize) => {

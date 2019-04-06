@@ -43,7 +43,7 @@
         challenges: [
           { name: "None", value: null },
           { name: "Elbit", value: "elbit" },
-          { name: "Fake News (Palantir)", value: "palantir" },
+          { name: "Fake News (MyPart)", value: "palantir" },
           { name: "Mizrahi Tefahot", value: "mizrahi" }
         ],
         challengePick: null

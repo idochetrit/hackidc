@@ -21,10 +21,12 @@ router.post(
     state: "loginState",
     failureRedirect: "/"
   }),
-  (req, res) => {
+  async (req, res) => {
     if (!req.user) return handleError(new Error("failed to login"), res);
 
-    const redirectPath: string = getRedirectPathStatus("judge");
+    const { name: roleName } = await req.user.$get("role");
+    const lowerRoleName = _.toLower(roleName);
+    const redirectPath: string = getRedirectPathStatus(lowerRoleName);
     res.redirect(redirectPath);
   }
 );

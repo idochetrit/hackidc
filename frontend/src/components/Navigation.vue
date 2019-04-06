@@ -36,8 +36,8 @@
                 <strong>{{ this.$store.getters.getUser.name | firstName }}</strong>
               </button>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
-                <router-link v-if="user.role.toLowerCase() !== 'judge'" class="dropdown-item" :data-toggle="collapse" data-target="#navbarCollapsedDiv" tag="a" :to="{ name: 'user-dashboard' }" active-class="active" exact>My Profile</router-link>
-                <router-link v-if="user.role.toLowerCase() !== 'judge'" class="dropdown-item" :data-toggle="collapse" data-target="#navbarCollapsedDiv" tag="a" :to="{ name: 'team-dashboard', params: { codeNumber: user.team.codeNumber } }" active-class="active" exact>My Team</router-link>
+                <router-link v-if="!['judge', 'mentor'].includes(user.role.toLowerCase())" class="dropdown-item" :data-toggle="collapse" data-target="#navbarCollapsedDiv" tag="a" :to="{ name: 'user-dashboard' }" active-class="active" exact>My Profile</router-link>
+                <router-link v-if="!['judge', 'mentor'].includes(user.role.toLowerCase())" class="dropdown-item" :data-toggle="collapse" data-target="#navbarCollapsedDiv" tag="a" :to="{ name: 'team-dashboard', params: { codeNumber: user.team.codeNumber } }" active-class="active" exact>My Team</router-link>
                 <router-link v-if="user.role.toLowerCase() === 'judge'" class="dropdown-item" :data-toggle="collapse" data-target="#navbarCollapsedDiv" tag="a" :to="{ name: 'judging-landing' }" active-class="active"  exact>Judging Area</router-link>
                 <div class="dropdown-divider"></div>
                 <button @click="signout" class="dropdown-item text-danger" :data-toggle="collapse" data-target="#navbarCollapsedDiv"><strong>Sign out</strong></button>

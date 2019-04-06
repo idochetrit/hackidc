@@ -15,7 +15,7 @@
     "clean": "rm -rf dist && mkdir dist",
     "build-server": "./node_modules/.bin/tsc",
     "build-client": "node ./build/build.js",
-    "build": "npm run clean && npm run build-server && npm run build-client && npm run migrate",
+    "build": "npm run clean && npm run build-server && npm run build-client",
     "migrate": "./node_modules/.bin/sequelize db:migrate",
     "seed": "./node_modules/.bin/sequelize db:seed:all",
     "migrate-clean": "./node_modules/.bin/sequelize db:migrate:undo:all",
