@@ -16,7 +16,10 @@ export const FINAL_JUDGES = [
   "yossi_maaravi",
   "son_preminger",
   "tal_zackon",
-  "revital_hollander"
+  "revital_hollander",
+  "assaf_rappaport",
+  "yasmin_lukatz",
+  "gil_golan"
 ];
 export class JudgeService {
   public static async createLocalAuthUser(profile: any) {
