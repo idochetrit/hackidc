@@ -31,7 +31,7 @@
           .then(data => {
             this.$store.dispatch("setJudgingRound", Number(data.round));
           })
-        }, 2000)
+        }, 3000)
       }
     },
     components: {

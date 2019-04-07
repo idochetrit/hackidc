@@ -1,39 +1,60 @@
 import * as _ from "lodash";
 import { UserService } from "../users/user.service";
 
-export function ensureAuthenticated(req, res, next) {
-  if (process.env.NODE_ENV !== "production" || req.isAuthenticated()) {
-    if (req.user) res.set("Authorization", req.user.authToken);
-    return next();
-  }
-  res.redirect("/login");
-}
 export const LEVELS = {
   ADMIN: ["Judge", "Mentor"],
   JUDGE: "Judge",
   MENTOR: "Mentor"
 };
+
+export function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    // || process.env.NODE_ENV !== "production"
+    if (req.user) {
+      res.set("Authorization", req.user.authToken);
+    }
+    return next();
+  }
+  res.redirect("/login");
+}
+
 export function isPermittedUser(level) {
   return async function(req, res, next) {
     try {
-      if (process.env.NODE_ENV !== "production" || req.isAuthenticated()) {
+      if (req.isAuthenticated()) {
+        // || process.env.NODE_ENV !== "production"
         const userId: number = Number(
           _.get(req, "user.id") ||
             req.query.id ||
             req.headers.userid ||
             _.get(req.session.passport, "user")
         );
-        const user = await UserService.findById(userId, { includeDeps: true });
-        if (level === user.role.name) {
-          return next();
-        }
-        throw new Error(`user level: ${user.role.name} not permitted to: ${level}`);
+
+        if (await permittedForRound(userId, level)) return next();
+        throw new Error(`userId: ${userId} not permitted to: ${level}`);
+      } else {
+        throw new Error(`Unauthorized User`);
       }
     } catch (err) {
       console.error(err);
-      throw err;
+      res.redirect("/login");
     }
   };
+}
+
+export async function permittedForRound(userId: number, level: string = null): Promise<boolean> {
+  const user = await UserService.findById(userId, { includeDeps: true });
+  const {
+    role: { name: roleName }
+  } = user;
+
+  if (level && level !== roleName) return false;
+  const currentRound: number = Number(process.env.ROUND_NUMBER) || 0;
+  const mappedRoundRestrictions = {
+    [LEVELS.JUDGE]: () => currentRound >= 1,
+    [LEVELS.MENTOR]: () => currentRound >= 0
+  };
+  return mappedRoundRestrictions[roleName]();
 }
 
 export function isSuperAdmin(req, res, next) {

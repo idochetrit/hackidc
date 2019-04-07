@@ -10,7 +10,7 @@
                 <hr>
                 <h4><strong>Judge?</strong></h4>
                 <router-link to="/judges-login" tag="button" class="btn btn-md btn-info" exact>
-                    Judges Sign In
+                    Judges / Mentors Sign In
                 </router-link>
             </div>
         </div>

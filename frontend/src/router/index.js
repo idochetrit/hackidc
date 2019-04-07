@@ -176,7 +176,7 @@ export default new Router({
       component: JudgesLogin,
       beforeEnter(to, from, next) {
         if (
-          store.getters.getCurrentJudgingRound >= 1 &&
+          store.getters.getCurrentJudgingRound >= 0 &&
           store.getters.getCurrentJudgingRound <= 2
         ) {
           next();

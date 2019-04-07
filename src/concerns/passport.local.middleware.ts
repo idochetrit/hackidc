@@ -2,6 +2,7 @@ import * as passport from "passport";
 import { UserService } from "../users/user.service";
 import { User } from "../users/user.model";
 import { Strategy } from "passport-local";
+import { permittedForRound } from "./auth.users";
 const LocalStrategy = Strategy;
 
 passport.serializeUser((user, done) => {
@@ -24,6 +25,9 @@ passport.use(
       try {
         const user = await User.findOne({ where: { email: username } });
         if (!user) {
+          return done(null, false);
+        }
+        if (!(await permittedForRound(user.id))) {
           return done(null, false);
         }
         if (!(await UserService.verifyPassword(user, password))) {
