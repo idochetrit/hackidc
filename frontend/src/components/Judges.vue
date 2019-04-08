@@ -79,6 +79,11 @@
             title: "Faculty member, Adelson school of Entrepreneurship, founder of TMT-Tel Aviv Music Technology",
             thumbnail: require("../../static/revital_hollander.jpeg")
           },
+          {
+            name: "Yasmin Lukatz",
+            title: "Executive Director at ICON",
+            thumbnail: require("../../static/yasmin_lukatz.jpeg")
+          }
         ]
       };
     }
