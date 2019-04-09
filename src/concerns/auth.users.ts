@@ -46,7 +46,11 @@ export async function permittedForRound(userId: number, level: string = null): P
     role: { name: roleName }
   } = user;
 
-  if (level && level !== roleName) return false;
+  if (level) {
+    const levelArray: string[] = _.isArray(level) ? level : [level];
+    if (levelArray.indexOf(roleName) === -1) return false;
+  }
+
   const currentRound: number = Number(process.env.ROUND_NUMBER) || 0;
   const mappedRoundRestrictions = {
     [LEVELS.JUDGE]: () => currentRound >= 1,
