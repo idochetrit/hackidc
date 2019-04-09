@@ -9,7 +9,6 @@ export const LEVELS = {
 
 export function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
-    // || process.env.NODE_ENV !== "production"
     if (req.user) {
       res.set("Authorization", req.user.authToken);
     }
@@ -22,7 +21,6 @@ export function isPermittedUser(level) {
   return async function(req, res, next) {
     try {
       if (req.isAuthenticated()) {
-        // || process.env.NODE_ENV !== "production"
         const userId: number = Number(
           _.get(req, "user.id") ||
             req.query.id ||
@@ -58,10 +56,7 @@ export async function permittedForRound(userId: number, level: string = null): P
 }
 
 export function isSuperAdmin(req, res, next) {
-  if (
-    process.env.NODE_ENV !== "production" ||
-    req.headers["authorization"] === process.env.ADMIN_TOKEN
-  ) {
+  if (req.headers["authorization"] === process.env.ADMIN_TOKEN) {
     return next();
   }
   res.redirect("/login");
