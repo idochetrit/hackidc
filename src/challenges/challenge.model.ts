@@ -18,7 +18,6 @@ export const CHALLENGES = {
   PALANTIR: "palantir",
   MIZRAHI: "mizrahi"
 };
-
 @Table({
   tableName: "Challenges"
 })

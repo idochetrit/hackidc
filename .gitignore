@@ -7,3 +7,4 @@ dist/
 public/bundle.js
 .DS_Store
 public/index.html
+tmp/

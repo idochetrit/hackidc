@@ -23,7 +23,8 @@ export const SANITIZED_FIELDS = [
   "authToken",
   "cvAgree",
   "role",
-  "team"
+  "team",
+  "canViewCV"
 ];
 
 export const SANITIZED_PUBLIC_FIELDS = [
@@ -37,6 +38,7 @@ export const SANITIZED_PUBLIC_FIELDS = [
   "academicInstitute",
   "linkedInProfileUrl",
   "role",
+  "canViewCV",
   "team"
 ];
 
@@ -48,7 +50,8 @@ export const PATH_SANITIZED_FIELDS = [
   "bio",
   "mobile",
   "teamId",
-  "shirtSize"
+  "shirtSize",
+  "canViewCV"
 ];
 
 export const academicInstitutesMap = {
@@ -73,3 +76,5 @@ export const academicInstitutesMap = {
   shenkar: "Shenkar College",
   other: "Other"
 };
+
+export const JUDGE_SANITIZED_FIELDS = ["id", "name", "email", "password", "canViewCV", "role"];

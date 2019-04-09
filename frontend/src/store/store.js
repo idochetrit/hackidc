@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
+import _ from "lodash";
 
 Vue.use(Vuex);
 
@@ -12,18 +13,23 @@ export const store = new Vuex.Store({
       registerStatus: ""
     },
     loading: false,
-    registration: "opened" // valid values: 'under-construction' ,'opened' or 'closed'
+    judgeObject: null,
+    registration: "closed", // valid values: 'under-construction' ,'opened' or 'closed'
+    currentJudgingRound: 0 // 0: closed, 1: round1, 2: round2
   },
   getters: {
     isLoading: state => state.loading,
     isRegistrationOpen: state => state.registration,
     isAuthenticated: state => state.authenticated,
     getUser: state => state.user,
-    isSignedUp: state => state.authenticated && state.user.registerStatus !== "pending"
+    isSignedUp: state => state.authenticated && state.user.registerStatus !== "pending",
+    getJudgeObject: state => state.judgeObject,
+    getCurrentJudgingRound: state => state.currentJudgingRound
   },
   mutations: {
     setLoading: (state, payload) => (state.loading = payload),
     setRegistrationStatus: (state, payload) => (state.registration = payload),
+    setCurrentJudgingRound: (state, payload) => (state.currentJudgingRound = payload),
     authenticate: (state, payload) => {
       state.authenticated = true;
       state.token = payload.authToken;
@@ -36,6 +42,20 @@ export const store = new Vuex.Store({
     },
     updateUserObject: (state, payload) => {
       state.user = { ...payload };
+    },
+    setJudgeObject: (state, payload) => (state.judgeObject = payload),
+    removeTeamFromJudgeArray: (state, payload) => {
+      const index = _.findIndex(
+        state.judgeObject.teams[payload.challengeName],
+        teamCodeNumber => teamCodeNumber === payload.teamNumber
+      );
+      state.judgeObject.teams[payload.challengeName].splice(index, 1);
+
+      const sumIndex = _.findIndex(
+        state.judgeObject.summary[payload.challengeName],
+        ts => ts.teamCodeNumber === payload.teamNumber
+      );
+      if (sumIndex != -1) state.judgeObject.summary[payload.challengeName][sumIndex].locked = true;
     }
   },
   actions: {
@@ -50,6 +70,9 @@ export const store = new Vuex.Store({
     },
     registrationClosed: context => {
       context.commit("setRegistrationStatus", "closed");
+    },
+    setJudgingRound: (context, payload) => {
+      context.commit("setCurrentJudgingRound", payload);
     },
     signIn: (context, payload) => {
       context.commit("authenticate", payload);
@@ -68,6 +91,12 @@ export const store = new Vuex.Store({
         .catch(err => {
           console.log(err);
         });
+    },
+    updateJudgeObject: (context, payload) => {
+      context.commit("setJudgeObject", payload);
+    },
+    markTeamAsRanked: (context, payload) => {
+      context.commit("removeTeamFromJudgeArray", payload);
     }
   }
 });

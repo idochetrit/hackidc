@@ -26,7 +26,9 @@ export class TeamService {
   public static async buildTeam({ builder, teamParams }: { builder: User; teamParams: any }) {
     try {
       const { challengeName } = teamParams;
-      const { id: defaultChallengeId } = await Challenge.getByName(challengeName || "General");
+      const { id: defaultChallengeId } = await Challenge.getByName(
+        challengeName || CHALLENGES.GENERAL
+      );
       const newTeam = _.extend(
         {
           builderId: builder.id,
@@ -72,6 +74,18 @@ export class TeamService {
       throw new Error(`Team with code: ${codeNumber}, not found.`);
     }
     return team;
+  }
+
+  public static async findOneById(id: number): Promise<Team> {
+    const team = await Team.findOne({ where: { id } });
+    if (!team) {
+      throw new Error(`Team with id: ${id}, not found.`);
+    }
+    return team;
+  }
+
+  public static async findTeamsByCode(codeNumbers: number[]): Promise<Team[]> {
+    return Team.findAll({ where: { codeNumber: { $in: codeNumbers } } });
   }
 
   public static async getAllChallenges(): Promise<any[]> {
@@ -147,7 +161,7 @@ export class TeamService {
 
   public static async deleteTeam(id: number) {
     const team = await Team.findById(id);
-    await team.updateAttributes({ isDeleted: true });
+    await team.update({ isDeleted: true });
   }
 
   public static async updateRSVP(userId: number, team: Team, rsvpFlag: boolean, field: string) {

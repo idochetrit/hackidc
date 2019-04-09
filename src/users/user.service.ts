@@ -7,7 +7,9 @@ import { User } from "./user.model";
 import userRole from "./user.role";
 import UserScore from "./user.score";
 import { PATH_SANITIZED_FIELDS, SANITIZED_FIELDS, academicInstitutesMap } from "./user.constants";
-import { Sequelize } from "sequelize-typescript";
+import { Sequelize, IsUUID } from "sequelize-typescript";
+import * as uuidv4 from "uuid/v4";
+import { encryptPassword, comparePassword } from "../concerns/users_utils";
 
 export class UserService {
   public static async createLinkedInUser(profile: any, authToken: string) {
@@ -127,7 +129,7 @@ export class UserService {
       const team: Team = user.team || ((await user.$get("team")) as Team);
 
       sanitizedParams.role = _.get(role, "name") || "Unavailable";
-      sanitizedParams.team = team && (await TeamService.sanitize(team));
+      sanitizedParams.team = await TeamService.sanitize(team);
     }
 
     return sanitizedParams;
@@ -138,6 +140,13 @@ export class UserService {
     if (intersectedKeys.length > 0) {
       throw new Error(`Params: ${intersectedKeys.join(",")} are not allowed.`);
     }
+  }
+
+  public static async getByIds(userIds: number[]): Promise<User[]> {
+    return User.findAll({ where: { id: { $in: userIds } } }).catch(err => {
+      console.log("Error fetching users", err);
+      return [];
+    });
   }
 
   public static extractUserParams(params: any, sanitizedFields = SANITIZED_FIELDS) {
@@ -188,10 +197,32 @@ export class UserService {
     await user.update({ cvFile: fileParams.data });
   }
 
+  public static async verifyPassword(user: User, password: string) {
+    try {
+      const isMatch = await comparePassword(password, user.password);
+
+      // update AuthToken
+      if (isMatch) {
+        await user.update({ authToken: uuidv4() });
+      } else {
+        await user.update({ authToken: null });
+      }
+      return isMatch;
+    } catch (err) {
+      console.log(`failed to log in judge ${user.email}`);
+      throw err;
+    }
+  }
+
+  public static async createPasswordForUser(user: User, newPassword: string) {
+    const newHashedPassword: string = await encryptPassword(newPassword);
+    await user.update({ password: newHashedPassword });
+  }
+
   public static async findById(
     id: number,
     { includeDeps = false }: { includeDeps?: boolean } = {}
-  ) {
+  ): Promise<User> {
     let includes = [];
     if (includeDeps) {
       includes = [{ model: Team, required: false }, { model: Role, required: false }];
@@ -201,6 +232,12 @@ export class UserService {
       include: includes
     });
     return user;
+  }
+
+  public static async findByEmail(email: string): Promise<User> {
+    return await User.findOne({
+      where: { email }
+    });
   }
 
   public static async deleteUser(id: number) {

@@ -2,6 +2,8 @@ import { Router } from "express";
 import * as _ from "lodash";
 import { getRedirectPathStatus } from "../concerns/auth.users";
 import passportLinkedin from "../concerns/passport.linkedIn.middleware";
+import passportLocal from "../concerns/passport.local.middleware";
+import { handleError } from "../routers.helper";
 
 const router = new Router();
 
@@ -10,6 +12,24 @@ router.get("/logout", (req, res) => {
   req.logout();
   res.status(204).send("");
 });
+
+// for judges
+// POST /auth/login
+router.post(
+  "/login",
+  passportLocal.authenticate("local", {
+    state: "loginState",
+    failureRedirect: "/"
+  }),
+  async (req, res) => {
+    if (!req.user) return handleError(new Error("failed to login"), res);
+
+    const { name: roleName } = await req.user.$get("role");
+    const lowerRoleName = _.toLower(roleName);
+    const redirectPath: string = getRedirectPathStatus(lowerRoleName);
+    res.redirect(redirectPath);
+  }
+);
 
 // GET /auth/linkedin
 router.get("/linkedin", passportLinkedin.authenticate("linkedin", { state: "loginState" }));

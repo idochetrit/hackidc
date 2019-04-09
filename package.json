@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "engines": {
-    "node": ">= 10.0.0",
+    "node": "10.9.0",
     "npm": ">= 6.0.0"
   },
   "scripts": {
@@ -15,12 +15,11 @@
     "clean": "rm -rf dist && mkdir dist",
     "build-server": "./node_modules/.bin/tsc",
     "build-client": "node ./build/build.js",
-    "build": "npm run clean && npm run build-server && npm run build-client && npm run migrate",
+    "build": "npm run clean && npm run build-server && npm run build-client",
     "migrate": "./node_modules/.bin/sequelize db:migrate",
     "seed": "./node_modules/.bin/sequelize db:seed:all",
     "migrate-clean": "./node_modules/.bin/sequelize db:migrate:undo:all",
     "setup": "npm run migrate-clean && npm run migrate && npm run seed",
-    "postinstall": "npm run build",
     "start": "node ./dist/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -40,6 +39,7 @@
     "axios": "0.18.0",
     "babel-eslint": "10.0.1",
     "babel-loader": "8.0.4",
+    "bcryptjs": "2.4.3",
     "body-parser": "1.18.3",
     "chalk": "2.0.1",
     "concurrently": "4.0.1",
@@ -67,6 +67,7 @@
     "ora": "1.2.0",
     "passport": "0.4.0",
     "passport-linkedin-oauth2": "1.5.0",
+    "passport-local": "1.0.0",
     "pg": "7.5.0",
     "pg-hstore": "2.3.2",
     "pluralize": "7.0.0",
@@ -81,6 +82,7 @@
     "tslint": "5.11.0",
     "typescript": "3.1.6",
     "uglifyjs-webpack-plugin": "1.1.1",
+    "uuid": "3.3.2",
     "vue": "2.5.2",
     "vue-gallery-slideshow": "1.2.10",
     "vue-loader": "13.3.0",

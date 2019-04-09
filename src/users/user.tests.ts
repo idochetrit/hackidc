@@ -5,6 +5,11 @@ import { academicInstitutesMap } from "./user.constants";
 import { TeamService } from "../teams/team.service";
 import { UserService } from "./user.service";
 import { sequelize } from "../db/sequelize";
+import { encryptPassword } from "../concerns/users_utils";
+import { Team } from "../teams/team.model";
+import { FINAL_JUDGES } from "./judges/judge.service";
+import { TeamScoreService } from "../teams/scores/teamScore.service";
+import { Sequelize } from "sequelize-typescript";
 
 export namespace UserTests {
   const fieldOfStudies = [
@@ -44,6 +49,18 @@ export namespace UserTests {
     ]);
   }
 
+  export async function createTestMentors(type, count = 20) {
+    let createdUsers = [];
+    for (let i = 0; i < count; i++) {
+      createdUsers.push(
+        User.create(sampleFakeMentorFields(type)).catch(err => {
+          console.log("error creating user", err);
+        })
+      );
+      return Promise.all(createdUsers);
+    }
+  }
+
   async function createFakeUser(user: User): Promise<any> {
     try {
       let teamParams: any = {};
@@ -75,10 +92,18 @@ export namespace UserTests {
     }
   }
 
+  function sampleFakeMentorFields({ defaultRole = "Mentor" }: { defaultRole: string }): any {
+    const baseAttrs = this.sampleFakeMentorFields();
+    baseAttrs.role = defaultRole;
+
+    // create password
+    const hashedPass = encryptPassword("Aa123123");
+    baseAttrs.password = hashedPass;
+  }
+
   function sampleFakeUserFields(): any {
     const studyYear = Math.floor(Math.random() * 4 + 1);
     const role = _.sample(["TeamBuilder", "Participant", "Participant", "Loner"]);
-    console.log(role);
     return {
       name: faker.name.findName(),
       email: faker.internet.email(),
@@ -92,5 +117,37 @@ export namespace UserTests {
       role,
       studyYear
     };
+  }
+
+  // ------ Final Round ------
+  export async function createTestTeamScores() {
+    const challenges = [2, 3, 4];
+    const generalChallengeId = 1;
+
+    const teams: Team[] = await Team.findAll();
+    const sampleJudges: User[] = await User.findAll({
+      where: Sequelize.and({ roleId: 3 }, { email: { $notIn: FINAL_JUDGES } }), // judge
+      order: [Sequelize.fn("random")],
+      limit: 20
+    });
+
+    let promises = [];
+    for (const team of teams) {
+      const { codeNumber: teamCodeNumber } = team;
+      const challengeId = _.sample(challenges);
+      const { id: judgeId } = _.sample(sampleJudges);
+      //cerate one for general and one for challenge
+
+      promises.push(
+        TeamScoreService.createScoreRecord({
+          teamCodeNumber,
+          challengeId: generalChallengeId,
+          judgeId
+        }),
+        TeamScoreService.createScoreRecord({ teamCodeNumber, challengeId, judgeId })
+      );
+    }
+
+    await Promise.all(promises);
   }
 }

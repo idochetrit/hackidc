@@ -44,6 +44,8 @@ export class User extends Model<User> {
   })
   public email: string;
   @Column
+  public password: string;
+  @Column
   public gender: string;
   @Column
   public mobile: string;
@@ -119,6 +121,15 @@ export class User extends Model<User> {
   })
   public authToken: string;
 
+  @Column
+  public manualScore: number;
+
+  @Column
+  public isReviewd: boolean;
+
+  @Column
+  public attendedPreHack: boolean;
+
   @CreatedAt
   @Column
   public createdAt: Date;
@@ -128,4 +139,7 @@ export class User extends Model<User> {
   public updatedAt: Date;
   @Column
   public isDeleted: boolean;
+
+  @Column
+  public canViewCV: boolean;
 }

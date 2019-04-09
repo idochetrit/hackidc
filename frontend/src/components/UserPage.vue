@@ -11,6 +11,11 @@
                 <h5>{{ user.studyYear | yearFormatter }} year {{ user.fieldOfStudy | fieldFormatter | nameFormatter }} student, at {{ user.academicInstitute }}</h5>
                 <a :href="user.linkedInProfileUrl" target="_blank" class="btn btn-md linkedinBtn"><span class="fab fa-linkedin-in fa-lg"></span></a>
             </div>
+            <div v-if="authUser.role &&['judge', 'mentor'].includes(authUser.role.toLowerCase()) && canViewCV">
+                <a :href="`/api/users/self/uploads/${user.id}/cv`" target="_blank" class="btn btn-md btn-outline-info">
+                    View CV
+                </a>
+            </div>
             <div class="row profile-body">
                 <h4 v-if="user.role != 'Loner'">
                     <span class="fas fa-user-tie fa-lg"></span> Member of team
@@ -50,16 +55,18 @@ export default {
   data() {
     return {
       user: {
-        userPicture: "", name: "", studyYear: "", fieldOfStudy: "", linkedInProfileUrl: "", bio: "",
+        userPicture: "", name: "", studyYear: "", fieldOfStudy: "", linkedInProfileUrl: "", bio: "", canViewCV: false,
         team: { codeNumber: "", codeName: "", users: [] }
       }
     };
   },
   computed: {
     id() { return this.$route.params.id; },
+    canViewCV() { return this.user.canViewCV; },
     teammates() {
       return this.user.team.users.filter(m => m.id !== Number(this.id));
-    }
+    },
+    authUser() { return this.$store.getters.getUser }
   },
   beforeRouteEnter (to, from, next) {
     store.dispatch("loadingStart");
