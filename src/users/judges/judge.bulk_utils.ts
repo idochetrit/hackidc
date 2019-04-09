@@ -4,7 +4,7 @@ import * as fs from "fs";
 import userRole from "../user.role";
 import { LEVELS } from "../../concerns/auth.users";
 
-const PASSWRODS = ["Aa123123", "1q2w3e4r", "1234qwer"];
+const PASSWRODS = ["Aa123456"];
 
 export async function createJudges(count = 100, offset = 0, override_judges) {
   const { profiles, judgeCreationPromises, finalname } = override_judges
