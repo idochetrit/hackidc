@@ -177,6 +177,7 @@ export class TeamScoreService {
         teamCodeNumber
       }
     });
+    await TeamService.deleteTeam(teamId);
   }
 
   public static async findTeamScoreBy({
