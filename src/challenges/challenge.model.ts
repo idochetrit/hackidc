@@ -14,9 +14,9 @@ import {
 import { Team } from "../teams/team.model";
 export const CHALLENGES = {
   GENERAL: "general",
-  ELBIT: "elbit",
-  PALANTIR: "palantir",
-  MIZRAHI: "mizrahi"
+  ELBIT: "elbit", // 2
+  MIZRAHI: "mizrahi", // 3
+  PALANTIR: "palantir" // 4
 };
 @Table({
   tableName: "Challenges"

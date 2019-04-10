@@ -2,7 +2,7 @@
   "development": {
     "username": "hackidc",
     "password": "hack1d3!",
-    "database": "hackidcapp-dev",
+    "database": "prod_copy",
     "host": "127.0.0.1",
     "port": 5432,
     "dialect": "postgres"
