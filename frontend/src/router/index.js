@@ -142,23 +142,23 @@ export default new Router({
       },
       component: FAQ
     },
-    // {
-    //   path: "/signup-info",
-    //   name: "signup-info",
-    //   meta: {
-    //     title: "HackIDC 2019 | Registration"
-    //   },
-    //   component: RegistrationInfo
-    // },
-    // {
-    //   path: "/signup",
-    //   name: "signup",
-    //   meta: {
-    //     title: "HackIDC 2019 | Registration"
-    //   },
-    //   component: Registration,
-    //   beforeEnter: navigateRegistration
-    // },
+    {
+      path: "/signup-info",
+      name: "signup-info",
+      meta: {
+        title: "HackIDC 2019 | Registration"
+      },
+      component: RegistrationInfo
+    },
+    {
+      path: "/signup",
+      name: "signup",
+      meta: {
+        title: "HackIDC 2019 | Registration"
+      },
+      component: Registration,
+      beforeEnter: navigateRegistration
+    },
     {
       path: "/login",
       name: "login",
