@@ -45,9 +45,9 @@
             thumbnail: require("../../static/iddo_gino.jpg")
           },
           {
-            name: "Roei Deutsch",
-            title: "Co-Founder & CEO of Jolt",
-            thumbnail: require("../../static/roei_deutsch.jpeg")
+            name: "Avner Strauss",
+            title: "CEO at Strauss Strategy",
+            thumbnail: require("../../static/avner_strauss.jpeg")
           },
           {
             name: "Lior Noy",

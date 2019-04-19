@@ -1,5 +1,5 @@
 <template>
-    <div class="container-fluid bg-info">
+    <div v-if="counter.days > 0" class="container-fluid bg-info">
         <h5 id="registration"><span>{{ counter.message }}:</span>
             <span v-if="view < 767">{{ counter.days }}d,</span>
             <span v-else>{{ counter.days }} days,</span>

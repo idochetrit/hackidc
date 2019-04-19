@@ -38,7 +38,7 @@
 
 <style scoped>
   .container-fluid {
-    margin-top: 4rem;
+    margin-top: 3rem;
     padding: 2rem 0 8rem 0;
     background-size: cover;
     background: url('../../static/hero.jpg') no-repeat bottom;
